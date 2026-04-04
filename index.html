@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Amigão Petshop – Gerador de Imagens</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --verde:    #2ECC71;
+      --verde-esc:#1a9e52;
+      --azul:     #3498DB;
+      --laranja:  #F39C12;
+      --vermelho: #E74C3C;
+      --roxo:     #9B59B6;
+      --bg:       #f0faf4;
+      --texto:    #1a2e1e;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: var(--bg);
+      color: var(--texto);
+      min-height: 100vh;
+    }
+
+    header {
+      background: linear-gradient(135deg, #1a9e52 0%, #2ECC71 60%, #F39C12 100%);
+      color: #fff;
+      text-align: center;
+      padding: 28px 20px 22px;
+      box-shadow: 0 4px 20px rgba(0,0,0,.15);
+    }
+    header .paw { font-size: 2.4rem; }
+    header h1  { font-family: 'Fredoka One', cursive; font-size: 2.2rem; letter-spacing: 1px; }
+    header p   { font-size: .95rem; opacity: .9; margin-top: 4px; }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 30px 16px 60px;
+    }
+
+    .controls {
+      background: #fff;
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 2px 12px rgba(0,0,0,.08);
+      margin-bottom: 32px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+    }
+    .controls label { font-weight: 700; font-size: .85rem; color: #555; display: block; margin-bottom: 5px; }
+    .controls input, .controls select, .controls textarea {
+      width: 100%; padding: 9px 12px; border: 2px solid #ddd;
+      border-radius: 8px; font-family: inherit; font-size: .9rem;
+      transition: border-color .2s;
+    }
+    .controls input:focus, .controls select:focus, .controls textarea:focus {
+      border-color: var(--verde); outline: none;
+    }
+    .controls textarea { resize: vertical; min-height: 70px; }
+
+    .btn-group { display: flex; gap: 10px; flex-wrap: wrap; align-items: flex-end; }
+    .btn {
+      padding: 10px 20px; border: none; border-radius: 10px;
+      font-family: 'Nunito', sans-serif; font-weight: 800; font-size: .9rem;
+      cursor: pointer; transition: transform .15s, box-shadow .15s;
+    }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 4px 14px rgba(0,0,0,.15); }
+    .btn-primary  { background: var(--verde);   color: #fff; }
+    .btn-download { background: var(--azul);    color: #fff; }
+    .btn-whatsapp { background: #25D366;         color: #fff; }
+
+    .template-picker {
+      display: flex; gap: 12px; flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+    .tpl-btn {
+      padding: 8px 18px; border-radius: 20px; border: 2.5px solid transparent;
+      cursor: pointer; font-family: 'Nunito', sans-serif; font-weight: 700;
+      font-size: .85rem; transition: all .2s;
+    }
+    .tpl-btn.active, .tpl-btn:hover { border-color: var(--verde); background: #e8fdf1; }
+
+    .canvas-section {
+      background: #fff; border-radius: 20px;
+      padding: 28px; box-shadow: 0 2px 16px rgba(0,0,0,.09);
+      text-align: center;
+    }
+    .canvas-section h2 { font-family: 'Fredoka One', cursive; color: var(--verde-esc); margin-bottom: 18px; }
+    canvas { max-width: 100%; border-radius: 12px; box-shadow: 0 6px 28px rgba(0,0,0,.13); }
+
+    .action-row { margin-top: 20px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="paw">🐾</div>
+  <h1>Amigão Petshop</h1>
+  <p>Gerador de Imagens Promocionais para Redes Sociais</p>
+</header>
+
+<div class="container">
+
+  <div class="template-picker">
+    <button class="tpl-btn active" onclick="setTemplate('promo')"    >🏷️ Promoção</button>
+    <button class="tpl-btn"        onclick="setTemplate('banho')"    >🛁 Banho & Tosa</button>
+    <button class="tpl-btn"        onclick="setTemplate('consulta')" >🩺 Veterinário</button>
+    <button class="tpl-btn"        onclick="setTemplate('racao')"    >🥩 Ração</button>
+    <button class="tpl-btn"        onclick="setTemplate('fidelidade')">⭐ Fidelidade</button>
+    <button class="tpl-btn"        onclick="setTemplate('abertura')" >🎉 Abertura / Evento</button>
+  </div>
+
+  <div class="controls">
+    <div>
+      <label>Título Principal</label>
+      <input id="inp-titulo" type="text" value="SUPER PROMOÇÃO!" />
+    </div>
+    <div>
+      <label>Subtítulo / Serviço</label>
+      <input id="inp-sub" type="text" value="Banho + Tosa por R$ 49,90" />
+    </div>
+    <div>
+      <label>Descrição / Detalhe</label>
+      <textarea id="inp-desc">Válido até 30/04 • Agende já pelo WhatsApp!</textarea>
+    </div>
+    <div>
+      <label>WhatsApp</label>
+      <input id="inp-fone" type="text" value="(00) 99999-9999" />
+    </div>
+    <div>
+      <label>Slogan / Endereço</label>
+      <input id="inp-end" type="text" value="Rua dos Animais, 123 – Centro" />
+    </div>
+    <div>
+      <label>Cor de Destaque</label>
+      <select id="inp-cor" onchange="renderCanvas()">
+        <option value="verde">Verde</option>
+        <option value="azul">Azul</option>
+        <option value="laranja">Laranja</option>
+        <option value="roxo">Roxo</option>
+        <option value="vermelho">Vermelho</option>
+      </select>
+    </div>
+    <div class="btn-group">
+      <button class="btn btn-primary"  onclick="renderCanvas()">🔄 Atualizar</button>
+      <button class="btn btn-download" onclick="downloadImg()">⬇️ Baixar PNG</button>
+    </div>
+  </div>
+
+  <div class="canvas-section">
+    <h2>Pré-visualização (1080 × 1080 px)</h2>
+    <canvas id="card" width="1080" height="1080"></canvas>
+    <div class="action-row">
+      <button class="btn btn-download" onclick="downloadImg()">⬇️ Baixar Imagem PNG</button>
+      <button class="btn btn-whatsapp" onclick="copyHint()">📋 Copiar para WhatsApp</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const PALETTES = {
+  verde:    { bg1:'#0d6e35', bg2:'#2ECC71', accent:'#F39C12', text:'#ffffff', badge:'#F39C12', badgeText:'#1a2e1e' },
+  azul:     { bg1:'#154e8c', bg2:'#3498DB', accent:'#F39C12', text:'#ffffff', badge:'#F39C12', badgeText:'#1a2e1e' },
+  laranja:  { bg1:'#9b5b00', bg2:'#F39C12', accent:'#2ECC71', text:'#ffffff', badge:'#2ECC71', badgeText:'#ffffff' },
+  roxo:     { bg1:'#5b2b82', bg2:'#9B59B6', accent:'#F39C12', text:'#ffffff', badge:'#F39C12', badgeText:'#1a2e1e' },
+  vermelho: { bg1:'#8b1a1a', bg2:'#E74C3C', accent:'#F39C12', text:'#ffffff', badge:'#F39C12', badgeText:'#1a2e1e' },
+};
+
+let currentTemplate = 'promo';
+
+function setTemplate(t) {
+  currentTemplate = t;
+  document.querySelectorAll('.tpl-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  const presets = {
+    promo:      { titulo:'SUPER PROMOÇÃO!', sub:'Banho + Tosa por R$ 49,90', desc:'Válido até 30/04 • Agende já!' },
+    banho:      { titulo:'BANHO & TOSA', sub:'Especialistas em cuidar do seu pet', desc:'Agenda aberta – sem filas!\nLigue ou mande mensagem.' },
+    consulta:   { titulo:'CONSULTA VETERINÁRIA', sub:'A saúde do seu pet em boas mãos', desc:'Clínica geral • Vacinas • Exames\nAtendimento com hora marcada.' },
+    racao:      { titulo:'RAÇÃO EM PROMOÇÃO', sub:'As melhores marcas com desconto', desc:'Consulte sabores disponíveis.\nEntregamos na sua casa!' },
+    fidelidade: { titulo:'CLUBE AMIGÃO', sub:'Acumule pontos e ganhe prêmios!', desc:'A cada serviço você pontua.\nTroque por banhos e brindes.' },
+    abertura:   { titulo:'GRANDE ABERTURA!', sub:'Amigão Petshop – novidade na cidade', desc:'Venha conhecer nossa loja!\nBrindes e sorteios no dia.' },
+  };
+  const p = presets[t];
+  document.getElementById('inp-titulo').value = p.titulo;
+  document.getElementById('inp-sub').value    = p.sub;
+  document.getElementById('inp-desc').value   = p.desc;
+  renderCanvas();
+}
+
+function hexToRgba(hex, a = 1) {
+  const r = parseInt(hex.slice(1,3),16);
+  const g = parseInt(hex.slice(3,5),16);
+  const b = parseInt(hex.slice(5,7),16);
+  return `rgba(${r},${g},${b},${a})`;
+}
+
+function drawPaw(ctx, cx, cy, size, color, alpha = 1) {
+  ctx.save();
+  ctx.globalAlpha = alpha;
+  ctx.fillStyle = color;
+  ctx.beginPath(); ctx.ellipse(cx, cy + size*.25, size*.4, size*.35, 0, 0, Math.PI*2); ctx.fill();
+  const angles = [-0.55, -0.18, 0.18, 0.55];
+  angles.forEach(a => {
+    ctx.beginPath();
+    ctx.ellipse(cx + Math.sin(a)*size*.5, cy - Math.cos(a)*size*.2, size*.2, size*.25, a, 0, Math.PI*2);
+    ctx.fill();
+  });
+  ctx.restore();
+}
+
+function drawBone(ctx, x, y, len, thick, color, alpha = 1) {
+  ctx.save();
+  ctx.globalAlpha = alpha;
+  ctx.fillStyle = color;
+  ctx.strokeStyle = color;
+  ctx.lineWidth = thick;
+  ctx.lineCap = 'round';
+  ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x + len, y); ctx.stroke();
+  [[x, y],[x+len, y]].forEach(([px,py]) => {
+    ctx.beginPath(); ctx.arc(px, py - thick*.6, thick*.7, 0, Math.PI*2); ctx.fill();
+    ctx.beginPath(); ctx.arc(px, py + thick*.6, thick*.7, 0, Math.PI*2); ctx.fill();
+  });
+  ctx.restore();
+}
+
+function drawDogSilhouette(ctx, x, y, size, color) {
+  ctx.save();
+  ctx.fillStyle = color;
+  ctx.translate(x, y);
+  ctx.scale(size/100, size/100);
+  ctx.beginPath(); ctx.ellipse(0, 0, 45, 28, 0, 0, Math.PI*2); ctx.fill();
+  ctx.beginPath(); ctx.ellipse(45, -20, 22, 20, -0.2, 0, Math.PI*2); ctx.fill();
+  ctx.beginPath(); ctx.ellipse(62, -12, 14, 11, 0.15, 0, Math.PI*2); ctx.fill();
+  ctx.beginPath(); ctx.ellipse(40, -38, 10, 16, -0.5, 0, Math.PI*2); ctx.fill();
+  ctx.beginPath();
+  ctx.moveTo(-42, -10); ctx.quadraticCurveTo(-70, -30, -58, -50);
+  ctx.lineWidth = 14; ctx.strokeStyle = color; ctx.lineCap = 'round'; ctx.stroke();
+  [[-25,20],[0,20],[20,20],[38,20]].forEach(([lx,ly]) => {
+    ctx.beginPath(); ctx.roundRect(lx-6, ly, 12, 30, 6); ctx.fill();
+  });
+  ctx.restore();
+}
+
+function drawCatSilhouette(ctx, x, y, size, color) {
+  ctx.save();
+  ctx.fillStyle = color;
+  ctx.translate(x, y);
+  ctx.scale(size/100, size/100);
+  ctx.beginPath(); ctx.ellipse(0, 10, 38, 30, 0, 0, Math.PI*2); ctx.fill();
+  ctx.beginPath(); ctx.ellipse(35, -18, 24, 22, 0, 0, Math.PI*2); ctx.fill();
+  ctx.beginPath(); ctx.moveTo(22,-36); ctx.lineTo(16,-58); ctx.lineTo(36,-40); ctx.closePath(); ctx.fill();
+  ctx.beginPath(); ctx.moveTo(44,-36); ctx.lineTo(54,-56); ctx.lineTo(52,-36); ctx.closePath(); ctx.fill();
+  ctx.beginPath();
+  ctx.moveTo(-36, 20); ctx.bezierCurveTo(-60, 0, -65, -30, -42, -40);
+  ctx.lineWidth = 13; ctx.strokeStyle = color; ctx.lineCap = 'round'; ctx.stroke();
+  [[-18,32],[8,32],[24,32],[40,32]].forEach(([lx,ly]) => {
+    ctx.beginPath(); ctx.roundRect(lx-5, ly, 11, 26, 5); ctx.fill();
+  });
+  ctx.restore();
+}
+
+function renderCanvas() {
+  const canvas = document.getElementById('card');
+  const ctx    = canvas.getContext('2d');
+  const W = 1080, H = 1080;
+  const corKey = document.getElementById('inp-cor').value;
+  const pal    = PALETTES[corKey];
+  const titulo = document.getElementById('inp-titulo').value || 'AMIGÃO PETSHOP';
+  const sub    = document.getElementById('inp-sub').value    || '';
+  const desc   = document.getElementById('inp-desc').value   || '';
+  const fone   = document.getElementById('inp-fone').value   || '';
+  const end    = document.getElementById('inp-end').value    || '';
+
+  ctx.clearRect(0, 0, W, H);
+
+  const grad = ctx.createLinearGradient(0, 0, W, H);
+  grad.addColorStop(0, pal.bg1);
+  grad.addColorStop(1, pal.bg2);
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, W, H);
+
+  [[W*.82,H*.12,220,.12],[W*.1,H*.85,180,.1],[W*.55,H*.5,300,.05]].forEach(([cx,cy,r,a]) => {
+    ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI*2);
+    ctx.fillStyle = hexToRgba('#ffffff', a); ctx.fill();
+  });
+
+  [[80,80,.15],[200,900,.1],[950,200,.12],[850,850,.08],[500,150,.07],[900,500,.09],[100,600,.06],[700,100,.08]]
+    .forEach(([px,py,a]) => drawPaw(ctx, px, py, 55, '#ffffff', a));
+
+  [[200,70,120,10,.08],[700,980,100,9,.07],[40,450,90,8,.06]]
+    .forEach(([bx,by,bl,bt,ba]) => drawBone(ctx, bx, by, bl, bt, '#ffffff', ba));
+
+  drawDogSilhouette(ctx, 160,  H - 80, 200, hexToRgba('#000000', .12));
+  drawCatSilhouette(ctx, W-150, H - 80, 180, hexToRgba('#000000', .10));
+
+  const badgeLabels = {
+    promo:'🏷️ PROMOÇÃO ESPECIAL', banho:'🛁 BANHO & TOSA', consulta:'🩺 CLÍNICA VETERINÁRIA',
+    racao:'🥩 RAÇÃO & NUTRIÇÃO', fidelidade:'⭐ CLUBE FIDELIDADE', abertura:'🎉 GRANDE ABERTURA',
+  };
+  const bW = 420, bH = 50, bX = (W - bW)/2, bY = 55;
+  ctx.save();
+  ctx.fillStyle = pal.badge;
+  ctx.beginPath(); ctx.roundRect(bX, bY, bW, bH, 25); ctx.fill();
+  ctx.font = 'bold 22px Nunito, sans-serif';
+  ctx.fillStyle = pal.badgeText;
+  ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+  ctx.fillText(badgeLabels[currentTemplate] || '🐾 PETSHOP', W/2, bY + bH/2);
+  ctx.restore();
+
+  ctx.save();
+  ctx.beginPath(); ctx.arc(W/2, 220, 90, 0, Math.PI*2);
+  ctx.fillStyle = hexToRgba('#ffffff', .15); ctx.fill();
+  ctx.restore();
+
+  ctx.save();
+  ctx.font = '110px serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+  ctx.fillText('🐾', W/2, 222);
+  ctx.restore();
+
+  ctx.save();
+  ctx.shadowColor = 'rgba(0,0,0,.4)'; ctx.shadowBlur = 18;
+  ctx.fillStyle = '#ffffff';
+  ctx.font = 'bold 78px "Fredoka One", cursive';
+  ctx.textAlign = 'center'; ctx.textBaseline = 'top';
+  ctx.fillText('Amigão Petshop', W/2, 330);
+  ctx.restore();
+
+  ctx.save();
+  ctx.strokeStyle = hexToRgba(pal.accent, .8); ctx.lineWidth = 4; ctx.setLineDash([14, 8]);
+  ctx.beginPath(); ctx.moveTo(120, 432); ctx.lineTo(W-120, 432); ctx.stroke();
+  ctx.restore();
+
+  const cardY = 455, cardH = 190;
+  ctx.save();
+  ctx.fillStyle = hexToRgba('#000000', .25);
+  ctx.beginPath(); ctx.roundRect(60, cardY, W-120, cardH, 20); ctx.fill();
+  ctx.fillStyle = pal.accent;
+  ctx.textAlign = 'center'; ctx.textBaseline = 'top';
+  let fsize = 68;
+  ctx.font = `bold ${fsize}px Nunito, sans-serif`;
+  while (ctx.measureText(titulo).width > W - 180 && fsize > 28) {
+    fsize -= 3; ctx.font = `bold ${fsize}px Nunito, sans-serif`;
+  }
+  ctx.shadowColor = 'rgba(0,0,0,.5)'; ctx.shadowBlur = 10;
+  ctx.fillText(titulo, W/2, cardY + 20);
+  ctx.fillStyle = '#ffffff';
+  fsize = 34; ctx.font = `bold ${fsize}px Nunito, sans-serif`;
+  ctx.shadowBlur = 6;
+  while (ctx.measureText(sub).width > W - 160 && fsize > 18) {
+    fsize -= 2; ctx.font = `bold ${fsize}px Nunito, sans-serif`;
+  }
+  ctx.fillText(sub, W/2, cardY + 110);
+  ctx.restore();
+
+  ctx.save();
+  ctx.fillStyle = hexToRgba('#ffffff', .92); ctx.font = '30px Nunito, sans-serif';
+  ctx.textAlign = 'center'; ctx.textBaseline = 'top';
+  let dy = 672;
+  desc.split('\n').forEach(line => { ctx.fillText(line, W/2, dy); dy += 40; });
+  ctx.restore();
+
+  const stripY = H - 200;
+  ctx.save();
+  ctx.fillStyle = hexToRgba('#000000', .35); ctx.fillRect(0, stripY, W, 200);
+  ctx.font = 'bold 38px Nunito, sans-serif'; ctx.fillStyle = pal.accent;
+  ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+  ctx.fillText('📱 WhatsApp: ' + fone, W/2, stripY + 60);
+  ctx.font = '28px Nunito, sans-serif'; ctx.fillStyle = hexToRgba('#ffffff', .85);
+  ctx.fillText('📍 ' + end, W/2, stripY + 115);
+  ctx.font = 'italic 22px Nunito, sans-serif'; ctx.fillStyle = hexToRgba('#ffffff', .6);
+  ctx.fillText('Porque seu pet merece o melhor! 🐶🐱', W/2, stripY + 165);
+  ctx.restore();
+
+  drawPaw(ctx, 50,   50,  45, hexToRgba(pal.accent, .5));
+  drawPaw(ctx, W-50, 50,  45, hexToRgba(pal.accent, .5));
+  drawPaw(ctx, 50,   H-50, 45, hexToRgba(pal.accent, .5));
+  drawPaw(ctx, W-50, H-50, 45, hexToRgba(pal.accent, .5));
+}
+
+function downloadImg() {
+  const canvas = document.getElementById('card');
+  const link = document.createElement('a');
+  link.download = `amigao-petshop-${currentTemplate}.png`;
+  link.href = canvas.toDataURL('image/png');
+  link.click();
+}
+
+function copyHint() {
+  alert('💡 Dica:\n1. Clique em "Baixar Imagem PNG"\n2. Abra o WhatsApp Web\n3. Arraste a imagem para a conversa desejada!');
+}
+
+document.querySelectorAll('#inp-titulo,#inp-sub,#inp-desc,#inp-fone,#inp-end').forEach(el =>
+  el.addEventListener('input', renderCanvas)
+);
+
+window.addEventListener('load', renderCanvas);
+</script>
+</body>
+</html>
