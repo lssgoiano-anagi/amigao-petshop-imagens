@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Amigão Petshop – Artes Prontas</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet" />
+  <style>
+    :root { --verde:#2ECC71; --verde-esc:#1a9e52; --azul:#3498DB; --laranja:#F39C12; }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    body { font-family:'Nunito',sans-serif; background:#f0faf4; color:#1a2e1e; }
+
+    header {
+      background: linear-gradient(135deg,#1a9e52,#2ECC71 60%,#F39C12);
+      color:#fff; text-align:center; padding:28px 20px 22px;
+      box-shadow:0 4px 20px rgba(0,0,0,.15);
+    }
+    header h1 { font-family:'Fredoka One',cursive; font-size:2.2rem; }
+    header p  { font-size:.95rem; opacity:.9; margin-top:4px; }
+
+    .container { max-width:1300px; margin:0 auto; padding:30px 16px 60px; }
+
+    .filters {
+      display:flex; gap:10px; flex-wrap:wrap; margin-bottom:28px;
+    }
+    .filter-btn {
+      padding:8px 20px; border-radius:20px; border:2.5px solid #ccc;
+      background:#fff; cursor:pointer; font-family:'Nunito',sans-serif;
+      font-weight:700; font-size:.85rem; transition:all .2s;
+    }
+    .filter-btn.active, .filter-btn:hover {
+      border-color:var(--verde); background:#e8fdf1; color:#1a9e52;
+    }
+
+    .grid {
+      display:grid;
+      grid-template-columns:repeat(auto-fill,minmax(340px,1fr));
+      gap:24px;
+    }
+
+    .card {
+      background:#fff; border-radius:20px;
+      box-shadow:0 4px 18px rgba(0,0,0,.1);
+      overflow:hidden; transition:transform .2s,box-shadow .2s;
+    }
+    .card:hover { transform:translateY(-4px); box-shadow:0 8px 30px rgba(0,0,0,.15); }
+
+    .canvas-wrap { position:relative; width:100%; aspect-ratio:1; }
+    canvas.arte { width:100%; height:100%; display:block; }
+    .loading-msg {
+      position:absolute; inset:0; display:flex; align-items:center;
+      justify-content:center; font-size:.9rem; color:#888;
+      background:#f8f8f8;
+    }
+
+    .card-footer {
+      padding:14px 16px; display:flex; align-items:center; justify-content:space-between;
+    }
+    .card-info h3 { font-size:.95rem; font-weight:800; color:#1a2e1e; }
+    .card-info p  { font-size:.8rem;  color:#666; margin-top:2px; }
+
+    .btn-dl {
+      background:var(--azul); color:#fff; border:none;
+      padding:9px 18px; border-radius:10px; cursor:pointer;
+      font-family:'Nunito',sans-serif; font-weight:800; font-size:.85rem;
+      transition:transform .15s,box-shadow .15s; white-space:nowrap;
+    }
+    .btn-dl:hover { transform:translateY(-2px); box-shadow:0 4px 12px rgba(0,0,0,.15); }
+  </style>
+</head>
+<body>
+
+<header>
+  <div style="font-size:2rem">🐾</div>
+  <h1>Amigão Petshop – Artes Prontas</h1>
+  <p>Clique em ⬇️ Baixar para salvar a arte e usar nas redes sociais</p>
+</header>
+
+<div class="container">
+
+  <div class="filters">
+    <button class="filter-btn active" onclick="filtrar('todos',this)">🐾 Todos</button>
+    <button class="filter-btn" onclick="filtrar('cachorro-pequeno',this)">🐩 Cão Pequeno</button>
+    <button class="filter-btn" onclick="filtrar('cachorro-grande',this)">🐕 Cão Grande</button>
+    <button class="filter-btn" onclick="filtrar('gato',this)">🐱 Gatos</button>
+    <button class="filter-btn" onclick="filtrar('praia',this)">🏖️ Praia</button>
+    <button class="filter-btn" onclick="filtrar('fazenda',this)">🌾 Fazenda/Chácara</button>
+    <button class="filter-btn" onclick="filtrar('apartamento',this)">🏢 Apartamento</button>
+    <button class="filter-btn" onclick="filtrar('casa',this)">🏡 Casa/Quintal</button>
+    <button class="filter-btn" onclick="filtrar('lazer',this)">⛲ Área de Lazer</button>
+  </div>
+
+  <div class="grid" id="grade"></div>
+</div>
+
+<script>
+const ARTES = [
+  { id:'cp1', titulo:'BANHO & TOSA', sub:'Para cães de porte pequeno', tag:'cachorro-pequeno',
+    cor:'#2ECC71', foto:'https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=800&q=80' },
+  { id:'cp2', titulo:'CONSULTA VETERINÁRIA', sub:'Seu pequenino merece o melhor', tag:'cachorro-pequeno',
+    cor:'#3498DB', foto:'https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=800&q=80' },
+  { id:'cp3', titulo:'SUPER PROMOÇÃO!', sub:'Banho + Tosa a partir de R$ 39,90', tag:'cachorro-pequeno',
+    cor:'#F39C12', foto:'https://images.unsplash.com/photo-1576201836106-db1758fd1c97?w=800&q=80' },
+  { id:'cg1', titulo:'ADESTRAMENTO', sub:'Para cães de porte grande', tag:'cachorro-grande',
+    cor:'#E74C3C', foto:'https://images.unsplash.com/photo-1552053831-71594a27632d?w=800&q=80' },
+  { id:'cg2', titulo:'RAÇÃO PREMIUM', sub:'Nutrição para raças grandes', tag:'cachorro-grande',
+    cor:'#1a9e52', foto:'https://images.unsplash.com/photo-1537151608828-ea2b11777ee8?w=800&q=80' },
+  { id:'cg3', titulo:'BANHO ESPECIAL', sub:'Cães grandes com carinho', tag:'cachorro-grande',
+    cor:'#9B59B6', foto:'https://images.unsplash.com/photo-1561037404-61cd46aa615b?w=800&q=80' },
+  { id:'ga1', titulo:'TOSA FELINA', sub:'Especialistas em gatos', tag:'gato',
+    cor:'#9B59B6', foto:'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=800&q=80' },
+  { id:'ga2', titulo:'CONSULTA FELINA', sub:'Cuidando da saúde do seu gato', tag:'gato',
+    cor:'#3498DB', foto:'https://images.unsplash.com/photo-1573865526739-10659fec78a5?w=800&q=80' },
+  { id:'ga3', titulo:'RAÇÃO PARA GATOS', sub:'As melhores marcas em estoque', tag:'gato',
+    cor:'#F39C12', foto:'https://images.unsplash.com/photo-1495360010541-f48722b4b6b8?w=800&q=80' },
+  { id:'pr1', titulo:'VERÃO COM SEU PET', sub:'Acesse e agende o banho pós-praia!', tag:'praia',
+    cor:'#F39C12', foto:'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80' },
+  { id:'pr2', titulo:'PASSEIO NA PRAIA', sub:'Produtos para o verão do seu pet', tag:'praia',
+    cor:'#3498DB', foto:'https://images.unsplash.com/photo-1519046904884-53103b34b206?w=800&q=80' },
+  { id:'fz1', titulo:'PETS NA NATUREZA', sub:'Ração e acessórios para o campo', tag:'fazenda',
+    cor:'#1a9e52', foto:'https://images.unsplash.com/photo-1500595046743-cd271d694d30?w=800&q=80' },
+  { id:'fz2', titulo:'VIDA NO CAMPO', sub:'Seu pet feliz na chácara!', tag:'fazenda',
+    cor:'#F39C12', foto:'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800&q=80' },
+  { id:'ap1', titulo:'PET NO APARTAMENTO', sub:'Produtos para espaços menores', tag:'apartamento',
+    cor:'#9B59B6', foto:'https://images.unsplash.com/photo-1545249849-1eaf0bff03ee?w=800&q=80' },
+  { id:'ap2', titulo:'CONFORTO EM CASA', sub:'Caminhas, brinquedos e mais!', tag:'apartamento',
+    cor:'#3498DB', foto:'https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?w=800&q=80' },
+  { id:'ca1', titulo:'QUINTAL FELIZ', sub:'Brinquedos e acessórios para pets', tag:'casa',
+    cor:'#2ECC71', foto:'https://images.unsplash.com/photo-1558788353-f76d92427f16?w=800&q=80' },
+  { id:'ca2', titulo:'PET EM CASA', sub:'Tudo para o seu melhor amigo', tag:'casa',
+    cor:'#E74C3C', foto:'https://images.unsplash.com/photo-1601758125946-6ec2ef64daf8?w=800&q=80' },
+  { id:'lz1', titulo:'ÁREA DE LAZER', sub:'Passeie com segurança e estilo', tag:'lazer',
+    cor:'#F39C12', foto:'https://images.unsplash.com/photo-1534361960057-19f4434a73d9?w=800&q=80' },
+  { id:'lz2', titulo:'CLUBE DOS PETS', sub:'Fidelidade que rende prêmios!', tag:'lazer',
+    cor:'#2ECC71', foto:'https://images.unsplash.com/photo-1548802673-380ab8ebc7b7?w=800&q=80' },
+];
+
+function renderArte(arte, canvas) {
+  const ctx = canvas.getContext('2d');
+  const W = 1080, H = 1080;
+  canvas.width = W; canvas.height = H;
+  const img = new Image();
+  img.crossOrigin = 'anonymous';
+  img.src = arte.foto;
+  const draw = () => {
+    ctx.clearRect(0, 0, W, H);
+    const scale = Math.max(W / img.naturalWidth, H / img.naturalHeight);
+    const iw = img.naturalWidth * scale;
+    const ih = img.naturalHeight * scale;
+    ctx.drawImage(img, (W-iw)/2, (H-ih)/2, iw, ih);
+    const ov = ctx.createLinearGradient(0,0,0,H);
+    ov.addColorStop(0,'rgba(0,0,0,0.25)');
+    ov.addColorStop(0.45,'rgba(0,0,0,0.15)');
+    ov.addColorStop(1,'rgba(0,0,0,0.82)');
+    ctx.fillStyle = ov; ctx.fillRect(0,0,W,H);
+    const fg = ctx.createLinearGradient(0,0,W,0);
+    fg.addColorStop(0, arte.cor); fg.addColorStop(1, arte.cor+'aa');
+    ctx.fillStyle = fg; ctx.fillRect(0,0,W,110);
+    ctx.save();
+    ctx.font='52px serif'; ctx.textBaseline='middle'; ctx.textAlign='left';
+    ctx.fillText('🐾',36,55);
+    ctx.font='bold 38px "Fredoka One",cursive'; ctx.fillStyle='#fff';
+    ctx.shadowColor='rgba(0,0,0,.4)'; ctx.shadowBlur=8;
+    ctx.fillText('Amigão Petshop',105,55);
+    ctx.restore();
+    drawPawSmall(ctx,W-60,60,28,'rgba(255,255,255,0.3)');
+    drawPawSmall(ctx,W-110,85,18,'rgba(255,255,255,0.2)');
+    ctx.save();
+    ctx.textAlign='left'; ctx.textBaseline='bottom';
+    ctx.shadowColor='rgba(0,0,0,.8)'; ctx.shadowBlur=20;
+    let fs=72; ctx.font=`bold ${fs}px Nunito,sans-serif`;
+    while(ctx.measureText(arte.titulo).width>W-80&&fs>32){fs-=3;ctx.font=`bold ${fs}px Nunito,sans-serif`;}
+    ctx.fillStyle=arte.cor; ctx.fillText(arte.titulo,42,H-210);
+    ctx.fillStyle='#fff';   ctx.fillText(arte.titulo,40,H-212);
+    ctx.restore();
+    ctx.save();
+    ctx.textAlign='left'; ctx.textBaseline='bottom';
+    ctx.font='bold 38px Nunito,sans-serif'; ctx.fillStyle='rgba(255,255,255,0.92)';
+    ctx.shadowColor='rgba(0,0,0,.7)'; ctx.shadowBlur=12;
+    ctx.fillText(arte.sub,40,H-140);
+    ctx.restore();
+    ctx.save();
+    ctx.strokeStyle=arte.cor; ctx.lineWidth=5;
+    ctx.beginPath(); ctx.moveTo(40,H-118); ctx.lineTo(W-40,H-118); ctx.stroke();
+    ctx.restore();
+    ctx.save();
+    ctx.textAlign='left'; ctx.textBaseline='bottom';
+    ctx.font='bold 30px Nunito,sans-serif'; ctx.fillStyle='rgba(255,255,255,0.85)';
+    ctx.shadowColor='rgba(0,0,0,.6)'; ctx.shadowBlur=8;
+    ctx.fillText('📱 WhatsApp  •  📍 Sua Cidade',40,H-40);
+    ctx.font='italic 24px Nunito,sans-serif'; ctx.fillStyle='rgba(255,255,255,0.6)';
+    ctx.fillText('Porque seu pet merece o melhor! 🐶🐱',40,H-10);
+    ctx.restore();
+    const lm=canvas.parentElement.querySelector('.loading-msg');
+    if(lm) lm.remove();
+  };
+  if(img.complete&&img.naturalWidth){draw();}
+  else{img.onload=draw; img.onerror=()=>drawSemFoto(ctx,arte,W,H);}
+}
+
+function drawPawSmall(ctx,cx,cy,size,color){
+  ctx.save(); ctx.fillStyle=color;
+  ctx.beginPath(); ctx.ellipse(cx,cy+size*.25,size*.4,size*.35,0,0,Math.PI*2); ctx.fill();
+  [-0.55,-0.18,0.18,0.55].forEach(a=>{
+    ctx.beginPath();
+    ctx.ellipse(cx+Math.sin(a)*size*.5,cy-Math.cos(a)*size*.2,size*.2,size*.25,a,0,Math.PI*2);
+    ctx.fill();
+  });
+  ctx.restore();
+}
+
+function drawSemFoto(ctx,arte,W,H){
+  const g=ctx.createLinearGradient(0,0,W,H);
+  g.addColorStop(0,'#1a2e1e'); g.addColorStop(1,arte.cor);
+  ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
+  ctx.font='160px serif'; ctx.textAlign='center'; ctx.textBaseline='middle';
+  ctx.fillText('🐾',W/2,H/2);
+}
+
+function montarGrade(lista){
+  const grade=document.getElementById('grade');
+  grade.innerHTML='';
+  lista.forEach(arte=>{
+    const card=document.createElement('div');
+    card.className='card'; card.dataset.tag=arte.tag;
+    const wrap=document.createElement('div');
+    wrap.className='canvas-wrap';
+    const loading=document.createElement('div');
+    loading.className='loading-msg'; loading.textContent='⏳ Carregando foto…';
+    const cv=document.createElement('canvas');
+    cv.className='arte'; cv.id='cv-'+arte.id;
+    wrap.appendChild(loading); wrap.appendChild(cv);
+    const footer=document.createElement('div');
+    footer.className='card-footer';
+    footer.innerHTML=`
+      <div class="card-info">
+        <h3>${arte.titulo}</h3>
+        <p>${arte.sub}</p>
+      </div>
+      <button class="btn-dl" onclick="baixar('${arte.id}','${arte.titulo}')">⬇️ Baixar</button>
+    `;
+    card.appendChild(wrap); card.appendChild(footer);
+    grade.appendChild(card);
+    renderArte(arte,cv);
+  });
+}
+
+function filtrar(tag,btn){
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  montarGrade(tag==='todos'?ARTES:ARTES.filter(a=>a.tag===tag));
+}
+
+function baixar(id,titulo){
+  const cv=document.getElementById('cv-'+id);
+  if(!cv) return;
+  const link=document.createElement('a');
+  link.download='amigao-'+titulo.toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9-]/g,'')+'.png';
+  link.href=cv.toDataURL('image/png');
+  link.click();
+}
+
+montarGrade(ARTES);
+</script>
+</body>
+</html>
