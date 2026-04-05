@@ -1214,14 +1214,14 @@ async function confirmarMover(novaPasta){
   mostrarToast('⏳ Movendo imagem…',10000);
   try{
     const getR=await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${ghPath}`,{headers:{'Authorization':`Bearer ${cfg.ghToken}`}});
-    if(!getR.ok){mostrarToast('❌ Erro ao ler arquivo original');return;}
+    if(!getR.ok){const d=await getR.json().catch(()=>({}));mostrarToast(`❌ Erro ao ler original: ${getR.status} – ${d.message||''}`);return;}
     const orig=await getR.json();
     const putR=await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${novoCaminho}`,{
       method:'PUT',
       headers:{'Authorization':`Bearer ${cfg.ghToken}`,'Content-Type':'application/json'},
       body:JSON.stringify({message:`Movido para ${novaPasta}: ${nomeArq}`,content:orig.content.replace(/\n/g,''),branch:GH_BRANCH})
     });
-    if(!putR.ok){mostrarToast('❌ Erro ao criar na nova pasta');return;}
+    if(!putR.ok){const d=await putR.json().catch(()=>({}));mostrarToast(`❌ Erro ao mover: ${putR.status} – ${d.message||''}`);return;}
     await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${ghPath}`,{
       method:'DELETE',
       headers:{'Authorization':`Bearer ${cfg.ghToken}`,'Content-Type':'application/json'},
@@ -1350,48 +1350,35 @@ async function migrarImgsParaGitHub(pasta){
   const prog=document.getElementById('prat-import-progress');
   const btn=document.getElementById('btn-importar-gh');
   if(btn)btn.disabled=true;
-  let ok=0,erros=0;
+  let ok=0,erros=0;const msgs=[];
   for(const item of pendentes){
-    if(prog)prog.style.display='',prog.textContent=`⏳ Baixando ${ok+erros+1}/${pendentes.length}: ${item.lbl}…`;
+    if(prog)prog.style.display='',prog.textContent=`⏳ ${ok+erros+1}/${pendentes.length}: ${item.lbl}…`;
     try{
       const urlObj=new URL(item.url);
       const nomeArq=urlObj.pathname.split('/').pop().replace(/\?.*$/,'')||`foto-${Date.now()}.jpg`;
       const path=`imagens/${pasta}/${nomeArq}`;
-      // Verifica se já existe
       const chk=await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${path}`,{headers:{'Authorization':`Bearer ${cfg.ghToken}`}});
-      if(chk.ok){
-        item.url=`https://raw.githubusercontent.com/${GH_REPO}/${GH_BRANCH}/${path}`;
-        ok++;continue;
-      }
-      // Baixa a imagem
+      if(chk.ok){item.url=`https://raw.githubusercontent.com/${GH_REPO}/${GH_BRANCH}/${path}`;ok++;continue;}
       const imgResp=await fetch(item.url);
-      if(!imgResp.ok){erros++;continue;}
+      if(!imgResp.ok){msgs.push(`${item.lbl}: imagem retornou HTTP ${imgResp.status}`);erros++;continue;}
       const blob=await imgResp.blob();
-      const base64=await new Promise((res,rej)=>{
-        const r=new FileReader();
-        r.onload=()=>res(r.result.split(',')[1]);
-        r.onerror=rej;
-        r.readAsDataURL(blob);
-      });
-      // Envia para GitHub
+      const base64=await new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result.split(',')[1]);r.onerror=rej;r.readAsDataURL(blob);});
       const put=await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${path}`,{
         method:'PUT',
         headers:{'Authorization':`Bearer ${cfg.ghToken}`,'Content-Type':'application/json'},
         body:JSON.stringify({message:`Importado: ${item.lbl}`,content:base64,branch:GH_BRANCH})
       });
-      if(put.ok){
-        item.url=`https://raw.githubusercontent.com/${GH_REPO}/${GH_BRANCH}/${path}`;
-        ok++;
-      } else {erros++;}
-    }catch(e){erros++;}
+      if(put.ok){item.url=`https://raw.githubusercontent.com/${GH_REPO}/${GH_BRANCH}/${path}`;ok++;}
+      else{const d=await put.json().catch(()=>({}));msgs.push(`${item.lbl}: GitHub ${put.status} – ${d.message||'sem detalhe'}`);erros++;}
+    }catch(e){msgs.push(`${item.lbl}: ${e.message||e}`);erros++;}
   }
   if(prog)prog.style.display='none';
   if(btn)btn.disabled=false;
-  salvarMigracao(pasta);
-  renderPratOutras();
-  atualizarBotaoImportar(pasta);
-  carregarImgsGitHub(pasta);
-  mostrarToast(erros?`✅ ${ok} salvas no GitHub, ❌ ${erros} erros`:`✅ ${ok} fotos salvas no GitHub!`);
+  salvarMigracao(pasta);renderPratOutras();atualizarBotaoImportar(pasta);carregarImgsGitHub(pasta);
+  if(erros){
+    const detalhe=msgs.slice(0,3).join(' | ')+(msgs.length>3?` (+${msgs.length-3} mais)`:'');
+    mostrarToast(`❌ ${erros} erro(s): ${detalhe}`,10000);
+  } else {mostrarToast(`✅ ${ok} fotos salvas no GitHub!`);}
 }
 
 // ── MIGRAR FUNDOS DOS MODELOS PARA GITHUB ──────────────
@@ -1423,40 +1410,34 @@ async function migrarFotosGaleria(){
   const prog=document.getElementById('prat-galeria-import-prog');
   if(bar)bar.classList.add('hidden');
   if(prog)prog.style.display='';
-  let ok=0,erros=0;
+  let ok=0,erros=0;const msgs=[];
   for(const id of pendentes){
-    if(prog)prog.textContent=`⏳ Baixando fundo ${ok+erros+1}/${pendentes.length}…`;
+    if(prog)prog.textContent=`⏳ ${ok+erros+1}/${pendentes.length}: pexels-${id}…`;
     const path=`imagens/galeria/pexels-${id}.jpg`;
     try{
-      // Check if already in GitHub
       const chk=await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${path}`,{headers:{'Authorization':`Bearer ${cfg.ghToken}`}});
-      if(chk.ok){
-        fotoGhMap[id]=`https://raw.githubusercontent.com/${GH_REPO}/${GH_BRANCH}/${path}`;
-        ok++;continue;
-      }
+      if(chk.ok){fotoGhMap[id]=`https://raw.githubusercontent.com/${GH_REPO}/${GH_BRANCH}/${path}`;ok++;continue;}
       const pexelsUrl=`https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&w=800&h=800&fit=crop`;
       const imgResp=await fetch(pexelsUrl);
-      if(!imgResp.ok){erros++;continue;}
+      if(!imgResp.ok){msgs.push(`pexels-${id}: download HTTP ${imgResp.status}`);erros++;continue;}
       const blob=await imgResp.blob();
-      const base64=await new Promise((res,rej)=>{
-        const r=new FileReader();r.onload=()=>res(r.result.split(',')[1]);r.onerror=rej;r.readAsDataURL(blob);
-      });
+      const base64=await new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result.split(',')[1]);r.onerror=rej;r.readAsDataURL(blob);});
       const put=await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${path}`,{
         method:'PUT',
         headers:{'Authorization':`Bearer ${cfg.ghToken}`,'Content-Type':'application/json'},
         body:JSON.stringify({message:`Fundo galeria: pexels-${id}`,content:base64,branch:GH_BRANCH})
       });
-      if(put.ok){
-        fotoGhMap[id]=`https://raw.githubusercontent.com/${GH_REPO}/${GH_BRANCH}/${path}`;
-        ok++;
-      }else{erros++;}
-    }catch(e){erros++;}
+      if(put.ok){fotoGhMap[id]=`https://raw.githubusercontent.com/${GH_REPO}/${GH_BRANCH}/${path}`;ok++;}
+      else{const d=await put.json().catch(()=>({}));msgs.push(`pexels-${id}: GitHub ${put.status} – ${d.message||'sem detalhe'}`);erros++;}
+    }catch(e){msgs.push(`pexels-${id}: ${e.message||e}`);erros++;}
   }
   if(prog)prog.style.display='none';
   localStorage.setItem(FOTO_GH_KEY,JSON.stringify(fotoGhMap));
-  renderPratGaleria();
-  atualizarBotaoImportarGaleria();
-  mostrarToast(erros?`✅ ${ok} fundos salvos, ❌ ${erros} erros`:`✅ ${ok} fundos salvos no GitHub!`);
+  renderPratGaleria();atualizarBotaoImportarGaleria();
+  if(erros){
+    const detalhe=msgs.slice(0,3).join(' | ')+(msgs.length>3?` (+${msgs.length-3} mais)`:'');
+    mostrarToast(`❌ ${erros} erro(s): ${detalhe}`,10000);
+  } else {mostrarToast(`✅ ${ok} fundos salvos no GitHub!`);}
 }
 
 // ── CANVAS RENDER ──────────────────────────────────────
