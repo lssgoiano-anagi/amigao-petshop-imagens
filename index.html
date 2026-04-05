@@ -65,8 +65,25 @@
     .btn-usar:hover{opacity:.88;}
 
     /* EDITOR */
-    .editor-layout{display:grid;grid-template-columns:1fr 370px;gap:22px;align-items:start;}
-    @media(max-width:900px){.editor-layout{grid-template-columns:1fr;}}
+    .editor-layout{display:grid;grid-template-columns:1fr 340px 240px;gap:18px;align-items:start;}
+    @media(max-width:1100px){.editor-layout{grid-template-columns:1fr 320px;}.prat-panel{grid-column:1/-1;}.prat-grid{grid-template-columns:repeat(6,1fr);}}
+    @media(max-width:750px){.editor-layout{grid-template-columns:1fr;}.prat-grid{grid-template-columns:repeat(4,1fr);}}
+
+    /* PRATELEIRA */
+    .prat-panel{background:#fff;border-radius:16px;box-shadow:var(--sombra);overflow:hidden;}
+    .prat-header{padding:14px 16px 0;font-weight:900;font-size:.9rem;color:var(--verde-esc);display:flex;align-items:center;gap:6px;}
+    .prat-tabs{display:flex;gap:0;border-bottom:2px solid #f0f0f0;margin-top:10px;}
+    .prat-tab{flex:1;padding:9px 4px;text-align:center;font-size:.72rem;font-weight:800;color:#aaa;cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;transition:all .2s;line-height:1.3;}
+    .prat-tab.active{color:var(--verde-esc);border-bottom-color:var(--verde);}
+    .prat-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:10px;}
+    .prat-item{position:relative;aspect-ratio:1;border-radius:10px;overflow:hidden;cursor:pointer;border:3px solid transparent;transition:border-color .18s,transform .18s;}
+    .prat-item:hover{transform:scale(1.04);}
+    .prat-item.sel{border-color:var(--verde);}
+    .prat-item img{width:100%;height:100%;object-fit:cover;display:block;}
+    .prat-item.grad{display:flex;align-items:center;justify-content:center;font-size:.6rem;font-weight:800;color:rgba(255,255,255,.9);text-shadow:0 1px 3px rgba(0,0,0,.5);}
+    .prat-label{position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,.55);color:#fff;font-size:.6rem;font-weight:800;padding:3px 5px;line-height:1.2;}
+    .prat-reset{margin:0 10px 10px;width:calc(100% - 20px);padding:8px;background:#f5f5f5;border:none;border-radius:9px;cursor:pointer;font-family:'Nunito',sans-serif;font-size:.75rem;font-weight:700;color:#666;}
+    .prat-reset:hover{background:#eee;}
     .panel{background:#fff;border-radius:16px;padding:20px;box-shadow:var(--sombra);}
     .panel-title{font-weight:900;font-size:.95rem;margin-bottom:14px;color:var(--verde-esc);}
     #editor-canvas{width:100%;aspect-ratio:1;display:block;border-radius:8px;}
@@ -193,6 +210,17 @@
         <div class="color-row" id="color-row"></div>
         <button class="btn-gerar" onclick="finalizarArte()">✨ Gerar Arte e Compartilhar →</button>
         <button class="btn-back" onclick="irPara(1)">← Voltar para Galeria</button>
+      </div>
+      <!-- PRATELEIRA -->
+      <div class="prat-panel" id="prat-panel">
+        <div class="prat-header">🗂️ Prateleira</div>
+        <div class="prat-tabs">
+          <div class="prat-tab active" onclick="pratAba('fundos',this)">🖼️<br>Fundos</div>
+          <div class="prat-tab" onclick="pratAba('racao',this)">🛍️<br>Ração</div>
+          <div class="prat-tab" onclick="pratAba('acessorios',this)">🎾<br>Acessórios</div>
+        </div>
+        <div class="prat-grid" id="prat-grid"></div>
+        <button class="prat-reset" onclick="pratReset()">↩ Usar foto padrão da arte</button>
       </div>
     </div>
   </section>
@@ -343,7 +371,7 @@ const ARTES=[
 // ── STATE ──────────────────────────────────────────────
 const CORES=['#2ECC71','#3498DB','#F39C12','#E74C3C','#9B59B6','#1a9e52','#E91E63','#FF9800','#00BCD4','#795548'];
 let cfg={nome:'Amigão Pet Shop 🐾',wpp:'(XX) XXXXX-XXXX',cidade:'Sua Cidade',insta:''};
-let ed={arte:null,titulo:'',sub:'',dest:'',cor:'#2ECC71'};
+let ed={arte:null,titulo:'',sub:'',dest:'',cor:'#2ECC71',bgUrl:null,bgGrad:null};
 let curCat='todos',srch='',step=1,renderTmr=null;
 
 // ── BOOT ───────────────────────────────────────────────
@@ -465,8 +493,8 @@ function renderThumb(a,canvas){
 }
 function selecionarArte(id){
   const a=ARTES.find(x=>x.id===id);if(!a)return;
-  ed.arte=a;ed.titulo=a.t;ed.sub=a.s;ed.dest='';ed.cor=a.c;
-  preencherEditor();irPara(2);setTimeout(schedRender,100);
+  ed.arte=a;ed.titulo=a.t;ed.sub=a.s;ed.dest='';ed.cor=a.c;ed.bgUrl=null;ed.bgGrad=null;
+  preencherEditor();irPara(2);renderPrat();setTimeout(schedRender,100);
 }
 function preencherEditor(){
   document.getElementById('ed-nome').value=cfg.nome;
@@ -487,65 +515,155 @@ function renderCores(){
 function selCor(c){ed.cor=c;updateSwatchSel(c);schedRender();}
 function updateSwatchSel(c){document.querySelectorAll('.cswatch').forEach(s=>s.classList.toggle('sel',s.dataset.c===c));}
 
+// ── PRATELEIRA ─────────────────────────────────────────
+const PRAT={
+  fundos:[
+    {url:null,grad:'linear-gradient(135deg,#1a9e52,#2ECC71)',lbl:'Verde Pet'},
+    {url:null,grad:'linear-gradient(135deg,#3498DB,#1abc9c)',lbl:'Azul Fresco'},
+    {url:null,grad:'linear-gradient(135deg,#F39C12,#e74c3c)',lbl:'Laranja Quente'},
+    {url:null,grad:'linear-gradient(135deg,#9B59B6,#3498DB)',lbl:'Roxo Elegante'},
+    {url:null,grad:'linear-gradient(135deg,#1a2e1e,#2ECC71)',lbl:'Escuro & Verde'},
+    {url:null,grad:'linear-gradient(135deg,#e74c3c,#9B59B6)',lbl:'Vermelho Vivo'},
+    {url:'https://loremflickr.com/480/480/dog,park?lock=10',lbl:'Cão no Parque'},
+    {url:'https://loremflickr.com/480/480/puppy,grass?lock=11',lbl:'Filhote no Jardim'},
+    {url:'https://loremflickr.com/480/480/cat,window?lock=12',lbl:'Gato na Janela'},
+    {url:'https://loremflickr.com/480/480/dog,home?lock=13',lbl:'Pet em Casa'},
+    {url:'https://loremflickr.com/480/480/dog,beach?lock=14',lbl:'Pet na Praia'},
+    {url:'https://loremflickr.com/480/480/cat,sofa?lock=15',lbl:'Gato no Sofá'},
+  ],
+  racao:[
+    {url:'https://loremflickr.com/480/480/dog food,bag?lock=20',lbl:'Ração Cão'},
+    {url:'https://loremflickr.com/480/480/cat food,bag?lock=21',lbl:'Ração Gato'},
+    {url:'https://loremflickr.com/480/480/pet food,package?lock=22',lbl:'Pacote Premium'},
+    {url:'https://loremflickr.com/480/480/dog food,bowl?lock=23',lbl:'Tigela Servida'},
+    {url:'https://loremflickr.com/480/480/kibble,dog?lock=24',lbl:'Ração Seca'},
+    {url:'https://loremflickr.com/480/480/wet food,cat?lock=25',lbl:'Ração Úmida'},
+    {url:'https://loremflickr.com/480/480/treats,dog?lock=26',lbl:'Petiscos Cão'},
+    {url:'https://loremflickr.com/480/480/treats,cat?lock=27',lbl:'Petiscos Gato'},
+    {url:'https://loremflickr.com/480/480/dog,eating?lock=28',lbl:'Cão Comendo'},
+    {url:'https://loremflickr.com/480/480/cat,eating?lock=29',lbl:'Gato Comendo'},
+    {url:'https://loremflickr.com/480/480/puppy,food?lock=30',lbl:'Filhote e Comida'},
+    {url:'https://loremflickr.com/480/480/senior,dog food?lock=31',lbl:'Ração Senior'},
+  ],
+  acessorios:[
+    {url:'https://loremflickr.com/480/480/dog,leash?lock=40',lbl:'Guia & Coleira'},
+    {url:'https://loremflickr.com/480/480/dog,toy?lock=41',lbl:'Brinquedo Cão'},
+    {url:'https://loremflickr.com/480/480/cat,toy?lock=42',lbl:'Brinquedo Gato'},
+    {url:'https://loremflickr.com/480/480/dog,bed?lock=43',lbl:'Caminha Pet'},
+    {url:'https://loremflickr.com/480/480/pet,carrier?lock=44',lbl:'Bolsa Transporte'},
+    {url:'https://loremflickr.com/480/480/dog,collar?lock=45',lbl:'Coleira'},
+    {url:'https://loremflickr.com/480/480/dog,clothes?lock=46',lbl:'Roupinha'},
+    {url:'https://loremflickr.com/480/480/pet,grooming?lock=47',lbl:'Tosa & Higiene'},
+    {url:'https://loremflickr.com/480/480/dog,shampoo?lock=48',lbl:'Shampoo Pet'},
+    {url:'https://loremflickr.com/480/480/aquarium,fish?lock=49',lbl:'Aquário'},
+    {url:'https://loremflickr.com/480/480/bird,cage?lock=50',lbl:'Gaiola'},
+    {url:'https://loremflickr.com/480/480/hamster,cage?lock=51',lbl:'Casinha Roedor'},
+  ],
+};
+let pratAbaAtual='fundos';
+function pratAba(aba,btn){
+  pratAbaAtual=aba;
+  document.querySelectorAll('.prat-tab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  renderPrat();
+}
+function renderPrat(){
+  const grid=document.getElementById('prat-grid');
+  if(!grid)return;
+  grid.innerHTML='';
+  PRAT[pratAbaAtual].forEach((item,i)=>{
+    const el=document.createElement('div');
+    el.className='prat-item'+(ed.bgUrl===item.url&&item.url?' sel':ed.bgGrad===item.grad&&item.grad?' sel':'');
+    if(item.grad&&!item.url){
+      el.classList.add('grad');
+      el.style.background=item.grad;
+      el.textContent=item.lbl;
+      el.onclick=()=>pratSelGrad(item.grad);
+    } else {
+      const img=document.createElement('img');
+      img.src=item.url;img.alt=item.lbl;img.loading='lazy';
+      const lbl=document.createElement('div');lbl.className='prat-label';lbl.textContent=item.lbl;
+      el.appendChild(img);el.appendChild(lbl);
+      el.onclick=()=>pratSelUrl(item.url);
+    }
+    grid.appendChild(el);
+  });
+}
+function pratSelUrl(url){
+  ed.bgUrl=url;ed.bgGrad=null;
+  renderPrat();schedRender();
+}
+function pratSelGrad(grad){
+  ed.bgGrad=grad;ed.bgUrl=null;
+  renderPrat();schedRender();
+}
+function pratReset(){
+  ed.bgUrl=null;ed.bgGrad=null;
+  renderPrat();schedRender();
+}
+
 // ── CANVAS RENDER ──────────────────────────────────────
 function schedRender(){clearTimeout(renderTmr);renderTmr=setTimeout(()=>renderArte(document.getElementById('editor-canvas')),150);}
 function getEdVals(){return{nome:document.getElementById('ed-nome')?.value||cfg.nome,wpp:document.getElementById('ed-wpp')?.value||cfg.wpp,cidade:document.getElementById('ed-cidade')?.value||cfg.cidade,titulo:document.getElementById('ed-titulo')?.value||ed.titulo,sub:document.getElementById('ed-sub')?.value||ed.sub,dest:document.getElementById('ed-dest')?.value||'',cor:ed.cor};}
+function drawArteTexto(ctx,v,W,H,cb){
+  const ov=ctx.createLinearGradient(0,0,0,H);
+  ov.addColorStop(0,'rgba(0,0,0,.22)');ov.addColorStop(.4,'rgba(0,0,0,.08)');ov.addColorStop(1,'rgba(0,0,0,.9)');
+  ctx.fillStyle=ov;ctx.fillRect(0,0,W,H);
+  const hg=ctx.createLinearGradient(0,0,W,0);hg.addColorStop(0,v.cor);hg.addColorStop(1,v.cor+'cc');
+  ctx.fillStyle=hg;ctx.fillRect(0,0,W,116);
+  if(MASCOTE_IMG.complete&&MASCOTE_IMG.naturalWidth){ctx.drawImage(MASCOTE_IMG,12,8,100,100);}
+  ctx.save();ctx.font='bold 44px "Fredoka One",cursive';ctx.fillStyle='#fff';ctx.shadowColor='rgba(0,0,0,.55)';ctx.shadowBlur=14;
+  ctx.textBaseline='middle';ctx.textAlign='left';
+  let nw=v.nome;if(ctx.measureText(nw).width>W-200)nw=nw.substring(0,28)+'…';
+  ctx.fillText(nw,122,58);ctx.restore();
+  drawPaw(ctx,W-55,55,26,'rgba(255,255,255,.28)');drawPaw(ctx,W-105,80,18,'rgba(255,255,255,.18)');
+  const hDest=v.dest?290:0;
+  if(v.dest){
+    ctx.save();ctx.font='bold 34px Nunito,sans-serif';
+    const tw=ctx.measureText(v.dest).width;
+    const tx=42,ty=H-360,th=58,trad=10;
+    ctx.fillStyle=v.cor;rrect(ctx,tx,ty,tw+44,th,trad);ctx.fill();
+    ctx.fillStyle='#fff';ctx.textBaseline='middle';ctx.textAlign='left';
+    ctx.shadowColor='rgba(0,0,0,.4)';ctx.shadowBlur=6;ctx.fillText(v.dest,tx+22,ty+29);ctx.restore();
+  }
+  ctx.save();ctx.textAlign='left';ctx.textBaseline='bottom';ctx.shadowColor='rgba(0,0,0,.95)';ctx.shadowBlur=24;
+  let fs=80;ctx.font=`900 ${fs}px Nunito,sans-serif`;
+  while(ctx.measureText(v.titulo).width>W-80&&fs>30){fs-=3;ctx.font=`900 ${fs}px Nunito,sans-serif`;}
+  const titleY=H-208-hDest;
+  ctx.fillStyle=v.cor;ctx.fillText(v.titulo,44,titleY+2);ctx.fillStyle='#fff';ctx.fillText(v.titulo,42,titleY);ctx.restore();
+  ctx.save();ctx.textAlign='left';ctx.textBaseline='bottom';ctx.font='bold 40px Nunito,sans-serif';
+  ctx.fillStyle='rgba(255,255,255,.92)';ctx.shadowColor='rgba(0,0,0,.8)';ctx.shadowBlur=14;
+  ctx.fillText(v.sub,42,H-136-hDest);ctx.restore();
+  ctx.save();ctx.strokeStyle=v.cor;ctx.lineWidth=5;
+  ctx.beginPath();ctx.moveTo(42,H-112-hDest);ctx.lineTo(W-42,H-112-hDest);ctx.stroke();ctx.restore();
+  ctx.save();ctx.textAlign='left';ctx.textBaseline='bottom';ctx.font='bold 32px Nunito,sans-serif';
+  ctx.fillStyle='rgba(255,255,255,.88)';ctx.shadowColor='rgba(0,0,0,.7)';ctx.shadowBlur=10;
+  ctx.fillText(`📱 ${v.wpp}  •  📍 ${v.cidade}`,42,H-44);
+  ctx.font='italic 25px Nunito,sans-serif';ctx.fillStyle='rgba(255,255,255,.58)';
+  ctx.fillText('Porque seu pet merece o melhor! 🐶🐱',42,H-12);ctx.restore();
+  if(cb)cb();
+}
 function renderArte(canvas,cb){
   if(!ed.arte)return;
   const v=getEdVals();
   const ctx=canvas.getContext('2d');const W=1080,H=1080;
   canvas.width=W;canvas.height=H;
-  const img=new Image();img.crossOrigin='anonymous';img.src=FOTO(ed.arte.tag,ARTES.indexOf(ed.arte));
+  // Gradient background (no image)
+  if(ed.bgGrad&&!ed.bgUrl){
+    const cols=ed.bgGrad.match(/#[0-9a-fA-F]{3,6}/g)||['#1a2e1e','#2ECC71'];
+    const g=ctx.createLinearGradient(0,0,W,H);
+    cols.forEach((c,i)=>g.addColorStop(i/Math.max(cols.length-1,1),c));
+    ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+    drawArteTexto(ctx,v,W,H,cb);return;
+  }
+  const src=ed.bgUrl||FOTO(ed.arte.tag,ARTES.indexOf(ed.arte));
+  const img=new Image();img.crossOrigin='anonymous';img.src=src;
   const draw=()=>{
     ctx.clearRect(0,0,W,H);
     const sc=Math.max(W/img.naturalWidth,H/img.naturalHeight);
     const iw=img.naturalWidth*sc,ih=img.naturalHeight*sc;
     ctx.drawImage(img,(W-iw)/2,(H-ih)/2,iw,ih);
-    const ov=ctx.createLinearGradient(0,0,0,H);
-    ov.addColorStop(0,'rgba(0,0,0,.22)');ov.addColorStop(.4,'rgba(0,0,0,.08)');ov.addColorStop(1,'rgba(0,0,0,.9)');
-    ctx.fillStyle=ov;ctx.fillRect(0,0,W,H);
-    // Header
-    const hg=ctx.createLinearGradient(0,0,W,0);hg.addColorStop(0,v.cor);hg.addColorStop(1,v.cor+'cc');
-    ctx.fillStyle=hg;ctx.fillRect(0,0,W,116);
-    // Mascot logo in header bar
-    if(MASCOTE_IMG.complete&&MASCOTE_IMG.naturalWidth){ctx.drawImage(MASCOTE_IMG,12,8,100,100);}
-    ctx.save();ctx.font='bold 44px "Fredoka One",cursive';ctx.fillStyle='#fff';ctx.shadowColor='rgba(0,0,0,.55)';ctx.shadowBlur=14;
-    ctx.textBaseline='middle';ctx.textAlign='left';
-    let nw=v.nome;if(ctx.measureText(nw).width>W-200)nw=nw.substring(0,28)+'…';
-    ctx.fillText(nw,122,58);ctx.restore();
-    drawPaw(ctx,W-55,55,26,'rgba(255,255,255,.28)');drawPaw(ctx,W-105,80,18,'rgba(255,255,255,.18)');
-    // Destaque tag
-    const hDest=v.dest?290:0;
-    if(v.dest){
-      ctx.save();ctx.font='bold 34px Nunito,sans-serif';
-      const tw=ctx.measureText(v.dest).width;
-      const tx=42,ty=H-360,th=58,trad=10;
-      ctx.fillStyle=v.cor;
-      rrect(ctx,tx,ty,tw+44,th,trad);ctx.fill();
-      ctx.fillStyle='#fff';ctx.textBaseline='middle';ctx.textAlign='left';
-      ctx.shadowColor='rgba(0,0,0,.4)';ctx.shadowBlur=6;
-      ctx.fillText(v.dest,tx+22,ty+29);ctx.restore();
-    }
-    // Title
-    ctx.save();ctx.textAlign='left';ctx.textBaseline='bottom';ctx.shadowColor='rgba(0,0,0,.95)';ctx.shadowBlur=24;
-    let fs=80;ctx.font=`900 ${fs}px Nunito,sans-serif`;
-    while(ctx.measureText(v.titulo).width>W-80&&fs>30){fs-=3;ctx.font=`900 ${fs}px Nunito,sans-serif`;}
-    const titleY=H-208-hDest;
-    ctx.fillStyle=v.cor;ctx.fillText(v.titulo,44,titleY+2);ctx.fillStyle='#fff';ctx.fillText(v.titulo,42,titleY);ctx.restore();
-    // Subtitle
-    ctx.save();ctx.textAlign='left';ctx.textBaseline='bottom';ctx.font='bold 40px Nunito,sans-serif';
-    ctx.fillStyle='rgba(255,255,255,.92)';ctx.shadowColor='rgba(0,0,0,.8)';ctx.shadowBlur=14;
-    ctx.fillText(v.sub,42,H-136-hDest);ctx.restore();
-    // Divider
-    ctx.save();ctx.strokeStyle=v.cor;ctx.lineWidth=5;
-    ctx.beginPath();ctx.moveTo(42,H-112-hDest);ctx.lineTo(W-42,H-112-hDest);ctx.stroke();ctx.restore();
-    // Footer
-    ctx.save();ctx.textAlign='left';ctx.textBaseline='bottom';ctx.font='bold 32px Nunito,sans-serif';
-    ctx.fillStyle='rgba(255,255,255,.88)';ctx.shadowColor='rgba(0,0,0,.7)';ctx.shadowBlur=10;
-    ctx.fillText(`📱 ${v.wpp}  •  📍 ${v.cidade}`,42,H-44);
-    ctx.font='italic 25px Nunito,sans-serif';ctx.fillStyle='rgba(255,255,255,.58)';
-    ctx.fillText('Porque seu pet merece o melhor! 🐶🐱',42,H-12);ctx.restore();
-    if(cb)cb();
+    drawArteTexto(ctx,v,W,H,cb);
   };
   if(img.complete&&img.naturalWidth)draw();
   else{img.onload=draw;img.onerror=()=>{ctx.fillStyle=v.cor;ctx.fillRect(0,0,W,H);ctx.font='160px serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('🐾',W/2,H/2);if(cb)cb();};}
