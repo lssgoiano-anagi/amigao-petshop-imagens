@@ -3,161 +3,601 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Amigão Petshop – Galeria de Artes</title>
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet"/>
+  <title>Criativo Pet – Plataforma de Artes para Petshop</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet"/>
   <style>
-    :root{--verde:#2ECC71;--verde-esc:#1a9e52;--azul:#3498DB;--laranja:#F39C12;}
+    :root{--verde:#2ECC71;--verde-esc:#1a9e52;--azul:#3498DB;--laranja:#F39C12;--roxo:#9B59B6;--vermelho:#E74C3C;--bg:#f0faf4;--texto:#1a2e1e;--sombra:0 4px 20px rgba(0,0,0,.12);}
     *{box-sizing:border-box;margin:0;padding:0;}
-    body{font-family:'Nunito',sans-serif;background:#f0faf4;color:#1a2e1e;}
-    header{background:linear-gradient(135deg,#1a9e52 0%,#2ECC71 55%,#F39C12 100%);color:#fff;text-align:center;padding:32px 20px 26px;box-shadow:0 4px 24px rgba(0,0,0,.18);}
-    header .logo{font-size:3rem;line-height:1;}
-    header h1{font-family:'Fredoka One',cursive;font-size:2.4rem;margin-top:6px;}
-    header p{font-size:1rem;opacity:.88;margin-top:5px;}
-    .container{max-width:1380px;margin:0 auto;padding:30px 16px 70px;}
-    .filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:32px;}
-    .filter-btn{padding:9px 22px;border-radius:22px;border:2.5px solid #ccc;background:#fff;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:700;font-size:.88rem;transition:all .2s;}
-    .filter-btn.active,.filter-btn:hover{border-color:var(--verde);background:#e8fdf1;color:#1a9e52;}
-    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:24px;}
-    .card{background:#fff;border-radius:20px;box-shadow:0 4px 18px rgba(0,0,0,.1);overflow:hidden;transition:transform .2s,box-shadow .2s;}
-    .card:hover{transform:translateY(-5px);box-shadow:0 10px 32px rgba(0,0,0,.16);}
-    .canvas-wrap{position:relative;width:100%;aspect-ratio:1;}
-    canvas.arte{width:100%;height:100%;display:block;}
-    .loading-msg{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:.9rem;color:#999;background:#f5f5f5;}
-    .card-footer{padding:14px 16px;display:flex;align-items:center;justify-content:space-between;gap:10px;}
-    .card-info h3{font-size:.95rem;font-weight:800;color:#1a2e1e;}
-    .card-info p{font-size:.78rem;color:#666;margin-top:2px;}
-    .btn-dl{background:var(--azul);color:#fff;border:none;padding:9px 20px;border-radius:10px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:800;font-size:.85rem;transition:transform .15s,box-shadow .15s;white-space:nowrap;flex-shrink:0;}
-    .btn-dl:hover{transform:translateY(-2px);box-shadow:0 4px 14px rgba(0,0,0,.16);}
-    .total-info{font-size:.9rem;color:#666;margin-bottom:16px;font-weight:700;}
+    body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--texto);min-height:100vh;}
+    .hidden{display:none!important;}
+
+    /* MODAL */
+    .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:300;display:flex;align-items:center;justify-content:center;padding:20px;}
+    .modal-box{background:#fff;border-radius:20px;padding:28px;max-width:460px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.3);}
+    .modal-box h2{font-family:'Fredoka One',cursive;font-size:1.6rem;color:var(--verde-esc);margin-bottom:6px;}
+    .modal-box .modal-sub{font-size:.88rem;color:#666;margin-bottom:20px;line-height:1.5;}
+    .modal-actions{display:flex;gap:10px;margin-top:20px;}
+    .btn-primary{flex:1;padding:12px;background:linear-gradient(135deg,var(--verde-esc),var(--verde));color:#fff;border:none;border-radius:12px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:900;font-size:.95rem;}
+    .btn-secondary{padding:12px 16px;background:#f0f0f0;color:#555;border:none;border-radius:12px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:700;font-size:.88rem;}
+    .insta-steps{list-style:none;margin:12px 0;}
+    .insta-steps li{display:flex;gap:10px;align-items:flex-start;margin-bottom:10px;font-size:.88rem;line-height:1.4;}
+    .insta-steps .num{width:24px;height:24px;min-width:24px;border-radius:50%;background:linear-gradient(135deg,#f09433,#dc2743,#bc1888);color:#fff;font-size:.75rem;font-weight:900;display:flex;align-items:center;justify-content:center;}
+
+    /* HEADER */
+    header{background:linear-gradient(135deg,#1a9e52 0%,#2ECC71 55%,#F39C12 100%);color:#fff;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 4px 20px rgba(0,0,0,.2);position:sticky;top:0;z-index:100;}
+    .header-brand{display:flex;align-items:center;gap:12px;}
+    .header-logo{font-size:2rem;line-height:1;}
+    .header-title h1{font-family:'Fredoka One',cursive;font-size:1.5rem;line-height:1.1;}
+    .header-title p{font-size:.75rem;opacity:.85;font-weight:600;}
+    .btn-cfg{background:rgba(255,255,255,.25);border:2px solid rgba(255,255,255,.5);color:#fff;padding:8px 16px;border-radius:20px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:700;font-size:.82rem;transition:all .2s;white-space:nowrap;}
+    .btn-cfg:hover{background:rgba(255,255,255,.38);}
+
+    /* STEP TABS */
+    .steps-nav{background:#fff;display:flex;justify-content:center;box-shadow:0 2px 10px rgba(0,0,0,.07);position:sticky;top:60px;z-index:99;}
+    .step-tab{flex:1;max-width:200px;padding:13px 8px;text-align:center;cursor:pointer;font-weight:700;font-size:.82rem;color:#aaa;border-bottom:3px solid transparent;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:6px;user-select:none;}
+    .step-tab.active{color:var(--verde-esc);border-bottom-color:var(--verde);}
+    .step-tab.done{color:var(--verde-esc);}
+    .step-num{width:22px;height:22px;border-radius:50%;background:#eee;color:#aaa;font-size:.72rem;font-weight:900;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0;}
+    .step-tab.active .step-num,.step-tab.done .step-num{background:var(--verde);color:#fff;}
+
+    /* MAIN */
+    .main-content{max-width:1400px;margin:0 auto;padding:24px 16px 80px;}
+
+    /* GALLERY */
+    .gallery-controls{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-bottom:16px;}
+    .search-input{flex:1;min-width:180px;padding:10px 16px;border:2px solid #ddd;border-radius:20px;font-family:'Nunito',sans-serif;font-size:.9rem;outline:none;transition:border-color .2s;}
+    .search-input:focus{border-color:var(--verde);}
+    .total-badge{font-size:.85rem;color:#666;font-weight:700;white-space:nowrap;}
+    .cat-filters{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:22px;}
+    .cat-btn{padding:7px 15px;border-radius:20px;border:2px solid #ddd;background:#fff;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:700;font-size:.8rem;transition:all .2s;white-space:nowrap;}
+    .cat-btn:hover,.cat-btn.active{border-color:var(--verde);background:#e8fdf1;color:var(--verde-esc);}
+    .gallery-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:18px;}
+    .g-card{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 3px 14px rgba(0,0,0,.08);transition:transform .2s,box-shadow .2s;cursor:pointer;}
+    .g-card:hover{transform:translateY(-4px);box-shadow:0 10px 28px rgba(0,0,0,.14);}
+    .thumb-wrap{position:relative;width:100%;aspect-ratio:1;}
+    canvas.thumb{width:100%;height:100%;display:block;}
+    .thumb-loading{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:#f0faf4;font-size:.85rem;color:#999;}
+    .g-footer{padding:12px 14px;display:flex;align-items:center;justify-content:space-between;gap:8px;}
+    .g-info h3{font-size:.86rem;font-weight:800;}
+    .g-info p{font-size:.74rem;color:#777;margin-top:1px;}
+    .btn-usar{background:var(--verde);color:#fff;border:none;padding:7px 13px;border-radius:9px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:800;font-size:.78rem;white-space:nowrap;flex-shrink:0;transition:opacity .2s;}
+    .btn-usar:hover{opacity:.88;}
+
+    /* EDITOR */
+    .editor-layout{display:grid;grid-template-columns:1fr 370px;gap:22px;align-items:start;}
+    @media(max-width:900px){.editor-layout{grid-template-columns:1fr;}}
+    .panel{background:#fff;border-radius:16px;padding:20px;box-shadow:var(--sombra);}
+    .panel-title{font-weight:900;font-size:.95rem;margin-bottom:14px;color:var(--verde-esc);}
+    #editor-canvas{width:100%;aspect-ratio:1;display:block;border-radius:8px;}
+    .fsec{font-size:.72rem;font-weight:900;text-transform:uppercase;letter-spacing:.08em;color:#aaa;margin:18px 0 8px;}
+    .fsec:first-child{margin-top:0;}
+    .frow{margin-bottom:11px;}
+    .frow label{display:block;font-size:.8rem;font-weight:700;color:#555;margin-bottom:4px;}
+    .finput{width:100%;padding:9px 12px;border:2px solid #e0e0e0;border-radius:10px;font-family:'Nunito',sans-serif;font-size:.88rem;outline:none;transition:border-color .2s;}
+    .finput:focus{border-color:var(--verde);}
+    .color-row{display:flex;gap:8px;flex-wrap:wrap;}
+    .cswatch{width:34px;height:34px;border-radius:50%;cursor:pointer;border:3px solid transparent;transition:border-color .15s,transform .15s;}
+    .cswatch:hover,.cswatch.sel{border-color:#333;transform:scale(1.12);}
+    .btn-gerar{width:100%;padding:14px;background:linear-gradient(135deg,var(--verde-esc),var(--verde));color:#fff;border:none;border-radius:12px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:900;font-size:1rem;margin-top:14px;transition:opacity .2s,transform .15s;}
+    .btn-gerar:hover{opacity:.9;transform:translateY(-1px);}
+    .btn-back{width:100%;padding:10px;background:#f2f2f2;color:#666;border:none;border-radius:12px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:700;font-size:.86rem;margin-top:8px;}
+    .btn-back:hover{background:#e8e8e8;}
+
+    /* SHARE */
+    .share-layout{display:grid;grid-template-columns:1fr 310px;gap:22px;align-items:start;}
+    @media(max-width:900px){.share-layout{grid-template-columns:1fr;}}
+    #share-canvas{width:100%;aspect-ratio:1;display:block;border-radius:8px;}
+    .share-btns{display:flex;flex-direction:column;gap:11px;}
+    .share-info{background:#fff;border-radius:16px;padding:18px;box-shadow:var(--sombra);}
+    .share-info h3{font-size:.95rem;font-weight:800;margin-bottom:6px;}
+    .share-info p{font-size:.8rem;color:#666;line-height:1.5;}
+    .btn-share{width:100%;padding:14px;border:none;border-radius:14px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:900;font-size:.92rem;display:flex;align-items:center;justify-content:center;gap:10px;transition:transform .15s,opacity .2s;box-shadow:0 4px 14px rgba(0,0,0,.15);}
+    .btn-share:hover{transform:translateY(-2px);opacity:.93;}
+    .btn-dl{background:var(--azul);color:#fff;}
+    .btn-wpp{background:#25D366;color:#fff;}
+    .btn-insta{background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);color:#fff;}
+    .btn-share-sec{background:#f0f0f0;color:#555;width:100%;padding:11px;border:none;border-radius:12px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:700;font-size:.86rem;}
+    .btn-share-sec:hover{background:#e4e4e4;}
+
+    /* FORM INLINE */
+    .form-row{margin-bottom:11px;}
+    .form-row label{display:block;font-size:.8rem;font-weight:700;color:#555;margin-bottom:4px;}
+    .form-input{width:100%;padding:9px 12px;border:2px solid #e0e0e0;border-radius:10px;font-family:'Nunito',sans-serif;font-size:.88rem;outline:none;transition:border-color .2s;}
+    .form-input:focus{border-color:var(--verde);}
+
+    @media(max-width:600px){header{padding:12px 14px;}.header-title h1{font-size:1.25rem;}.main-content{padding:16px 10px 60px;}.gallery-grid{grid-template-columns:repeat(2,1fr);gap:10px;}.step-tab span:last-child{display:none;}}
   </style>
 </head>
 <body>
-<header>
-  <div class="logo">🐾</div>
-  <h1>Amigão Petshop</h1>
-  <p>Galeria de Artes Prontas • Clique em ⬇️ Baixar e use nas redes sociais</p>
-</header>
-<div class="container">
-  <div class="filters">
-    <button class="filter-btn active" onclick="filtrar('todos',this)">🐾 Todos</button>
-    <button class="filter-btn" onclick="filtrar('cachorro-pequeno',this)">🐩 Cão Pequeno</button>
-    <button class="filter-btn" onclick="filtrar('cachorro-grande',this)">🐕 Cão Grande</button>
-    <button class="filter-btn" onclick="filtrar('gato',this)">🐱 Gatos</button>
-    <button class="filter-btn" onclick="filtrar('praia',this)">🏖️ Praia</button>
-    <button class="filter-btn" onclick="filtrar('fazenda',this)">🌾 Fazenda/Chácara</button>
-    <button class="filter-btn" onclick="filtrar('apartamento',this)">🏢 Apartamento</button>
-    <button class="filter-btn" onclick="filtrar('casa',this)">🏡 Casa/Quintal</button>
-    <button class="filter-btn" onclick="filtrar('lazer',this)">⛲ Área de Lazer</button>
+
+<!-- MODAL CONFIG -->
+<div class="modal-overlay" id="modal-cfg">
+  <div class="modal-box">
+    <h2>🐾 Configure seu Petshop</h2>
+    <p class="modal-sub">Essas informações aparecerão em todas as suas artes. Você pode alterar a qualquer momento clicando em <b>Meu Petshop</b>.</p>
+    <div class="form-row"><label>Nome do Petshop *</label><input class="form-input" id="cfg-nome" placeholder="Ex: Petshop Amigão" maxlength="40"/></div>
+    <div class="form-row"><label>WhatsApp</label><input class="form-input" id="cfg-wpp" placeholder="(XX) XXXXX-XXXX" maxlength="20"/></div>
+    <div class="form-row"><label>Cidade / UF</label><input class="form-input" id="cfg-cidade" placeholder="Sua Cidade - UF" maxlength="30"/></div>
+    <div class="form-row"><label>Instagram (opcional)</label><input class="form-input" id="cfg-insta" placeholder="@seupetshop" maxlength="30"/></div>
+    <div class="modal-actions"><button class="btn-primary" onclick="salvarCfg()">✅ Salvar e Começar</button></div>
   </div>
-  <div class="total-info" id="total-info"></div>
-  <div class="grid" id="grade"></div>
+</div>
+
+<!-- MODAL INSTAGRAM -->
+<div class="modal-overlay hidden" id="modal-insta">
+  <div class="modal-box">
+    <h2 style="background:linear-gradient(135deg,#f09433,#dc2743,#bc1888);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">📸 Postar no Instagram</h2>
+    <p class="modal-sub">A imagem foi baixada! Siga os passos abaixo:</p>
+    <ul class="insta-steps">
+      <li><span class="num">1</span><span>Abra o aplicativo do <strong>Instagram</strong> no celular</span></li>
+      <li><span class="num">2</span><span>Toque no <strong>+</strong> para criar novo post ou Story</span></li>
+      <li><span class="num">3</span><span>Selecione a <strong>imagem baixada</strong> da sua galeria de fotos</span></li>
+      <li><span class="num">4</span><span>Adicione uma <strong>legenda</strong> com hashtags: #petshop #cãeseamigos #gatosfelizes</span></li>
+      <li><span class="num">5</span><span>Toque em <strong>Compartilhar</strong> e pronto! 🎉</span></li>
+    </ul>
+    <p style="font-size:.78rem;color:#999;margin-top:8px;">💡 Poste também nos Stories para mais alcance!</p>
+    <div class="modal-actions"><button class="btn-primary" onclick="document.getElementById('modal-insta').classList.add('hidden')">✅ Entendi!</button></div>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="header-brand">
+    <div class="header-logo">🐾</div>
+    <div class="header-title">
+      <h1 id="hdr-nome">Criativo Pet</h1>
+      <p>Plataforma de Artes para Petshops</p>
+    </div>
+  </div>
+  <button class="btn-cfg" onclick="abrirCfg()">⚙️ <span id="hdr-cfg-lbl">Configurar</span></button>
+</header>
+
+<!-- STEPS NAV -->
+<nav class="steps-nav">
+  <div class="step-tab active" id="tab-1" onclick="irPara(1)"><span class="step-num">1</span><span>Galeria</span></div>
+  <div class="step-tab" id="tab-2" onclick="irPara(2)"><span class="step-num">2</span><span>Personalizar</span></div>
+  <div class="step-tab" id="tab-3" onclick="irPara(3)"><span class="step-num">3</span><span>Compartilhar</span></div>
+</nav>
+
+<!-- MAIN -->
+<div class="main-content">
+
+  <!-- STEP 1: GALLERY -->
+  <section id="step-1">
+    <div class="gallery-controls">
+      <input class="search-input" id="srch" placeholder="🔍 Buscar artes..." oninput="buscar(this.value)"/>
+      <span class="total-badge" id="total-badge"></span>
+    </div>
+    <div class="cat-filters" id="cat-filters"></div>
+    <div class="gallery-grid" id="gallery-grid"></div>
+  </section>
+
+  <!-- STEP 2: EDITOR -->
+  <section id="step-2" class="hidden">
+    <div class="editor-layout">
+      <div class="panel">
+        <div class="panel-title">👁️ Pré-visualização</div>
+        <canvas id="editor-canvas"></canvas>
+      </div>
+      <div class="panel">
+        <div class="fsec">📍 Dados do Petshop</div>
+        <div class="frow"><label>Nome do Petshop</label><input class="finput" id="ed-nome" oninput="schedRender()"/></div>
+        <div class="frow"><label>WhatsApp</label><input class="finput" id="ed-wpp" oninput="schedRender()"/></div>
+        <div class="frow"><label>Cidade / UF</label><input class="finput" id="ed-cidade" oninput="schedRender()"/></div>
+        <div class="fsec">✏️ Texto da Arte</div>
+        <div class="frow"><label>Título principal</label><input class="finput" id="ed-titulo" oninput="schedRender()" maxlength="40"/></div>
+        <div class="frow"><label>Subtítulo / Descrição</label><input class="finput" id="ed-sub" oninput="schedRender()" maxlength="60"/></div>
+        <div class="frow"><label>Destaque / Promoção (opcional)</label><input class="finput" id="ed-dest" placeholder="Ex: A partir de R$ 39,90!" oninput="schedRender()" maxlength="36"/></div>
+        <div class="fsec">🎨 Cor do Tema</div>
+        <div class="color-row" id="color-row"></div>
+        <button class="btn-gerar" onclick="finalizarArte()">✨ Gerar Arte e Compartilhar →</button>
+        <button class="btn-back" onclick="irPara(1)">← Voltar para Galeria</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- STEP 3: SHARE -->
+  <section id="step-3" class="hidden">
+    <div class="share-layout">
+      <div class="panel">
+        <div class="panel-title">🖼️ Arte Final — 1080×1080px</div>
+        <canvas id="share-canvas"></canvas>
+      </div>
+      <div class="share-btns">
+        <div class="share-info">
+          <h3>🚀 Arte pronta para publicar!</h3>
+          <p>Baixe ou compartilhe diretamente no WhatsApp e Instagram.</p>
+        </div>
+        <button class="btn-share btn-dl" onclick="baixar()">⬇️ Baixar Imagem (PNG)</button>
+        <button class="btn-share btn-wpp" onclick="sharWpp()">💬 Compartilhar no WhatsApp</button>
+        <button class="btn-share btn-insta" onclick="sharInsta()">📸 Salvar para Instagram</button>
+        <button class="btn-share-sec" onclick="irPara(2)">← Editar Arte</button>
+        <button class="btn-share-sec" style="margin-top:4px" onclick="irPara(1)">🔄 Escolher Nova Arte</button>
+      </div>
+    </div>
+  </section>
+
 </div>
 <script>
-const ARTES=[
-  {id:'cp1',titulo:'BANHO & TOSA',sub:'Para cães de porte pequeno',tag:'cachorro-pequeno',cor:'#2ECC71',foto:'https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=1080&q=90'},
-  {id:'cp2',titulo:'CONSULTA VETERINÁRIA',sub:'Seu pequenino merece cuidado',tag:'cachorro-pequeno',cor:'#3498DB',foto:'https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=1080&q=90'},
-  {id:'cp3',titulo:'SUPER PROMOÇÃO!',sub:'Banho + Tosa a partir de R$ 39,90',tag:'cachorro-pequeno',cor:'#F39C12',foto:'https://images.unsplash.com/photo-1576201836106-db1758fd1c97?w=1080&q=90'},
-  {id:'cp4',titulo:'RAÇÃO ESPECIAL',sub:'Nutrição para raças pequenas',tag:'cachorro-pequeno',cor:'#E74C3C',foto:'https://images.unsplash.com/photo-1453227588014-c43a7d008db4?w=1080&q=90'},
-  {id:'cp5',titulo:'ACESSÓRIOS PET',sub:'Coleiras, roupinhas e muito mais!',tag:'cachorro-pequeno',cor:'#9B59B6',foto:'https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=1080&q=90'},
-  {id:'cp6',titulo:'CLUBE FIDELIDADE',sub:'Acumule pontos a cada banho!',tag:'cachorro-pequeno',cor:'#1a9e52',foto:'https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=1080&q=90'},
-  {id:'cg1',titulo:'ADESTRAMENTO',sub:'Cães de porte grande e médio',tag:'cachorro-grande',cor:'#E74C3C',foto:'https://images.unsplash.com/photo-1552053831-71594a27632d?w=1080&q=90'},
-  {id:'cg2',titulo:'RAÇÃO PREMIUM',sub:'Nutrição completa para raças grandes',tag:'cachorro-grande',cor:'#1a9e52',foto:'https://images.unsplash.com/photo-1537151608828-ea2b11777ee8?w=1080&q=90'},
-  {id:'cg3',titulo:'BANHO ESPECIAL',sub:'Cuidado e carinho para cães grandes',tag:'cachorro-grande',cor:'#9B59B6',foto:'https://images.unsplash.com/photo-1561037404-61cd46aa615b?w=1080&q=90'},
-  {id:'cg4',titulo:'PASSEIO SEGURO',sub:'Guias, coleiras e peitorais',tag:'cachorro-grande',cor:'#3498DB',foto:'https://images.unsplash.com/photo-1477884213360-7e9d7dcc1e48?w=1080&q=90'},
-  {id:'cg5',titulo:'SAÚDE & BEM-ESTAR',sub:'Vacinas e consultas em dia',tag:'cachorro-grande',cor:'#F39C12',foto:'https://images.unsplash.com/photo-1583511655826-05700d52f4d1?w=1080&q=90'},
-  {id:'cg6',titulo:'PROMOÇÃO RELÂMPAGO',sub:'Somente esta semana!',tag:'cachorro-grande',cor:'#E74C3C',foto:'https://images.unsplash.com/photo-1558788353-f76d92427f16?w=1080&q=90'},
-  {id:'ga1',titulo:'TOSA FELINA',sub:'Especialistas em cuidar de gatos',tag:'gato',cor:'#9B59B6',foto:'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=1080&q=90'},
-  {id:'ga2',titulo:'CONSULTA FELINA',sub:'A saúde do seu gato em boas mãos',tag:'gato',cor:'#3498DB',foto:'https://images.unsplash.com/photo-1573865526739-10659fec78a5?w=1080&q=90'},
-  {id:'ga3',titulo:'RAÇÃO PARA GATOS',sub:'As melhores marcas em estoque',tag:'gato',cor:'#F39C12',foto:'https://images.unsplash.com/photo-1495360010541-f48722b4b6b8?w=1080&q=90'},
-  {id:'ga4',titulo:'ACESSÓRIOS FELINOS',sub:'Arranhadores, casinhas e brinquedos',tag:'gato',cor:'#E74C3C',foto:'https://images.unsplash.com/photo-1533743983-a4f61bf1bb8b?w=1080&q=90'},
-  {id:'ga5',titulo:'BANHO GATOS',sub:'Banho especial sem estresse',tag:'gato',cor:'#2ECC71',foto:'https://images.unsplash.com/photo-1574158622682-e719b968efd7?w=1080&q=90'},
-  {id:'ga6',titulo:'ADOTE COM AMOR',sub:'Venha conhecer nossos filhotes!',tag:'gato',cor:'#1a9e52',foto:'https://images.unsplash.com/photo-1548802673-380ab8ebc7b7?w=1080&q=90'},
-  {id:'pr1',titulo:'VERÃO COM SEU PET',sub:'Banho pós-praia com desconto!',tag:'praia',cor:'#F39C12',foto:'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1080&q=90'},
-  {id:'pr2',titulo:'PASSEIO NA PRAIA',sub:'Produtos para o verão do seu pet',tag:'praia',cor:'#3498DB',foto:'https://images.unsplash.com/photo-1519046904884-53103b34b206?w=1080&q=90'},
-  {id:'pr3',titulo:'FÉRIAS FELIZES',sub:'Cuide do pet antes de viajar!',tag:'praia',cor:'#2ECC71',foto:'https://images.unsplash.com/photo-1473116763249-9ba006682a52?w=1080&q=90'},
-  {id:'pr4',titulo:'PROTETOR SOLAR PET',sub:'Proteja seu pet no verão',tag:'praia',cor:'#E74C3C',foto:'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1080&q=90'},
-  {id:'fz1',titulo:'PETS NA NATUREZA',sub:'Ração e acessórios para o campo',tag:'fazenda',cor:'#1a9e52',foto:'https://images.unsplash.com/photo-1500595046743-cd271d694d30?w=1080&q=90'},
-  {id:'fz2',titulo:'VIDA NO CAMPO',sub:'Seu pet feliz na chácara!',tag:'fazenda',cor:'#F39C12',foto:'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1080&q=90'},
-  {id:'fz3',titulo:'AVENTURA NA FAZENDA',sub:'Produtos para pets aventureiros',tag:'fazenda',cor:'#E74C3C',foto:'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=1080&q=90'},
-  {id:'fz4',titulo:'AR LIVRE & SAÚDE',sub:'Antiparasitários e vacinas',tag:'fazenda',cor:'#2ECC71',foto:'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1080&q=90'},
-  {id:'ap1',titulo:'PET NO APARTAMENTO',sub:'Tudo para pets em espaços menores',tag:'apartamento',cor:'#9B59B6',foto:'https://images.unsplash.com/photo-1545249849-1eaf0bff03ee?w=1080&q=90'},
-  {id:'ap2',titulo:'CONFORTO EM CASA',sub:'Caminhas, brinquedos e muito mais!',tag:'apartamento',cor:'#3498DB',foto:'https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?w=1080&q=90'},
-  {id:'ap3',titulo:'PET CITY',sub:'Seu pet feliz na cidade!',tag:'apartamento',cor:'#F39C12',foto:'https://images.unsplash.com/photo-1586105251261-72a756497a11?w=1080&q=90'},
-  {id:'ca1',titulo:'QUINTAL FELIZ',sub:'Brinquedos e acessórios ao ar livre',tag:'casa',cor:'#2ECC71',foto:'https://images.unsplash.com/photo-1558788353-f76d92427f16?w=1080&q=90'},
-  {id:'ca2',titulo:'PET EM CASA',sub:'Tudo para o seu melhor amigo',tag:'casa',cor:'#E74C3C',foto:'https://images.unsplash.com/photo-1601758125946-6ec2ef64daf8?w=1080&q=90'},
-  {id:'ca3',titulo:'FAMÍLIA & PET',sub:'Porque ele é parte da família!',tag:'casa',cor:'#9B59B6',foto:'https://images.unsplash.com/photo-1560807707-8cc77767d783?w=1080&q=90'},
-  {id:'lz1',titulo:'ÁREA DE LAZER',sub:'Passeie com segurança e estilo',tag:'lazer',cor:'#F39C12',foto:'https://images.unsplash.com/photo-1534361960057-19f4434a73d9?w=1080&q=90'},
-  {id:'lz2',titulo:'CLUBE DOS PETS',sub:'Fidelidade que rende prêmios!',tag:'lazer',cor:'#2ECC71',foto:'https://images.unsplash.com/photo-1548802673-380ab8ebc7b7?w=1080&q=90'},
-  {id:'lz3',titulo:'DIVERSÃO GARANTIDA',sub:'Brinquedos e petiscos especiais',tag:'lazer',cor:'#3498DB',foto:'https://images.unsplash.com/photo-1534361960057-19f4434a73d9?w=1080&q=90'},
+const CATS=[
+  {id:'todos',lbl:'🐾 Todos'},{id:'cachorro-pequeno',lbl:'🐩 Cão Pequeno'},
+  {id:'cachorro-grande',lbl:'🐕 Cão Grande'},{id:'gato',lbl:'🐱 Gatos'},
+  {id:'aves',lbl:'🐦 Aves'},{id:'peixes',lbl:'🐠 Peixes'},
+  {id:'roedores',lbl:'🐹 Roedores'},{id:'banho-tosa',lbl:'✂️ Banho & Tosa'},
+  {id:'veterinario',lbl:'🏥 Veterinário'},{id:'nutricao',lbl:'🍖 Nutrição'},
+  {id:'acessorios',lbl:'🎀 Acessórios'},{id:'vacinas',lbl:'💉 Vacinas & Saúde'},
+  {id:'dicas',lbl:'💡 Dicas & Info'},{id:'promocoes',lbl:'🌟 Promoções'},
+  {id:'praia',lbl:'🏖️ Praia & Verão'},{id:'fazenda',lbl:'🌾 Fazenda & Campo'},
+  {id:'adestramento',lbl:'🎓 Adestramento'}
 ];
-function renderArte(arte,canvas){
-  const ctx=canvas.getContext('2d');const W=1080,H=1080;
+const FOTO=id=>`https://images.unsplash.com/photo-${id}?w=1080&q=90`;
+const ARTES=[
+  {id:'cp01',t:'BANHO & TOSA',s:'Para cães de porte pequeno',tag:'cachorro-pequeno',c:'#2ECC71',f:'1587300003388-59208cc962cb'},
+  {id:'cp02',t:'CONSULTA VETERINÁRIA',s:'Seu pequenino merece cuidado',tag:'cachorro-pequeno',c:'#3498DB',f:'1548199973-03cce0bbc87b'},
+  {id:'cp03',t:'SUPER PROMOÇÃO!',s:'Banho + Tosa com preço especial',tag:'cachorro-pequeno',c:'#F39C12',f:'1576201836106-db1758fd1c97'},
+  {id:'cp04',t:'RAÇÃO ESPECIAL',s:'Nutrição para raças pequenas',tag:'cachorro-pequeno',c:'#E74C3C',f:'1453227588014-c43a7d008db4'},
+  {id:'cp05',t:'ACESSÓRIOS PET',s:'Coleiras, roupinhas e muito mais!',tag:'cachorro-pequeno',c:'#9B59B6',f:'1601758228041-f3b2795255f1'},
+  {id:'cp06',t:'CLUBE FIDELIDADE',s:'Acumule pontos a cada banho!',tag:'cachorro-pequeno',c:'#1a9e52',f:'1583337130417-3346a1be7dee'},
+  {id:'cp07',t:'PETISCO GOURMET',s:'Delícias para o seu pequenino',tag:'cachorro-pequeno',c:'#F39C12',f:'1518020382113-a7e8fc38eac9'},
+  {id:'cp08',t:'TOSA CRIATIVA',s:'Looks modernos para seu pet!',tag:'cachorro-pequeno',c:'#9B59B6',f:'1552053831-71594a27632d'},
+  {id:'cg01',t:'ADESTRAMENTO',s:'Cães de porte grande e médio',tag:'cachorro-grande',c:'#E74C3C',f:'1552053831-71594a27632d'},
+  {id:'cg02',t:'RAÇÃO PREMIUM',s:'Nutrição completa para raças grandes',tag:'cachorro-grande',c:'#1a9e52',f:'1537151608828-ea2b11777ee8'},
+  {id:'cg03',t:'BANHO ESPECIAL',s:'Cuidado e carinho para cães grandes',tag:'cachorro-grande',c:'#9B59B6',f:'1561037404-61cd46aa615b'},
+  {id:'cg04',t:'PASSEIO SEGURO',s:'Guias, coleiras e peitorais top',tag:'cachorro-grande',c:'#3498DB',f:'1477884213360-7e9d7dcc1e48'},
+  {id:'cg05',t:'SAÚDE & BEM-ESTAR',s:'Vacinas e consultas em dia',tag:'cachorro-grande',c:'#F39C12',f:'1583511655826-05700d52f4d1'},
+  {id:'cg06',t:'PROMOÇÃO RELÂMPAGO',s:'Somente esta semana!',tag:'cachorro-grande',c:'#E74C3C',f:'1558788353-f76d92427f16'},
+  {id:'cg07',t:'GOLDEN ESPECIAL',s:'Banho completo com perfume premium',tag:'cachorro-grande',c:'#F39C12',f:'1587300003388-59208cc962cb'},
+  {id:'cg08',t:'PET FELIZ',s:'Seu melhor amigo em boas mãos',tag:'cachorro-grande',c:'#2ECC71',f:'1534361960057-19f4434a73d9'},
+  {id:'ga01',t:'TOSA FELINA',s:'Especialistas em cuidar de gatos',tag:'gato',c:'#9B59B6',f:'1514888286974-6c03e2ca1dba'},
+  {id:'ga02',t:'CONSULTA FELINA',s:'A saúde do seu gato em boas mãos',tag:'gato',c:'#3498DB',f:'1573865526739-10659fec78a5'},
+  {id:'ga03',t:'RAÇÃO PARA GATOS',s:'As melhores marcas em estoque',tag:'gato',c:'#F39C12',f:'1495360010541-f48722b4b6b8'},
+  {id:'ga04',t:'ACESSÓRIOS FELINOS',s:'Arranhadores, casinhas e brinquedos',tag:'gato',c:'#E74C3C',f:'1533743983-a4f61bf1bb8b'},
+  {id:'ga05',t:'BANHO SEM ESTRESSE',s:'Técnica especial para gatos',tag:'gato',c:'#2ECC71',f:'1574158622682-e719b968efd7'},
+  {id:'ga06',t:'ADOTE COM AMOR',s:'Venha conhecer nossos filhotes!',tag:'gato',c:'#1a9e52',f:'1548802673-380ab8ebc7b7'},
+  {id:'ga07',t:'CASTRAÇÃO FELINA',s:'Saúde e qualidade de vida',tag:'gato',c:'#3498DB',f:'1592194996308-7b43878e84a6'},
+  {id:'ga08',t:'PROMOÇÃO GATOS',s:'Combo banho + tosa com desconto!',tag:'gato',c:'#9B59B6',f:'1573865526182-f81fcd42eed4'},
+  {id:'av01',t:'AVES & CIA',s:'Tudo para o seu passarinho',tag:'aves',c:'#F39C12',f:'1444464666168-49d633b86797'},
+  {id:'av02',t:'PAPAGAIO & CALOPSITA',s:'Produtos e acessórios para aves',tag:'aves',c:'#2ECC71',f:'1522926193341-e9ffd686c60f'},
+  {id:'av03',t:'RAÇÃO PARA AVES',s:'A melhor nutrição para seu pássaro',tag:'aves',c:'#E74C3C',f:'1516467508483-a7212febe31a'},
+  {id:'av04',t:'SAÚDE DAS AVES',s:'Consulta veterinária especializada',tag:'aves',c:'#3498DB',f:'1452570053594-1b985d6ea890'},
+  {id:'av05',t:'BRINQUEDOS PARA AVES',s:'Entretenimento e bem-estar',tag:'aves',c:'#9B59B6',f:'1471086569966-db3eebc25a59'},
+  {id:'av06',t:'GAIOLAS & VIVEIROS',s:'Conforto e beleza para suas aves',tag:'aves',c:'#1a9e52',f:'1418489098061-ce87b5dc3aee'},
+  {id:'px01',t:'AQUARISMO',s:'Tudo para o seu aquário',tag:'peixes',c:'#3498DB',f:'1520488889-c9ccb7c22da7'},
+  {id:'px02',t:'PEIXES ORNAMENTAIS',s:'As espécies mais belas em estoque',tag:'peixes',c:'#1a9e52',f:'1544551763-46a013bb70d5'},
+  {id:'px03',t:'RAÇÃO PARA PEIXES',s:'Nutrição balanceada para seu aquário',tag:'peixes',c:'#F39C12',f:'1522069213448-443a614da9b6'},
+  {id:'px04',t:'AQUÁRIO DECORADO',s:'Filtros, iluminação e decoração',tag:'peixes',c:'#9B59B6',f:'1584267385494-9fdd9a71ad75'},
+  {id:'px05',t:'PEIXE BETTA',s:'O peixe mais lindo do aquário',tag:'peixes',c:'#E74C3C',f:'1583212292454-1fe6229603b7'},
+  {id:'ro01',t:'HAMSTERS & CIA',s:'Tudo para seus pets pequenos',tag:'roedores',c:'#F39C12',f:'1548767797-d8c844163ef4'},
+  {id:'ro02',t:'COELHOS ADORÁVEIS',s:'Acessórios e alimentos para coelhos',tag:'roedores',c:'#9B59B6',f:'1462093630527-71d44c54db65'},
+  {id:'ro03',t:'RAÇÃO PARA ROEDORES',s:'Nutrição especial para hamsters',tag:'roedores',c:'#2ECC71',f:'1585110396000-c9ffd4e4b308'},
+  {id:'ro04',t:'PORQUINHOS DA ÍNDIA',s:'Produtos especiais para guinea pigs',tag:'roedores',c:'#E74C3C',f:'1548767797-d8c844163ef4'},
+  {id:'bt01',t:'BANHO & TOSA',s:'Profissionais experientes e carinhosos',tag:'banho-tosa',c:'#2ECC71',f:'1587300003388-59208cc962cb'},
+  {id:'bt02',t:'TOSA HIGIÊNICA',s:'Conforto e higiene para seu pet',tag:'banho-tosa',c:'#3498DB',f:'1548199973-03cce0bbc87b'},
+  {id:'bt03',t:'BANHO PREMIUM',s:'Shampoo especial + hidratação',tag:'banho-tosa',c:'#9B59B6',f:'1561037404-61cd46aa615b'},
+  {id:'bt04',t:'TOSA MODINHA',s:'Looks estilosos para seu pet!',tag:'banho-tosa',c:'#E74C3C',f:'1576201836106-db1758fd1c97'},
+  {id:'bt05',t:'COMBO COMPLETO',s:'Banho + Tosa + Hidratação',tag:'banho-tosa',c:'#F39C12',f:'1583337130417-3346a1be7dee'},
+  {id:'bt06',t:'ESFOLIAÇÃO PET',s:'Pelo saudável e brilhante!',tag:'banho-tosa',c:'#1a9e52',f:'1518020382113-a7e8fc38eac9'},
+  {id:'bt07',t:'AGENDAMENTO ONLINE',s:'Reserve seu horário pelo WhatsApp',tag:'banho-tosa',c:'#25D366',f:'1552053831-71594a27632d'},
+  {id:'bt08',t:'BANHO A DOMICÍLIO',s:'Comodidade para você e seu pet',tag:'banho-tosa',c:'#3498DB',f:'1537151608828-ea2b11777ee8'},
+  {id:'vt01',t:'CONSULTA VETERINÁRIA',s:'Cuidando da saúde do seu pet',tag:'veterinario',c:'#3498DB',f:'1548802673-380ab8ebc7b7'},
+  {id:'vt02',t:'CHECK-UP COMPLETO',s:'Prevenção é o melhor remédio!',tag:'veterinario',c:'#2ECC71',f:'1583511655826-05700d52f4d1'},
+  {id:'vt03',t:'DERMATOLOGIA PET',s:'Tratamentos para pele e pelo',tag:'veterinario',c:'#F39C12',f:'1548199973-03cce0bbc87b'},
+  {id:'vt04',t:'MICROCHIPAGEM',s:'Identifique e proteja seu pet',tag:'veterinario',c:'#9B59B6',f:'1560807707-8cc77767d783'},
+  {id:'vt05',t:'CASTRAÇÃO',s:'Saúde e qualidade de vida para o pet',tag:'veterinario',c:'#1a9e52',f:'1574158622682-e719b968efd7'},
+  {id:'vt06',t:'ORTOPEDIA PET',s:'Cuidando do sistema locomotor',tag:'veterinario',c:'#E74C3C',f:'1516734212186-a967f81ad0d7'},
+  {id:'nt01',t:'RAÇÃO PREMIUM',s:'As melhores marcas com desconto',tag:'nutricao',c:'#E74C3C',f:'1587300003388-59208cc962cb'},
+  {id:'nt02',t:'RAÇÃO NATURAL',s:'Alimentação saudável e balanceada',tag:'nutricao',c:'#2ECC71',f:'1537151608828-ea2b11777ee8'},
+  {id:'nt03',t:'PETISCOS GOURMET',s:'Snacks deliciosos para recompensar',tag:'nutricao',c:'#F39C12',f:'1601758125946-6ec2ef64daf8'},
+  {id:'nt04',t:'SUPLEMENTOS PET',s:'Vitaminas e minerais essenciais',tag:'nutricao',c:'#3498DB',f:'1548199973-03cce0bbc87b'},
+  {id:'nt05',t:'DIETA ESPECIAL',s:'Para pets com necessidades específicas',tag:'nutricao',c:'#9B59B6',f:'1514888286974-6c03e2ca1dba'},
+  {id:'nt06',t:'PROMOÇÃO RAÇÃO',s:'Compre 3 leve 4 na linha premium!',tag:'nutricao',c:'#E74C3C',f:'1453227588014-c43a7d008db4'},
+  {id:'ac01',t:'ACESSÓRIOS PET',s:'Coleiras, guias e muito mais!',tag:'acessorios',c:'#9B59B6',f:'1601758228041-f3b2795255f1'},
+  {id:'ac02',t:'ROUPINHAS PET',s:'Estilo e conforto para seu pet',tag:'acessorios',c:'#F39C12',f:'1583337130417-3346a1be7dee'},
+  {id:'ac03',t:'CAMINHAS & CASINHAS',s:'O melhor descanso para seu pet',tag:'acessorios',c:'#E74C3C',f:'1548802673-380ab8ebc7b7'},
+  {id:'ac04',t:'BRINQUEDOS',s:'Diversão e entretenimento para pets',tag:'acessorios',c:'#2ECC71',f:'1518020382113-a7e8fc38eac9'},
+  {id:'ac05',t:'TRANSPORTE SEGURO',s:'Caixas e bolsas de transporte',tag:'acessorios',c:'#3498DB',f:'1477884213360-7e9d7dcc1e48'},
+  {id:'vc01',t:'VACINA ANTIRRÁBICA',s:'Proteja seu pet e sua família',tag:'vacinas',c:'#E74C3C',f:'1560807707-8cc77767d783'},
+  {id:'vc02',t:'V10 CANINA',s:'Imunização completa para cães',tag:'vacinas',c:'#3498DB',f:'1583511655826-05700d52f4d1'},
+  {id:'vc03',t:'VACINA FELINA',s:'Proteção total para seu gato',tag:'vacinas',c:'#9B59B6',f:'1514888286974-6c03e2ca1dba'},
+  {id:'vc04',t:'VERMIFUGAÇÃO',s:'Saúde do pet começa por dentro',tag:'vacinas',c:'#2ECC71',f:'1548199973-03cce0bbc87b'},
+  {id:'vc05',t:'ANTIPULGAS',s:'Carrapatos, pulgas e bernes',tag:'vacinas',c:'#F39C12',f:'1561037404-61cd46aa615b'},
+  {id:'dk01',t:'VOCÊ SABIA?',s:'Cães precisam de banho a cada 15 dias',tag:'dicas',c:'#3498DB',f:'1587300003388-59208cc962cb'},
+  {id:'dk02',t:'DICA DE SAÚDE',s:'Gatos devem beber bastante água',tag:'dicas',c:'#9B59B6',f:'1573865526739-10659fec78a5'},
+  {id:'dk03',t:'FIQUE ATENTO!',s:'Vacinas em dia protegem a família toda',tag:'dicas',c:'#E74C3C',f:'1548802673-380ab8ebc7b7'},
+  {id:'dk04',t:'NUTRIÇÃO CORRETA',s:'Ração de qualidade faz toda diferença',tag:'dicas',c:'#2ECC71',f:'1537151608828-ea2b11777ee8'},
+  {id:'dk05',t:'CUIDADO NO VERÃO',s:'Pets precisam de hidratação extra',tag:'dicas',c:'#F39C12',f:'1507525428034-b723cf961d3e'},
+  {id:'dk06',t:'EXERCÍCIO É SAÚDE',s:'Passeios diários são essenciais',tag:'dicas',c:'#1a9e52',f:'1477884213360-7e9d7dcc1e48'},
+  {id:'dk07',t:'IDENTIFIQUE SEU PET',s:'Microchip garante o retorno seguro',tag:'dicas',c:'#9B59B6',f:'1560807707-8cc77767d783'},
+  {id:'dk08',t:'DENTE SAUDÁVEL',s:'Escovação regular previne doenças',tag:'dicas',c:'#3498DB',f:'1601758125946-6ec2ef64daf8'},
+  {id:'dk09',t:'STRESS DO PET',s:'Sinais de que seu pet precisa de ajuda',tag:'dicas',c:'#E74C3C',f:'1514888286974-6c03e2ca1dba'},
+  {id:'dk10',t:'BEM-ESTAR ANIMAL',s:'Amor e carinho fazem toda diferença!',tag:'dicas',c:'#F39C12',f:'1583337130417-3346a1be7dee'},
+  {id:'pm01',t:'MEGA PROMOÇÃO!',s:'Descontos imperdíveis essa semana',tag:'promocoes',c:'#E74C3C',f:'1548199973-03cce0bbc87b'},
+  {id:'pm02',t:'PROMOÇÃO RELÂMPAGO',s:'Por tempo limitado! Corra!',tag:'promocoes',c:'#F39C12',f:'1576201836106-db1758fd1c97'},
+  {id:'pm03',t:'DESCONTO ESPECIAL',s:'Só para clientes do WhatsApp!',tag:'promocoes',c:'#25D366',f:'1587300003388-59208cc962cb'},
+  {id:'pm04',t:'COMBO PET',s:'Banho + Tosa + Hidratação',tag:'promocoes',c:'#9B59B6',f:'1552053831-71594a27632d'},
+  {id:'pm05',t:'FIDELIDADE PREMIADA',s:'Na 5ª visita ganhe um banho grátis!',tag:'promocoes',c:'#2ECC71',f:'1583337130417-3346a1be7dee'},
+  {id:'pm06',t:'SEGUNDA FELIZ',s:'Todo Monday: 20% off no banho!',tag:'promocoes',c:'#3498DB',f:'1477884213360-7e9d7dcc1e48'},
+  {id:'pm07',t:'ANIVERSÁRIO DO PET',s:'Mês do nascimento com desconto!',tag:'promocoes',c:'#E74C3C',f:'1518020382113-a7e8fc38eac9'},
+  {id:'pm08',t:'INDIQUE E GANHE',s:'Indique amigos e ganhe prêmios!',tag:'promocoes',c:'#F39C12',f:'1560807707-8cc77767d783'},
+  {id:'pr01',t:'VERÃO COM SEU PET',s:'Banho pós-praia com desconto!',tag:'praia',c:'#F39C12',f:'1507525428034-b723cf961d3e'},
+  {id:'pr02',t:'PASSEIO NA PRAIA',s:'Produtos para o verão do seu pet',tag:'praia',c:'#3498DB',f:'1519046904884-53103b34b206'},
+  {id:'pr03',t:'FÉRIAS FELIZES',s:'Cuide do pet antes de viajar!',tag:'praia',c:'#2ECC71',f:'1473116763249-9ba006682a52'},
+  {id:'pr04',t:'PROTEÇÃO SOLAR PET',s:'Proteja seu pet do sol forte',tag:'praia',c:'#E74C3C',f:'1507525428034-b723cf961d3e'},
+  {id:'pr05',t:'HIDRATAÇÃO NO VERÃO',s:'Banho extra + hidratação do pelo',tag:'praia',c:'#9B59B6',f:'1519046904884-53103b34b206'},
+  {id:'fz01',t:'PETS NA NATUREZA',s:'Ração e acessórios para o campo',tag:'fazenda',c:'#1a9e52',f:'1500595046743-cd271d694d30'},
+  {id:'fz02',t:'VIDA NO CAMPO',s:'Seu pet feliz na chácara!',tag:'fazenda',c:'#F39C12',f:'1464822759023-fed622ff2c3b'},
+  {id:'fz03',t:'AVENTURA NA FAZENDA',s:'Produtos para pets aventureiros',tag:'fazenda',c:'#E74C3C',f:'1500534314209-a25ddb2bd429'},
+  {id:'fz04',t:'AR LIVRE & SAÚDE',s:'Antiparasitários e vacinas em dia',tag:'fazenda',c:'#2ECC71',f:'1441974231531-c6227db76b6e'},
+  {id:'fz05',t:'PET RURAL',s:'Cuidados especiais no campo',tag:'fazenda',c:'#9B59B6',f:'1500595046743-cd271d694d30'},
+  {id:'ad01',t:'ADESTRAMENTO',s:'Comportamento saudável e equilibrado',tag:'adestramento',c:'#E74C3C',f:'1552053831-71594a27632d'},
+  {id:'ad02',t:'CURSO DE OBEDIÊNCIA',s:'Cão obediente = família feliz!',tag:'adestramento',c:'#3498DB',f:'1477884213360-7e9d7dcc1e48'},
+  {id:'ad03',t:'ADESTRAMENTO BÁSICO',s:'Primeiros comandos essenciais',tag:'adestramento',c:'#2ECC71',f:'1537151608828-ea2b11777ee8'},
+  {id:'ad04',t:'SOCIALIZAÇÃO PET',s:'Pets felizes com outros animais',tag:'adestramento',c:'#F39C12',f:'1548199973-03cce0bbc87b'},
+  {id:'ad05',t:'CONTROLE COMPORTAMENTAL',s:'Sem stress para vizinhos e família',tag:'adestramento',c:'#9B59B6',f:'1558788353-f76d92427f16'},
+];
+
+// ── STATE ──────────────────────────────────────────────
+const CORES=['#2ECC71','#3498DB','#F39C12','#E74C3C','#9B59B6','#1a9e52','#E91E63','#FF9800','#00BCD4','#795548'];
+let cfg={nome:'Amigão Petshop',wpp:'(XX) XXXXX-XXXX',cidade:'Sua Cidade',insta:''};
+let ed={arte:null,titulo:'',sub:'',dest:'',cor:'#2ECC71'};
+let curCat='todos',srch='',step=1,renderTmr=null;
+
+// ── BOOT ───────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded',()=>{
+  const saved=localStorage.getItem('petcfg');
+  if(saved){cfg={...cfg,...JSON.parse(saved)};document.getElementById('modal-cfg').classList.add('hidden');atualizarHdr();}
+  renderCats();renderGaleria();renderCores();
+});
+
+// ── CONFIG ─────────────────────────────────────────────
+function abrirCfg(){
+  document.getElementById('cfg-nome').value=cfg.nome;
+  document.getElementById('cfg-wpp').value=cfg.wpp;
+  document.getElementById('cfg-cidade').value=cfg.cidade;
+  document.getElementById('cfg-insta').value=cfg.insta||'';
+  document.getElementById('modal-cfg').classList.remove('hidden');
+}
+function salvarCfg(){
+  const n=document.getElementById('cfg-nome').value.trim();
+  if(!n){alert('Informe o nome do petshop!');return;}
+  cfg.nome=n;cfg.wpp=document.getElementById('cfg-wpp').value.trim()||'(XX) XXXXX-XXXX';
+  cfg.cidade=document.getElementById('cfg-cidade').value.trim()||'Sua Cidade';
+  cfg.insta=document.getElementById('cfg-insta').value.trim();
+  localStorage.setItem('petcfg',JSON.stringify(cfg));
+  document.getElementById('modal-cfg').classList.add('hidden');
+  atualizarHdr();
+  if(step===2)preencherEditor();
+}
+function atualizarHdr(){
+  document.getElementById('hdr-nome').textContent=cfg.nome;
+  document.getElementById('hdr-cfg-lbl').textContent='Meu Petshop';
+}
+
+// ── NAVIGATION ─────────────────────────────────────────
+function irPara(s){
+  if(s>=2&&!ed.arte){if(s===2)alert('Selecione uma arte na galeria primeiro!');else alert('Crie sua arte antes de compartilhar!');return;}
+  step=s;
+  [1,2,3].forEach(i=>{
+    const sec=document.getElementById('step-'+i);
+    const tab=document.getElementById('tab-'+i);
+    sec.classList.toggle('hidden',i!==s);
+    tab.classList.remove('active','done');
+    if(i===s)tab.classList.add('active');else if(i<s)tab.classList.add('done');
+  });
+  window.scrollTo({top:0,behavior:'smooth'});
+  if(s===3)renderShare();
+}
+
+// ── GALLERY ────────────────────────────────────────────
+function renderCats(){
+  document.getElementById('cat-filters').innerHTML=
+    CATS.map(c=>`<button class="cat-btn${c.id==='todos'?' active':''}" onclick="filtrarCat('${c.id}',this)">${c.lbl}</button>`).join('');
+}
+function filtrarCat(cat,btn){
+  curCat=cat;
+  document.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');renderGaleria();
+}
+function buscar(v){srch=v.toLowerCase();renderGaleria();}
+function filtrados(){
+  return ARTES.filter(a=>{
+    const mc=curCat==='todos'||a.tag===curCat;
+    const ms=!srch||a.t.toLowerCase().includes(srch)||a.s.toLowerCase().includes(srch);
+    return mc&&ms;
+  });
+}
+function renderGaleria(){
+  const lista=filtrados();
+  const grid=document.getElementById('gallery-grid');
+  document.getElementById('total-badge').textContent=`${lista.length} arte${lista.length!==1?'s':''} disponíve${lista.length!==1?'is':'l'}`;
+  grid.innerHTML='';
+  lista.forEach((a,i)=>{
+    const card=document.createElement('div');card.className='g-card';
+    const tw=document.createElement('div');tw.className='thumb-wrap';
+    const ld=document.createElement('div');ld.className='thumb-loading';ld.innerHTML='<span>⏳</span>';
+    const cv=document.createElement('canvas');cv.className='thumb';cv.id='cv-'+a.id;
+    tw.appendChild(ld);tw.appendChild(cv);
+    const ft=document.createElement('div');ft.className='g-footer';
+    ft.innerHTML=`<div class="g-info"><h3>${a.t}</h3><p>${a.s}</p></div><button class="btn-usar" onclick="selecionarArte('${a.id}')">✏️ Usar</button>`;
+    card.appendChild(tw);card.appendChild(ft);grid.appendChild(card);
+    setTimeout(()=>renderThumb(a,cv),i*40);
+  });
+}
+function renderThumb(a,canvas){
+  const ctx=canvas.getContext('2d');const W=540,H=540;
   canvas.width=W;canvas.height=H;
-  const img=new Image();img.crossOrigin='anonymous';img.src=arte.foto;
+  const img=new Image();img.crossOrigin='anonymous';img.src=FOTO(a.f);
   const draw=()=>{
     ctx.clearRect(0,0,W,H);
     const sc=Math.max(W/img.naturalWidth,H/img.naturalHeight);
     const iw=img.naturalWidth*sc,ih=img.naturalHeight*sc;
     ctx.drawImage(img,(W-iw)/2,(H-ih)/2,iw,ih);
     const ov=ctx.createLinearGradient(0,0,0,H);
-    ov.addColorStop(0,'rgba(0,0,0,0.22)');ov.addColorStop(0.4,'rgba(0,0,0,0.10)');ov.addColorStop(1,'rgba(0,0,0,0.85)');
+    ov.addColorStop(0,'rgba(0,0,0,.18)');ov.addColorStop(1,'rgba(0,0,0,.78)');
     ctx.fillStyle=ov;ctx.fillRect(0,0,W,H);
-    const fg=ctx.createLinearGradient(0,0,W,0);
-    fg.addColorStop(0,arte.cor);fg.addColorStop(1,arte.cor+'bb');
-    ctx.fillStyle=fg;ctx.fillRect(0,0,W,115);
-    ctx.save();ctx.font='56px serif';ctx.textBaseline='middle';ctx.textAlign='left';ctx.fillText('🐾',34,58);
-    ctx.font='bold 40px "Fredoka One",cursive';ctx.fillStyle='#fff';ctx.shadowColor='rgba(0,0,0,.5)';ctx.shadowBlur=10;
-    ctx.fillText('Amigão Petshop',110,58);ctx.restore();
-    paw(ctx,W-55,55,26,'rgba(255,255,255,.3)');paw(ctx,W-105,78,17,'rgba(255,255,255,.2)');
-    ctx.save();ctx.textAlign='left';ctx.textBaseline='bottom';ctx.shadowColor='rgba(0,0,0,.9)';ctx.shadowBlur=22;
-    let fs=76;ctx.font=`900 ${fs}px Nunito,sans-serif`;
-    while(ctx.measureText(arte.titulo).width>W-80&&fs>30){fs-=3;ctx.font=`900 ${fs}px Nunito,sans-serif`;}
-    ctx.fillStyle=arte.cor;ctx.fillText(arte.titulo,44,H-218);ctx.fillStyle='#fff';ctx.fillText(arte.titulo,42,H-220);ctx.restore();
-    ctx.save();ctx.textAlign='left';ctx.textBaseline='bottom';ctx.font='bold 38px Nunito,sans-serif';
-    ctx.fillStyle='rgba(255,255,255,.93)';ctx.shadowColor='rgba(0,0,0,.8)';ctx.shadowBlur=14;ctx.fillText(arte.sub,42,H-148);ctx.restore();
-    ctx.save();ctx.strokeStyle=arte.cor;ctx.lineWidth=5;ctx.beginPath();ctx.moveTo(42,H-124);ctx.lineTo(W-42,H-124);ctx.stroke();ctx.restore();
+    ctx.fillStyle=a.c;ctx.fillRect(0,0,W,50);
+    ctx.save();ctx.font='bold 18px "Fredoka One",cursive';ctx.fillStyle='#fff';ctx.textBaseline='middle';ctx.textAlign='left';
+    const nomeShort=cfg.nome.length>22?cfg.nome.substring(0,22)+'…':cfg.nome;
+    ctx.fillText('🐾 '+nomeShort,10,25);ctx.restore();
+    drawPaw(ctx,W-32,25,14,'rgba(255,255,255,.3)');
+    ctx.save();ctx.textAlign='left';ctx.textBaseline='bottom';ctx.shadowColor='rgba(0,0,0,.9)';ctx.shadowBlur=10;
+    let fs=28;ctx.font=`900 ${fs}px Nunito,sans-serif`;
+    while(ctx.measureText(a.t).width>W-32&&fs>14){fs-=2;ctx.font=`900 ${fs}px Nunito,sans-serif`;}
+    ctx.fillStyle=a.c;ctx.fillText(a.t,16,H-78);ctx.fillStyle='#fff';ctx.fillText(a.t,15,H-79);ctx.restore();
+    ctx.save();ctx.textAlign='left';ctx.textBaseline='bottom';ctx.font=`bold 15px Nunito,sans-serif`;
+    ctx.fillStyle='rgba(255,255,255,.88)';ctx.shadowColor='rgba(0,0,0,.8)';ctx.shadowBlur=6;
+    let sub=a.s;if(ctx.measureText(sub).width>W-32)sub=sub.substring(0,32)+'…';
+    ctx.fillText(sub,16,H-46);ctx.restore();
+    ctx.strokeStyle=a.c;ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(16,H-36);ctx.lineTo(W-16,H-36);ctx.stroke();
+    ctx.save();ctx.font='bold 13px Nunito,sans-serif';ctx.fillStyle='rgba(255,255,255,.7)';ctx.textBaseline='bottom';ctx.textAlign='left';
+    ctx.fillText('📱 '+cfg.wpp,16,H-8);ctx.restore();
+    canvas.parentElement.querySelector('.thumb-loading')?.remove();
+  };
+  if(img.complete&&img.naturalWidth)draw();
+  else{img.onload=draw;img.onerror=()=>{ctx.fillStyle=a.c;ctx.fillRect(0,0,W,H);ctx.font='80px serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('🐾',W/2,H/2);canvas.parentElement.querySelector('.thumb-loading')?.remove();};}
+}
+function selecionarArte(id){
+  const a=ARTES.find(x=>x.id===id);if(!a)return;
+  ed.arte=a;ed.titulo=a.t;ed.sub=a.s;ed.dest='';ed.cor=a.c;
+  preencherEditor();irPara(2);setTimeout(schedRender,100);
+}
+function preencherEditor(){
+  document.getElementById('ed-nome').value=cfg.nome;
+  document.getElementById('ed-wpp').value=cfg.wpp;
+  document.getElementById('ed-cidade').value=cfg.cidade;
+  document.getElementById('ed-titulo').value=ed.arte?.t||ed.titulo;
+  document.getElementById('ed-sub').value=ed.arte?.s||ed.sub;
+  document.getElementById('ed-dest').value='';
+  updateSwatchSel(ed.cor);
+}
+
+// ── COLORS ─────────────────────────────────────────────
+function renderCores(){
+  document.getElementById('color-row').innerHTML=CORES.map(c=>
+    `<div class="cswatch${c===ed.cor?' sel':''}" data-c="${c}" style="background:${c}" onclick="selCor('${c}')"></div>`
+  ).join('');
+}
+function selCor(c){ed.cor=c;updateSwatchSel(c);schedRender();}
+function updateSwatchSel(c){document.querySelectorAll('.cswatch').forEach(s=>s.classList.toggle('sel',s.dataset.c===c));}
+
+// ── CANVAS RENDER ──────────────────────────────────────
+function schedRender(){clearTimeout(renderTmr);renderTmr=setTimeout(()=>renderArte(document.getElementById('editor-canvas')),150);}
+function getEdVals(){return{nome:document.getElementById('ed-nome')?.value||cfg.nome,wpp:document.getElementById('ed-wpp')?.value||cfg.wpp,cidade:document.getElementById('ed-cidade')?.value||cfg.cidade,titulo:document.getElementById('ed-titulo')?.value||ed.titulo,sub:document.getElementById('ed-sub')?.value||ed.sub,dest:document.getElementById('ed-dest')?.value||'',cor:ed.cor};}
+function renderArte(canvas,cb){
+  if(!ed.arte)return;
+  const v=getEdVals();
+  const ctx=canvas.getContext('2d');const W=1080,H=1080;
+  canvas.width=W;canvas.height=H;
+  const img=new Image();img.crossOrigin='anonymous';img.src=FOTO(ed.arte.f);
+  const draw=()=>{
+    ctx.clearRect(0,0,W,H);
+    const sc=Math.max(W/img.naturalWidth,H/img.naturalHeight);
+    const iw=img.naturalWidth*sc,ih=img.naturalHeight*sc;
+    ctx.drawImage(img,(W-iw)/2,(H-ih)/2,iw,ih);
+    const ov=ctx.createLinearGradient(0,0,0,H);
+    ov.addColorStop(0,'rgba(0,0,0,.22)');ov.addColorStop(.4,'rgba(0,0,0,.08)');ov.addColorStop(1,'rgba(0,0,0,.9)');
+    ctx.fillStyle=ov;ctx.fillRect(0,0,W,H);
+    // Header
+    const hg=ctx.createLinearGradient(0,0,W,0);hg.addColorStop(0,v.cor);hg.addColorStop(1,v.cor+'cc');
+    ctx.fillStyle=hg;ctx.fillRect(0,0,W,116);
+    ctx.save();ctx.font='62px serif';ctx.textBaseline='middle';ctx.textAlign='left';ctx.fillText('🐾',30,58);ctx.restore();
+    ctx.save();ctx.font='bold 44px "Fredoka One",cursive';ctx.fillStyle='#fff';ctx.shadowColor='rgba(0,0,0,.5)';ctx.shadowBlur=12;
+    ctx.textBaseline='middle';ctx.textAlign='left';
+    let nw=v.nome;if(ctx.measureText(nw).width>W-160)nw=nw.substring(0,28)+'…';
+    ctx.fillText(nw,112,58);ctx.restore();
+    drawPaw(ctx,W-55,55,26,'rgba(255,255,255,.28)');drawPaw(ctx,W-105,80,18,'rgba(255,255,255,.18)');
+    // Destaque tag
+    const hDest=v.dest?290:0;
+    if(v.dest){
+      ctx.save();ctx.font='bold 34px Nunito,sans-serif';
+      const tw=ctx.measureText(v.dest).width;
+      const tx=42,ty=H-360,th=58,trad=10;
+      ctx.fillStyle=v.cor;
+      rrect(ctx,tx,ty,tw+44,th,trad);ctx.fill();
+      ctx.fillStyle='#fff';ctx.textBaseline='middle';ctx.textAlign='left';
+      ctx.shadowColor='rgba(0,0,0,.4)';ctx.shadowBlur=6;
+      ctx.fillText(v.dest,tx+22,ty+29);ctx.restore();
+    }
+    // Title
+    ctx.save();ctx.textAlign='left';ctx.textBaseline='bottom';ctx.shadowColor='rgba(0,0,0,.95)';ctx.shadowBlur=24;
+    let fs=80;ctx.font=`900 ${fs}px Nunito,sans-serif`;
+    while(ctx.measureText(v.titulo).width>W-80&&fs>30){fs-=3;ctx.font=`900 ${fs}px Nunito,sans-serif`;}
+    const titleY=H-208-hDest;
+    ctx.fillStyle=v.cor;ctx.fillText(v.titulo,44,titleY+2);ctx.fillStyle='#fff';ctx.fillText(v.titulo,42,titleY);ctx.restore();
+    // Subtitle
+    ctx.save();ctx.textAlign='left';ctx.textBaseline='bottom';ctx.font='bold 40px Nunito,sans-serif';
+    ctx.fillStyle='rgba(255,255,255,.92)';ctx.shadowColor='rgba(0,0,0,.8)';ctx.shadowBlur=14;
+    ctx.fillText(v.sub,42,H-136-hDest);ctx.restore();
+    // Divider
+    ctx.save();ctx.strokeStyle=v.cor;ctx.lineWidth=5;
+    ctx.beginPath();ctx.moveTo(42,H-112-hDest);ctx.lineTo(W-42,H-112-hDest);ctx.stroke();ctx.restore();
+    // Footer
     ctx.save();ctx.textAlign='left';ctx.textBaseline='bottom';ctx.font='bold 32px Nunito,sans-serif';
     ctx.fillStyle='rgba(255,255,255,.88)';ctx.shadowColor='rgba(0,0,0,.7)';ctx.shadowBlur=10;
-    ctx.fillText('📱 WhatsApp  •  📍 Sua Cidade',42,H-44);
-    ctx.font='italic 24px Nunito,sans-serif';ctx.fillStyle='rgba(255,255,255,.58)';
+    ctx.fillText(`📱 ${v.wpp}  •  📍 ${v.cidade}`,42,H-44);
+    ctx.font='italic 25px Nunito,sans-serif';ctx.fillStyle='rgba(255,255,255,.58)';
     ctx.fillText('Porque seu pet merece o melhor! 🐶🐱',42,H-12);ctx.restore();
-    const lm=canvas.parentElement.querySelector('.loading-msg');if(lm)lm.remove();
+    if(cb)cb();
   };
-  if(img.complete&&img.naturalWidth){draw();}else{img.onload=draw;img.onerror=()=>{ctx.fillStyle='#1a2e1e';ctx.fillRect(0,0,W,H);};}
+  if(img.complete&&img.naturalWidth)draw();
+  else{img.onload=draw;img.onerror=()=>{ctx.fillStyle=v.cor;ctx.fillRect(0,0,W,H);ctx.font='160px serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('🐾',W/2,H/2);if(cb)cb();};}
 }
-function paw(ctx,cx,cy,sz,color){
+function finalizarArte(){
+  ed.titulo=document.getElementById('ed-titulo').value;
+  ed.sub=document.getElementById('ed-sub').value;
+  ed.dest=document.getElementById('ed-dest').value;
+  irPara(3);
+}
+function renderShare(){
+  const sc=document.getElementById('share-canvas');
+  const ec=document.getElementById('editor-canvas');
+  if(ec.width>0){sc.width=ec.width;sc.height=ec.height;sc.getContext('2d').drawImage(ec,0,0);}
+  else renderArte(sc);
+}
+
+// ── DRAW HELPERS ───────────────────────────────────────
+function drawPaw(ctx,cx,cy,sz,color){
   ctx.save();ctx.fillStyle=color;
   ctx.beginPath();ctx.ellipse(cx,cy+sz*.25,sz*.4,sz*.35,0,0,Math.PI*2);ctx.fill();
-  [-0.55,-0.18,0.18,0.55].forEach(a=>{ctx.beginPath();ctx.ellipse(cx+Math.sin(a)*sz*.5,cy-Math.cos(a)*sz*.2,sz*.2,sz*.25,a,0,Math.PI*2);ctx.fill();});
+  [-0.55,-0.18,.18,.55].forEach(a=>{ctx.beginPath();ctx.ellipse(cx+Math.sin(a)*sz*.5,cy-Math.cos(a)*sz*.2,sz*.2,sz*.25,a,0,Math.PI*2);ctx.fill();});
   ctx.restore();
 }
-function montarGrade(lista){
-  const grade=document.getElementById('grade');
-  document.getElementById('total-info').textContent=`${lista.length} artes disponíveis`;
-  grade.innerHTML='';
-  lista.forEach(arte=>{
-    const card=document.createElement('div');card.className='card';card.dataset.tag=arte.tag;
-    const wrap=document.createElement('div');wrap.className='canvas-wrap';
-    const loading=document.createElement('div');loading.className='loading-msg';loading.innerHTML='<span>⏳ Carregando…</span>';
-    const cv=document.createElement('canvas');cv.className='arte';cv.id='cv-'+arte.id;
-    wrap.appendChild(loading);wrap.appendChild(cv);
-    const footer=document.createElement('div');footer.className='card-footer';
-    footer.innerHTML=`<div class="card-info"><h3>${arte.titulo}</h3><p>${arte.sub}</p></div><button class="btn-dl" onclick="baixar('${arte.id}','${arte.titulo}')">⬇️ Baixar</button>`;
-    card.appendChild(wrap);card.appendChild(footer);grade.appendChild(card);
-    setTimeout(()=>renderArte(arte,cv),60);
-  });
+function rrect(ctx,x,y,w,h,r){
+  ctx.beginPath();ctx.moveTo(x+r,y);ctx.lineTo(x+w-r,y);ctx.quadraticCurveTo(x+w,y,x+w,y+r);
+  ctx.lineTo(x+w,y+h-r);ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);ctx.lineTo(x+r,y+h);
+  ctx.quadraticCurveTo(x,y+h,x,y+h-r);ctx.lineTo(x,y+r);ctx.quadraticCurveTo(x,y,x+r,y);ctx.closePath();
 }
-function filtrar(tag,btn){
-  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');
-  montarGrade(tag==='todos'?ARTES:ARTES.filter(a=>a.tag===tag));
+
+// ── SHARING ────────────────────────────────────────────
+function getNomeArq(){
+  const n=cfg.nome.toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9-]/g,'');
+  const t=ed.titulo.toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9-]/g,'');
+  return `${n}-${t}.png`;
 }
-function baixar(id,titulo){
-  const cv=document.getElementById('cv-'+id);if(!cv)return;
-  const link=document.createElement('a');
-  link.download='amigao-'+titulo.toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9-]/g,'')+'.png';
-  link.href=cv.toDataURL('image/png');link.click();
+function baixar(){
+  const c=document.getElementById('share-canvas');
+  const a=document.createElement('a');a.download=getNomeArq();a.href=c.toDataURL('image/png');a.click();
 }
-montarGrade(ARTES);
+async function sharWpp(){
+  const canvas=document.getElementById('share-canvas');
+  const texto=`${ed.titulo}\n${ed.sub}\n\n📱 ${cfg.wpp} • 📍 ${cfg.cidade}`;
+  if(navigator.share){
+    canvas.toBlob(async blob=>{
+      const file=new File([blob],'arte-petshop.png',{type:'image/png'});
+      if(navigator.canShare&&navigator.canShare({files:[file]})){
+        try{await navigator.share({files:[file],title:cfg.nome,text:texto});return;}catch(e){}
+      }
+      baixar();setTimeout(()=>window.open(`https://wa.me/?text=${encodeURIComponent(texto)}`,'_blank'),700);
+    },'image/png');
+  } else {
+    baixar();
+    setTimeout(()=>window.open(`https://web.whatsapp.com/send?text=${encodeURIComponent(texto)}`,'_blank'),700);
+  }
+}
+function sharInsta(){
+  baixar();
+  setTimeout(()=>document.getElementById('modal-insta').classList.remove('hidden'),600);
+}
 </script>
 </body>
 </html>
