@@ -176,6 +176,16 @@
     .prat-layer-lbl{flex:1;font-size:.7rem;font-weight:700;color:#555;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
     .prat-layer-rm{background:none;border:none;cursor:pointer;font-size:.9rem;color:#E74C3C;padding:2px 4px;flex-shrink:0;}
     .prat-layer-rm:hover{background:#fde;border-radius:50%;}
+    /* UPLOAD ITEM ACTIONS */
+    .upload-item-actions{position:absolute;top:3px;right:3px;display:none;flex-direction:column;gap:3px;z-index:10;}
+    .prat-item:hover .upload-item-actions{display:flex;}
+    .upload-act-btn{width:22px;height:22px;border-radius:6px;border:none;cursor:pointer;font-size:.65rem;font-weight:900;display:flex;align-items:center;justify-content:center;box-shadow:0 1px 4px rgba(0,0,0,.4);}
+    .upload-act-del{background:#E74C3C;color:#fff;}
+    .upload-act-mv{background:#3498DB;color:#fff;}
+    /* MODAL MOVER */
+    .pasta-opcoes{display:flex;flex-direction:column;gap:8px;margin:12px 0;}
+    .pasta-opt-btn{padding:10px 14px;border:2px solid #e0e0e0;border-radius:12px;background:#fafafa;cursor:pointer;font-family:'Nunito',sans-serif;font-size:.9rem;font-weight:700;text-align:left;transition:all .15s;}
+    .pasta-opt-btn:hover{border-color:var(--verde);background:#e8fdf1;color:var(--verde-esc);}
     .prat-tab-mode{font-size:.58rem;background:#e8fdf1;color:var(--verde-esc);border-radius:6px;padding:1px 5px;display:block;margin-top:2px;}
     /* FUNDOS SECTION inside galeria */
     .prat-sec-lbl{font-size:.68rem;font-weight:900;text-transform:uppercase;letter-spacing:.08em;color:#aaa;padding:8px 8px 4px;margin-top:4px;}
@@ -231,6 +241,18 @@
     </ul>
     <p style="font-size:.78rem;color:#999;margin-top:8px;">💡 Poste também nos Stories para mais alcance!</p>
     <div class="modal-actions"><button class="btn-primary" onclick="document.getElementById('modal-insta').classList.add('hidden')">✅ Entendi!</button></div>
+  </div>
+</div>
+
+<!-- MODAL MOVER IMAGEM -->
+<div class="modal-overlay hidden" id="modal-mover">
+  <div class="modal-box">
+    <h2>📂 Mover Imagem</h2>
+    <p class="modal-sub">Escolha a pasta de destino para a imagem:</p>
+    <div class="pasta-opcoes" id="modal-mover-opcoes"></div>
+    <div class="modal-actions">
+      <button class="btn-secondary" onclick="document.getElementById('modal-mover').classList.add('hidden')">Cancelar</button>
+    </div>
   </div>
 </div>
 
@@ -871,7 +893,7 @@ function uploadImagem(input){
         });
         if(resp.ok){
           const rawUrl=`https://raw.githubusercontent.com/${GH_REPO}/${GH_BRANCH}/${path}`;
-          entrada.url=rawUrl;entrada.local=false;
+          entrada.url=rawUrl;entrada.local=false;entrada.ghPath=path;
           pratSelUrl(rawUrl);
           renderUploadThumbs();
           mostrarToast('✅ Salvo no GitHub! Disponível permanentemente.');
@@ -888,19 +910,110 @@ function renderUploadThumbs(){
   const wrap=document.getElementById('upload-thumbs');
   if(!wrap)return;
   wrap.innerHTML='';
-  uploads.forEach(u=>{
+  uploads.forEach((u,idx)=>{
     const el=document.createElement('div');
     const inLayer=ed.objects.some(o=>o.url===u.url);
     el.className='prat-item'+(ed.bgUrl===u.url?' sel':inLayer?' in-layer':'');
     const img=document.createElement('img');img.src=u.url;img.alt=u.lbl;
     const lbl=document.createElement('div');lbl.className='prat-label';lbl.textContent=(u.local?'📱 ':'☁️ ')+u.lbl;
     el.appendChild(img);el.appendChild(lbl);
+    // Action buttons (delete + move)
+    const actions=document.createElement('div');actions.className='upload-item-actions';
+    const btnDel=document.createElement('button');
+    btnDel.className='upload-act-btn upload-act-del';
+    btnDel.title='Excluir imagem';btnDel.textContent='🗑';
+    btnDel.onclick=(e)=>{e.stopPropagation();excluirUpload(idx);};
+    const btnMv=document.createElement('button');
+    btnMv.className='upload-act-btn upload-act-mv';
+    btnMv.title='Mover de pasta';btnMv.textContent='📂';
+    btnMv.onclick=(e)=>{e.stopPropagation();abrirModalMover(idx);};
+    actions.appendChild(btnDel);
+    if(!u.local)actions.appendChild(btnMv);
+    el.appendChild(actions);
     el.onclick=()=>{
       if(isLayerAba()){toggleObject(u.url,u.lbl);}else{pratSelUrl(u.url);}
       renderUploadThumbs();
     };
     wrap.appendChild(el);
   });
+}
+async function excluirUpload(idx){
+  const u=uploads[idx];
+  if(!u)return;
+  if(!confirm(`Excluir "${u.lbl}"?`))return;
+  // Remove from GitHub if saved there
+  if(u.ghPath&&cfg.ghToken){
+    mostrarToast('⏳ Excluindo do GitHub…',8000);
+    try{
+      const check=await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${u.ghPath}`,{headers:{'Authorization':`token ${cfg.ghToken}`}});
+      if(check.ok){
+        const d=await check.json();
+        const resp=await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${u.ghPath}`,{
+          method:'DELETE',
+          headers:{'Authorization':`token ${cfg.ghToken}`,'Content-Type':'application/json'},
+          body:JSON.stringify({message:`Excluído via portal: ${u.lbl}`,sha:d.sha,branch:GH_BRANCH})
+        });
+        if(resp.ok){mostrarToast('🗑️ Excluído do GitHub!');}
+        else{mostrarToast('❌ Erro ao excluir do GitHub');return;}
+      }
+    }catch(e){mostrarToast('⚠️ Erro de conexão');}
+  }
+  // Remove from canvas if in use
+  if(ed.bgUrl===u.url){ed.bgUrl='';schedRender();}
+  ed.objects=ed.objects.filter(o=>o.url!==u.url);
+  uploads.splice(idx,1);
+  renderUploadThumbs();schedRender();
+  if(!u.ghPath)mostrarToast('🗑️ Imagem removida!');
+}
+const PASTAS_GH=[
+  {id:'pets',lbl:'🐾 Pets (animais)'},
+  {id:'racao',lbl:'🍖 Ração & Petiscos'},
+  {id:'acessorios',lbl:'🎀 Acessórios'},
+  {id:'fundos',lbl:'🖼️ Fundos'},
+];
+let moverIdx=-1;
+function abrirModalMover(idx){
+  const u=uploads[idx];if(!u||!u.ghPath)return;
+  moverIdx=idx;
+  const pastaAtual=u.ghPath.split('/')[1]||'';
+  const opcoes=document.getElementById('modal-mover-opcoes');
+  opcoes.innerHTML=PASTAS_GH.filter(p=>p.id!==pastaAtual).map(p=>
+    `<button class="pasta-opt-btn" onclick="confirmarMover('${p.id}')">${p.lbl}</button>`
+  ).join('');
+  document.getElementById('modal-mover').classList.remove('hidden');
+}
+async function confirmarMover(novaPasta){
+  document.getElementById('modal-mover').classList.add('hidden');
+  const u=uploads[moverIdx];if(!u||!u.ghPath||!cfg.ghToken)return;
+  const nomeArq=u.ghPath.split('/').pop();
+  const novoCaminho=`imagens/${novaPasta}/${nomeArq}`;
+  mostrarToast('⏳ Movendo imagem…',10000);
+  try{
+    // Ler arquivo original
+    const getR=await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${u.ghPath}`,{headers:{'Authorization':`token ${cfg.ghToken}`}});
+    if(!getR.ok){mostrarToast('❌ Erro ao ler arquivo original');return;}
+    const orig=await getR.json();
+    // Criar na nova pasta
+    const putR=await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${novoCaminho}`,{
+      method:'PUT',
+      headers:{'Authorization':`token ${cfg.ghToken}`,'Content-Type':'application/json'},
+      body:JSON.stringify({message:`Movido para ${novaPasta}: ${nomeArq}`,content:orig.content.replace(/\n/g,''),branch:GH_BRANCH})
+    });
+    if(!putR.ok){mostrarToast('❌ Erro ao criar na nova pasta');return;}
+    // Excluir da pasta original
+    await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${u.ghPath}`,{
+      method:'DELETE',
+      headers:{'Authorization':`token ${cfg.ghToken}`,'Content-Type':'application/json'},
+      body:JSON.stringify({message:`Movido de ${u.ghPath.split('/')[1]}: ${nomeArq}`,sha:orig.sha,branch:GH_BRANCH})
+    });
+    const novaUrl=`https://raw.githubusercontent.com/${GH_REPO}/${GH_BRANCH}/${novoCaminho}`;
+    const oldUrl=u.url;
+    u.url=novaUrl;u.ghPath=novoCaminho;
+    if(ed.bgUrl===oldUrl)ed.bgUrl=novaUrl;
+    ed.objects.forEach(o=>{if(o.url===oldUrl)o.url=novaUrl;});
+    renderUploadThumbs();schedRender();
+    mostrarToast(`✅ Movido para "${PASTAS_GH.find(p=>p.id===novaPasta)?.lbl||novaPasta}"!`);
+  }catch(e){mostrarToast('⚠️ Erro de conexão ao mover');}
 }
 
 // ── CANVAS RENDER ──────────────────────────────────────
