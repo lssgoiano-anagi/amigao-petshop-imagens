@@ -169,12 +169,29 @@
     /* LAYERS PANEL */
     .prat-layers{border-top:2px solid #f0f0f0;padding:8px;}
     .prat-layers-title{font-size:.68rem;font-weight:900;color:#888;text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;}
-    .prat-layer-item{display:flex;align-items:center;gap:6px;padding:4px 6px;background:#fff8e1;border-radius:8px;margin-bottom:4px;}
+    .prat-layer-item{display:flex;align-items:center;gap:6px;padding:4px 6px;border-radius:8px;margin-bottom:4px;cursor:pointer;border:2px solid transparent;transition:border-color .15s;}
+    .prat-layer-item:hover{background:#fafafa;}
+    .prat-layer-item.sel{background:#fff8e1;border-color:#F39C12;}
     .prat-layer-thumb{width:32px;height:32px;object-fit:cover;border-radius:5px;border:1px solid #eee;}
     .prat-layer-lbl{flex:1;font-size:.7rem;font-weight:700;color:#555;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
     .prat-layer-rm{background:none;border:none;cursor:pointer;font-size:.9rem;color:#E74C3C;padding:2px 4px;flex-shrink:0;}
     .prat-layer-rm:hover{background:#fde;border-radius:50%;}
     .prat-tab-mode{font-size:.58rem;background:#e8fdf1;color:var(--verde-esc);border-radius:6px;padding:1px 5px;display:block;margin-top:2px;}
+    /* FUNDOS SECTION inside galeria */
+    .prat-sec-lbl{font-size:.68rem;font-weight:900;text-transform:uppercase;letter-spacing:.08em;color:#aaa;padding:8px 8px 4px;margin-top:4px;}
+    /* TRANSFORM PANEL */
+    .transform-panel{background:#fff;border-radius:12px;padding:10px 12px;box-shadow:0 2px 12px rgba(0,0,0,.1);border:2px solid #F39C12;margin-top:8px;}
+    .tp-title{font-size:.78rem;font-weight:900;color:#E65100;margin-bottom:8px;display:flex;align-items:center;justify-content:space-between;}
+    .tp-row{display:flex;align-items:center;gap:5px;margin-bottom:6px;flex-wrap:wrap;}
+    .tp-lbl{font-size:.65rem;font-weight:800;color:#aaa;min-width:52px;}
+    .tp-btn{padding:4px 8px;border:1.5px solid #ddd;border-radius:8px;background:#fafafa;cursor:pointer;font-size:.72rem;font-weight:800;transition:all .15s;white-space:nowrap;}
+    .tp-btn:hover{background:#eee;border-color:#bbb;}
+    .tp-btn.danger{border-color:#E74C3C;color:#E74C3C;}
+    .tp-btn.danger:hover{background:#fde;}
+    .tp-val{font-size:.72rem;font-weight:900;color:#333;min-width:34px;text-align:center;}
+    canvas{cursor:default;}
+    canvas.dragging{cursor:grabbing!important;}
+    canvas.hovering{cursor:grab;}
   </style>
 </head>
 <body>
@@ -237,26 +254,63 @@
     <!-- Canvas -->
     <div class="canvas-col">
       <canvas id="editor-canvas"></canvas>
-      <div class="canvas-hint">Preview — exporta em 1080×1080px</div>
+      <div class="canvas-hint">Preview — exporta em 1080×1080px • Arraste as camadas no canvas</div>
+      <!-- Transform panel -->
+      <div class="transform-panel hidden" id="transform-panel">
+        <div class="tp-title">
+          <span>🎯 <span id="tp-name">Camada</span></span>
+          <button class="tp-btn danger" onclick="removeSelectedObj()">🗑️ Remover</button>
+        </div>
+        <div class="tp-row">
+          <span class="tp-lbl">Posição:</span>
+          <button class="tp-btn" onclick="moveObj(-150,0)" title="Esquerda">◀◀</button>
+          <button class="tp-btn" onclick="moveObj(-60,0)">◀</button>
+          <button class="tp-btn" onclick="centerObj()">⊕</button>
+          <button class="tp-btn" onclick="moveObj(60,0)">▶</button>
+          <button class="tp-btn" onclick="moveObj(150,0)" title="Direita">▶▶</button>
+          <button class="tp-btn" onclick="moveObj(0,-80)">▲</button>
+          <button class="tp-btn" onclick="moveObj(0,80)">▼</button>
+        </div>
+        <div class="tp-row">
+          <span class="tp-lbl">Rotação:</span>
+          <button class="tp-btn" onclick="rotateObj(-90)">↺90</button>
+          <button class="tp-btn" onclick="rotateObj(-15)">↺15</button>
+          <button class="tp-btn" onclick="rotateObj(0,true)">0°</button>
+          <button class="tp-btn" onclick="rotateObj(15)">↻15</button>
+          <button class="tp-btn" onclick="rotateObj(90)">↻90</button>
+          <span class="tp-val" id="tp-rot">0°</span>
+        </div>
+        <div class="tp-row">
+          <span class="tp-lbl">Tamanho:</span>
+          <button class="tp-btn" onclick="scaleObj(0.6)">−−</button>
+          <button class="tp-btn" onclick="scaleObj(0.85)">−</button>
+          <span class="tp-val" id="tp-scale">100%</span>
+          <button class="tp-btn" onclick="scaleObj(1.18)">+</button>
+          <button class="tp-btn" onclick="scaleObj(1.5)">++</button>
+          <button class="tp-btn" onclick="flipObj()">⟺ Espelhar</button>
+        </div>
+      </div>
     </div>
 
     <!-- PRATELEIRA -->
     <div class="prat-panel" id="prat-panel">
       <div class="prat-header">🗂️ Prateleira</div>
       <div class="prat-tabs">
-        <div class="prat-tab active" onclick="pratAba('galeria',this)">📋<br>Galeria</div>
-        <div class="prat-tab" onclick="pratAba('fundos',this)">🖼️<br>Fundos</div>
+        <div class="prat-tab active" onclick="pratAba('galeria',this)">📋<br>Modelos</div>
         <div class="prat-tab" onclick="pratAba('pets',this)">🐾<br>Pets<span class="prat-tab-mode">+camada</span></div>
         <div class="prat-tab" onclick="pratAba('racao',this)">🥫<br>Ração<span class="prat-tab-mode">+camada</span></div>
         <div class="prat-tab" onclick="pratAba('acessorios',this)">🎾<br>Acess.<span class="prat-tab-mode">+camada</span></div>
       </div>
       <div class="prat-body" id="prat-body">
-        <!-- Galeria tab -->
+        <!-- Modelos tab (galeria + fundos mesclados) -->
         <div id="prat-galeria-area">
-          <input class="prat-search" id="prat-srch" placeholder="🔍 Buscar..." oninput="pratBuscar(this.value)"/>
+          <input class="prat-search" id="prat-srch" placeholder="🔍 Buscar modelo..." oninput="pratBuscar(this.value)"/>
           <div class="prat-cats" id="prat-cats"></div>
           <div id="prat-sel-info" class="prat-sel-info"></div>
           <div class="prat-grid" id="prat-galeria-grid"></div>
+          <!-- Fundos inline -->
+          <div class="prat-sec-lbl">🖼️ Fundos & Gradientes</div>
+          <div class="prat-grid" id="prat-fundos-grid"></div>
         </div>
         <!-- Fundos/Ração/Acessórios tab -->
         <div id="prat-outras-area" class="hidden">
@@ -452,14 +506,14 @@ const CORES=['#2ECC71','#3498DB','#F39C12','#E74C3C','#9B59B6','#1a9e52','#E91E6
 let cfg={nome:'Amigão Pet Shop 🐾',wpp:'(XX) XXXXX-XXXX',cidade:'Sua Cidade',insta:'',ghToken:''};
 const GH_REPO='lssgoiano-anagi/amigao-petshop-imagens';
 const GH_BRANCH='main';
-let ed={arte:null,titulo:'',sub:'',dest:'',cor:'#2ECC71',bgUrl:null,bgGrad:null,objects:[]};
+let ed={arte:null,titulo:'',sub:'',dest:'',cor:'#2ECC71',bgUrl:null,bgGrad:null,objects:[],selectedObjIdx:-1};
 let renderTmr=null;
 
 // ── BOOT ───────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded',()=>{
   const saved=localStorage.getItem('petcfg');
   if(saved){const s=JSON.parse(saved);if(s.nome==='Amigão Petshop'||s.nome==='Amigão Pet Shop 🐾🐾')s.nome='Amigão Pet Shop 🐾';cfg={...cfg,...s};document.getElementById('modal-cfg').classList.add('hidden');}
-  atualizarHdr();preencherEditor();renderCores();renderPratCats();renderPratGaleria();
+  atualizarHdr();preencherEditor();renderCores();renderPratCats();renderPratGaleria();renderPratFundos();initCanvasInteraction();
 });
 
 // ── CONFIG ─────────────────────────────────────────────
@@ -561,32 +615,40 @@ const PRAT={
     {url:null,grad:'linear-gradient(135deg,#F39C12,#E74C3C)',lbl:'Fogo'},
   ],
   pets:[
-    {url:'imagens/pets/cachorro-labrador.svg',lbl:'Labrador'},
-    {url:'imagens/pets/cachorro-bulldog.svg',lbl:'Bulldog'},
-    {url:'imagens/pets/cachorro-poodle.svg',lbl:'Poodle'},
-    {url:'imagens/pets/cachorro-beagle.svg',lbl:'Beagle'},
-    {url:'imagens/pets/gato-laranja.svg',lbl:'Gato Laranja'},
-    {url:'imagens/pets/gato-cinza.svg',lbl:'Gato Cinza'},
-    {url:'imagens/pets/papagaio.svg',lbl:'Papagaio'},
-    {url:'imagens/pets/coelho.svg',lbl:'Coelho'},
+    {url:'https://images.pexels.com/photos/2607544/pexels-photo-2607544.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Golden Retriever'},
+    {url:'https://images.pexels.com/photos/1805164/pexels-photo-1805164.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Shih Tzu'},
+    {url:'https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Pastor Alemão'},
+    {url:'https://images.pexels.com/photos/1254140/pexels-photo-1254140.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Filhote'},
+    {url:'https://images.pexels.com/photos/2887458/pexels-photo-2887458.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Husky'},
+    {url:'https://images.pexels.com/photos/1591939/pexels-photo-1591939.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Cachorrinho'},
+    {url:'https://images.pexels.com/photos/45201/pexels-photo-45201.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Gato Laranja'},
+    {url:'https://images.pexels.com/photos/617278/pexels-photo-617278.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Gato Cinza'},
+    {url:'https://images.pexels.com/photos/1404819/pexels-photo-1404819.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Gato Tabby'},
+    {url:'https://images.pexels.com/photos/1543793/pexels-photo-1543793.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Gatinho'},
+    {url:'https://images.pexels.com/photos/349758/pexels-photo-349758.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Papagaio'},
+    {url:'https://images.pexels.com/photos/730896/pexels-photo-730896.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Hamster'},
   ],
   racao:[
-    {url:'imagens/racao/racao-cachorro-premium.svg',lbl:'Cães Adultos Premium'},
-    {url:'imagens/racao/racao-gato-premium.svg',lbl:'Gatos Adultos Premium'},
-    {url:'imagens/racao/racao-filhote.svg',lbl:'Filhotes'},
-    {url:'imagens/racao/racao-natural.svg',lbl:'Natural Grain Free'},
-    {url:'imagens/racao/lata-gato.svg',lbl:'Lata Gato Frango'},
-    {url:'imagens/racao/petisco-ossinho.svg',lbl:'Petisco Ossinho'},
-    {url:'imagens/racao/petisco-gato.svg',lbl:'Petisco Felino'},
-    {url:'imagens/racao/racao-idoso.svg',lbl:'Cães Sênior'},
+    {url:'https://images.pexels.com/photos/5732456/pexels-photo-5732456.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Ração Premium'},
+    {url:'https://images.pexels.com/photos/6568501/pexels-photo-6568501.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Tigela de Ração'},
+    {url:'https://images.pexels.com/photos/1741205/pexels-photo-1741205.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Pet & Ração'},
+    {url:'https://images.pexels.com/photos/4498150/pexels-photo-4498150.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Petiscos'},
+    {url:'https://images.pexels.com/photos/7210748/pexels-photo-7210748.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Gato Comendo'},
+    {url:'https://images.pexels.com/photos/6957641/pexels-photo-6957641.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Ração Gato'},
+    {url:'https://images.pexels.com/photos/8434791/pexels-photo-8434791.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Bowl Pet'},
+    {url:'https://images.pexels.com/photos/6816866/pexels-photo-6816866.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Pet Alimentando'},
+    {url:'https://images.pexels.com/photos/5255197/pexels-photo-5255197.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Snack Pet'},
+    {url:'https://images.pexels.com/photos/7210604/pexels-photo-7210604.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Filhote Comendo'},
   ],
   acessorios:[
-    {url:'imagens/acessorios/coleira-osso.svg',lbl:'Coleira com Tag'},
-    {url:'imagens/acessorios/tigela-dupla.svg',lbl:'Tigela Dupla'},
-    {url:'imagens/acessorios/brinquedo-osso.svg',lbl:'Brinquedo Osso'},
-    {url:'imagens/acessorios/arranhador-gato.svg',lbl:'Arranhador Gato'},
-    {url:'imagens/acessorios/caminha-pet.svg',lbl:'Caminha Pet'},
-    {url:'imagens/acessorios/bola-pet.svg',lbl:'Bola Pet'},
+    {url:'https://images.pexels.com/photos/3651579/pexels-photo-3651579.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Coleira & Tags'},
+    {url:'https://images.pexels.com/photos/4587987/pexels-photo-4587987.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Guia & Peitoral'},
+    {url:'https://images.pexels.com/photos/5731871/pexels-photo-5731871.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Caminha'},
+    {url:'https://images.pexels.com/photos/6816861/pexels-photo-6816861.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Brinquedo'},
+    {url:'https://images.pexels.com/photos/4587992/pexels-photo-4587992.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Roupa Pet'},
+    {url:'https://images.pexels.com/photos/6957640/pexels-photo-6957640.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Higiene Pet'},
+    {url:'https://images.pexels.com/photos/5255213/pexels-photo-5255213.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Escova & Tosa'},
+    {url:'https://images.pexels.com/photos/5731873/pexels-photo-5731873.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Bolsa Transporte'},
   ],
 };
 let pratAbaAtual='galeria';
@@ -599,15 +661,35 @@ function pratAba(aba,btn){
   const galArea=document.getElementById('prat-galeria-area');
   const outArea=document.getElementById('prat-outras-area');
   const resetBtn=document.getElementById('prat-reset-btn');
-  if(aba==='galeria'){galArea.classList.remove('hidden');outArea.classList.add('hidden');renderPratGaleria();}
-  else{
+  if(aba==='galeria'){
+    galArea.classList.remove('hidden');outArea.classList.add('hidden');
+    renderPratGaleria();renderPratFundos();
+  } else {
     galArea.classList.add('hidden');outArea.classList.remove('hidden');
-    // fundos: show reset btn. layers tabs: hide reset btn
-    resetBtn.style.display=(aba==='fundos'?'':'none');
+    resetBtn.style.display='none';
     renderPratOutras();
   }
 }
 function pratBuscar(v){pratSrch=v.toLowerCase();renderPratGaleria();}
+function renderPratFundos(){
+  const grid=document.getElementById('prat-fundos-grid');
+  if(!grid)return;
+  grid.innerHTML='';
+  PRAT.fundos.forEach(item=>{
+    const el=document.createElement('div');
+    el.className='prat-item'+(ed.bgUrl===item.url&&item.url?' sel':ed.bgGrad===item.grad&&item.grad?' sel':'');
+    if(item.grad&&!item.url){
+      el.classList.add('grad');el.style.background=item.grad;el.textContent=item.lbl;
+      el.onclick=()=>pratSelGrad(item.grad);
+    } else {
+      const img=document.createElement('img');img.src=item.url;img.alt=item.lbl;img.loading='lazy';
+      const lbl=document.createElement('div');lbl.className='prat-label';lbl.textContent=item.lbl;
+      el.appendChild(img);el.appendChild(lbl);
+      el.onclick=()=>pratSelUrl(item.url);
+    }
+    grid.appendChild(el);
+  });
+}
 function pratFiltrarCat(cat,btn){
   pratCatAtual=cat;
   document.querySelectorAll('.pcat-btn').forEach(b=>b.classList.remove('active'));
@@ -697,21 +779,34 @@ function pratSelGrad(grad){
 function pratReset(){
   ed.bgUrl=null;ed.bgGrad=null;renderPratOutras();schedRender();
 }
+const OBJ_BASE_H=380; // px em canvas 1080
 function toggleObject(url,lbl){
   const idx=ed.objects.findIndex(o=>o.url===url);
-  if(idx>=0){ed.objects.splice(idx,1);mostrarToast('🗑️ '+lbl+' removido');}
-  else{ed.objects.push({url,lbl});mostrarToast('✅ '+lbl+' adicionado ao card!');}
-  renderPratOutras();schedRender();
+  if(idx>=0){
+    if(ed.selectedObjIdx===idx)ed.selectedObjIdx=-1;
+    ed.objects.splice(idx,1);
+    mostrarToast('🗑️ '+lbl+' removido');
+  } else {
+    // Posição default: centro-inferior, ligeiramente escalonado por qtd
+    const n=ed.objects.length;
+    const xOff=(n%3-1)*200; // espalha horizontalmente
+    ed.objects.push({url,lbl,x:540+xOff,y:850,scale:1.0,rot:0,flipH:false});
+    ed.selectedObjIdx=ed.objects.length-1;
+    mostrarToast('✅ '+lbl+' adicionado! Arraste no canvas para posicionar.');
+  }
+  renderPratOutras();updateTransformPanel();schedRender();
 }
 function removeObject(idx){
   const o=ed.objects[idx];
   ed.objects.splice(idx,1);
+  if(ed.selectedObjIdx===idx)ed.selectedObjIdx=-1;
+  else if(ed.selectedObjIdx>idx)ed.selectedObjIdx--;
   mostrarToast('🗑️ '+(o?.lbl||'Item')+' removido');
-  renderPratOutras();schedRender();
+  renderPratOutras();updateTransformPanel();schedRender();
 }
 function limparObjetos(){
-  ed.objects=[];mostrarToast('🗑️ Camadas limpas');
-  renderPratOutras();schedRender();
+  ed.objects=[];ed.selectedObjIdx=-1;mostrarToast('🗑️ Camadas limpas');
+  renderPratOutras();updateTransformPanel();schedRender();
 }
 function renderLayersPanel(){
   const panel=document.getElementById('prat-layers');
@@ -721,10 +816,14 @@ function renderLayersPanel(){
   panel.classList.remove('hidden');
   list.innerHTML='';
   ed.objects.forEach((o,i)=>{
-    const row=document.createElement('div');row.className='prat-layer-item';
+    const row=document.createElement('div');
+    row.className='prat-layer-item'+(ed.selectedObjIdx===i?' sel':'');
+    row.onclick=()=>{ed.selectedObjIdx=(ed.selectedObjIdx===i?-1:i);renderLayersPanel();updateTransformPanel();schedRender();};
     const thumb=document.createElement('img');thumb.className='prat-layer-thumb';thumb.src=o.url;thumb.alt=o.lbl;
-    const lbl=document.createElement('span');lbl.className='prat-layer-lbl';lbl.textContent=o.lbl;
-    const rm=document.createElement('button');rm.className='prat-layer-rm';rm.textContent='✕';rm.title='Remover';rm.onclick=()=>removeObject(i);
+    const lbl=document.createElement('span');lbl.className='prat-layer-lbl';
+    lbl.textContent=(i===ed.selectedObjIdx?'▶ ':'')+o.lbl+(o.rot?` ${o.rot}°`:'');
+    const rm=document.createElement('button');rm.className='prat-layer-rm';rm.textContent='✕';rm.title='Remover';
+    rm.onclick=e=>{e.stopPropagation();removeObject(i);};
     row.appendChild(thumb);row.appendChild(lbl);row.appendChild(rm);
     list.appendChild(row);
   });
@@ -805,34 +904,65 @@ function renderUploadThumbs(){
 }
 
 // ── CANVAS RENDER ──────────────────────────────────────
-function schedRender(){clearTimeout(renderTmr);renderTmr=setTimeout(()=>renderArte(document.getElementById('editor-canvas')),150);}
-function drawObjects(ctx,W,H,cb){
+function schedRender(){
+  // Preload object images for hit-test cache
+  ed.objects.forEach(o=>{
+    if(!objImgCache[o.url]){const img=new Image();img.crossOrigin='anonymous';img.src=o.url;objImgCache[o.url]=img;}
+  });
+  clearTimeout(renderTmr);renderTmr=setTimeout(()=>renderArte(document.getElementById('editor-canvas')),150);
+}
+function rrectPath(ctx,x,y,w,h,r){
+  ctx.beginPath();
+  ctx.moveTo(x+r,y);ctx.lineTo(x+w-r,y);ctx.quadraticCurveTo(x+w,y,x+w,y+r);
+  ctx.lineTo(x+w,y+h-r);ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);
+  ctx.lineTo(x+r,y+h);ctx.quadraticCurveTo(x,y+h,x,y+h-r);
+  ctx.lineTo(x,y+r);ctx.quadraticCurveTo(x,y,x+r,y);
+  ctx.closePath();
+}
+function drawObjects(ctx,W,H,cb,showSel=true){
   const objs=ed.objects;
   if(!objs.length){if(cb)cb();return;}
   let loaded=0;
   const imgs=objs.map(obj=>{
     const img=new Image();img.crossOrigin='anonymous';
     img.onload=img.onerror=()=>{loaded++;if(loaded===objs.length)render();};
-    img.src=obj.url;
-    return img;
+    img.src=obj.url;return img;
   });
-  // Trigger immediately if already cached
   if(imgs.every(i=>i.complete)){render();return;}
   function render(){
-    const n=objs.length;
-    const cols=Math.min(n,3);
-    const slotW=W/cols;
-    const maxH=H*0.42;
-    imgs.forEach((img,i)=>{
-      if(!img.naturalWidth)return;
+    objs.forEach((obj,i)=>{
+      const img=imgs[i];if(!img.naturalWidth)return;
       const ar=img.naturalWidth/img.naturalHeight;
-      let ih=maxH,iw=ih*ar;
-      if(iw>slotW*0.88){iw=slotW*0.88;ih=iw/ar;}
-      const col=i%cols;
-      const row=Math.floor(i/cols);
-      const cx=slotW*col+slotW/2;
-      const by=H-115-row*ih*0.25;
-      ctx.drawImage(img,cx-iw/2,by-ih,iw,ih);
+      const ih=OBJ_BASE_H*obj.scale;
+      const iw=ih*ar;
+      const r=20;
+      // Pass 1: shadow rect (no clip)
+      ctx.save();
+      ctx.translate(obj.x,obj.y);
+      if(obj.rot)ctx.rotate(obj.rot*Math.PI/180);
+      ctx.shadowColor='rgba(0,0,0,.45)';ctx.shadowBlur=30;ctx.shadowOffsetX=10;ctx.shadowOffsetY=16;
+      rrectPath(ctx,-iw/2,-ih/2,iw,ih,r);
+      ctx.fillStyle='rgba(0,0,0,.01)';ctx.fill();
+      ctx.restore();
+      // Pass 2: image with rounded clip
+      ctx.save();
+      ctx.translate(obj.x,obj.y);
+      if(obj.rot)ctx.rotate(obj.rot*Math.PI/180);
+      if(obj.flipH)ctx.scale(-1,1);
+      rrectPath(ctx,-iw/2,-ih/2,iw,ih,r);
+      ctx.clip();
+      ctx.drawImage(img,-iw/2,-ih/2,iw,ih);
+      ctx.restore();
+      // Selection outline
+      if(showSel&&ed.selectedObjIdx===i){
+        ctx.save();
+        ctx.translate(obj.x,obj.y);
+        if(obj.rot)ctx.rotate(obj.rot*Math.PI/180);
+        ctx.strokeStyle='#F39C12';ctx.lineWidth=10;ctx.setLineDash([28,14]);
+        ctx.shadowColor='rgba(0,0,0,.5)';ctx.shadowBlur=8;
+        ctx.strokeRect(-iw/2-8,-ih/2-8,iw+16,ih+16);
+        ctx.setLineDash([]);ctx.restore();
+      }
     });
     if(cb)cb();
   }
@@ -881,7 +1011,8 @@ function renderArte(canvas,cb){
   const v=getEdVals();
   const ctx=canvas.getContext('2d');const W=1080,H=1080;
   canvas.width=W;canvas.height=H;
-  const afterBg=()=>drawObjects(ctx,W,H,()=>drawArteTexto(ctx,v,W,H,cb));
+  const isExport=!!cb;
+  const afterBg=()=>drawObjects(ctx,W,H,()=>drawArteTexto(ctx,v,W,H,cb),!isExport);
   // Gradient background (no image)
   if(ed.bgGrad&&!ed.bgUrl){
     const cols=ed.bgGrad.match(/#[0-9a-fA-F]{3,6}/g)||['#1a2e1e','#2ECC71'];
@@ -910,11 +1041,8 @@ function drawPaw(ctx,cx,cy,sz,color){
   [-0.55,-0.18,.18,.55].forEach(a=>{ctx.beginPath();ctx.ellipse(cx+Math.sin(a)*sz*.5,cy-Math.cos(a)*sz*.2,sz*.2,sz*.25,a,0,Math.PI*2);ctx.fill();});
   ctx.restore();
 }
-function rrect(ctx,x,y,w,h,r){
-  ctx.beginPath();ctx.moveTo(x+r,y);ctx.lineTo(x+w-r,y);ctx.quadraticCurveTo(x+w,y,x+w,y+r);
-  ctx.lineTo(x+w,y+h-r);ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);ctx.lineTo(x+r,y+h);
-  ctx.quadraticCurveTo(x,y+h,x,y+h-r);ctx.lineTo(x,y+r);ctx.quadraticCurveTo(x,y,x+r,y);ctx.closePath();
-}
+// rrect is now rrectPath (defined in drawObjects section)
+function rrect(ctx,x,y,w,h,r){rrectPath(ctx,x,y,w,h,r);}
 
 // ── SHARING ────────────────────────────────────────────
 function getNomeArq(){
@@ -947,6 +1075,114 @@ function sharInsta(){
   baixar();
   setTimeout(()=>document.getElementById('modal-insta').classList.remove('hidden'),600);
 }
+
+// ── TRANSFORM CONTROLS ─────────────────────────────────
+function selectedObj(){return ed.selectedObjIdx>=0&&ed.selectedObjIdx<ed.objects.length?ed.objects[ed.selectedObjIdx]:null;}
+function updateTransformPanel(){
+  const panel=document.getElementById('transform-panel');
+  const o=selectedObj();
+  if(!o){panel.classList.add('hidden');renderLayersPanel();return;}
+  panel.classList.remove('hidden');
+  document.getElementById('tp-name').textContent=o.lbl;
+  document.getElementById('tp-scale').textContent=Math.round(o.scale*100)+'%';
+  document.getElementById('tp-rot').textContent=(Math.round(o.rot||0))+'°';
+  renderLayersPanel();
+}
+function rotateObj(deg,abs=false){
+  const o=selectedObj();if(!o)return;
+  o.rot=abs?deg:((o.rot||0)+deg+720)%360;
+  updateTransformPanel();schedRender();
+}
+function scaleObj(factor){
+  const o=selectedObj();if(!o)return;
+  o.scale=Math.min(4,Math.max(0.15,o.scale*factor));
+  updateTransformPanel();schedRender();
+}
+function moveObj(dx,dy){
+  const o=selectedObj();if(!o)return;
+  o.x=Math.min(1200,Math.max(-120,o.x+dx));
+  o.y=Math.min(1200,Math.max(-120,o.y+dy));
+  schedRender();
+}
+function centerObj(){
+  const o=selectedObj();if(!o)return;
+  o.x=540;schedRender();
+}
+function flipObj(){
+  const o=selectedObj();if(!o)return;
+  o.flipH=!o.flipH;schedRender();
+}
+function removeSelectedObj(){
+  if(ed.selectedObjIdx<0)return;
+  removeObject(ed.selectedObjIdx);
+}
+
+// ── CANVAS INTERACTION (drag to move layers) ───────────
+let dragState=null;
+function initCanvasInteraction(){
+  const cv=document.getElementById('editor-canvas');
+  function cvPt(e){
+    const r=cv.getBoundingClientRect();
+    const src=e.touches?e.touches[0]:e;
+    return{x:(src.clientX-r.left)*(1080/r.width),y:(src.clientY-r.top)*(1080/r.height)};
+  }
+  function objBounds(obj){
+    const img=objImgCache[obj.url];
+    if(!img||!img.naturalWidth)return{iw:OBJ_BASE_H*obj.scale,ih:OBJ_BASE_H*obj.scale};
+    const ar=img.naturalWidth/img.naturalHeight;
+    const ih=OBJ_BASE_H*obj.scale;
+    return{iw:ih*ar,ih};
+  }
+  function hitTest(pt){
+    for(let i=ed.objects.length-1;i>=0;i--){
+      const o=ed.objects[i];
+      const{iw,ih}=objBounds(o);
+      const dx=pt.x-o.x,dy=pt.y-o.y;
+      const rad=-(o.rot||0)*Math.PI/180;
+      const lx=dx*Math.cos(rad)-dy*Math.sin(rad);
+      const ly=dx*Math.sin(rad)+dy*Math.cos(rad);
+      if(Math.abs(lx)<=iw/2+20&&Math.abs(ly)<=ih/2+20)return i;
+    }
+    return -1;
+  }
+  function onDown(e){
+    if(e.target!==cv)return;
+    const pt=cvPt(e);
+    const idx=hitTest(pt);
+    if(idx>=0){
+      ed.selectedObjIdx=idx;
+      const o=ed.objects[idx];
+      dragState={idx,sx:pt.x,sy:pt.y,ox:o.x,oy:o.y};
+      cv.classList.add('dragging');
+      updateTransformPanel();schedRender();
+      e.preventDefault();
+    } else {
+      ed.selectedObjIdx=-1;
+      updateTransformPanel();schedRender();
+    }
+  }
+  function onMove(e){
+    const pt=cvPt(e);
+    if(dragState){
+      const o=ed.objects[dragState.idx];
+      if(o){o.x=dragState.ox+(pt.x-dragState.sx);o.y=dragState.oy+(pt.y-dragState.sy);schedRender();}
+      e.preventDefault();
+    } else {
+      const idx=hitTest(pt);
+      cv.classList.toggle('hovering',idx>=0&&!dragState);
+    }
+  }
+  function onUp(){dragState=null;cv.classList.remove('dragging');}
+  cv.addEventListener('mousedown',onDown);
+  cv.addEventListener('mousemove',onMove);
+  cv.addEventListener('mouseup',onUp);
+  cv.addEventListener('mouseleave',onUp);
+  cv.addEventListener('touchstart',onDown,{passive:false});
+  cv.addEventListener('touchmove',onMove,{passive:false});
+  cv.addEventListener('touchend',onUp);
+}
+// Image cache for hit-testing bounds
+const objImgCache={};
 </script>
 </body>
 </html>
