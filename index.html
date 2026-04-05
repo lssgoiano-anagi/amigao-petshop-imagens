@@ -349,6 +349,14 @@
             <div class="prat-sec-lbl">📁 Salvas no GitHub</div>
             <div class="prat-grid" id="prat-gh-grid"></div>
           </div>
+          <!-- Fotos padrão (externas ou já migradas) -->
+          <div id="prat-padrao-section">
+            <div class="prat-sec-lbl" id="prat-padrao-lbl" style="display:flex;align-items:center;justify-content:space-between;">
+              <span>🖼️ Fotos padrão</span>
+              <button id="btn-importar-gh" class="upload-act-btn" style="width:auto;padding:3px 8px;font-size:.65rem;background:var(--verde-esc);color:#fff;border-radius:8px;white-space:nowrap;" onclick="migrarImgsParaGitHub(pratAbaAtual)" title="Baixar todas para o GitHub">⬇️ Salvar no GitHub</button>
+            </div>
+            <div id="prat-import-progress" style="display:none;font-size:.7rem;color:var(--verde-esc);padding:4px 8px;font-weight:800;"></div>
+          </div>
           <div class="prat-grid" id="prat-outras-grid"></div>
           <button class="prat-reset" id="prat-reset-btn" onclick="pratReset()">↩ Foto padrão da arte</button>
         </div>
@@ -540,6 +548,7 @@ let renderTmr=null;
 document.addEventListener('DOMContentLoaded',()=>{
   const saved=localStorage.getItem('petcfg');
   if(saved){const s=JSON.parse(saved);if(s.nome==='Amigão Petshop'||s.nome==='Amigão Pet Shop 🐾🐾')s.nome='Amigão Pet Shop 🐾';cfg={...cfg,...s};document.getElementById('modal-cfg').classList.add('hidden');}
+  carregarMigracoes();
   atualizarHdr();preencherEditor();renderCores();renderPratCats();renderPratGaleria();renderPratFundos();initCanvasInteraction();
 });
 
@@ -695,6 +704,7 @@ function pratAba(aba,btn){
     galArea.classList.add('hidden');outArea.classList.remove('hidden');
     resetBtn.style.display='none';
     renderPratOutras();
+    atualizarBotaoImportar(aba);
     carregarImgsGitHub(aba);
   }
 }
@@ -1102,6 +1112,91 @@ async function carregarImgsGitHub(pasta){
       grid.appendChild(el);
     });
   }catch(ex){sec.classList.add('hidden');}
+}
+
+// ── MIGRAR FOTOS PADRÃO PARA GITHUB ────────────────────
+const PRAT_MIGRADO_KEY='pratMigrado_v1';
+function carregarMigracoes(){
+  try{
+    const saved=JSON.parse(localStorage.getItem(PRAT_MIGRADO_KEY)||'{}');
+    ['pets','racao','acessorios'].forEach(pasta=>{
+      if(!saved[pasta])return;
+      saved[pasta].forEach(m=>{
+        const item=PRAT[pasta].find(i=>i.lbl===m.lbl);
+        if(item&&m.url)item.url=m.url;
+      });
+    });
+  }catch(e){}
+}
+function salvarMigracao(pasta){
+  try{
+    const saved=JSON.parse(localStorage.getItem(PRAT_MIGRADO_KEY)||'{}');
+    saved[pasta]=PRAT[pasta].filter(i=>i.url&&i.url.includes('raw.githubusercontent.com')).map(i=>({lbl:i.lbl,url:i.url}));
+    localStorage.setItem(PRAT_MIGRADO_KEY,JSON.stringify(saved));
+  }catch(e){}
+}
+function atualizarBotaoImportar(pasta){
+  const btn=document.getElementById('btn-importar-gh');
+  if(!btn)return;
+  const itens=PRAT[pasta]||[];
+  const pendentes=itens.filter(it=>it.url&&!it.url.startsWith('imagens/')&&!it.url.includes('raw.githubusercontent.com'));
+  if(!cfg.ghToken||pendentes.length===0){
+    btn.style.display='none';
+  } else {
+    btn.style.display='';
+    btn.textContent=`⬇️ Salvar ${pendentes.length} no GitHub`;
+  }
+}
+async function migrarImgsParaGitHub(pasta){
+  if(!cfg.ghToken){mostrarToast('⚠️ Configure o Token GitHub primeiro');return;}
+  const itens=PRAT[pasta]||[];
+  const pendentes=itens.filter(it=>it.url&&!it.url.startsWith('imagens/')&&!it.url.includes('raw.githubusercontent.com'));
+  if(!pendentes.length){mostrarToast('✅ Todas as fotos já estão no GitHub!');return;}
+  const prog=document.getElementById('prat-import-progress');
+  const btn=document.getElementById('btn-importar-gh');
+  if(btn)btn.disabled=true;
+  let ok=0,erros=0;
+  for(const item of pendentes){
+    if(prog)prog.style.display='',prog.textContent=`⏳ Baixando ${ok+erros+1}/${pendentes.length}: ${item.lbl}…`;
+    try{
+      const urlObj=new URL(item.url);
+      const nomeArq=urlObj.pathname.split('/').pop().replace(/\?.*$/,'')||`foto-${Date.now()}.jpg`;
+      const path=`imagens/${pasta}/${nomeArq}`;
+      // Verifica se já existe
+      const chk=await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${path}`,{headers:{'Authorization':`token ${cfg.ghToken}`}});
+      if(chk.ok){
+        item.url=`https://raw.githubusercontent.com/${GH_REPO}/${GH_BRANCH}/${path}`;
+        ok++;continue;
+      }
+      // Baixa a imagem
+      const imgResp=await fetch(item.url);
+      if(!imgResp.ok){erros++;continue;}
+      const blob=await imgResp.blob();
+      const base64=await new Promise((res,rej)=>{
+        const r=new FileReader();
+        r.onload=()=>res(r.result.split(',')[1]);
+        r.onerror=rej;
+        r.readAsDataURL(blob);
+      });
+      // Envia para GitHub
+      const put=await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${path}`,{
+        method:'PUT',
+        headers:{'Authorization':`token ${cfg.ghToken}`,'Content-Type':'application/json'},
+        body:JSON.stringify({message:`Importado: ${item.lbl}`,content:base64,branch:GH_BRANCH})
+      });
+      if(put.ok){
+        item.url=`https://raw.githubusercontent.com/${GH_REPO}/${GH_BRANCH}/${path}`;
+        ok++;
+      } else {erros++;}
+    }catch(e){erros++;}
+  }
+  if(prog)prog.style.display='none';
+  if(btn)btn.disabled=false;
+  salvarMigracao(pasta);
+  renderPratOutras();
+  atualizarBotaoImportar(pasta);
+  carregarImgsGitHub(pasta);
+  mostrarToast(erros?`✅ ${ok} salvas no GitHub, ❌ ${erros} erros`:`✅ ${ok} fotos salvas no GitHub!`);
 }
 
 // ── CANVAS RENDER ──────────────────────────────────────
