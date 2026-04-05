@@ -33,41 +33,66 @@
     .btn-cfg{background:rgba(255,255,255,.25);border:2px solid rgba(255,255,255,.5);color:#fff;padding:8px 16px;border-radius:20px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:700;font-size:.82rem;transition:all .2s;white-space:nowrap;}
     .btn-cfg:hover{background:rgba(255,255,255,.38);}
 
-    /* STEP TABS */
-    .steps-nav{background:#fff;display:flex;justify-content:center;box-shadow:0 2px 10px rgba(0,0,0,.07);position:sticky;top:60px;z-index:99;}
-    .step-tab{flex:1;max-width:200px;padding:13px 8px;text-align:center;cursor:pointer;font-weight:700;font-size:.82rem;color:#aaa;border-bottom:3px solid transparent;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:6px;user-select:none;}
-    .step-tab.active{color:var(--verde-esc);border-bottom-color:var(--verde);}
-    .step-tab.done{color:var(--verde-esc);}
-    .step-num{width:22px;height:22px;border-radius:50%;background:#eee;color:#aaa;font-size:.72rem;font-weight:900;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0;}
-    .step-tab.active .step-num,.step-tab.done .step-num{background:var(--verde);color:#fff;}
-
     /* MAIN */
-    .main-content{max-width:1400px;margin:0 auto;padding:24px 16px 80px;}
+    .main-content{max-width:1400px;margin:0 auto;padding:20px 16px 60px;}
 
-    /* GALLERY */
-    .gallery-controls{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-bottom:16px;}
-    .search-input{flex:1;min-width:180px;padding:10px 16px;border:2px solid #ddd;border-radius:20px;font-family:'Nunito',sans-serif;font-size:.9rem;outline:none;transition:border-color .2s;}
-    .search-input:focus{border-color:var(--verde);}
-    .total-badge{font-size:.85rem;color:#666;font-weight:700;white-space:nowrap;}
-    .cat-filters{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:22px;}
-    .cat-btn{padding:7px 15px;border-radius:20px;border:2px solid #ddd;background:#fff;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:700;font-size:.8rem;transition:all .2s;white-space:nowrap;}
-    .cat-btn:hover,.cat-btn.active{border-color:var(--verde);background:#e8fdf1;color:var(--verde-esc);}
-    .gallery-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:18px;}
-    .g-card{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 3px 14px rgba(0,0,0,.08);transition:transform .2s,box-shadow .2s;cursor:pointer;}
-    .g-card:hover{transform:translateY(-4px);box-shadow:0 10px 28px rgba(0,0,0,.14);}
-    .thumb-wrap{position:relative;width:100%;aspect-ratio:1;}
-    canvas.thumb{width:100%;height:100%;display:block;}
-    .thumb-loading{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:#f0faf4;font-size:.85rem;color:#999;}
-    .g-footer{padding:12px 14px;display:flex;align-items:center;justify-content:space-between;gap:8px;}
-    .g-info h3{font-size:.86rem;font-weight:800;}
-    .g-info p{font-size:.74rem;color:#777;margin-top:1px;}
-    .btn-usar{background:var(--verde);color:#fff;border:none;padding:7px 13px;border-radius:9px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:800;font-size:.78rem;white-space:nowrap;flex-shrink:0;transition:opacity .2s;}
-    .btn-usar:hover{opacity:.88;}
-
-    /* EDITOR */
-    .editor-layout{display:grid;grid-template-columns:1fr 340px 240px;gap:18px;align-items:start;}
-    @media(max-width:1100px){.editor-layout{grid-template-columns:1fr 320px;}.prat-panel{grid-column:1/-1;}.prat-grid{grid-template-columns:repeat(6,1fr);}}
-    @media(max-width:750px){.editor-layout{grid-template-columns:1fr;}.prat-grid{grid-template-columns:repeat(4,1fr);}}
+    /* APP LAYOUT */
+    .app-wrap{display:grid;grid-template-columns:1fr 290px;gap:18px;align-items:start;}
+    @media(max-width:900px){.app-wrap{grid-template-columns:1fr;}}
+    .canvas-col{display:flex;flex-direction:column;gap:14px;}
+    #editor-canvas{width:100%;aspect-ratio:1;display:block;border-radius:10px;box-shadow:0 4px 20px rgba(0,0,0,.15);}
+    .pers-panel{background:#fff;border-radius:16px;padding:18px;box-shadow:var(--sombra);}
+    .pers-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 18px;}
+    @media(max-width:600px){.pers-grid{grid-template-columns:1fr;}}
+    .share-row{display:flex;gap:10px;}
+    .share-row .btn-share{flex:1;padding:13px 8px;font-size:.82rem;border-radius:12px;}
+    /* keep old panel style for share-canvas */
+    .panel{background:#fff;border-radius:16px;padding:20px;box-shadow:var(--sombra);}
+    .panel-title{font-weight:900;font-size:.95rem;margin-bottom:14px;color:var(--verde-esc);}
+    #share-canvas{width:100%;aspect-ratio:1;display:block;border-radius:8px;}
+    .share-layout{display:grid;grid-template-columns:1fr 310px;gap:22px;align-items:start;}
+    @media(max-width:900px){.share-layout{grid-template-columns:1fr;}}
+    .share-btns{display:flex;flex-direction:column;gap:11px;}
+    .share-info{background:#fff;border-radius:16px;padding:18px;box-shadow:var(--sombra);}
+    .share-info h3{font-size:.95rem;font-weight:800;margin-bottom:6px;}
+    .share-info p{font-size:.8rem;color:#666;line-height:1.5;}
+    .btn-share-sec{background:#f0f0f0;color:#555;width:100%;padding:11px;border:none;border-radius:12px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:700;font-size:.86rem;}
+    .btn-share-sec:hover{background:#e4e4e4;}
+    /* EDITOR FIELDS */
+    .fsec{font-size:.72rem;font-weight:900;text-transform:uppercase;letter-spacing:.08em;color:#aaa;margin:16px 0 8px;}
+    .fsec:first-child{margin-top:0;}
+    .frow{margin-bottom:10px;}
+    .frow label{display:block;font-size:.78rem;font-weight:700;color:#555;margin-bottom:3px;}
+    .finput{width:100%;padding:8px 11px;border:2px solid #e0e0e0;border-radius:10px;font-family:'Nunito',sans-serif;font-size:.86rem;outline:none;transition:border-color .2s;}
+    .finput:focus{border-color:var(--verde);}
+    .color-row{display:flex;gap:8px;flex-wrap:wrap;}
+    .cswatch{width:30px;height:30px;border-radius:50%;cursor:pointer;border:3px solid transparent;transition:border-color .15s,transform .15s;}
+    .cswatch:hover,.cswatch.sel{border-color:#333;transform:scale(1.15);}
+    /* PRATELEIRA */
+    .prat-panel{background:#fff;border-radius:16px;box-shadow:var(--sombra);overflow:hidden;position:sticky;top:80px;max-height:calc(100vh - 100px);display:flex;flex-direction:column;}
+    @media(max-width:900px){.prat-panel{position:static;max-height:none;}}
+    .prat-header{padding:14px 16px 0;font-weight:900;font-size:.9rem;color:var(--verde-esc);}
+    .prat-tabs{display:flex;border-bottom:2px solid #f0f0f0;margin-top:8px;flex-shrink:0;}
+    .prat-tab{flex:1;padding:8px 2px;text-align:center;font-size:.68rem;font-weight:800;color:#aaa;cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;transition:all .2s;line-height:1.3;}
+    .prat-tab.active{color:var(--verde-esc);border-bottom-color:var(--verde);}
+    .prat-body{overflow-y:auto;flex:1;}
+    .prat-search{width:calc(100% - 16px);margin:10px 8px 6px;padding:7px 11px;border:2px solid #e8e8e8;border-radius:20px;font-family:'Nunito',sans-serif;font-size:.8rem;outline:none;}
+    .prat-search:focus{border-color:var(--verde);}
+    .prat-cats{display:flex;gap:5px;flex-wrap:nowrap;overflow-x:auto;padding:0 8px 6px;scrollbar-width:none;}
+    .prat-cats::-webkit-scrollbar{display:none;}
+    .pcat-btn{padding:4px 10px;border-radius:20px;border:1.5px solid #ddd;background:#fff;cursor:pointer;font-size:.7rem;font-weight:800;white-space:nowrap;transition:all .18s;}
+    .pcat-btn.active{border-color:var(--verde);background:#e8fdf1;color:var(--verde-esc);}
+    .prat-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:6px 8px;}
+    .prat-item{position:relative;aspect-ratio:1;border-radius:10px;overflow:hidden;cursor:pointer;border:3px solid transparent;transition:border-color .18s,transform .15s;}
+    .prat-item:hover{transform:scale(1.03);}
+    .prat-item.sel{border-color:var(--verde);}
+    .prat-item img,.prat-item canvas{width:100%;height:100%;object-fit:cover;display:block;}
+    .prat-item.grad{display:flex;align-items:center;justify-content:center;font-size:.58rem;font-weight:800;color:rgba(255,255,255,.95);text-shadow:0 1px 3px rgba(0,0,0,.5);text-align:center;padding:4px;}
+    .prat-label{position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,.6);color:#fff;font-size:.58rem;font-weight:800;padding:3px 4px;line-height:1.2;}
+    .prat-reset{margin:4px 8px 10px;width:calc(100% - 16px);padding:7px;background:#f5f5f5;border:none;border-radius:9px;cursor:pointer;font-family:'Nunito',sans-serif;font-size:.72rem;font-weight:700;color:#666;flex-shrink:0;}
+    .prat-reset:hover{background:#eee;}
+    .prat-sel-info{font-size:.7rem;color:var(--verde-esc);font-weight:800;padding:4px 8px;background:#e8fdf1;border-radius:8px;margin:0 8px 6px;display:none;}
+    .prat-sel-info.show{display:block;}
 
     /* PRATELEIRA */
     .prat-panel{background:#fff;border-radius:16px;box-shadow:var(--sombra);overflow:hidden;}
@@ -123,7 +148,7 @@
     .form-input{width:100%;padding:9px 12px;border:2px solid #e0e0e0;border-radius:10px;font-family:'Nunito',sans-serif;font-size:.88rem;outline:none;transition:border-color .2s;}
     .form-input:focus{border-color:var(--verde);}
 
-    @media(max-width:600px){header{padding:12px 14px;}.header-title h1{font-size:1.25rem;}.main-content{padding:16px 10px 60px;}.gallery-grid{grid-template-columns:repeat(2,1fr);gap:10px;}.step-tab span:last-child{display:none;}}
+    @media(max-width:600px){header{padding:12px 14px;}.header-title h1{font-size:1.2rem;}.main-content{padding:12px 10px 50px;}.share-row .btn-share{font-size:.74rem;padding:11px 4px;}}
   </style>
 </head>
 <body>
@@ -170,82 +195,67 @@
   <button class="btn-cfg" onclick="abrirCfg()">⚙️ <span id="hdr-cfg-lbl">Configurar</span></button>
 </header>
 
-<!-- STEPS NAV -->
-<nav class="steps-nav">
-  <div class="step-tab active" id="tab-1" onclick="irPara(1)"><span class="step-num">1</span><span>Galeria</span></div>
-  <div class="step-tab" id="tab-2" onclick="irPara(2)"><span class="step-num">2</span><span>Personalizar</span></div>
-  <div class="step-tab" id="tab-3" onclick="irPara(3)"><span class="step-num">3</span><span>Compartilhar</span></div>
-</nav>
-
-<!-- MAIN -->
+<!-- MAIN APP -->
 <div class="main-content">
+  <div class="app-wrap">
 
-  <!-- STEP 1: GALLERY -->
-  <section id="step-1">
-    <div class="gallery-controls">
-      <input class="search-input" id="srch" placeholder="🔍 Buscar artes..." oninput="buscar(this.value)"/>
-      <span class="total-badge" id="total-badge"></span>
-    </div>
-    <div class="cat-filters" id="cat-filters"></div>
-    <div class="gallery-grid" id="gallery-grid"></div>
-  </section>
+    <!-- COLUNA ESQUERDA: canvas + personalizar + compartilhar -->
+    <div class="canvas-col">
+      <canvas id="editor-canvas"></canvas>
 
-  <!-- STEP 2: EDITOR -->
-  <section id="step-2" class="hidden">
-    <div class="editor-layout">
-      <div class="panel">
-        <div class="panel-title">👁️ Pré-visualização</div>
-        <canvas id="editor-canvas"></canvas>
-      </div>
-      <div class="panel">
-        <div class="fsec">📍 Dados do Petshop</div>
-        <div class="frow"><label>Nome do Petshop</label><input class="finput" id="ed-nome" oninput="schedRender()"/></div>
-        <div class="frow"><label>WhatsApp</label><input class="finput" id="ed-wpp" oninput="schedRender()"/></div>
-        <div class="frow"><label>Cidade / UF</label><input class="finput" id="ed-cidade" oninput="schedRender()"/></div>
-        <div class="fsec">✏️ Texto da Arte</div>
-        <div class="frow"><label>Título principal</label><input class="finput" id="ed-titulo" oninput="schedRender()" maxlength="40"/></div>
-        <div class="frow"><label>Subtítulo / Descrição</label><input class="finput" id="ed-sub" oninput="schedRender()" maxlength="60"/></div>
-        <div class="frow"><label>Destaque / Promoção (opcional)</label><input class="finput" id="ed-dest" placeholder="Ex: A partir de R$ 39,90!" oninput="schedRender()" maxlength="36"/></div>
+      <div class="pers-panel">
+        <div class="pers-grid">
+          <div>
+            <div class="fsec" style="margin-top:0">📍 Petshop</div>
+            <div class="frow"><label>Nome</label><input class="finput" id="ed-nome" oninput="schedRender()"/></div>
+            <div class="frow"><label>WhatsApp</label><input class="finput" id="ed-wpp" oninput="schedRender()"/></div>
+            <div class="frow"><label>Cidade / UF</label><input class="finput" id="ed-cidade" oninput="schedRender()"/></div>
+          </div>
+          <div>
+            <div class="fsec" style="margin-top:0">✏️ Texto</div>
+            <div class="frow"><label>Título</label><input class="finput" id="ed-titulo" oninput="schedRender()" maxlength="40"/></div>
+            <div class="frow"><label>Subtítulo</label><input class="finput" id="ed-sub" oninput="schedRender()" maxlength="60"/></div>
+            <div class="frow"><label>Destaque</label><input class="finput" id="ed-dest" placeholder="Ex: a partir de R$ 39,90!" oninput="schedRender()" maxlength="36"/></div>
+          </div>
+        </div>
         <div class="fsec">🎨 Cor do Tema</div>
         <div class="color-row" id="color-row"></div>
-        <button class="btn-gerar" onclick="finalizarArte()">✨ Gerar Arte e Compartilhar →</button>
-        <button class="btn-back" onclick="irPara(1)">← Voltar para Galeria</button>
       </div>
-      <!-- PRATELEIRA -->
-      <div class="prat-panel" id="prat-panel">
-        <div class="prat-header">🗂️ Prateleira</div>
-        <div class="prat-tabs">
-          <div class="prat-tab active" onclick="pratAba('fundos',this)">🖼️<br>Fundos</div>
-          <div class="prat-tab" onclick="pratAba('racao',this)">🛍️<br>Ração</div>
-          <div class="prat-tab" onclick="pratAba('acessorios',this)">🎾<br>Acessórios</div>
-        </div>
-        <div class="prat-grid" id="prat-grid"></div>
-        <button class="prat-reset" onclick="pratReset()">↩ Usar foto padrão da arte</button>
+
+      <div class="share-row">
+        <button class="btn-share btn-dl" onclick="baixar()">⬇️ Baixar</button>
+        <button class="btn-share btn-wpp" onclick="sharWpp()">💬 WhatsApp</button>
+        <button class="btn-share btn-insta" onclick="sharInsta()">📸 Instagram</button>
       </div>
     </div>
-  </section>
 
-  <!-- STEP 3: SHARE -->
-  <section id="step-3" class="hidden">
-    <div class="share-layout">
-      <div class="panel">
-        <div class="panel-title">🖼️ Arte Final — 1080×1080px</div>
-        <canvas id="share-canvas"></canvas>
+    <!-- COLUNA DIREITA: Prateleira -->
+    <div class="prat-panel" id="prat-panel">
+      <div class="prat-header">🗂️ Prateleira</div>
+      <div class="prat-tabs">
+        <div class="prat-tab active" onclick="pratAba('galeria',this)">📋<br>Galeria</div>
+        <div class="prat-tab" onclick="pratAba('fundos',this)">🖼️<br>Fundos</div>
+        <div class="prat-tab" onclick="pratAba('racao',this)">🛍️<br>Ração</div>
+        <div class="prat-tab" onclick="pratAba('acessorios',this)">🎾<br>Acesso.</div>
       </div>
-      <div class="share-btns">
-        <div class="share-info">
-          <h3>🚀 Arte pronta para publicar!</h3>
-          <p>Baixe ou compartilhe diretamente no WhatsApp e Instagram.</p>
+      <div class="prat-body" id="prat-body">
+        <!-- Galeria tab -->
+        <div id="prat-galeria-area">
+          <input class="prat-search" id="prat-srch" placeholder="🔍 Buscar..." oninput="pratBuscar(this.value)"/>
+          <div class="prat-cats" id="prat-cats"></div>
+          <div id="prat-sel-info" class="prat-sel-info"></div>
+          <div class="prat-grid" id="prat-galeria-grid"></div>
         </div>
-        <button class="btn-share btn-dl" onclick="baixar()">⬇️ Baixar Imagem (PNG)</button>
-        <button class="btn-share btn-wpp" onclick="sharWpp()">💬 Compartilhar no WhatsApp</button>
-        <button class="btn-share btn-insta" onclick="sharInsta()">📸 Salvar para Instagram</button>
-        <button class="btn-share-sec" onclick="irPara(2)">← Editar Arte</button>
-        <button class="btn-share-sec" style="margin-top:4px" onclick="irPara(1)">🔄 Escolher Nova Arte</button>
+        <!-- Fundos/Ração/Acessórios tab -->
+        <div id="prat-outras-area" class="hidden">
+          <div id="prat-sel-info2" class="prat-sel-info"></div>
+          <div class="prat-grid" id="prat-outras-grid"></div>
+          <button class="prat-reset" onclick="pratReset()">↩ Foto padrão da arte</button>
+        </div>
       </div>
     </div>
-  </section>
 
+  </div>
 </div>
 <script>
 const CATS=[
@@ -372,14 +382,13 @@ const ARTES=[
 const CORES=['#2ECC71','#3498DB','#F39C12','#E74C3C','#9B59B6','#1a9e52','#E91E63','#FF9800','#00BCD4','#795548'];
 let cfg={nome:'Amigão Pet Shop 🐾',wpp:'(XX) XXXXX-XXXX',cidade:'Sua Cidade',insta:''};
 let ed={arte:null,titulo:'',sub:'',dest:'',cor:'#2ECC71',bgUrl:null,bgGrad:null};
-let curCat='todos',srch='',step=1,renderTmr=null;
+let renderTmr=null;
 
 // ── BOOT ───────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded',()=>{
   const saved=localStorage.getItem('petcfg');
   if(saved){const s=JSON.parse(saved);if(s.nome==='Amigão Petshop'||s.nome==='Amigão Pet Shop 🐾🐾')s.nome='Amigão Pet Shop 🐾';cfg={...cfg,...s};document.getElementById('modal-cfg').classList.add('hidden');}
-  atualizarHdr();
-  renderCats();renderGaleria();renderCores();
+  atualizarHdr();preencherEditor();renderCores();renderPratCats();renderPratGaleria();
 });
 
 // ── CONFIG ─────────────────────────────────────────────
@@ -398,64 +407,15 @@ function salvarCfg(){
   cfg.insta=document.getElementById('cfg-insta').value.trim();
   localStorage.setItem('petcfg',JSON.stringify(cfg));
   document.getElementById('modal-cfg').classList.add('hidden');
-  atualizarHdr();
-  if(step===2)preencherEditor();
+  atualizarHdr();preencherEditor();schedRender();
 }
 function atualizarHdr(){
   document.getElementById('hdr-nome').textContent=cfg.nome;
   document.getElementById('hdr-cfg-lbl').textContent='Meu Petshop';
 }
 
-// ── NAVIGATION ─────────────────────────────────────────
-function irPara(s){
-  if(s>=2&&!ed.arte){if(s===2)alert('Selecione uma arte na galeria primeiro!');else alert('Crie sua arte antes de compartilhar!');return;}
-  step=s;
-  [1,2,3].forEach(i=>{
-    const sec=document.getElementById('step-'+i);
-    const tab=document.getElementById('tab-'+i);
-    sec.classList.toggle('hidden',i!==s);
-    tab.classList.remove('active','done');
-    if(i===s)tab.classList.add('active');else if(i<s)tab.classList.add('done');
-  });
-  window.scrollTo({top:0,behavior:'smooth'});
-  if(s===3)renderShare();
-}
-
-// ── GALLERY ────────────────────────────────────────────
-function renderCats(){
-  document.getElementById('cat-filters').innerHTML=
-    CATS.map(c=>`<button class="cat-btn${c.id==='todos'?' active':''}" onclick="filtrarCat('${c.id}',this)">${c.lbl}</button>`).join('');
-}
-function filtrarCat(cat,btn){
-  curCat=cat;
-  document.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');renderGaleria();
-}
-function buscar(v){srch=v.toLowerCase();renderGaleria();}
-function filtrados(){
-  return ARTES.filter(a=>{
-    const mc=curCat==='todos'||a.tag===curCat;
-    const ms=!srch||a.t.toLowerCase().includes(srch)||a.s.toLowerCase().includes(srch);
-    return mc&&ms;
-  });
-}
-function renderGaleria(){
-  const lista=filtrados();
-  const grid=document.getElementById('gallery-grid');
-  document.getElementById('total-badge').textContent=`${lista.length} arte${lista.length!==1?'s':''} disponíve${lista.length!==1?'is':'l'}`;
-  grid.innerHTML='';
-  lista.forEach((a,i)=>{
-    const card=document.createElement('div');card.className='g-card';
-    const tw=document.createElement('div');tw.className='thumb-wrap';
-    const ld=document.createElement('div');ld.className='thumb-loading';ld.innerHTML='<span>⏳</span>';
-    const cv=document.createElement('canvas');cv.className='thumb';cv.id='cv-'+a.id;
-    tw.appendChild(ld);tw.appendChild(cv);
-    const ft=document.createElement('div');ft.className='g-footer';
-    ft.innerHTML=`<div class="g-info"><h3>${a.t}</h3><p>${a.s}</p></div><button class="btn-usar" onclick="selecionarArte('${a.id}')">✏️ Usar</button>`;
-    card.appendChild(tw);card.appendChild(ft);grid.appendChild(card);
-    setTimeout(()=>renderThumb(a,cv),i*40);
-  });
-}
+// ── GALLERY (legacy stubs) ──────────────────────────────
+function irPara(){}
 function renderThumb(a,canvas){
   const ctx=canvas.getContext('2d');const W=540,H=540;
   canvas.width=W;canvas.height=H;
@@ -491,11 +451,7 @@ function renderThumb(a,canvas){
   if(img.complete&&img.naturalWidth)draw();
   else{img.onload=draw;img.onerror=()=>{ctx.fillStyle=a.c;ctx.fillRect(0,0,W,H);ctx.font='80px serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('🐾',W/2,H/2);canvas.parentElement.querySelector('.thumb-loading')?.remove();};}
 }
-function selecionarArte(id){
-  const a=ARTES.find(x=>x.id===id);if(!a)return;
-  ed.arte=a;ed.titulo=a.t;ed.sub=a.s;ed.dest='';ed.cor=a.c;ed.bgUrl=null;ed.bgGrad=null;
-  preencherEditor();irPara(2);renderPrat();setTimeout(schedRender,100);
-}
+function selecionarArte(id){pratSelArte(id);}
 function preencherEditor(){
   document.getElementById('ed-nome').value=cfg.nome;
   document.getElementById('ed-wpp').value=cfg.wpp;
@@ -560,46 +516,87 @@ const PRAT={
     {url:'https://loremflickr.com/480/480/hamster,cage?lock=51',lbl:'Casinha Roedor'},
   ],
 };
-let pratAbaAtual='fundos';
+let pratAbaAtual='galeria';
+let pratCatAtual='todos';
+let pratSrch='';
 function pratAba(aba,btn){
   pratAbaAtual=aba;
   document.querySelectorAll('.prat-tab').forEach(t=>t.classList.remove('active'));
   btn.classList.add('active');
-  renderPrat();
+  const galArea=document.getElementById('prat-galeria-area');
+  const outArea=document.getElementById('prat-outras-area');
+  if(aba==='galeria'){galArea.classList.remove('hidden');outArea.classList.add('hidden');renderPratGaleria();}
+  else{galArea.classList.add('hidden');outArea.classList.remove('hidden');renderPratOutras();}
 }
-function renderPrat(){
-  const grid=document.getElementById('prat-grid');
-  if(!grid)return;
+function pratBuscar(v){pratSrch=v.toLowerCase();renderPratGaleria();}
+function pratFiltrarCat(cat,btn){
+  pratCatAtual=cat;
+  document.querySelectorAll('.pcat-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');renderPratGaleria();
+}
+function renderPratCats(){
+  document.getElementById('prat-cats').innerHTML=
+    CATS.map(c=>`<button class="pcat-btn${c.id===pratCatAtual?' active':''}" onclick="pratFiltrarCat('${c.id}',this)">${c.lbl}</button>`).join('');
+}
+function renderPratGaleria(){
+  const lista=ARTES.filter(a=>{
+    const mc=pratCatAtual==='todos'||a.tag===pratCatAtual;
+    const ms=!pratSrch||a.t.toLowerCase().includes(pratSrch)||a.s.toLowerCase().includes(pratSrch);
+    return mc&&ms;
+  });
+  const grid=document.getElementById('prat-galeria-grid');
   grid.innerHTML='';
-  PRAT[pratAbaAtual].forEach((item,i)=>{
+  lista.forEach((a,i)=>{
+    const el=document.createElement('div');
+    el.className='prat-item'+(ed.arte?.id===a.id?' sel':'');
+    const cv=document.createElement('canvas');
+    el.appendChild(cv);
+    const lbl=document.createElement('div');lbl.className='prat-label';lbl.textContent=a.t;
+    el.appendChild(lbl);
+    el.onclick=()=>pratSelArte(a.id);
+    grid.appendChild(el);
+    setTimeout(()=>renderThumb(a,cv),i*30);
+  });
+  const info=document.getElementById('prat-sel-info');
+  if(ed.arte){info.textContent='✅ Selecionado: '+ed.arte.t;info.classList.add('show');}
+  else{info.classList.remove('show');}
+}
+function pratSelArte(id){
+  const a=ARTES.find(x=>x.id===id);if(!a)return;
+  ed.arte=a;ed.titulo=a.t;ed.sub=a.s;ed.cor=a.c;
+  preencherEditor();renderPratGaleria();schedRender();
+}
+function renderPratOutras(){
+  const grid=document.getElementById('prat-outras-grid');
+  grid.innerHTML='';
+  const items=PRAT[pratAbaAtual]||[];
+  items.forEach(item=>{
     const el=document.createElement('div');
     el.className='prat-item'+(ed.bgUrl===item.url&&item.url?' sel':ed.bgGrad===item.grad&&item.grad?' sel':'');
     if(item.grad&&!item.url){
-      el.classList.add('grad');
-      el.style.background=item.grad;
-      el.textContent=item.lbl;
+      el.classList.add('grad');el.style.background=item.grad;el.textContent=item.lbl;
       el.onclick=()=>pratSelGrad(item.grad);
     } else {
-      const img=document.createElement('img');
-      img.src=item.url;img.alt=item.lbl;img.loading='lazy';
+      const img=document.createElement('img');img.src=item.url;img.alt=item.lbl;img.loading='lazy';
       const lbl=document.createElement('div');lbl.className='prat-label';lbl.textContent=item.lbl;
       el.appendChild(img);el.appendChild(lbl);
       el.onclick=()=>pratSelUrl(item.url);
     }
     grid.appendChild(el);
   });
+  const info=document.getElementById('prat-sel-info2');
+  const sel=items.find(i=>i.url===ed.bgUrl||i.grad===ed.bgGrad);
+  if(sel){info.textContent='✅ '+sel.lbl;info.classList.add('show');}
+  else{info.classList.remove('show');}
 }
 function pratSelUrl(url){
-  ed.bgUrl=url;ed.bgGrad=null;
-  renderPrat();schedRender();
+  ed.bgUrl=url;ed.bgGrad=null;renderPratOutras();schedRender();
 }
 function pratSelGrad(grad){
-  ed.bgGrad=grad;ed.bgUrl=null;
-  renderPrat();schedRender();
+  ed.bgGrad=grad;ed.bgUrl=null;renderPratOutras();schedRender();
 }
 function pratReset(){
-  ed.bgUrl=null;ed.bgGrad=null;
-  renderPrat();schedRender();
+  ed.bgUrl=null;ed.bgGrad=null;renderPratOutras();schedRender();
 }
 
 // ── CANVAS RENDER ──────────────────────────────────────
@@ -668,18 +665,6 @@ function renderArte(canvas,cb){
   if(img.complete&&img.naturalWidth)draw();
   else{img.onload=draw;img.onerror=()=>{ctx.fillStyle=v.cor;ctx.fillRect(0,0,W,H);ctx.font='160px serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('🐾',W/2,H/2);if(cb)cb();};}
 }
-function finalizarArte(){
-  ed.titulo=document.getElementById('ed-titulo').value;
-  ed.sub=document.getElementById('ed-sub').value;
-  ed.dest=document.getElementById('ed-dest').value;
-  irPara(3);
-}
-function renderShare(){
-  const sc=document.getElementById('share-canvas');
-  const ec=document.getElementById('editor-canvas');
-  if(ec.width>0){sc.width=ec.width;sc.height=ec.height;sc.getContext('2d').drawImage(ec,0,0);}
-  else renderArte(sc);
-}
 
 // ── DRAW HELPERS ───────────────────────────────────────
 function drawPaw(ctx,cx,cy,sz,color){
@@ -700,12 +685,13 @@ function getNomeArq(){
   const t=ed.titulo.toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9-]/g,'');
   return `${n}-${t}.png`;
 }
+function getCanvas(){return document.getElementById('editor-canvas');}
 function baixar(){
-  const c=document.getElementById('share-canvas');
+  const c=getCanvas();
   const a=document.createElement('a');a.download=getNomeArq();a.href=c.toDataURL('image/png');a.click();
 }
 async function sharWpp(){
-  const canvas=document.getElementById('share-canvas');
+  const canvas=getCanvas();
   const texto=`${ed.titulo}\n${ed.sub}\n\n📱 ${cfg.wpp} • 📍 ${cfg.cidade}`;
   if(navigator.share){
     canvas.toBlob(async blob=>{
