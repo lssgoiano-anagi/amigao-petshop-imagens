@@ -17,6 +17,13 @@
     }
     header h1 { font-family:'Fredoka One',cursive; font-size:2.2rem; }
     header p  { font-size:.95rem; opacity:.9; margin-top:4px; }
+    .mascote-header {
+      width:72px; height:72px; border-radius:50%;
+      border:3px solid rgba(255,255,255,0.7);
+      box-shadow:0 2px 10px rgba(0,0,0,0.25);
+      margin:0 auto 8px;
+      display:block;
+    }
 
     .container { max-width:1300px; margin:0 auto; padding:30px 16px 60px; }
 
@@ -71,7 +78,7 @@
 <body>
 
 <header>
-  <div style="font-size:2rem">🐾</div>
+  <img src="mascote.png" alt="Mascote Amigão Petshop" class="mascote-header"/>
   <h1>Amigão Petshop – Artes Prontas</h1>
   <p>Clique em ⬇️ Baixar para salvar a arte e usar nas redes sociais</p>
 </header>
@@ -135,6 +142,9 @@ const ARTES = [
     cor:'#2ECC71', foto:'https://images.unsplash.com/photo-1548802673-380ab8ebc7b7?w=800&q=80' },
 ];
 
+const mascoteImg = new Image();
+mascoteImg.src = 'mascote.png';
+
 function renderArte(arte, canvas) {
   const ctx = canvas.getContext('2d');
   const W = 1080, H = 1080;
@@ -157,11 +167,12 @@ function renderArte(arte, canvas) {
     fg.addColorStop(0, arte.cor); fg.addColorStop(1, arte.cor+'aa');
     ctx.fillStyle = fg; ctx.fillRect(0,0,W,110);
     ctx.save();
-    ctx.font='52px serif'; ctx.textBaseline='middle'; ctx.textAlign='left';
-    ctx.fillText('🐾',36,55);
+    const mascoteSize = 72;
+    ctx.drawImage(mascoteImg, 24, (110-mascoteSize)/2, mascoteSize, mascoteSize);
     ctx.font='bold 38px "Fredoka One",cursive'; ctx.fillStyle='#fff';
+    ctx.textBaseline='middle'; ctx.textAlign='left';
     ctx.shadowColor='rgba(0,0,0,.4)'; ctx.shadowBlur=8;
-    ctx.fillText('Amigão Petshop',105,55);
+    ctx.fillText('Amigão Petshop',108,55);
     ctx.restore();
     drawPawSmall(ctx,W-60,60,28,'rgba(255,255,255,0.3)');
     drawPawSmall(ctx,W-110,85,18,'rgba(255,255,255,0.2)');
