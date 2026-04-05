@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 320">
+  <!-- Dog Bone Treat Bag - Yellow/Orange -->
+
+  <!-- Bag shadow -->
+  <ellipse cx="140" cy="312" rx="70" ry="10" fill="#00000022"/>
+
+  <!-- Bag body -->
+  <rect x="55" y="58" width="170" height="245" rx="14" fill="#F57F17"/>
+
+  <!-- Side shading -->
+  <rect x="55" y="58" width="26" height="245" rx="14" fill="#E65100" opacity="0.45"/>
+  <rect x="199" y="58" width="26" height="245" rx="14" fill="#E65100" opacity="0.35"/>
+
+  <!-- Top fold -->
+  <path d="M55 58 Q55 40 72 36 L208 36 Q225 40 225 58 Q225 70 208 74 L72 74 Q55 70 55 58 Z" fill="#E65100"/>
+
+  <!-- Seal lines -->
+  <rect x="76" y="38" width="128" height="6" rx="3" fill="#BF360C" opacity="0.5"/>
+  <rect x="76" y="47" width="128" height="6" rx="3" fill="#BF360C" opacity="0.4"/>
+
+  <!-- White label -->
+  <rect x="68" y="112" width="144" height="122" rx="10" fill="#FFFFFF"/>
+  <rect x="70" y="114" width="140" height="118" rx="9" fill="#FFFDE7"/>
+
+  <!-- Orange accent bands -->
+  <rect x="55" y="105" width="170" height="10" fill="#FB8C00"/>
+  <rect x="55" y="230" width="170" height="10" fill="#FB8C00"/>
+
+  <!-- Bone illustration in center -->
+  <!-- Main bone shaft -->
+  <rect x="110" y="148" width="60" height="16" rx="8" fill="#FFF9C4"/>
+  <rect x="112" y="150" width="56" height="12" rx="6" fill="#FFEE58"/>
+  <!-- Left knobs -->
+  <circle cx="116" cy="152" r="13" fill="#FFF9C4"/>
+  <circle cx="116" cy="162" r="13" fill="#FFF9C4"/>
+  <circle cx="116" cy="152" r="10" fill="#FFEE58"/>
+  <circle cx="116" cy="162" r="10" fill="#FFEE58"/>
+  <!-- Right knobs -->
+  <circle cx="164" cy="152" r="13" fill="#FFF9C4"/>
+  <circle cx="164" cy="162" r="13" fill="#FFF9C4"/>
+  <circle cx="164" cy="152" r="10" fill="#FFEE58"/>
+  <circle cx="164" cy="162" r="10" fill="#FFEE58"/>
+  <!-- Bone outline -->
+  <path d="M116 139 Q129 140 140 140 Q151 140 164 139 Q174 142 177 152 Q177 162 164 165 Q151 166 140 166 Q129 166 116 165 Q103 162 103 152 Q103 142 116 139 Z" fill="none" stroke="#F9A825" stroke-width="1.5"/>
+
+  <!-- PETISCO text -->
+  <text x="140" y="195" text-anchor="middle" font-family="Arial Black, Arial, sans-serif" font-size="16" font-weight="900" fill="#E65100" letter-spacing="1">PETISCO</text>
+
+  <!-- CARNE flavor tag -->
+  <rect x="104" y="202" width="72" height="22" rx="11" fill="#E65100"/>
+  <text x="140" y="217" text-anchor="middle" font-family="Arial Black, Arial, sans-serif" font-size="11" font-weight="700" fill="#FFFFFF" letter-spacing="1">● CARNE ●</text>
+
+  <!-- Brand top -->
+  <text x="140" y="98" text-anchor="middle" font-family="Arial Black, Arial, sans-serif" font-size="11" font-weight="700" fill="#FFF3E0" letter-spacing="3">BONUSDOG</text>
+
+  <!-- Weight badge -->
+  <ellipse cx="140" cy="268" rx="32" ry="22" fill="#BF360C"/>
+  <text x="140" y="272" text-anchor="middle" font-family="Arial Black, Arial, sans-serif" font-size="14" font-weight="900" fill="#FFFFFF">200g</text>
+
+  <!-- Bottom banner -->
+  <path d="M55 285 Q55 303 72 303 L208 303 Q225 303 225 285 L225 278 Q140 282 55 278 Z" fill="#E65100"/>
+  <text x="140" y="298" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#FFF3E0" letter-spacing="2">SEM CONSERVANTES</text>
+</svg>

@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 280">
+  <!-- Double Pet Bowls - Stainless Steel -->
+
+  <!-- Shared base/mat under both bowls -->
+  <rect x="22" y="198" width="236" height="18" rx="9" fill="#546E7A" opacity="0.3"/>
+
+  <!-- === LEFT BOWL (blue ring) === -->
+  <!-- Bowl shadow -->
+  <ellipse cx="88" cy="218" rx="56" ry="10" fill="#00000028"/>
+
+  <!-- Bowl outer rim ellipse top (rim visible from above) -->
+  <ellipse cx="88" cy="148" rx="60" ry="18" fill="#78909C"/>
+  <ellipse cx="88" cy="148" rx="54" ry="14" fill="#90A4AE"/>
+
+  <!-- Blue decorative ring at top -->
+  <ellipse cx="88" cy="148" rx="60" ry="18" fill="none" stroke="#1976D2" stroke-width="6"/>
+
+  <!-- Bowl body -->
+  <path d="M28 148 Q28 215 88 218 Q148 215 148 148 Z" fill="#90A4AE"/>
+
+  <!-- Bowl inner darker area -->
+  <path d="M38 152 Q38 212 88 214 Q138 212 138 152 Q138 158 88 162 Q38 158 38 152 Z" fill="#78909C"/>
+
+  <!-- Bowl inner bottom (inside surface) -->
+  <ellipse cx="88" cy="200" rx="38" ry="10" fill="#607D8B"/>
+
+  <!-- Steel highlight on left side -->
+  <path d="M34 156 Q34 200 54 212 Q38 200 38 160 Z" fill="#ECEFF1" opacity="0.35"/>
+
+  <!-- Right side subtle shadow -->
+  <path d="M142 156 Q142 200 122 212 Q138 200 138 160 Z" fill="#455A64" opacity="0.2"/>
+
+  <!-- Blue ring detail inside top rim -->
+  <ellipse cx="88" cy="148" rx="50" ry="12" fill="none" stroke="#1565C0" stroke-width="3" opacity="0.5"/>
+
+  <!-- === RIGHT BOWL (red ring) === -->
+  <!-- Bowl shadow -->
+  <ellipse cx="192" cy="218" rx="56" ry="10" fill="#00000028"/>
+
+  <!-- Bowl outer rim -->
+  <ellipse cx="192" cy="148" rx="60" ry="18" fill="#78909C"/>
+  <ellipse cx="192" cy="148" rx="54" ry="14" fill="#90A4AE"/>
+
+  <!-- Red decorative ring at top -->
+  <ellipse cx="192" cy="148" rx="60" ry="18" fill="none" stroke="#D32F2F" stroke-width="6"/>
+
+  <!-- Bowl body -->
+  <path d="M132 148 Q132 215 192 218 Q252 215 252 148 Z" fill="#90A4AE"/>
+
+  <!-- Bowl inner darker area -->
+  <path d="M142 152 Q142 212 192 214 Q242 212 242 152 Q242 158 192 162 Q142 158 142 152 Z" fill="#78909C"/>
+
+  <!-- Bowl inner bottom -->
+  <ellipse cx="192" cy="200" rx="38" ry="10" fill="#607D8B"/>
+
+  <!-- Steel highlight on left side -->
+  <path d="M138 156 Q138 200 158 212 Q142 200 142 160 Z" fill="#ECEFF1" opacity="0.35"/>
+
+  <!-- Right side subtle shadow -->
+  <path d="M246 156 Q246 200 226 212 Q242 200 242 160 Z" fill="#455A64" opacity="0.2"/>
+
+  <!-- Red ring detail inside top rim -->
+  <ellipse cx="192" cy="148" rx="50" ry="12" fill="none" stroke="#C62828" stroke-width="3" opacity="0.5"/>
+
+  <!-- === Shared stand/base === -->
+  <!-- Left bowl base ring -->
+  <ellipse cx="88" cy="218" rx="48" ry="8" fill="#546E7A"/>
+  <ellipse cx="88" cy="216" rx="44" ry="6" fill="#607D8B"/>
+
+  <!-- Right bowl base ring -->
+  <ellipse cx="192" cy="218" rx="48" ry="8" fill="#546E7A"/>
+  <ellipse cx="192" cy="216" rx="44" ry="6" fill="#607D8B"/>
+
+  <!-- Center connector bar -->
+  <rect x="120" y="210" width="40" height="10" rx="5" fill="#546E7A"/>
+</svg>

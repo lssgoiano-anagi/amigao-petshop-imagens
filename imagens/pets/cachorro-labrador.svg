@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 360">
+  <!-- Labrador Amarelo - Cartoon Flat Style -->
+  <!-- Shadow -->
+  <ellipse cx="140" cy="345" rx="65" ry="10" fill="#00000022"/>
+
+  <!-- Body -->
+  <ellipse cx="140" cy="245" rx="72" ry="80" fill="#D4924A"/>
+
+  <!-- Belly lighter patch -->
+  <ellipse cx="140" cy="265" rx="38" ry="52" fill="#E8B06A"/>
+
+  <!-- Front legs -->
+  <rect x="90" y="290" width="32" height="52" rx="16" fill="#D4924A"/>
+  <rect x="158" y="290" width="32" height="52" rx="16" fill="#D4924A"/>
+  <!-- Paws -->
+  <ellipse cx="106" cy="342" rx="17" ry="10" fill="#C07A36"/>
+  <ellipse cx="174" cy="342" rx="17" ry="10" fill="#C07A36"/>
+
+  <!-- Hind legs / haunches -->
+  <ellipse cx="88" cy="275" rx="30" ry="35" fill="#C07A36"/>
+  <ellipse cx="192" cy="275" rx="30" ry="35" fill="#C07A36"/>
+
+  <!-- Tail -->
+  <path d="M212 230 Q248 200 242 165 Q238 148 228 155 Q220 168 224 190 Q220 215 205 225 Z" fill="#D4924A"/>
+
+  <!-- Neck -->
+  <rect x="116" y="155" width="48" height="45" rx="20" fill="#D4924A"/>
+
+  <!-- Head -->
+  <ellipse cx="140" cy="138" rx="62" ry="58" fill="#D4924A"/>
+
+  <!-- Snout -->
+  <ellipse cx="140" cy="158" rx="32" ry="26" fill="#C07A36"/>
+  <ellipse cx="140" cy="162" rx="26" ry="20" fill="#D4924A"/>
+
+  <!-- Nose -->
+  <ellipse cx="140" cy="150" rx="14" ry="10" fill="#1A1A1A"/>
+  <ellipse cx="135" cy="147" rx="4" ry="3" fill="#ffffff55"/>
+
+  <!-- Mouth -->
+  <path d="M128 168 Q140 178 152 168" stroke="#8B4513" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+
+  <!-- Tongue -->
+  <ellipse cx="140" cy="178" rx="12" ry="9" fill="#E53935"/>
+  <line x1="140" y1="173" x2="140" y2="187" stroke="#C62828" stroke-width="1.5"/>
+
+  <!-- Eyes -->
+  <ellipse cx="116" cy="128" rx="13" ry="13" fill="#2C1B00"/>
+  <ellipse cx="164" cy="128" rx="13" ry="13" fill="#2C1B00"/>
+  <ellipse cx="113" cy="125" rx="4" ry="4" fill="#ffffff"/>
+  <ellipse cx="161" cy="125" rx="4" ry="4" fill="#ffffff"/>
+  <ellipse cx="114" cy="125" rx="2" ry="2" fill="#ffffffaa"/>
+  <ellipse cx="162" cy="125" rx="2" ry="2" fill="#ffffffaa"/>
+
+  <!-- Ears -->
+  <ellipse cx="88" cy="132" rx="26" ry="36" fill="#B8742A" transform="rotate(-10 88 132)"/>
+  <ellipse cx="192" cy="132" rx="26" ry="36" fill="#B8742A" transform="rotate(10 192 132)"/>
+
+  <!-- Ear inner shadow -->
+  <ellipse cx="88" cy="136" rx="16" ry="25" fill="#9A5F20" transform="rotate(-10 88 136)"/>
+  <ellipse cx="192" cy="136" rx="16" ry="25" fill="#9A5F20" transform="rotate(10 192 136)"/>
+
+  <!-- Eyebrow dots -->
+  <ellipse cx="116" cy="113" rx="6" ry="4" fill="#B8742A"/>
+  <ellipse cx="164" cy="113" rx="6" ry="4" fill="#B8742A"/>
+</svg>

@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 320">
+  <!-- Cat Treat Bag - Pink -->
+
+  <!-- Bag shadow -->
+  <ellipse cx="140" cy="312" rx="70" ry="10" fill="#00000022"/>
+
+  <!-- Bag body -->
+  <rect x="55" y="58" width="170" height="245" rx="14" fill="#AD1457"/>
+
+  <!-- Side shading -->
+  <rect x="55" y="58" width="26" height="245" rx="14" fill="#880E4F" opacity="0.5"/>
+  <rect x="199" y="58" width="26" height="245" rx="14" fill="#880E4F" opacity="0.4"/>
+
+  <!-- Top fold -->
+  <path d="M55 58 Q55 40 72 36 L208 36 Q225 40 225 58 Q225 70 208 74 L72 74 Q55 70 55 58 Z" fill="#880E4F"/>
+
+  <!-- Seal lines -->
+  <rect x="76" y="38" width="128" height="6" rx="3" fill="#560027" opacity="0.5"/>
+  <rect x="76" y="47" width="128" height="6" rx="3" fill="#560027" opacity="0.4"/>
+
+  <!-- White label -->
+  <rect x="68" y="112" width="144" height="122" rx="10" fill="#FFFFFF"/>
+  <rect x="70" y="114" width="140" height="118" rx="9" fill="#FCE4EC"/>
+
+  <!-- Pink accent bands -->
+  <rect x="55" y="105" width="170" height="10" fill="#C2185B"/>
+  <rect x="55" y="230" width="170" height="10" fill="#C2185B"/>
+
+  <!-- Cat paw icon -->
+  <!-- Main paw pad -->
+  <ellipse cx="140" cy="160" rx="16" ry="14" fill="#AD1457"/>
+  <!-- Top toe beans -->
+  <ellipse cx="124" cy="148" rx="7" ry="6" fill="#AD1457"/>
+  <ellipse cx="136" cy="143" rx="7" ry="6" fill="#AD1457"/>
+  <ellipse cx="148" cy="143" rx="7" ry="6" fill="#AD1457"/>
+  <ellipse cx="160" cy="148" rx="7" ry="6" fill="#AD1457"/>
+
+  <!-- Inner pad shine -->
+  <ellipse cx="138" cy="158" rx="6" ry="5" fill="#C2185B" opacity="0.6"/>
+
+  <!-- PETISCO FELINO text -->
+  <text x="140" y="192" text-anchor="middle" font-family="Arial Black, Arial, sans-serif" font-size="13" font-weight="900" fill="#AD1457" letter-spacing="0.5">PETISCO FELINO</text>
+
+  <!-- ATUM flavor tag -->
+  <rect x="108" y="200" width="64" height="22" rx="11" fill="#AD1457"/>
+  <text x="140" y="215" text-anchor="middle" font-family="Arial Black, Arial, sans-serif" font-size="11" font-weight="700" fill="#FFFFFF" letter-spacing="1">● ATUM ●</text>
+
+  <!-- Heart decorations -->
+  <text x="100" y="236" font-family="serif" font-size="14" fill="#F48FB1">♥</text>
+  <text x="168" y="236" font-family="serif" font-size="14" fill="#F48FB1">♥</text>
+  <text x="134" y="236" font-family="serif" font-size="14" fill="#F48FB1">♥</text>
+
+  <!-- Brand top -->
+  <text x="140" y="98" text-anchor="middle" font-family="Arial Black, Arial, sans-serif" font-size="11" font-weight="700" fill="#FFEEF5" letter-spacing="3">GOURMET CAT</text>
+
+  <!-- Weight badge -->
+  <ellipse cx="140" cy="268" rx="32" ry="22" fill="#560027"/>
+  <text x="140" y="272" text-anchor="middle" font-family="Arial Black, Arial, sans-serif" font-size="14" font-weight="900" fill="#FFFFFF">40g</text>
+
+  <!-- Bottom banner -->
+  <path d="M55 285 Q55 303 72 303 L208 303 Q225 303 225 285 L225 278 Q140 282 55 278 Z" fill="#880E4F"/>
+  <text x="140" y="298" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#FFEEF5" letter-spacing="2">IRRESISTÍVEL</text>
+</svg>

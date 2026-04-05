@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 320">
+  <!-- Cat Food Bag - Premium, Purple -->
+
+  <!-- Bag shadow -->
+  <ellipse cx="140" cy="312" rx="72" ry="10" fill="#00000022"/>
+
+  <!-- Bag body -->
+  <rect x="52" y="55" width="176" height="248" rx="12" fill="#7B1FA2"/>
+
+  <!-- Side shading -->
+  <rect x="52" y="55" width="28" height="248" rx="12" fill="#6A1B9A" opacity="0.5"/>
+  <rect x="200" y="55" width="28" height="248" rx="12" fill="#6A1B9A" opacity="0.4"/>
+
+  <!-- Bag top fold -->
+  <path d="M52 55 Q52 38 68 34 L212 34 Q228 38 228 55 Q228 68 212 72 L68 72 Q52 68 52 55 Z" fill="#6A1B9A"/>
+  <path d="M68 72 L212 72" stroke="#4A148C" stroke-width="2" fill="none"/>
+
+  <!-- Top seal -->
+  <rect x="72" y="36" width="136" height="6" rx="3" fill="#4A148C" opacity="0.6"/>
+  <rect x="72" y="45" width="136" height="6" rx="3" fill="#4A148C" opacity="0.5"/>
+
+  <!-- White label -->
+  <rect x="70" y="115" width="140" height="115" rx="8" fill="#FFFFFF"/>
+  <rect x="72" y="117" width="136" height="111" rx="7" fill="#FAFAFA"/>
+
+  <!-- Accent stripes -->
+  <rect x="52" y="100" width="176" height="18" fill="#8E24AA"/>
+  <rect x="52" y="228" width="176" height="18" fill="#8E24AA"/>
+
+  <!-- Cat face icon on label -->
+  <!-- Cat head -->
+  <circle cx="140" cy="145" r="14" fill="#7B1FA2"/>
+  <!-- Cat ears -->
+  <polygon points="129,134 126,124 136,132" fill="#7B1FA2"/>
+  <polygon points="151,134 154,124 144,132" fill="#7B1FA2"/>
+  <!-- Cat eyes -->
+  <ellipse cx="135" cy="144" rx="4" ry="3" fill="#FFFFFF"/>
+  <ellipse cx="145" cy="144" rx="4" ry="3" fill="#FFFFFF"/>
+  <!-- Pupils -->
+  <ellipse cx="135" cy="144" rx="2" ry="3" fill="#1A1A1A"/>
+  <ellipse cx="145" cy="144" rx="2" ry="3" fill="#1A1A1A"/>
+  <!-- Nose -->
+  <polygon points="140,150 138,153 142,153" fill="#F48FB1"/>
+  <!-- Whisker lines -->
+  <line x1="143" y1="152" x2="152" y2="150" stroke="#FFFFFF" stroke-width="1"/>
+  <line x1="137" y1="152" x2="128" y2="150" stroke="#FFFFFF" stroke-width="1"/>
+
+  <!-- GATOS ADULTOS text -->
+  <text x="140" y="176" text-anchor="middle" font-family="Arial Black, Arial, sans-serif" font-size="13" font-weight="900" fill="#7B1FA2" letter-spacing="1">GATOS ADULTOS</text>
+
+  <!-- PREMIUM in yellow -->
+  <text x="140" y="196" text-anchor="middle" font-family="Arial Black, Arial, sans-serif" font-size="10" font-weight="700" fill="#F57F17" letter-spacing="2">PREMIUM</text>
+
+  <!-- Stars -->
+  <text x="96" y="215" text-anchor="middle" font-family="serif" font-size="14" fill="#FDD835">★</text>
+  <text x="184" y="215" text-anchor="middle" font-family="serif" font-size="14" fill="#FDD835">★</text>
+
+  <!-- Brand text top -->
+  <text x="140" y="96" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="700" fill="#E1BEE7" letter-spacing="3">●  FELICAT  ●</text>
+
+  <!-- Weight badge -->
+  <ellipse cx="140" cy="268" rx="32" ry="22" fill="#4A148C"/>
+  <text x="140" y="272" text-anchor="middle" font-family="Arial Black, Arial, sans-serif" font-size="16" font-weight="900" fill="#FFFFFF">3kg</text>
+
+  <!-- Bottom banner -->
+  <path d="M52 285 Q52 303 68 303 L212 303 Q228 303 228 285 L228 275 Q228 275 140 280 Q52 275 52 275 Z" fill="#6A1B9A"/>
+  <text x="140" y="298" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#E1BEE7" letter-spacing="2">SALMÃO &amp; ATUM</text>
+</svg>

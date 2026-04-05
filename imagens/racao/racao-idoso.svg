@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 320">
+  <!-- Senior Dog Food Bag - Teal -->
+
+  <!-- Bag shadow -->
+  <ellipse cx="140" cy="312" rx="72" ry="10" fill="#00000022"/>
+
+  <!-- Bag body -->
+  <rect x="52" y="55" width="176" height="248" rx="12" fill="#00695C"/>
+
+  <!-- Side shading -->
+  <rect x="52" y="55" width="28" height="248" rx="12" fill="#004D40" opacity="0.5"/>
+  <rect x="200" y="55" width="28" height="248" rx="12" fill="#004D40" opacity="0.4"/>
+
+  <!-- Bag top fold -->
+  <path d="M52 55 Q52 38 68 34 L212 34 Q228 38 228 55 Q228 68 212 72 L68 72 Q52 68 52 55 Z" fill="#004D40"/>
+  <path d="M68 72 L212 72" stroke="#00251A" stroke-width="2" fill="none"/>
+
+  <!-- Seal lines -->
+  <rect x="72" y="36" width="136" height="6" rx="3" fill="#00251A" opacity="0.6"/>
+  <rect x="72" y="45" width="136" height="6" rx="3" fill="#00251A" opacity="0.5"/>
+
+  <!-- White label -->
+  <rect x="70" y="108" width="140" height="128" rx="8" fill="#FFFFFF"/>
+  <rect x="72" y="110" width="136" height="124" rx="7" fill="#E0F2F1"/>
+
+  <!-- Teal accent stripes -->
+  <rect x="52" y="100" width="176" height="11" fill="#00796B"/>
+  <rect x="52" y="233" width="176" height="11" fill="#00796B"/>
+
+  <!-- Older dog silhouette -->
+  <!-- Dog body simple shape -->
+  <ellipse cx="140" cy="158" rx="28" ry="18" fill="#00695C"/>
+  <!-- Head -->
+  <circle cx="162" cy="148" r="14" fill="#00695C"/>
+  <!-- Ear floppy -->
+  <ellipse cx="170" cy="154" rx="8" ry="12" fill="#004D40" transform="rotate(15 170 154)"/>
+  <!-- Legs -->
+  <rect x="116" y="168" width="8" height="14" rx="4" fill="#00695C"/>
+  <rect x="128" y="168" width="8" height="14" rx="4" fill="#00695C"/>
+  <rect x="150" y="168" width="8" height="14" rx="4" fill="#00695C"/>
+  <rect x="162" y="168" width="8" height="14" rx="4" fill="#00695C"/>
+  <!-- Tail -->
+  <path d="M114 164 Q105 158 108 150 Q112 148 115 154 Q114 160 114 164 Z" fill="#00695C"/>
+  <!-- Dog eye -->
+  <circle cx="166" cy="145" r="3" fill="#E0F2F1"/>
+  <circle cx="166" cy="145" r="1.5" fill="#1A1A1A"/>
+  <!-- Snout -->
+  <ellipse cx="173" cy="150" rx="6" ry="4" fill="#004D40"/>
+  <!-- Nose -->
+  <circle cx="176" cy="149" r="2" fill="#E0F2F1"/>
+
+  <!-- CÃES SÊNIOR text -->
+  <text x="140" y="202" text-anchor="middle" font-family="Arial Black, Arial, sans-serif" font-size="14" font-weight="900" fill="#00695C" letter-spacing="0.5">CÃES SÊNIOR</text>
+
+  <!-- +7 anos badge -->
+  <ellipse cx="140" cy="221" rx="38" ry="14" fill="#00695C"/>
+  <text x="140" y="225" text-anchor="middle" font-family="Arial Black, Arial, sans-serif" font-size="11" font-weight="700" fill="#FFFFFF">+7 anos</text>
+
+  <!-- Divider -->
+  <line x1="90" y1="210" x2="190" y2="210" stroke="#80CBC4" stroke-width="1.5"/>
+
+  <!-- Brand top -->
+  <text x="140" y="96" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="700" fill="#B2DFDB" letter-spacing="3">VITALONG</text>
+
+  <!-- Sub text label -->
+  <text x="140" y="236" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="#00897B" letter-spacing="1">ARTICULAÇÕES · CORAÇÃO</text>
+
+  <!-- Weight badge -->
+  <ellipse cx="140" cy="270" rx="32" ry="22" fill="#004D40"/>
+  <text x="140" y="274" text-anchor="middle" font-family="Arial Black, Arial, sans-serif" font-size="16" font-weight="900" fill="#FFFFFF">8kg</text>
+
+  <!-- Bottom banner -->
+  <path d="M52 287 Q52 303 68 303 L212 303 Q228 303 228 287 L228 280 Q140 284 52 280 Z" fill="#004D40"/>
+  <text x="140" y="298" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#B2DFDB" letter-spacing="2">BAIXO FÓSFORO</text>
+</svg>

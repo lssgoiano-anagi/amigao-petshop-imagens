@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 360">
+  <!-- English Bulldog - White & Brown Patches, Flat Cartoon -->
+
+  <!-- Shadow -->
+  <ellipse cx="140" cy="348" rx="70" ry="10" fill="#00000022"/>
+
+  <!-- Body - stocky wide -->
+  <ellipse cx="140" cy="248" rx="82" ry="78" fill="#F5F5F5"/>
+
+  <!-- Brown patch on back -->
+  <path d="M158 178 Q200 185 215 230 Q218 258 200 278 Q180 288 158 280 Q165 250 162 220 Z" fill="#8D6E63"/>
+
+  <!-- Chest -->
+  <ellipse cx="140" cy="268" rx="42" ry="48" fill="#EEEEEE"/>
+
+  <!-- Front legs - short thick -->
+  <rect x="88" y="295" width="36" height="48" rx="18" fill="#F5F5F5"/>
+  <rect x="156" y="295" width="36" height="48" rx="18" fill="#F5F5F5"/>
+  <!-- Paws -->
+  <ellipse cx="106" cy="343" rx="19" ry="11" fill="#E0E0E0"/>
+  <ellipse cx="174" cy="343" rx="19" ry="11" fill="#E0E0E0"/>
+  <!-- Paw toes -->
+  <ellipse cx="98" cy="344" rx="5" ry="4" fill="#BDBDBD"/>
+  <ellipse cx="106" cy="346" rx="5" ry="4" fill="#BDBDBD"/>
+  <ellipse cx="114" cy="344" rx="5" ry="4" fill="#BDBDBD"/>
+  <ellipse cx="166" cy="344" rx="5" ry="4" fill="#BDBDBD"/>
+  <ellipse cx="174" cy="346" rx="5" ry="4" fill="#BDBDBD"/>
+  <ellipse cx="182" cy="344" rx="5" ry="4" fill="#BDBDBD"/>
+
+  <!-- Haunches -->
+  <ellipse cx="86" cy="278" rx="32" ry="36" fill="#F5F5F5"/>
+  <ellipse cx="194" cy="278" rx="32" ry="36" fill="#8D6E63"/>
+
+  <!-- Short tail -->
+  <path d="M215 250 Q238 240 236 228 Q234 216 222 220 Q218 232 215 248 Z" fill="#F5F5F5"/>
+
+  <!-- Neck - wide -->
+  <path d="M108 168 Q140 158 172 168 L175 195 Q140 205 105 195 Z" fill="#F5F5F5"/>
+
+  <!-- Head - wide flat bulldog head -->
+  <ellipse cx="140" cy="140" rx="70" ry="62" fill="#F5F5F5"/>
+
+  <!-- Brown patch over left eye/ear area -->
+  <path d="M80 118 Q95 105 115 108 Q118 125 112 145 Q100 152 85 145 Q75 135 80 118 Z" fill="#8D6E63"/>
+
+  <!-- Wrinkles on forehead -->
+  <path d="M110 118 Q140 112 168 118" stroke="#D6C5C0" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M115 128 Q140 122 163 128" stroke="#D6C5C0" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+
+  <!-- Big snout / muzzle -->
+  <ellipse cx="140" cy="165" rx="42" ry="34" fill="#EEEEEE"/>
+
+  <!-- Jowls / underbite folds -->
+  <path d="M100 172 Q115 188 140 186 Q165 188 180 172" fill="#E0E0E0"/>
+  <path d="M104 180 Q115 195 140 193 Q165 195 176 180" fill="#D5D5D5"/>
+
+  <!-- Nose - wide flat -->
+  <ellipse cx="140" cy="152" rx="18" ry="13" fill="#1A1A1A"/>
+  <ellipse cx="132" cy="148" rx="5" ry="4" fill="#00000044"/>
+  <ellipse cx="148" cy="148" rx="5" ry="4" fill="#00000044"/>
+  <ellipse cx="134" cy="146" rx="3" ry="2" fill="#ffffff44"/>
+
+  <!-- Mouth wrinkle lines -->
+  <path d="M118 170 Q128 178 140 177 Q152 178 162 170" stroke="#BDBDBD" stroke-width="2" fill="none"/>
+
+  <!-- Eyes -->
+  <ellipse cx="116" cy="130" rx="14" ry="14" fill="#2C1B00"/>
+  <ellipse cx="164" cy="130" rx="14" ry="14" fill="#2C1B00"/>
+  <!-- White of eye -->
+  <ellipse cx="112" cy="127" rx="5" ry="5" fill="#ffffff"/>
+  <ellipse cx="160" cy="127" rx="5" ry="5" fill="#ffffff"/>
+  <!-- Shine -->
+  <ellipse cx="113" cy="126" rx="2.5" ry="2.5" fill="#ffffffcc"/>
+  <ellipse cx="161" cy="126" rx="2.5" ry="2.5" fill="#ffffffcc"/>
+
+  <!-- Droopy eye bags -->
+  <path d="M104 136 Q116 142 128 137" stroke="#D6C5C0" stroke-width="2" fill="none"/>
+  <path d="M152 137 Q164 142 176 136" stroke="#D6C5C0" stroke-width="2" fill="none"/>
+
+  <!-- Ears - small rose ears -->
+  <ellipse cx="85" cy="116" rx="22" ry="28" fill="#8D6E63" transform="rotate(-15 85 116)"/>
+  <ellipse cx="195" cy="116" rx="22" ry="28" fill="#D4C0B8" transform="rotate(15 195 116)"/>
+  <ellipse cx="85" cy="120" rx="14" ry="19" fill="#7A5C52" transform="rotate(-15 85 120)"/>
+  <ellipse cx="195" cy="120" rx="14" ry="19" fill="#C4A89E" transform="rotate(15 195 120)"/>
+</svg>

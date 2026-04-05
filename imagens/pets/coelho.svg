@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 360">
+  <!-- White Rabbit - Sitting, Cartoon Flat -->
+
+  <!-- Shadow -->
+  <ellipse cx="140" cy="350" rx="62" ry="9" fill="#00000022"/>
+
+  <!-- Long upright ears -->
+  <!-- Left ear -->
+  <ellipse cx="110" cy="72" rx="20" ry="56" fill="#FAFAFA"/>
+  <ellipse cx="110" cy="72" rx="11" ry="45" fill="#F8BBD0"/>
+  <!-- Right ear -->
+  <ellipse cx="170" cy="68" rx="20" ry="56" fill="#FAFAFA"/>
+  <ellipse cx="170" cy="68" rx="11" ry="45" fill="#F8BBD0"/>
+
+  <!-- Ear shading -->
+  <ellipse cx="109" cy="72" rx="12" ry="46" fill="#FAFAFA" opacity="0.5"/>
+
+  <!-- Body -->
+  <ellipse cx="140" cy="258" rx="72" ry="78" fill="#FAFAFA"/>
+
+  <!-- Belly -->
+  <ellipse cx="140" cy="272" rx="44" ry="56" fill="#F5F5F5"/>
+  <ellipse cx="140" cy="285" rx="34" ry="44" fill="#FFFFFF"/>
+
+  <!-- Fluffy tail at back -->
+  <circle cx="198" cy="270" r="22" fill="#F5F5F5"/>
+  <circle cx="200" cy="262" r="18" fill="#FAFAFA"/>
+  <circle cx="206" cy="272" r="15" fill="#FAFAFA"/>
+
+  <!-- Front paws sitting -->
+  <ellipse cx="108" cy="320" rx="26" ry="18" fill="#FAFAFA"/>
+  <ellipse cx="172" cy="320" rx="26" ry="18" fill="#FAFAFA"/>
+  <!-- Paw toes -->
+  <ellipse cx="98" cy="323" rx="8" ry="6" fill="#F0F0F0"/>
+  <ellipse cx="108" cy="325" rx="8" ry="6" fill="#F0F0F0"/>
+  <ellipse cx="118" cy="323" rx="8" ry="6" fill="#F0F0F0"/>
+  <ellipse cx="162" cy="323" rx="8" ry="6" fill="#F0F0F0"/>
+  <ellipse cx="172" cy="325" rx="8" ry="6" fill="#F0F0F0"/>
+  <ellipse cx="182" cy="323" rx="8" ry="6" fill="#F0F0F0"/>
+
+  <!-- Hind feet visible at side -->
+  <ellipse cx="82" cy="316" rx="24" ry="14" fill="#FAFAFA" transform="rotate(-20 82 316)"/>
+  <ellipse cx="200" cy="316" rx="24" ry="14" fill="#FAFAFA" transform="rotate(20 200 316)"/>
+
+  <!-- Neck -->
+  <ellipse cx="140" cy="182" rx="36" ry="24" fill="#FAFAFA"/>
+
+  <!-- Head -->
+  <ellipse cx="140" cy="148" rx="60" ry="58" fill="#FAFAFA"/>
+
+  <!-- Cheek puffs -->
+  <ellipse cx="100" cy="162" rx="24" ry="20" fill="#F5F5F5"/>
+  <ellipse cx="180" cy="162" rx="24" ry="20" fill="#F5F5F5"/>
+
+  <!-- Muzzle -->
+  <ellipse cx="140" cy="168" rx="28" ry="22" fill="#F5F5F5"/>
+  <!-- Split muzzle -->
+  <ellipse cx="126" cy="170" rx="16" ry="14" fill="#FAFAFA"/>
+  <ellipse cx="154" cy="170" rx="16" ry="14" fill="#FAFAFA"/>
+
+  <!-- Nose - pink small -->
+  <path d="M133 158 Q140 154 147 158 Q144 164 140 166 Q136 164 133 158 Z" fill="#F48FB1"/>
+  <!-- Nose shine -->
+  <ellipse cx="137" cy="159" rx="3" ry="2" fill="#ffffff88"/>
+
+  <!-- Mouth -->
+  <path d="M140 166 L134 172" stroke="#FFAACC" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <path d="M140 166 L146 172" stroke="#FFAACC" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <path d="M126 175 Q134 180 140 178 Q146 180 154 175" stroke="#FFBBCC" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+
+  <!-- Whiskers -->
+  <line x1="145" y1="164" x2="192" y2="158" stroke="#CCCCCC" stroke-width="1.5"/>
+  <line x1="145" y1="168" x2="194" y2="168" stroke="#CCCCCC" stroke-width="1.5"/>
+  <line x1="145" y1="172" x2="190" y2="178" stroke="#CCCCCC" stroke-width="1.5"/>
+  <line x1="135" y1="164" x2="88" y2="158" stroke="#CCCCCC" stroke-width="1.5"/>
+  <line x1="135" y1="168" x2="86" y2="168" stroke="#CCCCCC" stroke-width="1.5"/>
+  <line x1="135" y1="172" x2="90" y2="178" stroke="#CCCCCC" stroke-width="1.5"/>
+
+  <!-- Eyes - pink/red (albino) or dark blue -->
+  <ellipse cx="116" cy="136" rx="14" ry="14" fill="#E0E0E0"/>
+  <ellipse cx="164" cy="136" rx="14" ry="14" fill="#E0E0E0"/>
+  <!-- Iris -->
+  <ellipse cx="116" cy="136" rx="10" ry="10" fill="#EF9A9A"/>
+  <ellipse cx="164" cy="136" rx="10" ry="10" fill="#EF9A9A"/>
+  <!-- Pupil -->
+  <ellipse cx="116" cy="136" rx="6" ry="6" fill="#1A1A1A"/>
+  <ellipse cx="164" cy="136" rx="6" ry="6" fill="#1A1A1A"/>
+  <!-- Shine -->
+  <ellipse cx="112" cy="132" rx="3.5" ry="4" fill="#ffffff"/>
+  <ellipse cx="160" cy="132" rx="3.5" ry="4" fill="#ffffff"/>
+  <ellipse cx="113" cy="133" rx="1.5" ry="2" fill="#ffffffcc"/>
+  <ellipse cx="161" cy="133" rx="1.5" ry="2" fill="#ffffffcc"/>
+</svg>

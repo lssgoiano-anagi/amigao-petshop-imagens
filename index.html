@@ -163,6 +163,18 @@
     .gh-token-hint a{color:var(--azul);}
     .prat-item.loading{background:linear-gradient(90deg,#f0f0f0 25%,#e0e0e0 50%,#f0f0f0 75%);background-size:200% 100%;animation:shimmer 1.2s infinite;}
     @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+    /* LAYER INDICATOR */
+    .prat-item.in-layer{border-color:#F39C12;}
+    .prat-item.in-layer::after{content:'✓';position:absolute;top:4px;right:4px;background:#F39C12;color:#fff;border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:900;}
+    /* LAYERS PANEL */
+    .prat-layers{border-top:2px solid #f0f0f0;padding:8px;}
+    .prat-layers-title{font-size:.68rem;font-weight:900;color:#888;text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;}
+    .prat-layer-item{display:flex;align-items:center;gap:6px;padding:4px 6px;background:#fff8e1;border-radius:8px;margin-bottom:4px;}
+    .prat-layer-thumb{width:32px;height:32px;object-fit:cover;border-radius:5px;border:1px solid #eee;}
+    .prat-layer-lbl{flex:1;font-size:.7rem;font-weight:700;color:#555;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+    .prat-layer-rm{background:none;border:none;cursor:pointer;font-size:.9rem;color:#E74C3C;padding:2px 4px;flex-shrink:0;}
+    .prat-layer-rm:hover{background:#fde;border-radius:50%;}
+    .prat-tab-mode{font-size:.58rem;background:#e8fdf1;color:var(--verde-esc);border-radius:6px;padding:1px 5px;display:block;margin-top:2px;}
   </style>
 </head>
 <body>
@@ -234,8 +246,9 @@
       <div class="prat-tabs">
         <div class="prat-tab active" onclick="pratAba('galeria',this)">📋<br>Galeria</div>
         <div class="prat-tab" onclick="pratAba('fundos',this)">🖼️<br>Fundos</div>
-        <div class="prat-tab" onclick="pratAba('racao',this)">🛍️<br>Ração</div>
-        <div class="prat-tab" onclick="pratAba('acessorios',this)">🎾<br>Acesso.</div>
+        <div class="prat-tab" onclick="pratAba('pets',this)">🐾<br>Pets<span class="prat-tab-mode">+camada</span></div>
+        <div class="prat-tab" onclick="pratAba('racao',this)">🥫<br>Ração<span class="prat-tab-mode">+camada</span></div>
+        <div class="prat-tab" onclick="pratAba('acessorios',this)">🎾<br>Acess.<span class="prat-tab-mode">+camada</span></div>
       </div>
       <div class="prat-body" id="prat-body">
         <!-- Galeria tab -->
@@ -256,7 +269,13 @@
           <!-- Uploads do usuário -->
           <div class="upload-thumbs" id="upload-thumbs"></div>
           <div class="prat-grid" id="prat-outras-grid"></div>
-          <button class="prat-reset" onclick="pratReset()">↩ Foto padrão da arte</button>
+          <button class="prat-reset" id="prat-reset-btn" onclick="pratReset()">↩ Foto padrão da arte</button>
+        </div>
+        <!-- Camadas ativas -->
+        <div class="prat-layers hidden" id="prat-layers">
+          <div class="prat-layers-title">📌 Camadas no card:</div>
+          <div id="prat-layers-list"></div>
+          <button class="prat-reset" style="background:#fff3e0;color:#E65100;" onclick="limparObjetos()">🗑️ Limpar todas as camadas</button>
         </div>
       </div>
     </div>
@@ -433,7 +452,7 @@ const CORES=['#2ECC71','#3498DB','#F39C12','#E74C3C','#9B59B6','#1a9e52','#E91E6
 let cfg={nome:'Amigão Pet Shop 🐾',wpp:'(XX) XXXXX-XXXX',cidade:'Sua Cidade',insta:'',ghToken:''};
 const GH_REPO='lssgoiano-anagi/amigao-petshop-imagens';
 const GH_BRANCH='main';
-let ed={arte:null,titulo:'',sub:'',dest:'',cor:'#2ECC71',bgUrl:null,bgGrad:null};
+let ed={arte:null,titulo:'',sub:'',dest:'',cor:'#2ECC71',bgUrl:null,bgGrad:null,objects:[]};
 let renderTmr=null;
 
 // ── BOOT ───────────────────────────────────────────────
@@ -541,33 +560,33 @@ const PRAT={
     {url:null,grad:'linear-gradient(135deg,#3498DB,#2ECC71)',lbl:'Azul Verde'},
     {url:null,grad:'linear-gradient(135deg,#F39C12,#E74C3C)',lbl:'Fogo'},
   ],
+  pets:[
+    {url:'imagens/pets/cachorro-labrador.svg',lbl:'Labrador'},
+    {url:'imagens/pets/cachorro-bulldog.svg',lbl:'Bulldog'},
+    {url:'imagens/pets/cachorro-poodle.svg',lbl:'Poodle'},
+    {url:'imagens/pets/cachorro-beagle.svg',lbl:'Beagle'},
+    {url:'imagens/pets/gato-laranja.svg',lbl:'Gato Laranja'},
+    {url:'imagens/pets/gato-cinza.svg',lbl:'Gato Cinza'},
+    {url:'imagens/pets/papagaio.svg',lbl:'Papagaio'},
+    {url:'imagens/pets/coelho.svg',lbl:'Coelho'},
+  ],
   racao:[
-    {url:'https://images.pexels.com/photos/1741205/pexels-photo-1741205.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Cachorro comendo'},
-    {url:'https://images.pexels.com/photos/5732456/pexels-photo-5732456.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Ração premium'},
-    {url:'https://images.pexels.com/photos/6568501/pexels-photo-6568501.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Tigela de ração'},
-    {url:'https://images.pexels.com/photos/6816866/pexels-photo-6816866.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Pet alimentando'},
-    {url:'https://images.pexels.com/photos/7210748/pexels-photo-7210748.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Gato comendo'},
-    {url:'https://images.pexels.com/photos/4498150/pexels-photo-4498150.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Petiscos'},
-    {url:'https://images.pexels.com/photos/6957641/pexels-photo-6957641.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Ração gato'},
-    {url:'https://images.pexels.com/photos/5255197/pexels-photo-5255197.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Snack pet'},
-    {url:'https://images.pexels.com/photos/8434791/pexels-photo-8434791.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Bowl pet'},
-    {url:'https://images.pexels.com/photos/7210604/pexels-photo-7210604.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Filhote comendo'},
-    {url:'https://images.pexels.com/photos/6957668/pexels-photo-6957668.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Gato e tigela'},
-    {url:'https://images.pexels.com/photos/5255210/pexels-photo-5255210.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Petisco gato'},
+    {url:'imagens/racao/racao-cachorro-premium.svg',lbl:'Cães Adultos Premium'},
+    {url:'imagens/racao/racao-gato-premium.svg',lbl:'Gatos Adultos Premium'},
+    {url:'imagens/racao/racao-filhote.svg',lbl:'Filhotes'},
+    {url:'imagens/racao/racao-natural.svg',lbl:'Natural Grain Free'},
+    {url:'imagens/racao/lata-gato.svg',lbl:'Lata Gato Frango'},
+    {url:'imagens/racao/petisco-ossinho.svg',lbl:'Petisco Ossinho'},
+    {url:'imagens/racao/petisco-gato.svg',lbl:'Petisco Felino'},
+    {url:'imagens/racao/racao-idoso.svg',lbl:'Cães Sênior'},
   ],
   acessorios:[
-    {url:'https://images.pexels.com/photos/1404819/pexels-photo-1404819.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Gato brinquedo'},
-    {url:'https://images.pexels.com/photos/3651579/pexels-photo-3651579.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Coleira dog'},
-    {url:'https://images.pexels.com/photos/5731871/pexels-photo-5731871.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Caminha pet'},
-    {url:'https://images.pexels.com/photos/6816861/pexels-photo-6816861.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Brinquedo'},
-    {url:'https://images.pexels.com/photos/7210754/pexels-photo-7210754.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Acessório'},
-    {url:'https://images.pexels.com/photos/4587987/pexels-photo-4587987.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Guia passeio'},
-    {url:'https://images.pexels.com/photos/5731873/pexels-photo-5731873.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Bolsa transporte'},
-    {url:'https://images.pexels.com/photos/6957640/pexels-photo-6957640.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Higiene pet'},
-    {url:'https://images.pexels.com/photos/5255213/pexels-photo-5255213.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Escova tosa'},
-    {url:'https://images.pexels.com/photos/4587992/pexels-photo-4587992.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Roupinha dog'},
-    {url:'https://images.pexels.com/photos/6568505/pexels-photo-6568505.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Brinquedo gato'},
-    {url:'https://images.pexels.com/photos/8434796/pexels-photo-8434796.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Cama pet'},
+    {url:'imagens/acessorios/coleira-osso.svg',lbl:'Coleira com Tag'},
+    {url:'imagens/acessorios/tigela-dupla.svg',lbl:'Tigela Dupla'},
+    {url:'imagens/acessorios/brinquedo-osso.svg',lbl:'Brinquedo Osso'},
+    {url:'imagens/acessorios/arranhador-gato.svg',lbl:'Arranhador Gato'},
+    {url:'imagens/acessorios/caminha-pet.svg',lbl:'Caminha Pet'},
+    {url:'imagens/acessorios/bola-pet.svg',lbl:'Bola Pet'},
   ],
 };
 let pratAbaAtual='galeria';
@@ -579,8 +598,14 @@ function pratAba(aba,btn){
   btn.classList.add('active');
   const galArea=document.getElementById('prat-galeria-area');
   const outArea=document.getElementById('prat-outras-area');
+  const resetBtn=document.getElementById('prat-reset-btn');
   if(aba==='galeria'){galArea.classList.remove('hidden');outArea.classList.add('hidden');renderPratGaleria();}
-  else{galArea.classList.add('hidden');outArea.classList.remove('hidden');renderPratOutras();}
+  else{
+    galArea.classList.add('hidden');outArea.classList.remove('hidden');
+    // fundos: show reset btn. layers tabs: hide reset btn
+    resetBtn.style.display=(aba==='fundos'?'':'none');
+    renderPratOutras();
+  }
 }
 function pratBuscar(v){pratSrch=v.toLowerCase();renderPratGaleria();}
 function pratFiltrarCat(cat,btn){
@@ -620,31 +645,48 @@ function pratSelArte(id){
   ed.arte=a;ed.titulo=a.t;ed.sub=a.s;ed.cor=a.c;
   preencherEditor();renderPratGaleria();schedRender();
 }
+const LAYER_ABAS=['pets','racao','acessorios'];
+function isLayerAba(){return LAYER_ABAS.includes(pratAbaAtual);}
 function renderPratOutras(){
   const grid=document.getElementById('prat-outras-grid');
   grid.innerHTML='';
   const items=PRAT[pratAbaAtual]||[];
   items.forEach(item=>{
     const el=document.createElement('div');
-    el.className='prat-item'+(ed.bgUrl===item.url&&item.url?' sel':ed.bgGrad===item.grad&&item.grad?' sel':'');
-    if(item.grad&&!item.url){
-      el.classList.add('grad');el.style.background=item.grad;el.textContent=item.lbl;
-      el.onclick=()=>pratSelGrad(item.grad);
+    const isBg=pratAbaAtual==='fundos';
+    if(isBg){
+      el.className='prat-item'+(ed.bgUrl===item.url&&item.url?' sel':ed.bgGrad===item.grad&&item.grad?' sel':'');
+      if(item.grad&&!item.url){
+        el.classList.add('grad');el.style.background=item.grad;el.textContent=item.lbl;
+        el.onclick=()=>pratSelGrad(item.grad);
+      } else {
+        const img=document.createElement('img');img.src=item.url;img.alt=item.lbl;img.loading='lazy';
+        const lbl=document.createElement('div');lbl.className='prat-label';lbl.textContent=item.lbl;
+        el.appendChild(img);el.appendChild(lbl);
+        el.onclick=()=>pratSelUrl(item.url);
+      }
     } else {
+      const inLayer=ed.objects.some(o=>o.url===item.url);
+      el.className='prat-item'+(inLayer?' in-layer':'');
       const img=document.createElement('img');img.src=item.url;img.alt=item.lbl;img.loading='lazy';
       const lbl=document.createElement('div');lbl.className='prat-label';lbl.textContent=item.lbl;
       el.appendChild(img);el.appendChild(lbl);
-      el.onclick=()=>pratSelUrl(item.url);
+      el.onclick=()=>toggleObject(item.url,item.lbl);
     }
     grid.appendChild(el);
   });
   renderUploadThumbs();
+  // layers panel
+  renderLayersPanel();
   const info=document.getElementById('prat-sel-info2');
-  const selPrat=items.find(i=>i.url===ed.bgUrl||i.grad===ed.bgGrad);
-  const selUp=uploads.find(u=>u.url===ed.bgUrl);
-  const sel=selPrat||selUp;
-  if(sel){info.textContent='✅ '+(sel.lbl||'Foto selecionada');info.classList.add('show');}
-  else{info.classList.remove('show');}
+  if(pratAbaAtual==='fundos'){
+    const sel=(items.find(i=>i.url===ed.bgUrl||i.grad===ed.bgGrad))||(uploads.find(u=>u.url===ed.bgUrl));
+    if(sel){info.textContent='✅ '+(sel.lbl||'Foto selecionada');info.classList.add('show');}
+    else{info.classList.remove('show');}
+  } else {
+    if(ed.objects.length){info.textContent=`📌 ${ed.objects.length} camada(s) no card`;info.classList.add('show');}
+    else{info.classList.remove('show');}
+  }
 }
 function pratSelUrl(url){
   ed.bgUrl=url;ed.bgGrad=null;renderPratOutras();schedRender();
@@ -654,6 +696,38 @@ function pratSelGrad(grad){
 }
 function pratReset(){
   ed.bgUrl=null;ed.bgGrad=null;renderPratOutras();schedRender();
+}
+function toggleObject(url,lbl){
+  const idx=ed.objects.findIndex(o=>o.url===url);
+  if(idx>=0){ed.objects.splice(idx,1);mostrarToast('🗑️ '+lbl+' removido');}
+  else{ed.objects.push({url,lbl});mostrarToast('✅ '+lbl+' adicionado ao card!');}
+  renderPratOutras();schedRender();
+}
+function removeObject(idx){
+  const o=ed.objects[idx];
+  ed.objects.splice(idx,1);
+  mostrarToast('🗑️ '+(o?.lbl||'Item')+' removido');
+  renderPratOutras();schedRender();
+}
+function limparObjetos(){
+  ed.objects=[];mostrarToast('🗑️ Camadas limpas');
+  renderPratOutras();schedRender();
+}
+function renderLayersPanel(){
+  const panel=document.getElementById('prat-layers');
+  const list=document.getElementById('prat-layers-list');
+  if(!panel||!list)return;
+  if(ed.objects.length===0){panel.classList.add('hidden');return;}
+  panel.classList.remove('hidden');
+  list.innerHTML='';
+  ed.objects.forEach((o,i)=>{
+    const row=document.createElement('div');row.className='prat-layer-item';
+    const thumb=document.createElement('img');thumb.className='prat-layer-thumb';thumb.src=o.url;thumb.alt=o.lbl;
+    const lbl=document.createElement('span');lbl.className='prat-layer-lbl';lbl.textContent=o.lbl;
+    const rm=document.createElement('button');rm.className='prat-layer-rm';rm.textContent='✕';rm.title='Remover';rm.onclick=()=>removeObject(i);
+    row.appendChild(thumb);row.appendChild(lbl);row.appendChild(rm);
+    list.appendChild(row);
+  });
 }
 
 // ── TOAST ──────────────────────────────────────────────
@@ -678,7 +752,7 @@ function uploadImagem(input){
     uploads.unshift(entrada);
     input.value='';
     renderUploadThumbs();
-    pratSelUrl(dataUrl);
+    if(isLayerAba()){toggleObject(dataUrl,lbl);}else{pratSelUrl(dataUrl);}
     mostrarToast('🖼️ Foto carregada!');
     // Enviar para GitHub se token configurado
     if(cfg.ghToken){
@@ -717,17 +791,52 @@ function renderUploadThumbs(){
   wrap.innerHTML='';
   uploads.forEach(u=>{
     const el=document.createElement('div');
-    el.className='prat-item'+(ed.bgUrl===u.url?' sel':'');
+    const inLayer=ed.objects.some(o=>o.url===u.url);
+    el.className='prat-item'+(ed.bgUrl===u.url?' sel':inLayer?' in-layer':'');
     const img=document.createElement('img');img.src=u.url;img.alt=u.lbl;
     const lbl=document.createElement('div');lbl.className='prat-label';lbl.textContent=(u.local?'📱 ':'☁️ ')+u.lbl;
     el.appendChild(img);el.appendChild(lbl);
-    el.onclick=()=>{pratSelUrl(u.url);renderUploadThumbs();};
+    el.onclick=()=>{
+      if(isLayerAba()){toggleObject(u.url,u.lbl);}else{pratSelUrl(u.url);}
+      renderUploadThumbs();
+    };
     wrap.appendChild(el);
   });
 }
 
 // ── CANVAS RENDER ──────────────────────────────────────
 function schedRender(){clearTimeout(renderTmr);renderTmr=setTimeout(()=>renderArte(document.getElementById('editor-canvas')),150);}
+function drawObjects(ctx,W,H,cb){
+  const objs=ed.objects;
+  if(!objs.length){if(cb)cb();return;}
+  let loaded=0;
+  const imgs=objs.map(obj=>{
+    const img=new Image();img.crossOrigin='anonymous';
+    img.onload=img.onerror=()=>{loaded++;if(loaded===objs.length)render();};
+    img.src=obj.url;
+    return img;
+  });
+  // Trigger immediately if already cached
+  if(imgs.every(i=>i.complete)){render();return;}
+  function render(){
+    const n=objs.length;
+    const cols=Math.min(n,3);
+    const slotW=W/cols;
+    const maxH=H*0.42;
+    imgs.forEach((img,i)=>{
+      if(!img.naturalWidth)return;
+      const ar=img.naturalWidth/img.naturalHeight;
+      let ih=maxH,iw=ih*ar;
+      if(iw>slotW*0.88){iw=slotW*0.88;ih=iw/ar;}
+      const col=i%cols;
+      const row=Math.floor(i/cols);
+      const cx=slotW*col+slotW/2;
+      const by=H-115-row*ih*0.25;
+      ctx.drawImage(img,cx-iw/2,by-ih,iw,ih);
+    });
+    if(cb)cb();
+  }
+}
 function getEdVals(){return{nome:document.getElementById('ed-nome')?.value||cfg.nome,wpp:document.getElementById('ed-wpp')?.value||cfg.wpp,cidade:document.getElementById('ed-cidade')?.value||cfg.cidade,titulo:document.getElementById('ed-titulo')?.value||ed.titulo,sub:document.getElementById('ed-sub')?.value||ed.sub,dest:document.getElementById('ed-dest')?.value||'',cor:ed.cor};}
 function drawArteTexto(ctx,v,W,H,cb){
   const ov=ctx.createLinearGradient(0,0,0,H);
@@ -772,13 +881,14 @@ function renderArte(canvas,cb){
   const v=getEdVals();
   const ctx=canvas.getContext('2d');const W=1080,H=1080;
   canvas.width=W;canvas.height=H;
+  const afterBg=()=>drawObjects(ctx,W,H,()=>drawArteTexto(ctx,v,W,H,cb));
   // Gradient background (no image)
   if(ed.bgGrad&&!ed.bgUrl){
     const cols=ed.bgGrad.match(/#[0-9a-fA-F]{3,6}/g)||['#1a2e1e','#2ECC71'];
     const g=ctx.createLinearGradient(0,0,W,H);
     cols.forEach((c,i)=>g.addColorStop(i/Math.max(cols.length-1,1),c));
     ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
-    drawArteTexto(ctx,v,W,H,cb);return;
+    afterBg();return;
   }
   const src=ed.bgUrl||FOTO(ed.arte.tag,ARTES.indexOf(ed.arte));
   const img=new Image();img.crossOrigin='anonymous';img.src=src;
@@ -787,7 +897,7 @@ function renderArte(canvas,cb){
     const sc=Math.max(W/img.naturalWidth,H/img.naturalHeight);
     const iw=img.naturalWidth*sc,ih=img.naturalHeight*sc;
     ctx.drawImage(img,(W-iw)/2,(H-ih)/2,iw,ih);
-    drawArteTexto(ctx,v,W,H,cb);
+    afterBg();
   };
   if(img.complete&&img.naturalWidth)draw();
   else{img.onload=draw;img.onerror=()=>{ctx.fillStyle=v.cor;ctx.fillRect(0,0,W,H);ctx.font='160px serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('🐾',W/2,H/2);if(cb)cb();};}

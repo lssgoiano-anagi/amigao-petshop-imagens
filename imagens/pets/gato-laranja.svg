@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 360">
+  <!-- Orange Tabby Cat - Sitting, Cartoon Flat -->
+
+  <!-- Shadow -->
+  <ellipse cx="140" cy="350" rx="60" ry="9" fill="#00000022"/>
+
+  <!-- Tail curled around body -->
+  <path d="M195 290 Q235 270 238 230 Q240 198 222 188 Q208 182 200 198 Q196 215 205 235 Q210 258 198 278 Q194 284 195 290 Z" fill="#E87722"/>
+  <!-- Tail stripe -->
+  <path d="M214 192 Q208 208 212 228 Q214 218 218 202 Z" fill="#B85A0A" opacity="0.7"/>
+
+  <!-- Body -->
+  <ellipse cx="138" cy="258" rx="70" ry="75" fill="#E87722"/>
+
+  <!-- White chest/belly -->
+  <ellipse cx="138" cy="272" rx="38" ry="55" fill="#FFF3E0"/>
+  <ellipse cx="138" cy="285" rx="28" ry="42" fill="#FFFFFF"/>
+
+  <!-- Tabby stripes on body -->
+  <path d="M90 230 Q96 222 104 228 Q98 236 90 230 Z" fill="#B85A0A" opacity="0.7"/>
+  <path d="M88 248 Q95 240 102 246 Q96 254 88 248 Z" fill="#B85A0A" opacity="0.7"/>
+  <path d="M186 230 Q180 222 172 228 Q178 236 186 230 Z" fill="#B85A0A" opacity="0.7"/>
+  <path d="M188 248 Q181 240 174 246 Q180 254 188 248 Z" fill="#B85A0A" opacity="0.7"/>
+
+  <!-- Front paws sitting -->
+  <ellipse cx="110" cy="326" rx="22" ry="16" fill="#E87722"/>
+  <ellipse cx="168" cy="326" rx="22" ry="16" fill="#E87722"/>
+  <!-- Paw toes -->
+  <ellipse cx="102" cy="329" rx="7" ry="5" fill="#D4621A"/>
+  <ellipse cx="110" cy="331" rx="7" ry="5" fill="#D4621A"/>
+  <ellipse cx="118" cy="329" rx="7" ry="5" fill="#D4621A"/>
+  <ellipse cx="160" cy="329" rx="7" ry="5" fill="#D4621A"/>
+  <ellipse cx="168" cy="331" rx="7" ry="5" fill="#D4621A"/>
+  <ellipse cx="176" cy="329" rx="7" ry="5" fill="#D4621A"/>
+
+  <!-- Neck -->
+  <rect x="120" y="164" width="38" height="42" rx="18" fill="#E87722"/>
+
+  <!-- Head -->
+  <ellipse cx="140" cy="142" rx="62" ry="58" fill="#E87722"/>
+
+  <!-- Forehead stripes -->
+  <path d="M120 100 Q140 95 160 100 Q158 108 140 106 Q122 108 120 100 Z" fill="#B85A0A" opacity="0.6"/>
+  <path d="M115 112 Q140 108 165 112 Q163 118 140 116 Q117 118 115 112 Z" fill="#B85A0A" opacity="0.5"/>
+
+  <!-- Cheek puffs -->
+  <ellipse cx="100" cy="158" rx="22" ry="18" fill="#EE8830"/>
+  <ellipse cx="180" cy="158" rx="22" ry="18" fill="#EE8830"/>
+
+  <!-- White muzzle -->
+  <ellipse cx="140" cy="162" rx="30" ry="24" fill="#FFF3E0"/>
+  <ellipse cx="140" cy="166" rx="24" ry="18" fill="#FFFFFF"/>
+
+  <!-- Nose - small pink -->
+  <path d="M133 152 Q140 148 147 152 L144 158 Q140 162 136 158 Z" fill="#E57373"/>
+  <!-- Nostrils -->
+  <ellipse cx="136" cy="154" rx="3" ry="2.5" fill="#C62828" opacity="0.5"/>
+  <ellipse cx="144" cy="154" rx="3" ry="2.5" fill="#C62828" opacity="0.5"/>
+
+  <!-- Mouth -->
+  <path d="M140 162 L134 168" stroke="#D4A0A0" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <path d="M140 162 L146 168" stroke="#D4A0A0" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <path d="M126 172 Q134 178 140 176 Q146 178 154 172" stroke="#CCAAAA" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+
+  <!-- Whiskers -->
+  <line x1="145" y1="162" x2="190" y2="155" stroke="#FFFFFF" stroke-width="1.5" opacity="0.9"/>
+  <line x1="145" y1="166" x2="192" y2="166" stroke="#FFFFFF" stroke-width="1.5" opacity="0.9"/>
+  <line x1="145" y1="170" x2="188" y2="176" stroke="#FFFFFF" stroke-width="1.5" opacity="0.9"/>
+  <line x1="135" y1="162" x2="90" y2="155" stroke="#FFFFFF" stroke-width="1.5" opacity="0.9"/>
+  <line x1="135" y1="166" x2="88" y2="166" stroke="#FFFFFF" stroke-width="1.5" opacity="0.9"/>
+  <line x1="135" y1="170" x2="92" y2="176" stroke="#FFFFFF" stroke-width="1.5" opacity="0.9"/>
+
+  <!-- Eyes - green -->
+  <ellipse cx="116" cy="132" rx="16" ry="16" fill="#4CAF50"/>
+  <ellipse cx="164" cy="132" rx="16" ry="16" fill="#4CAF50"/>
+  <!-- Pupils -->
+  <ellipse cx="116" cy="132" rx="7" ry="14" fill="#1A1A1A"/>
+  <ellipse cx="164" cy="132" rx="7" ry="14" fill="#1A1A1A"/>
+  <!-- Shine -->
+  <ellipse cx="112" cy="127" rx="4" ry="5" fill="#ffffff"/>
+  <ellipse cx="160" cy="127" rx="4" ry="5" fill="#ffffff"/>
+  <ellipse cx="113" cy="127" rx="2" ry="3" fill="#ffffffcc"/>
+  <ellipse cx="161" cy="127" rx="2" ry="3" fill="#ffffffcc"/>
+
+  <!-- Ears - pointed -->
+  <polygon points="88,112 78,72 112,98" fill="#E87722"/>
+  <polygon points="192,112 202,72 168,98" fill="#E87722"/>
+  <!-- Inner ear -->
+  <polygon points="90,110 82,78 108,100" fill="#FF7043" opacity="0.7"/>
+  <polygon points="190,110 198,78 172,100" fill="#FF7043" opacity="0.7"/>
+</svg>
