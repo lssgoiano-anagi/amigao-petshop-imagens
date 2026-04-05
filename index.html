@@ -36,28 +36,24 @@
     /* MAIN */
     .main-content{max-width:1400px;margin:0 auto;padding:20px 16px 60px;}
 
-    /* APP LAYOUT */
-    .app-wrap{display:grid;grid-template-columns:1fr 290px;gap:18px;align-items:start;}
-    @media(max-width:900px){.app-wrap{grid-template-columns:1fr;}}
-    .canvas-col{display:flex;flex-direction:column;gap:14px;}
+    /* APP LAYOUT — 3 colunas: canvas | personalizar | prateleira */
+    .app-wrap{display:grid;grid-template-columns:360px 1fr 290px;gap:16px;align-items:start;}
+    @media(max-width:1100px){.app-wrap{grid-template-columns:300px 1fr 270px;}}
+    @media(max-width:820px){.app-wrap{grid-template-columns:1fr 270px;}.canvas-col{grid-column:1/-1;}}
+    @media(max-width:600px){.app-wrap{grid-template-columns:1fr;}}
+    .canvas-col{display:flex;flex-direction:column;gap:12px;}
     #editor-canvas{width:100%;aspect-ratio:1;display:block;border-radius:10px;box-shadow:0 4px 20px rgba(0,0,0,.15);}
-    .pers-panel{background:#fff;border-radius:16px;padding:18px;box-shadow:var(--sombra);}
-    .pers-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 18px;}
-    @media(max-width:600px){.pers-grid{grid-template-columns:1fr;}}
-    .share-row{display:flex;gap:10px;}
-    .share-row .btn-share{flex:1;padding:13px 8px;font-size:.82rem;border-radius:12px;}
-    /* keep old panel style for share-canvas */
-    .panel{background:#fff;border-radius:16px;padding:20px;box-shadow:var(--sombra);}
-    .panel-title{font-weight:900;font-size:.95rem;margin-bottom:14px;color:var(--verde-esc);}
-    #share-canvas{width:100%;aspect-ratio:1;display:block;border-radius:8px;}
-    .share-layout{display:grid;grid-template-columns:1fr 310px;gap:22px;align-items:start;}
-    @media(max-width:900px){.share-layout{grid-template-columns:1fr;}}
-    .share-btns{display:flex;flex-direction:column;gap:11px;}
-    .share-info{background:#fff;border-radius:16px;padding:18px;box-shadow:var(--sombra);}
-    .share-info h3{font-size:.95rem;font-weight:800;margin-bottom:6px;}
-    .share-info p{font-size:.8rem;color:#666;line-height:1.5;}
-    .btn-share-sec{background:#f0f0f0;color:#555;width:100%;padding:11px;border:none;border-radius:12px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:700;font-size:.86rem;}
-    .btn-share-sec:hover{background:#e4e4e4;}
+    .canvas-hint{font-size:.7rem;color:#aaa;text-align:center;font-weight:700;}
+    .pers-col{display:flex;flex-direction:column;gap:12px;}
+    .pers-panel{background:#fff;border-radius:16px;padding:16px;box-shadow:var(--sombra);}
+    .share-row{display:flex;flex-direction:column;gap:8px;}
+    .share-row .btn-share{padding:13px;font-size:.88rem;border-radius:12px;}
+    /* upload area */
+    .upload-zone{margin:6px 8px;border:2px dashed #cce8d4;border-radius:10px;padding:10px 8px;text-align:center;cursor:pointer;transition:border-color .2s;}
+    .upload-zone:hover{border-color:var(--verde);}
+    .upload-zone input{display:none;}
+    .upload-zone span{font-size:.72rem;font-weight:800;color:var(--verde-esc);}
+    .upload-thumbs{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:0 8px 6px;}
     /* EDITOR FIELDS */
     .fsec{font-size:.72rem;font-weight:900;text-transform:uppercase;letter-spacing:.08em;color:#aaa;margin:16px 0 8px;}
     .fsec:first-child{margin-top:0;}
@@ -199,31 +195,29 @@
 <div class="main-content">
   <div class="app-wrap">
 
-    <!-- COLUNA ESQUERDA: canvas + personalizar + compartilhar -->
+    <!-- COLUNA 1: canvas pequeno -->
     <div class="canvas-col">
       <canvas id="editor-canvas"></canvas>
+      <div class="canvas-hint">Preview 1080×1080px</div>
+    </div>
 
+    <!-- COLUNA 2: personalizar + compartilhar -->
+    <div class="pers-col">
       <div class="pers-panel">
-        <div class="pers-grid">
-          <div>
-            <div class="fsec" style="margin-top:0">📍 Petshop</div>
-            <div class="frow"><label>Nome</label><input class="finput" id="ed-nome" oninput="schedRender()"/></div>
-            <div class="frow"><label>WhatsApp</label><input class="finput" id="ed-wpp" oninput="schedRender()"/></div>
-            <div class="frow"><label>Cidade / UF</label><input class="finput" id="ed-cidade" oninput="schedRender()"/></div>
-          </div>
-          <div>
-            <div class="fsec" style="margin-top:0">✏️ Texto</div>
-            <div class="frow"><label>Título</label><input class="finput" id="ed-titulo" oninput="schedRender()" maxlength="40"/></div>
-            <div class="frow"><label>Subtítulo</label><input class="finput" id="ed-sub" oninput="schedRender()" maxlength="60"/></div>
-            <div class="frow"><label>Destaque</label><input class="finput" id="ed-dest" placeholder="Ex: a partir de R$ 39,90!" oninput="schedRender()" maxlength="36"/></div>
-          </div>
-        </div>
+        <div class="fsec" style="margin-top:0">📍 Petshop</div>
+        <div class="frow"><label>Nome</label><input class="finput" id="ed-nome" oninput="schedRender()"/></div>
+        <div class="frow"><label>WhatsApp</label><input class="finput" id="ed-wpp" oninput="schedRender()"/></div>
+        <div class="frow"><label>Cidade / UF</label><input class="finput" id="ed-cidade" oninput="schedRender()"/></div>
+        <div class="fsec">✏️ Texto</div>
+        <div class="frow"><label>Título</label><input class="finput" id="ed-titulo" oninput="schedRender()" maxlength="40"/></div>
+        <div class="frow"><label>Subtítulo</label><input class="finput" id="ed-sub" oninput="schedRender()" maxlength="60"/></div>
+        <div class="frow"><label>Destaque / Promoção</label><input class="finput" id="ed-dest" placeholder="Ex: a partir de R$ 39,90!" oninput="schedRender()" maxlength="36"/></div>
         <div class="fsec">🎨 Cor do Tema</div>
         <div class="color-row" id="color-row"></div>
       </div>
 
       <div class="share-row">
-        <button class="btn-share btn-dl" onclick="baixar()">⬇️ Baixar</button>
+        <button class="btn-share btn-dl" onclick="baixar()">⬇️ Baixar PNG</button>
         <button class="btn-share btn-wpp" onclick="sharWpp()">💬 WhatsApp</button>
         <button class="btn-share btn-insta" onclick="sharInsta()">📸 Instagram</button>
       </div>
@@ -249,6 +243,13 @@
         <!-- Fundos/Ração/Acessórios tab -->
         <div id="prat-outras-area" class="hidden">
           <div id="prat-sel-info2" class="prat-sel-info"></div>
+          <!-- Upload de imagem própria -->
+          <div class="upload-zone" onclick="document.getElementById('upload-input').click()" id="upload-zone-wrap">
+            <input type="file" id="upload-input" accept="image/*" onchange="uploadImagem(this)"/>
+            <span>➕ Adicionar minha foto</span>
+          </div>
+          <!-- Uploads do usuário -->
+          <div class="upload-thumbs" id="upload-thumbs"></div>
           <div class="prat-grid" id="prat-outras-grid"></div>
           <button class="prat-reset" onclick="pratReset()">↩ Foto padrão da arte</button>
         </div>
@@ -584,9 +585,12 @@ function renderPratOutras(){
     }
     grid.appendChild(el);
   });
+  renderUploadThumbs();
   const info=document.getElementById('prat-sel-info2');
-  const sel=items.find(i=>i.url===ed.bgUrl||i.grad===ed.bgGrad);
-  if(sel){info.textContent='✅ '+sel.lbl;info.classList.add('show');}
+  const selPrat=items.find(i=>i.url===ed.bgUrl||i.grad===ed.bgGrad);
+  const selUp=uploads.find(u=>u.url===ed.bgUrl);
+  const sel=selPrat||selUp;
+  if(sel){info.textContent='✅ '+(sel.lbl||'Foto selecionada');info.classList.add('show');}
   else{info.classList.remove('show');}
 }
 function pratSelUrl(url){
@@ -597,6 +601,35 @@ function pratSelGrad(grad){
 }
 function pratReset(){
   ed.bgUrl=null;ed.bgGrad=null;renderPratOutras();schedRender();
+}
+
+// ── UPLOAD DE IMAGENS ──────────────────────────────────
+let uploads=[];
+function uploadImagem(input){
+  const file=input.files[0];if(!file)return;
+  const reader=new FileReader();
+  reader.onload=e=>{
+    const url=e.target.result;
+    uploads.unshift({url,lbl:file.name.replace(/\.[^.]+$/,'').substring(0,18)});
+    input.value='';
+    renderUploadThumbs();
+    pratSelUrl(url);
+  };
+  reader.readAsDataURL(file);
+}
+function renderUploadThumbs(){
+  const wrap=document.getElementById('upload-thumbs');
+  if(!wrap)return;
+  wrap.innerHTML='';
+  uploads.forEach(u=>{
+    const el=document.createElement('div');
+    el.className='prat-item'+(ed.bgUrl===u.url?' sel':'');
+    const img=document.createElement('img');img.src=u.url;img.alt=u.lbl;
+    const lbl=document.createElement('div');lbl.className='prat-label';lbl.textContent='⭐ '+u.lbl;
+    el.appendChild(img);el.appendChild(lbl);
+    el.onclick=()=>{pratSelUrl(u.url);renderUploadThumbs();};
+    wrap.appendChild(el);
+  });
 }
 
 // ── CANVAS RENDER ──────────────────────────────────────
