@@ -342,8 +342,13 @@
             <input type="file" id="upload-input" accept="image/*" onchange="uploadImagem(this)"/>
             <span>➕ Adicionar minha foto</span>
           </div>
-          <!-- Uploads do usuário -->
+          <!-- Uploads do usuário (sessão atual) -->
           <div class="upload-thumbs" id="upload-thumbs"></div>
+          <!-- Imagens já salvas no GitHub -->
+          <div id="prat-gh-section" class="hidden">
+            <div class="prat-sec-lbl">📁 Salvas no GitHub</div>
+            <div class="prat-grid" id="prat-gh-grid"></div>
+          </div>
           <div class="prat-grid" id="prat-outras-grid"></div>
           <button class="prat-reset" id="prat-reset-btn" onclick="pratReset()">↩ Foto padrão da arte</button>
         </div>
@@ -690,6 +695,7 @@ function pratAba(aba,btn){
     galArea.classList.add('hidden');outArea.classList.remove('hidden');
     resetBtn.style.display='none';
     renderPratOutras();
+    carregarImgsGitHub(aba);
   }
 }
 function pratBuscar(v){pratSrch=v.toLowerCase();renderPratGaleria();}
@@ -971,11 +977,27 @@ const PASTAS_GH=[
   {id:'acessorios',lbl:'🎀 Acessórios'},
   {id:'fundos',lbl:'🖼️ Fundos'},
 ];
-let moverIdx=-1;
+// moverTarget: {ghPath, url, onSuccess}
+let moverTarget=null;
 function abrirModalMover(idx){
   const u=uploads[idx];if(!u||!u.ghPath)return;
-  moverIdx=idx;
-  const pastaAtual=u.ghPath.split('/')[1]||'';
+  _abrirMoverDialog(u.ghPath,u.url,(novaUrl)=>{
+    u.url=novaUrl;u.ghPath=`imagens/${novaUrl.split('/imagens/')[1]}`;
+    renderUploadThumbs();
+  });
+}
+function abrirModalMoverGH(ghPath,url){
+  _abrirMoverDialog(ghPath,url,(novaUrl,novoPath)=>{
+    carregarImgsGitHub(pratAbaAtual);
+    // Atualiza canvas se estava em uso
+    if(ed.bgUrl===url)ed.bgUrl=novaUrl;
+    ed.objects.forEach(o=>{if(o.url===url)o.url=novaUrl;});
+    schedRender();
+  });
+}
+function _abrirMoverDialog(ghPath,url,onSuccess){
+  const pastaAtual=ghPath.split('/')[1]||'';
+  moverTarget={ghPath,url,onSuccess};
   const opcoes=document.getElementById('modal-mover-opcoes');
   opcoes.innerHTML=PASTAS_GH.filter(p=>p.id!==pastaAtual).map(p=>
     `<button class="pasta-opt-btn" onclick="confirmarMover('${p.id}')">${p.lbl}</button>`
@@ -984,36 +1006,102 @@ function abrirModalMover(idx){
 }
 async function confirmarMover(novaPasta){
   document.getElementById('modal-mover').classList.add('hidden');
-  const u=uploads[moverIdx];if(!u||!u.ghPath||!cfg.ghToken)return;
-  const nomeArq=u.ghPath.split('/').pop();
+  if(!moverTarget||!cfg.ghToken)return;
+  const {ghPath,url,onSuccess}=moverTarget;
+  const nomeArq=ghPath.split('/').pop();
   const novoCaminho=`imagens/${novaPasta}/${nomeArq}`;
   mostrarToast('⏳ Movendo imagem…',10000);
   try{
-    // Ler arquivo original
-    const getR=await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${u.ghPath}`,{headers:{'Authorization':`token ${cfg.ghToken}`}});
+    const getR=await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${ghPath}`,{headers:{'Authorization':`token ${cfg.ghToken}`}});
     if(!getR.ok){mostrarToast('❌ Erro ao ler arquivo original');return;}
     const orig=await getR.json();
-    // Criar na nova pasta
     const putR=await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${novoCaminho}`,{
       method:'PUT',
       headers:{'Authorization':`token ${cfg.ghToken}`,'Content-Type':'application/json'},
       body:JSON.stringify({message:`Movido para ${novaPasta}: ${nomeArq}`,content:orig.content.replace(/\n/g,''),branch:GH_BRANCH})
     });
     if(!putR.ok){mostrarToast('❌ Erro ao criar na nova pasta');return;}
-    // Excluir da pasta original
-    await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${u.ghPath}`,{
+    await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${ghPath}`,{
       method:'DELETE',
       headers:{'Authorization':`token ${cfg.ghToken}`,'Content-Type':'application/json'},
-      body:JSON.stringify({message:`Movido de ${u.ghPath.split('/')[1]}: ${nomeArq}`,sha:orig.sha,branch:GH_BRANCH})
+      body:JSON.stringify({message:`Movido de ${ghPath.split('/')[1]}: ${nomeArq}`,sha:orig.sha,branch:GH_BRANCH})
     });
     const novaUrl=`https://raw.githubusercontent.com/${GH_REPO}/${GH_BRANCH}/${novoCaminho}`;
-    const oldUrl=u.url;
-    u.url=novaUrl;u.ghPath=novoCaminho;
-    if(ed.bgUrl===oldUrl)ed.bgUrl=novaUrl;
-    ed.objects.forEach(o=>{if(o.url===oldUrl)o.url=novaUrl;});
-    renderUploadThumbs();schedRender();
+    if(ed.bgUrl===url)ed.bgUrl=novaUrl;
+    ed.objects.forEach(o=>{if(o.url===url)o.url=novaUrl;});
+    onSuccess(novaUrl,novoCaminho);
+    schedRender();
     mostrarToast(`✅ Movido para "${PASTAS_GH.find(p=>p.id===novaPasta)?.lbl||novaPasta}"!`);
   }catch(e){mostrarToast('⚠️ Erro de conexão ao mover');}
+}
+
+// ── IMAGENS DO GITHUB ──────────────────────────────────
+async function carregarImgsGitHub(pasta){
+  if(!cfg.ghToken)return;
+  const sec=document.getElementById('prat-gh-section');
+  const grid=document.getElementById('prat-gh-grid');
+  if(!sec||!grid)return;
+  grid.innerHTML='<div style="font-size:.72rem;color:#aaa;padding:6px 8px;">Carregando…</div>';
+  sec.classList.remove('hidden');
+  try{
+    const r=await fetch(`https://api.github.com/repos/${GH_REPO}/contents/imagens/${pasta}`,{
+      headers:{'Authorization':`token ${cfg.ghToken}`}
+    });
+    if(!r.ok){sec.classList.add('hidden');return;}
+    const files=await r.json();
+    const imgs=files.filter(f=>f.type==='file'&&/\.(jpg|jpeg|png|gif|webp|svg)$/i.test(f.name));
+    if(!imgs.length){sec.classList.add('hidden');return;}
+    sec.classList.remove('hidden');
+    grid.innerHTML='';
+    imgs.forEach(f=>{
+      const rawUrl=`https://raw.githubusercontent.com/${GH_REPO}/${GH_BRANCH}/imagens/${pasta}/${f.name}`;
+      const ghPath=`imagens/${pasta}/${f.name}`;
+      const lbl=f.name.replace(/\.[^.]+$/,'').substring(0,22);
+      const isBg=pasta==='fundos';
+      const inLayer=ed.objects.some(o=>o.url===rawUrl);
+      const el=document.createElement('div');
+      el.className='prat-item'+(ed.bgUrl===rawUrl?' sel':inLayer?' in-layer':'');
+      const img=document.createElement('img');img.src=rawUrl;img.alt=lbl;img.loading='lazy';
+      const lblEl=document.createElement('div');lblEl.className='prat-label';lblEl.textContent='📁 '+lbl;
+      el.appendChild(img);el.appendChild(lblEl);
+      el.onclick=()=>{
+        if(isBg){pratSelUrl(rawUrl);}else{toggleObject(rawUrl,lbl);}
+        carregarImgsGitHub(pasta);
+      };
+      // Botoes acao
+      const actions=document.createElement('div');actions.className='upload-item-actions';
+      const btnDel=document.createElement('button');
+      btnDel.className='upload-act-btn upload-act-del';btnDel.title='Excluir';btnDel.textContent='🗑';
+      btnDel.onclick=async(e)=>{
+        e.stopPropagation();
+        if(!confirm(`Excluir "${lbl}"?`))return;
+        mostrarToast('⏳ Excluindo…',8000);
+        try{
+          const chk=await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${ghPath}`,{headers:{'Authorization':`token ${cfg.ghToken}`}});
+          if(chk.ok){
+            const d=await chk.json();
+            const del=await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${ghPath}`,{
+              method:'DELETE',
+              headers:{'Authorization':`token ${cfg.ghToken}`,'Content-Type':'application/json'},
+              body:JSON.stringify({message:`Excluído via portal: ${f.name}`,sha:d.sha,branch:GH_BRANCH})
+            });
+            if(del.ok){
+              if(ed.bgUrl===rawUrl){ed.bgUrl='';schedRender();}
+              ed.objects=ed.objects.filter(o=>o.url!==rawUrl);
+              mostrarToast('🗑️ Excluído!');
+              carregarImgsGitHub(pasta);
+            }else{mostrarToast('❌ Erro ao excluir');}
+          }
+        }catch(ex){mostrarToast('⚠️ Erro de conexão');}
+      };
+      const btnMv=document.createElement('button');
+      btnMv.className='upload-act-btn upload-act-mv';btnMv.title='Mover pasta';btnMv.textContent='📂';
+      btnMv.onclick=(e)=>{e.stopPropagation();abrirModalMoverGH(ghPath,rawUrl);};
+      actions.appendChild(btnDel);actions.appendChild(btnMv);
+      el.appendChild(actions);
+      grid.appendChild(el);
+    });
+  }catch(ex){sec.classList.add('hidden');}
 }
 
 // ── CANVAS RENDER ──────────────────────────────────────
