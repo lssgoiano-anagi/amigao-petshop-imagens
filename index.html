@@ -231,7 +231,8 @@ const CATS=[
   {id:'praia',lbl:'🏖️ Praia & Verão'},{id:'fazenda',lbl:'🌾 Fazenda & Campo'},
   {id:'adestramento',lbl:'🎓 Adestramento'}
 ];
-const FOTO=id=>`https://picsum.photos/seed/${id}/1080/1080`;
+const TAG_FOTO={'cachorro-pequeno':'puppy','cachorro-grande':'dog','gato':'cat','aves':'bird,parrot','peixes':'fish,aquarium','roedores':'hamster,rabbit','banho-tosa':'dog,bath','veterinario':'dog,veterinarian','nutricao':'dog,food','acessorios':'dog,accessories','vacinas':'dog,health','dicas':'dog,cat','promocoes':'puppy','praia':'dog,beach','fazenda':'dog,nature'};
+const FOTO=(tag,idx)=>{const q=TAG_FOTO[tag]||'dog';return`https://loremflickr.com/1080/1080/${q}?lock=${idx}`;};
 // Pre-load mascot SVG for canvas use
 const MASCOTE_IMG=new Image();MASCOTE_IMG.src='marcote.png';
 const ARTES=[
@@ -348,7 +349,7 @@ let curCat='todos',srch='',step=1,renderTmr=null;
 // ── BOOT ───────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded',()=>{
   const saved=localStorage.getItem('petcfg');
-  if(saved){cfg={...cfg,...JSON.parse(saved)};document.getElementById('modal-cfg').classList.add('hidden');}
+  if(saved){const s=JSON.parse(saved);if(s.nome==='Amigão Petshop'||s.nome==='Amigão Pet Shop 🐾🐾')s.nome='Amigão Pet Shop 🐾';cfg={...cfg,...s};document.getElementById('modal-cfg').classList.add('hidden');}
   atualizarHdr();
   renderCats();renderGaleria();renderCores();
 });
@@ -430,7 +431,7 @@ function renderGaleria(){
 function renderThumb(a,canvas){
   const ctx=canvas.getContext('2d');const W=540,H=540;
   canvas.width=W;canvas.height=H;
-  const img=new Image();img.crossOrigin='anonymous';img.src=FOTO(a.f);
+  const img=new Image();img.crossOrigin='anonymous';img.src=FOTO(a.tag,ARTES.indexOf(a));
   const draw=()=>{
     ctx.clearRect(0,0,W,H);
     const sc=Math.max(W/img.naturalWidth,H/img.naturalHeight);
@@ -494,7 +495,7 @@ function renderArte(canvas,cb){
   const v=getEdVals();
   const ctx=canvas.getContext('2d');const W=1080,H=1080;
   canvas.width=W;canvas.height=H;
-  const img=new Image();img.crossOrigin='anonymous';img.src=FOTO(ed.arte.f);
+  const img=new Image();img.crossOrigin='anonymous';img.src=FOTO(ed.arte.tag,ARTES.indexOf(ed.arte));
   const draw=()=>{
     ctx.clearRect(0,0,W,H);
     const sc=Math.max(W/img.naturalWidth,H/img.naturalHeight);
