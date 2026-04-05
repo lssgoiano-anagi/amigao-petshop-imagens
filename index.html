@@ -341,14 +341,15 @@ const ARTES=[
 
 // ── STATE ──────────────────────────────────────────────
 const CORES=['#2ECC71','#3498DB','#F39C12','#E74C3C','#9B59B6','#1a9e52','#E91E63','#FF9800','#00BCD4','#795548'];
-let cfg={nome:'Amigão Pet Shop 🐾🐾',wpp:'(XX) XXXXX-XXXX',cidade:'Sua Cidade',insta:''};
+let cfg={nome:'Amigão Pet Shop 🐾',wpp:'(XX) XXXXX-XXXX',cidade:'Sua Cidade',insta:''};
 let ed={arte:null,titulo:'',sub:'',dest:'',cor:'#2ECC71'};
 let curCat='todos',srch='',step=1,renderTmr=null;
 
 // ── BOOT ───────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded',()=>{
   const saved=localStorage.getItem('petcfg');
-  if(saved){cfg={...cfg,...JSON.parse(saved)};document.getElementById('modal-cfg').classList.add('hidden');atualizarHdr();}
+  if(saved){cfg={...cfg,...JSON.parse(saved)};document.getElementById('modal-cfg').classList.add('hidden');}
+  atualizarHdr();
   renderCats();renderGaleria();renderCores();
 });
 
