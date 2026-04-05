@@ -144,7 +144,7 @@
 <!-- HEADER -->
 <header>
   <div class="header-brand">
-    <img class="header-logo" src="marcote.png" alt="Mascote Amigão Petshop"/>
+    <img class="header-logo" src="marcote.png" alt="Mascote Amigão Pet Shop"/>
     <div class="header-title">
       <h1 id="hdr-nome">Criativo Pet</h1>
       <p>Plataforma de Artes para Petshops</p>
@@ -341,7 +341,7 @@ const ARTES=[
 
 // ── STATE ──────────────────────────────────────────────
 const CORES=['#2ECC71','#3498DB','#F39C12','#E74C3C','#9B59B6','#1a9e52','#E91E63','#FF9800','#00BCD4','#795548'];
-let cfg={nome:'Amigão Petshop',wpp:'(XX) XXXXX-XXXX',cidade:'Sua Cidade',insta:''};
+let cfg={nome:'Amigão Pet Shop 🐾🐾',wpp:'(XX) XXXXX-XXXX',cidade:'Sua Cidade',insta:''};
 let ed={arte:null,titulo:'',sub:'',dest:'',cor:'#2ECC71'};
 let curCat='todos',srch='',step=1,renderTmr=null;
 
@@ -442,7 +442,7 @@ function renderThumb(a,canvas){
     // Mascot icon in header
     if(MASCOTE_IMG.complete&&MASCOTE_IMG.naturalWidth){ctx.drawImage(MASCOTE_IMG,6,2,46,46);}
     ctx.save();ctx.font='bold 18px "Fredoka One",cursive';ctx.fillStyle='#fff';ctx.textBaseline='middle';ctx.textAlign='left';
-    const nomeShort=cfg.nome.length>22?cfg.nome.substring(0,22)+'…':cfg.nome;
+    const nomeShort=cfg.nome.length>30?cfg.nome.substring(0,30)+'…':cfg.nome;
     ctx.shadowColor='rgba(0,0,0,.5)';ctx.shadowBlur=6;
     ctx.fillText(nomeShort,57,25);ctx.restore();
     ctx.save();ctx.textAlign='left';ctx.textBaseline='bottom';ctx.shadowColor='rgba(0,0,0,.9)';ctx.shadowBlur=10;
