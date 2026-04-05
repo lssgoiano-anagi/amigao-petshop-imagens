@@ -145,6 +145,14 @@
     .form-input:focus{border-color:var(--verde);}
 
     @media(max-width:600px){header{padding:12px 14px;}.header-title h1{font-size:1.2rem;}.main-content{padding:12px 10px 50px;}.share-row .btn-share{font-size:.74rem;padding:11px 4px;}}
+
+    /* TOAST */
+    .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:#1a2e1e;color:#fff;padding:12px 22px;border-radius:30px;font-size:.88rem;font-weight:700;z-index:999;transition:transform .3s;pointer-events:none;white-space:nowrap;}
+    .toast.show{transform:translateX(-50%) translateY(0);}
+    /* UPLOAD STATUS */
+    .upload-status{font-size:.7rem;text-align:center;padding:4px 8px;color:#666;min-height:18px;}
+    .gh-token-hint{font-size:.72rem;color:#aaa;margin-top:4px;line-height:1.4;}
+    .gh-token-hint a{color:var(--azul);}
   </style>
 </head>
 <body>
@@ -158,9 +166,17 @@
     <div class="form-row"><label>WhatsApp</label><input class="form-input" id="cfg-wpp" placeholder="(XX) XXXXX-XXXX" maxlength="20"/></div>
     <div class="form-row"><label>Cidade / UF</label><input class="form-input" id="cfg-cidade" placeholder="Sua Cidade - UF" maxlength="30"/></div>
     <div class="form-row"><label>Instagram (opcional)</label><input class="form-input" id="cfg-insta" placeholder="@seupetshop" maxlength="30"/></div>
+    <div class="form-row">
+      <label>🔑 Token GitHub (para salvar fotos no repositório)</label>
+      <input class="form-input" id="cfg-ghtoken" placeholder="ghp_xxxxxxxxxxxx" maxlength="100" type="password"/>
+      <p class="gh-token-hint">Crie em <b>GitHub → Settings → Developer settings → Personal access tokens → Fine-grained</b> com permissão <b>Contents: Read and Write</b> no repositório.</p>
+    </div>
     <div class="modal-actions"><button class="btn-primary" onclick="salvarCfg()">✅ Salvar e Começar</button></div>
   </div>
 </div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
 
 <!-- MODAL INSTAGRAM -->
 <div class="modal-overlay hidden" id="modal-insta">
@@ -381,7 +397,9 @@ const ARTES=[
 
 // ── STATE ──────────────────────────────────────────────
 const CORES=['#2ECC71','#3498DB','#F39C12','#E74C3C','#9B59B6','#1a9e52','#E91E63','#FF9800','#00BCD4','#795548'];
-let cfg={nome:'Amigão Pet Shop 🐾',wpp:'(XX) XXXXX-XXXX',cidade:'Sua Cidade',insta:''};
+let cfg={nome:'Amigão Pet Shop 🐾',wpp:'(XX) XXXXX-XXXX',cidade:'Sua Cidade',insta:'',ghToken:''};
+const GH_REPO='lssgoiano-anagi/amigao-petshop-imagens';
+const GH_BRANCH='main';
 let ed={arte:null,titulo:'',sub:'',dest:'',cor:'#2ECC71',bgUrl:null,bgGrad:null};
 let renderTmr=null;
 
@@ -398,6 +416,7 @@ function abrirCfg(){
   document.getElementById('cfg-wpp').value=cfg.wpp;
   document.getElementById('cfg-cidade').value=cfg.cidade;
   document.getElementById('cfg-insta').value=cfg.insta||'';
+  document.getElementById('cfg-ghtoken').value=cfg.ghToken||'';
   document.getElementById('modal-cfg').classList.remove('hidden');
 }
 function salvarCfg(){
@@ -406,6 +425,7 @@ function salvarCfg(){
   cfg.nome=n;cfg.wpp=document.getElementById('cfg-wpp').value.trim()||'(XX) XXXXX-XXXX';
   cfg.cidade=document.getElementById('cfg-cidade').value.trim()||'Sua Cidade';
   cfg.insta=document.getElementById('cfg-insta').value.trim();
+  cfg.ghToken=document.getElementById('cfg-ghtoken').value.trim();
   localStorage.setItem('petcfg',JSON.stringify(cfg));
   document.getElementById('modal-cfg').classList.add('hidden');
   atualizarHdr();preencherEditor();schedRender();
@@ -603,17 +623,58 @@ function pratReset(){
   ed.bgUrl=null;ed.bgGrad=null;renderPratOutras();schedRender();
 }
 
+// ── TOAST ──────────────────────────────────────────────
+let toastTmr=null;
+function mostrarToast(msg,dur=3000){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.classList.add('show');
+  clearTimeout(toastTmr);toastTmr=setTimeout(()=>t.classList.remove('show'),dur);
+}
+
 // ── UPLOAD DE IMAGENS ──────────────────────────────────
 let uploads=[];
 function uploadImagem(input){
   const file=input.files[0];if(!file)return;
+  const lbl=file.name.replace(/\.[^.]+$/,'').substring(0,22);
   const reader=new FileReader();
-  reader.onload=e=>{
-    const url=e.target.result;
-    uploads.unshift({url,lbl:file.name.replace(/\.[^.]+$/,'').substring(0,18)});
+  reader.onload=async e=>{
+    const dataUrl=e.target.result;
+    const base64=dataUrl.split(',')[1];
+    // Preview imediato no canvas
+    const entrada={url:dataUrl,lbl,local:true};
+    uploads.unshift(entrada);
     input.value='';
     renderUploadThumbs();
-    pratSelUrl(url);
+    pratSelUrl(dataUrl);
+    mostrarToast('🖼️ Foto carregada!');
+    // Enviar para GitHub se token configurado
+    if(cfg.ghToken){
+      const pasta=pratAbaAtual==='racao'?'racao':pratAbaAtual==='acessorios'?'acessorios':'fundos';
+      const path=`imagens/${pasta}/${file.name}`;
+      mostrarToast('⏳ Enviando para o GitHub…',10000);
+      try{
+        // Verificar se arquivo já existe (para pegar sha)
+        let sha=undefined;
+        const check=await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${path}`,{headers:{'Authorization':`token ${cfg.ghToken}`}});
+        if(check.ok){const d=await check.json();sha=d.sha;}
+        // Criar ou atualizar
+        const resp=await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${path}`,{
+          method:'PUT',
+          headers:{'Authorization':`token ${cfg.ghToken}`,'Content-Type':'application/json'},
+          body:JSON.stringify({message:`Upload via site: ${file.name}`,content:base64,branch:GH_BRANCH,...(sha?{sha}:{})})
+        });
+        if(resp.ok){
+          const rawUrl=`https://raw.githubusercontent.com/${GH_REPO}/${GH_BRANCH}/${path}`;
+          entrada.url=rawUrl;entrada.local=false;
+          pratSelUrl(rawUrl);
+          renderUploadThumbs();
+          mostrarToast('✅ Salvo no GitHub! Disponível permanentemente.');
+        } else {
+          const err=await resp.json();
+          mostrarToast('❌ Erro GitHub: '+(err.message||resp.status));
+        }
+      }catch(e){mostrarToast('⚠️ Sem conexão com GitHub');}
+    }
   };
   reader.readAsDataURL(file);
 }
@@ -625,7 +686,7 @@ function renderUploadThumbs(){
     const el=document.createElement('div');
     el.className='prat-item'+(ed.bgUrl===u.url?' sel':'');
     const img=document.createElement('img');img.src=u.url;img.alt=u.lbl;
-    const lbl=document.createElement('div');lbl.className='prat-label';lbl.textContent='⭐ '+u.lbl;
+    const lbl=document.createElement('div');lbl.className='prat-label';lbl.textContent=(u.local?'📱 ':'☁️ ')+u.lbl;
     el.appendChild(img);el.appendChild(lbl);
     el.onclick=()=>{pratSelUrl(u.url);renderUploadThumbs();};
     wrap.appendChild(el);
