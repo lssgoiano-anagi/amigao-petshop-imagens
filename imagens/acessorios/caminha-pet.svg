@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 280">
+  <!-- Round Pet Bed - Fluffy, Slight Angle View -->
+
+  <!-- Shadow -->
+  <ellipse cx="140" cy="258" rx="100" ry="15" fill="#00000025"/>
+
+  <!-- Bed base - viewed from slight above angle, elliptical -->
+  <!-- Outer border ring -->
+  <ellipse cx="140" cy="200" rx="110" ry="42" fill="#A1887F"/>
+  <ellipse cx="140" cy="192" rx="110" ry="42" fill="#A1887F"/>
+
+  <!-- Main bed body -->
+  <ellipse cx="140" cy="190" rx="102" ry="38" fill="#EFEBE9"/>
+
+  <!-- Fluffy border / bumper -->
+  <!-- Multiple overlapping circles for fluffy look -->
+  <circle cx="52" cy="182" r="28" fill="#D7CCC8"/>
+  <circle cx="72" cy="165" r="28" fill="#EFEBE9"/>
+  <circle cx="96" cy="155" r="28" fill="#D7CCC8"/>
+  <circle cx="120" cy="150" r="28" fill="#EFEBE9"/>
+  <circle cx="140" cy="150" r="28" fill="#D7CCC8"/>
+  <circle cx="160" cy="150" r="28" fill="#EFEBE9"/>
+  <circle cx="184" cy="155" r="28" fill="#D7CCC8"/>
+  <circle cx="208" cy="165" r="28" fill="#EFEBE9"/>
+  <circle cx="228" cy="182" r="28" fill="#D7CCC8"/>
+  <!-- Bottom arc bumper -->
+  <circle cx="228" cy="205" r="26" fill="#EFEBE9"/>
+  <circle cx="208" cy="218" r="26" fill="#D7CCC8"/>
+  <circle cx="185" cy="226" r="24" fill="#EFEBE9"/>
+  <circle cx="160" cy="230" r="24" fill="#D7CCC8"/>
+  <circle cx="140" cy="232" r="24" fill="#EFEBE9"/>
+  <circle cx="120" cy="230" r="24" fill="#D7CCC8"/>
+  <circle cx="95" cy="226" r="24" fill="#EFEBE9"/>
+  <circle cx="72" cy="218" r="26" fill="#D7CCC8"/>
+  <circle cx="52" cy="205" r="26" fill="#EFEBE9"/>
+
+  <!-- Interior sleeping surface -->
+  <ellipse cx="140" cy="192" rx="74" ry="30" fill="#BCAAA4"/>
+  <ellipse cx="140" cy="190" rx="70" ry="27" fill="#D7CCC8"/>
+
+  <!-- Pillow/cushion inside -->
+  <ellipse cx="140" cy="188" rx="62" ry="24" fill="#EFEBE9"/>
+  <!-- Pillow highlight -->
+  <ellipse cx="128" cy="182" rx="30" ry="12" fill="#FFFFFF" opacity="0.3"/>
+
+  <!-- Circular seam pattern on pillow -->
+  <ellipse cx="140" cy="188" rx="50" ry="18" fill="none" stroke="#D7CCC8" stroke-width="2"/>
+  <ellipse cx="140" cy="188" rx="36" ry="13" fill="none" stroke="#BCAAA4" stroke-width="1.5"/>
+  <ellipse cx="140" cy="188" rx="22" ry="8" fill="none" stroke="#D7CCC8" stroke-width="1.5"/>
+
+  <!-- Center button/tuft -->
+  <circle cx="140" cy="188" r="6" fill="#A1887F"/>
+  <circle cx="140" cy="188" r="4" fill="#8D6E63"/>
+  <circle cx="138" cy="186" r="1.5" fill="#FFFFFF" opacity="0.5"/>
+
+  <!-- Fluffy texture dimples on border -->
+  <circle cx="72" cy="165" r="6" fill="#BCAAA4" opacity="0.5"/>
+  <circle cx="140" cy="150" r="6" fill="#BCAAA4" opacity="0.5"/>
+  <circle cx="208" cy="165" r="6" fill="#BCAAA4" opacity="0.5"/>
+  <circle cx="228" cy="200" r="5" fill="#BCAAA4" opacity="0.5"/>
+  <circle cx="52" cy="200" r="5" fill="#BCAAA4" opacity="0.5"/>
+</svg>

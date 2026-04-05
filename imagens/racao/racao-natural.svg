@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 320">
+  <!-- Natural/Grain-Free Food Bag - Green -->
+
+  <!-- Bag shadow -->
+  <ellipse cx="140" cy="312" rx="72" ry="10" fill="#00000022"/>
+
+  <!-- Bag body -->
+  <rect x="52" y="55" width="176" height="248" rx="12" fill="#2E7D32"/>
+
+  <!-- Side shading -->
+  <rect x="52" y="55" width="28" height="248" rx="12" fill="#1B5E20" opacity="0.5"/>
+  <rect x="200" y="55" width="28" height="248" rx="12" fill="#1B5E20" opacity="0.4"/>
+
+  <!-- Bag top fold -->
+  <path d="M52 55 Q52 38 68 34 L212 34 Q228 38 228 55 Q228 68 212 72 L68 72 Q52 68 52 55 Z" fill="#1B5E20"/>
+  <path d="M68 72 L212 72" stroke="#1B5E20" stroke-width="2" fill="none"/>
+
+  <!-- Seal lines -->
+  <rect x="72" y="36" width="136" height="6" rx="3" fill="#145214" opacity="0.6"/>
+  <rect x="72" y="45" width="136" height="6" rx="3" fill="#145214" opacity="0.5"/>
+
+  <!-- Kraft paper style middle section -->
+  <rect x="70" y="105" width="140" height="128" rx="8" fill="#F5F5DC"/>
+  <rect x="72" y="107" width="136" height="124" rx="7" fill="#FAF7EE"/>
+
+  <!-- Texture lines on kraft area -->
+  <line x1="72" y1="115" x2="208" y2="115" stroke="#E8E0C8" stroke-width="1"/>
+  <line x1="72" y1="225" x2="208" y2="225" stroke="#E8E0C8" stroke-width="1"/>
+
+  <!-- Green accent stripes -->
+  <rect x="52" y="100" width="176" height="8" fill="#388E3C"/>
+  <rect x="52" y="230" width="176" height="8" fill="#388E3C"/>
+
+  <!-- Leaf icon -->
+  <path d="M140 118 Q158 122 162 136 Q166 150 155 158 Q148 162 140 158 Q132 162 125 158 Q114 150 118 136 Q122 122 140 118 Z" fill="#388E3C"/>
+  <!-- Leaf vein -->
+  <path d="M140 118 Q140 140 140 158" stroke="#2E7D32" stroke-width="1.5" fill="none"/>
+  <path d="M140 130 Q148 134 155 132" stroke="#2E7D32" stroke-width="1" fill="none"/>
+  <path d="M140 138 Q148 142 154 140" stroke="#2E7D32" stroke-width="1" fill="none"/>
+  <path d="M140 130 Q132 134 125 132" stroke="#2E7D32" stroke-width="1" fill="none"/>
+  <path d="M140 138 Q132 142 126 140" stroke="#2E7D32" stroke-width="1" fill="none"/>
+  <!-- Small leaf shine -->
+  <path d="M132 122 Q136 120 140 120 Q136 126 132 122 Z" fill="#66BB6A" opacity="0.6"/>
+
+  <!-- NATURAL text -->
+  <text x="140" y="188" text-anchor="middle" font-family="Georgia, serif" font-size="22" font-weight="900" fill="#2E7D32" letter-spacing="2">NATURAL</text>
+
+  <!-- GRAIN FREE smaller -->
+  <text x="140" y="206" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="600" fill="#5D4037" letter-spacing="3">GRAIN FREE</text>
+
+  <!-- Divider line -->
+  <line x1="90" y1="212" x2="190" y2="212" stroke="#A5D6A7" stroke-width="1.5"/>
+
+  <!-- Ingredients hint -->
+  <text x="140" y="225" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="#8D6E63" letter-spacing="1">SEM GLÚTEN · SEM CORANTES</text>
+
+  <!-- Brand top -->
+  <text x="140" y="95" text-anchor="middle" font-family="Georgia, serif" font-size="12" font-weight="700" fill="#A5D6A7" letter-spacing="3">VERDEPET</text>
+
+  <!-- Weight badge -->
+  <ellipse cx="140" cy="268" rx="32" ry="22" fill="#1B5E20"/>
+  <text x="140" y="272" text-anchor="middle" font-family="Arial Black, Arial, sans-serif" font-size="16" font-weight="900" fill="#FFFFFF">5kg</text>
+
+  <!-- Bottom banner -->
+  <path d="M52 285 Q52 303 68 303 L212 303 Q228 303 228 285 L228 278 Q140 282 52 278 Z" fill="#1B5E20"/>
+  <text x="140" y="298" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#A5D6A7" letter-spacing="2">PROTEÍNA REAL</text>
+</svg>

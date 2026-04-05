@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 320">
+  <!-- Dog Food Bag - Premium, Red -->
+
+  <!-- Bag shadow -->
+  <ellipse cx="140" cy="312" rx="72" ry="10" fill="#00000022"/>
+
+  <!-- Bag body -->
+  <rect x="52" y="55" width="176" height="248" rx="12" fill="#D32F2F"/>
+
+  <!-- Bag side shading left -->
+  <rect x="52" y="55" width="28" height="248" rx="12" fill="#B71C1C" opacity="0.5"/>
+  <!-- Bag side shading right -->
+  <rect x="200" y="55" width="28" height="248" rx="12" fill="#B71C1C" opacity="0.4"/>
+
+  <!-- Bag top fold -->
+  <path d="M52 55 Q52 38 68 34 L212 34 Q228 38 228 55 Q228 68 212 72 L68 72 Q52 68 52 55 Z" fill="#C62828"/>
+  <!-- Top fold crease -->
+  <path d="M68 72 L212 72" stroke="#B71C1C" stroke-width="2" fill="none"/>
+
+  <!-- Top seal/crimp lines -->
+  <rect x="72" y="36" width="136" height="6" rx="3" fill="#B71C1C" opacity="0.6"/>
+  <rect x="72" y="45" width="136" height="6" rx="3" fill="#B71C1C" opacity="0.5"/>
+
+  <!-- White label area in middle -->
+  <rect x="70" y="115" width="140" height="115" rx="8" fill="#FFFFFF"/>
+  <rect x="72" y="117" width="136" height="111" rx="7" fill="#FAFAFA"/>
+
+  <!-- Red accent stripe above label -->
+  <rect x="52" y="100" width="176" height="18" fill="#E53935"/>
+  <!-- Red accent stripe below label -->
+  <rect x="52" y="228" width="176" height="18" fill="#E53935"/>
+
+  <!-- Paw icon on label -->
+  <circle cx="140" cy="148" r="12" fill="#D32F2F"/>
+  <circle cx="127" cy="138" r="6" fill="#D32F2F"/>
+  <circle cx="153" cy="138" r="6" fill="#D32F2F"/>
+  <circle cx="120" cy="143" r="5" fill="#D32F2F"/>
+  <circle cx="160" cy="143" r="5" fill="#D32F2F"/>
+
+  <!-- CÃES ADULTOS text -->
+  <text x="140" y="176" text-anchor="middle" font-family="Arial Black, Arial, sans-serif" font-size="13" font-weight="900" fill="#D32F2F" letter-spacing="1">CÃES ADULTOS</text>
+
+  <!-- PREMIUM text on label -->
+  <text x="140" y="196" text-anchor="middle" font-family="Arial Black, Arial, sans-serif" font-size="10" font-weight="700" fill="#F57F17" letter-spacing="2">PREMIUM</text>
+
+  <!-- Star decorations -->
+  <polygon points="90,208 92,202 94,208 100,208 95,212 97,218 92,214 87,218 89,212 84,208" fill="#FDD835" transform="scale(0.8) translate(25,26)"/>
+  <polygon points="180,208 182,202 184,208 190,208 185,212 187,218 182,214 177,218 179,212 174,208" fill="#FDD835" transform="scale(0.8) translate(-15,26)"/>
+
+  <!-- Top product text -->
+  <text x="140" y="96" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="700" fill="#FFCDD2" letter-spacing="3">●  NUTRIPET  ●</text>
+
+  <!-- Bottom weight badge -->
+  <ellipse cx="140" cy="268" rx="36" ry="22" fill="#B71C1C"/>
+  <text x="140" y="272" text-anchor="middle" font-family="Arial Black, Arial, sans-serif" font-size="16" font-weight="900" fill="#FFFFFF">15kg</text>
+
+  <!-- Bottom banner -->
+  <path d="M52 285 Q52 303 68 303 L212 303 Q228 303 228 285 L228 275 Q228 275 140 280 Q52 275 52 275 Z" fill="#C62828"/>
+  <text x="140" y="298" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#FFCDD2" letter-spacing="2">CARNE &amp; FRANGO</text>
+</svg>

@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 320">
+  <!-- Puppy Food Bag - Orange, Fun Rounded Style -->
+
+  <!-- Bag shadow -->
+  <ellipse cx="140" cy="312" rx="72" ry="10" fill="#00000022"/>
+
+  <!-- Bag body - slightly rounded fun shape -->
+  <rect x="50" y="58" width="180" height="245" rx="18" fill="#E65100"/>
+
+  <!-- Side shading -->
+  <rect x="50" y="58" width="30" height="245" rx="18" fill="#BF360C" opacity="0.4"/>
+  <rect x="200" y="58" width="30" height="245" rx="18" fill="#BF360C" opacity="0.35"/>
+
+  <!-- Bag top fold -->
+  <path d="M50 58 Q50 40 70 36 L210 36 Q230 40 230 58 Q230 72 210 76 L70 76 Q50 72 50 58 Z" fill="#BF360C"/>
+
+  <!-- Seal lines -->
+  <rect x="75" y="38" width="130" height="6" rx="3" fill="#8D2600" opacity="0.5"/>
+  <rect x="75" y="47" width="130" height="6" rx="3" fill="#8D2600" opacity="0.4"/>
+
+  <!-- White label - rounded -->
+  <rect x="68" y="118" width="144" height="118" rx="14" fill="#FFFFFF"/>
+  <rect x="70" y="120" width="140" height="114" rx="13" fill="#FFF8F5"/>
+
+  <!-- Orange accent top stripe -->
+  <rect x="50" y="103" width="180" height="18" fill="#F4511E"/>
+  <!-- Orange accent bottom stripe -->
+  <rect x="50" y="232" width="180" height="18" fill="#F4511E"/>
+
+  <!-- Puppy face icon -->
+  <!-- Head -->
+  <circle cx="140" cy="148" r="16" fill="#E65100"/>
+  <!-- Ears floppy -->
+  <ellipse cx="126" cy="142" rx="8" ry="12" fill="#BF360C" transform="rotate(-10 126 142)"/>
+  <ellipse cx="154" cy="142" rx="8" ry="12" fill="#BF360C" transform="rotate(10 154 142)"/>
+  <!-- Snout -->
+  <ellipse cx="140" cy="152" rx="8" ry="6" fill="#FFCCBC"/>
+  <!-- Eyes -->
+  <circle cx="134" cy="145" r="4" fill="#1A1A1A"/>
+  <circle cx="146" cy="145" r="4" fill="#1A1A1A"/>
+  <circle cx="133" cy="144" r="1.5" fill="#ffffff"/>
+  <circle cx="145" cy="144" r="1.5" fill="#ffffff"/>
+  <!-- Nose -->
+  <ellipse cx="140" cy="151" rx="3" ry="2" fill="#1A1A1A"/>
+  <!-- Tongue -->
+  <ellipse cx="140" cy="158" rx="4" ry="3" fill="#EF9A9A"/>
+
+  <!-- FILHOTES text -->
+  <text x="140" y="180" text-anchor="middle" font-family="Arial Black, Arial, sans-serif" font-size="17" font-weight="900" fill="#E65100" letter-spacing="1">FILHOTES</text>
+
+  <!-- Sub text -->
+  <text x="140" y="198" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#FF8A65" letter-spacing="2">CRESCIMENTO SAUDÁVEL</text>
+
+  <!-- Fun dots decoration -->
+  <circle cx="100" cy="213" r="5" fill="#FFA726"/>
+  <circle cx="115" cy="218" r="4" fill="#FF7043"/>
+  <circle cx="130" cy="215" r="4" fill="#FFA726"/>
+  <circle cx="150" cy="215" r="4" fill="#FF7043"/>
+  <circle cx="165" cy="218" r="4" fill="#FFA726"/>
+  <circle cx="180" cy="213" r="5" fill="#FF7043"/>
+
+  <!-- Brand top -->
+  <text x="140" y="99" text-anchor="middle" font-family="Arial Rounded MT, Arial, sans-serif" font-size="12" font-weight="700" fill="#FFCCBC" letter-spacing="2">PET BABY</text>
+
+  <!-- Weight badge -->
+  <ellipse cx="140" cy="268" rx="34" ry="22" fill="#8D2600"/>
+  <text x="140" y="272" text-anchor="middle" font-family="Arial Black, Arial, sans-serif" font-size="16" font-weight="900" fill="#FFFFFF">10kg</text>
+
+  <!-- Bottom banner -->
+  <path d="M50 285 Q50 303 70 303 L210 303 Q230 303 230 285 L230 276 Q140 282 50 276 Z" fill="#BF360C"/>
+  <text x="140" y="298" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#FFCCBC" letter-spacing="2">FRANGO &amp; ARROZ</text>
+</svg>

@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 320">
+  <!-- Cat Food Can - Blue, 3/4 angle view -->
+
+  <!-- Can shadow -->
+  <ellipse cx="140" cy="305" rx="75" ry="12" fill="#00000028"/>
+
+  <!-- Can body -->
+  <rect x="52" y="115" width="176" height="178" rx="6" fill="#1565C0"/>
+
+  <!-- Can body left shadow -->
+  <rect x="52" y="115" width="24" height="178" rx="6" fill="#0D47A1" opacity="0.6"/>
+  <!-- Can body right highlight -->
+  <rect x="208" y="115" width="20" height="178" rx="6" fill="#1976D2" opacity="0.5"/>
+  <!-- Can body center highlight -->
+  <rect x="120" y="115" width="40" height="178" fill="#1E88E5" opacity="0.25"/>
+
+  <!-- White label band -->
+  <rect x="52" y="148" width="176" height="112" fill="#FFFFFF"/>
+  <rect x="52" y="150" width="176" height="108" fill="#E3F2FD"/>
+
+  <!-- Label top blue stripe -->
+  <rect x="52" y="148" width="176" height="14" fill="#0D47A1"/>
+  <!-- Label bottom blue stripe -->
+  <rect x="52" y="246" width="176" height="14" fill="#0D47A1"/>
+
+  <!-- Gold lid top ellipse -->
+  <ellipse cx="140" cy="115" rx="88" ry="22" fill="#FFD54F"/>
+  <ellipse cx="140" cy="115" rx="84" ry="18" fill="#FFCA28"/>
+  <ellipse cx="140" cy="113" rx="80" ry="16" fill="#FFD740"/>
+  <!-- Pull tab -->
+  <path d="M140 97 Q152 90 162 95 Q158 105 148 108 Q144 104 140 97 Z" fill="#F9A825"/>
+  <rect x="138" y="97" width="4" height="18" rx="2" fill="#F57F17"/>
+
+  <!-- Cat face icon on label -->
+  <!-- Cat head circle -->
+  <circle cx="140" cy="188" r="22" fill="#1565C0"/>
+  <!-- Cat ears -->
+  <polygon points="121,174 117,160 131,170" fill="#1565C0"/>
+  <polygon points="159,174 163,160 149,170" fill="#1565C0"/>
+  <!-- Cat face light area -->
+  <ellipse cx="140" cy="190" rx="16" ry="14" fill="#E3F2FD"/>
+  <!-- Cat eyes -->
+  <ellipse cx="133" cy="186" rx="5" ry="4" fill="#1565C0"/>
+  <ellipse cx="147" cy="186" rx="5" ry="4" fill="#1565C0"/>
+  <ellipse cx="133" cy="186" rx="2.5" ry="4" fill="#1A1A1A"/>
+  <ellipse cx="147" cy="186" rx="2.5" ry="4" fill="#1A1A1A"/>
+  <ellipse cx="132" cy="185" rx="1.5" ry="1.5" fill="#ffffff"/>
+  <ellipse cx="146" cy="185" rx="1.5" ry="1.5" fill="#ffffff"/>
+  <!-- Nose -->
+  <polygon points="140,192 138,195 142,195" fill="#F48FB1"/>
+  <!-- Whiskers -->
+  <line x1="142" y1="194" x2="155" y2="192" stroke="#1565C0" stroke-width="1"/>
+  <line x1="142" y1="196" x2="156" y2="197" stroke="#1565C0" stroke-width="1"/>
+  <line x1="138" y1="194" x2="125" y2="192" stroke="#1565C0" stroke-width="1"/>
+  <line x1="138" y1="196" x2="124" y2="197" stroke="#1565C0" stroke-width="1"/>
+
+  <!-- FRANGO text on label -->
+  <text x="140" y="220" text-anchor="middle" font-family="Arial Black, Arial, sans-serif" font-size="16" font-weight="900" fill="#1565C0" letter-spacing="2">FRANGO</text>
+
+  <!-- MOLHO text -->
+  <text x="140" y="234" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#1976D2" letter-spacing="3">AO MOLHO</text>
+
+  <!-- Top label text -->
+  <text x="140" y="160" text-anchor="middle" font-family="Arial Black, Arial, sans-serif" font-size="9" font-weight="700" fill="#E3F2FD" letter-spacing="3">PURO FELINO</text>
+
+  <!-- Bottom label text -->
+  <text x="140" y="256" text-anchor="middle" font-family="Arial Black, Arial, sans-serif" font-size="9" fill="#E3F2FD" letter-spacing="2">NET 85g</text>
+
+  <!-- Bottom ellipse of can -->
+  <ellipse cx="140" cy="293" rx="88" ry="16" fill="#0D47A1"/>
+  <ellipse cx="140" cy="293" rx="82" ry="13" fill="#1565C0"/>
+</svg>

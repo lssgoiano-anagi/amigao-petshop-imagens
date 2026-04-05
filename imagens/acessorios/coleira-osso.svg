@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 280">
+  <!-- Dog Collar - Blue with Bone Tag -->
+
+  <!-- Shadow -->
+  <ellipse cx="140" cy="252" rx="78" ry="10" fill="#00000020"/>
+
+  <!-- Collar strap in circular shape -->
+  <!-- Outer ring -->
+  <path d="M140 62 A80 80 0 1 1 139.9 62 Z" fill="none" stroke="#1976D2" stroke-width="22" stroke-dasharray="0"/>
+
+  <!-- Inner color variation on collar -->
+  <path d="M140 64 A78 78 0 1 1 139.9 64 Z" fill="none" stroke="#1E88E5" stroke-width="8" opacity="0.4"/>
+
+  <!-- Buckle at top -->
+  <rect x="124" y="55" width="32" height="20" rx="4" fill="#FFD54F"/>
+  <rect x="130" y="52" width="20" height="4" rx="2" fill="#F9A825"/>
+  <!-- Buckle prong -->
+  <rect x="139" y="50" width="2" height="28" rx="1" fill="#F57F17"/>
+  <!-- Buckle frame -->
+  <rect x="126" y="57" width="28" height="2" rx="1" fill="#F9A825"/>
+  <rect x="126" y="68" width="28" height="2" rx="1" fill="#F9A825"/>
+
+  <!-- Stitching detail on collar -->
+  <path d="M140 62 A80 80 0 1 1 139.9 62 Z" fill="none" stroke="#FFFFFF" stroke-width="1.5" stroke-dasharray="6,6" opacity="0.5"/>
+
+  <!-- Metal D-ring at bottom -->
+  <path d="M122 210 Q140 222 158 210" fill="none" stroke="#90A4AE" stroke-width="5"/>
+  <path d="M122 210 Q118 215 120 220 Q128 228 140 228 Q152 228 160 220 Q162 215 158 210" fill="none" stroke="#90A4AE" stroke-width="5"/>
+
+  <!-- Chain link from D-ring -->
+  <line x1="140" y1="228" x2="140" y2="252" stroke="#B0BEC5" stroke-width="3"/>
+
+  <!-- Bone tag -->
+  <!-- Tag itself -->
+  <ellipse cx="140" cy="265" rx="28" ry="20" fill="#FFD54F"/>
+  <ellipse cx="140" cy="265" rx="24" ry="16" fill="#FFEE58"/>
+
+  <!-- Bone shape on tag -->
+  <!-- Shaft -->
+  <rect x="128" y="263" width="24" height="6" rx="3" fill="#F9A825"/>
+  <!-- Left knobs -->
+  <circle cx="130" cy="263" r="5" fill="#F9A825"/>
+  <circle cx="130" cy="269" r="5" fill="#F9A825"/>
+  <!-- Right knobs -->
+  <circle cx="150" cy="263" r="5" fill="#F9A825"/>
+  <circle cx="150" cy="269" r="5" fill="#F9A825"/>
+  <!-- Tag shine -->
+  <ellipse cx="132" cy="259" rx="5" ry="3" fill="#FFFFFF" opacity="0.4"/>
+
+  <!-- Tag ring at top -->
+  <circle cx="140" cy="247" r="4" fill="none" stroke="#B0BEC5" stroke-width="2.5"/>
+</svg>
