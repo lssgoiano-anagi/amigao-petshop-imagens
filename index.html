@@ -202,6 +202,21 @@
     canvas{cursor:default;}
     canvas.dragging{cursor:grabbing!important;}
     canvas.hovering{cursor:grab;}
+    /* MODAL TRATAR IMAGEM */
+    .tratar-preview-wrap{display:flex;justify-content:center;align-items:center;min-height:120px;max-height:200px;background:#f4f4f4;border-radius:12px;overflow:hidden;margin:10px 0;position:relative;}
+    #tratar-canvas{max-width:100%;max-height:200px;display:block;}
+    .tratar-opts{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0;}
+    .tratar-toggle{padding:8px 14px;border:2px solid #ddd;border-radius:12px;background:#fafafa;cursor:pointer;font-family:'Nunito',sans-serif;font-size:.85rem;font-weight:700;transition:all .18s;user-select:none;}
+    .tratar-toggle:hover{border-color:#aaa;}
+    .tratar-toggle.on{border-color:var(--verde);background:#e8fdf1;color:var(--verde-esc);}
+    .tratar-toggle.loading{opacity:.6;pointer-events:none;}
+    .tratar-pasta-row{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0 4px;}
+    .tratar-pasta-btn{padding:5px 11px;border:2px solid #ddd;border-radius:10px;background:#fafafa;cursor:pointer;font-family:'Nunito',sans-serif;font-size:.8rem;font-weight:700;transition:all .15s;}
+    .tratar-pasta-btn.on{border-color:var(--azul);background:#e8f4fd;color:#1558a0;}
+    .tratar-status{font-size:.72rem;text-align:center;color:#888;min-height:18px;padding:2px 0;}
+    .tratar-prog{height:4px;background:#e8fdf1;border-radius:4px;overflow:hidden;margin:4px 0;display:none;}
+    .tratar-prog-bar{height:100%;background:var(--verde);width:0%;transition:width .3s;border-radius:4px;}
+    .btn-usar-local{background:none;border:none;color:#aaa;font-size:.75rem;cursor:pointer;text-decoration:underline;padding:4px;}
   </style>
 </head>
 <body>
@@ -252,6 +267,32 @@
     <div class="pasta-opcoes" id="modal-mover-opcoes"></div>
     <div class="modal-actions">
       <button class="btn-secondary" onclick="document.getElementById('modal-mover').classList.add('hidden')">Cancelar</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL TRATAR IMAGEM -->
+<div class="modal-overlay hidden" id="modal-tratar">
+  <div class="modal-box" style="max-width:480px;">
+    <h2>🖼️ Tratar Imagem</h2>
+    <p class="modal-sub">Aplique tratamentos antes de salvar no GitHub:</p>
+    <div class="tratar-preview-wrap">
+      <canvas id="tratar-canvas"></canvas>
+    </div>
+    <div class="tratar-status" id="tratar-status"></div>
+    <div class="tratar-prog" id="tratar-prog"><div class="tratar-prog-bar" id="tratar-prog-bar"></div></div>
+    <div class="tratar-opts">
+      <button class="tratar-toggle" id="btn-tratar-bg" onclick="toggleTratamento('bg')">✂️ Remover fundo</button>
+      <button class="tratar-toggle" id="btn-tratar-qual" onclick="toggleTratamento('qual')">✨ Melhorar qualidade</button>
+    </div>
+    <div style="font-size:.72rem;font-weight:800;color:#888;margin-top:6px;">📂 Pasta de destino:</div>
+    <div class="tratar-pasta-row" id="tratar-pasta-row"></div>
+    <div class="modal-actions" style="margin-top:14px;">
+      <button class="btn-primary" id="btn-tratar-salvar" onclick="salvarImagemTratada()">💾 Salvar no GitHub</button>
+      <button class="btn-secondary" onclick="cancelarTratamento()">❌ Cancelar</button>
+    </div>
+    <div style="text-align:center;margin-top:6px;">
+      <button class="btn-usar-local" onclick="usarLocalSemSalvar()">⏭️ Usar sem salvar no GitHub</button>
     </div>
   </div>
 </div>
@@ -318,10 +359,10 @@
     <div class="prat-panel" id="prat-panel">
       <div class="prat-header">🗂️ Prateleira</div>
       <div class="prat-tabs">
-        <div class="prat-tab active" onclick="pratAba('galeria',this)">📋<br>Modelos</div>
-        <div class="prat-tab" onclick="pratAba('pets',this)">🐾<br>Pets<span class="prat-tab-mode">+camada</span></div>
-        <div class="prat-tab" onclick="pratAba('racao',this)">🥫<br>Ração<span class="prat-tab-mode">+camada</span></div>
-        <div class="prat-tab" onclick="pratAba('acessorios',this)">🎾<br>Acess.<span class="prat-tab-mode">+camada</span></div>
+        <div class="prat-tab active" data-aba="galeria" onclick="pratAba('galeria',this)">📋<br>Modelos</div>
+        <div class="prat-tab" data-aba="pets" onclick="pratAba('pets',this)">🐾<br>Pets<span class="prat-tab-mode">+camada</span></div>
+        <div class="prat-tab" data-aba="racao" onclick="pratAba('racao',this)">🥫<br>Ração<span class="prat-tab-mode">+camada</span></div>
+        <div class="prat-tab" data-aba="acessorios" onclick="pratAba('acessorios',this)">🎾<br>Acess.<span class="prat-tab-mode">+camada</span></div>
       </div>
       <div class="prat-body" id="prat-body">
         <!-- Modelos tab (galeria + fundos mesclados) -->
@@ -885,54 +926,225 @@ function mostrarToast(msg,dur=3000){
 let uploads=[];
 function uploadImagem(input){
   const file=input.files[0];if(!file)return;
-  const lbl=file.name.replace(/\.[^.]+$/,'').substring(0,22);
-  const reader=new FileReader();
-  reader.onload=async e=>{
-    const dataUrl=e.target.result;
-    const base64=dataUrl.split(',')[1];
-    // Preview imediato no canvas
-    const entrada={url:dataUrl,lbl,local:true};
-    uploads.unshift(entrada);
-    input.value='';
-    renderUploadThumbs();
-    if(isLayerAba()){toggleObject(dataUrl,lbl);}else{pratSelUrl(dataUrl);}
-    mostrarToast('🖼️ Foto carregada!');
-    // Enviar para GitHub se token configurado
-    if(cfg.ghToken){
-      const pasta=pratAbaAtual==='racao'?'racao':pratAbaAtual==='acessorios'?'acessorios':'fundos';
-      const path=`imagens/${pasta}/${file.name}`;
-      mostrarToast('⏳ Enviando para o GitHub…',10000);
-      try{
-        // Verificar se arquivo já existe (para pegar sha)
-        let sha=undefined;
-        const check=await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${path}`,{headers:{'Authorization':`token ${cfg.ghToken}`}});
-        if(check.ok){const d=await check.json();sha=d.sha;}
-        // Criar ou atualizar
-        const resp=await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${path}`,{
-          method:'PUT',
-          headers:{'Authorization':`token ${cfg.ghToken}`,'Content-Type':'application/json'},
-          body:JSON.stringify({message:`Upload via site: ${file.name}`,content:base64,branch:GH_BRANCH,...(sha?{sha}:{})})
-        });
-        if(resp.ok){
-          const rawUrl=`https://raw.githubusercontent.com/${GH_REPO}/${GH_BRANCH}/${path}`;
-          entrada.url=rawUrl;entrada.local=false;entrada.ghPath=path;
-          pratSelUrl(rawUrl);
-          renderUploadThumbs();
-          mostrarToast('✅ Salvo no GitHub! Disponível permanentemente.');
-        } else {
-          const err=await resp.json();
-          mostrarToast('❌ Erro GitHub: '+(err.message||resp.status));
-        }
-      }catch(e){mostrarToast('⚠️ Sem conexão com GitHub');}
-    }
+  input.value='';
+  abrirTratamento(file);
+}
+
+// ── TRATAMENTO DE IMAGEM ────────────────────────────────
+let tratCtx={file:null,originalBlob:null,processedBlob:null,tratamentos:{bg:false,qual:false},pasta:null};
+
+function _pastaDefault(){
+  const abas=['pets','racao','acessorios','fundos'];
+  return abas.includes(pratAbaAtual)?pratAbaAtual:'pets';
+}
+function abrirTratamento(file){
+  tratCtx={file,originalBlob:file,processedBlob:file,tratamentos:{bg:false,qual:false},pasta:_pastaDefault()};
+  // Reset UI
+  ['bg','qual'].forEach(t=>{
+    const b=document.getElementById('btn-tratar-'+t);
+    if(b){b.classList.remove('on','loading');}
+  });
+  document.getElementById('tratar-status').textContent='';
+  document.getElementById('tratar-prog').style.display='none';
+  document.getElementById('btn-tratar-salvar').disabled=false;
+  // Pasta buttons
+  const row=document.getElementById('tratar-pasta-row');
+  row.innerHTML=PASTAS_GH.map(p=>`<button class="tratar-pasta-btn${p.id===tratCtx.pasta?' on':''}" onclick="selecionarPastaTratar('${p.id}',this)">${p.lbl}</button>`).join('');
+  // Preview
+  const canvas=document.getElementById('tratar-canvas');
+  const ctx=canvas.getContext('2d');
+  const img=new Image();
+  const url=URL.createObjectURL(file);
+  img.onload=()=>{
+    const maxW=400,maxH=180;
+    const scale=Math.min(maxW/img.naturalWidth,maxH/img.naturalHeight,1);
+    canvas.width=img.naturalWidth*scale;canvas.height=img.naturalHeight*scale;
+    ctx.drawImage(img,0,0,canvas.width,canvas.height);
+    URL.revokeObjectURL(url);
   };
-  reader.readAsDataURL(file);
+  img.src=url;
+  document.getElementById('modal-tratar').classList.remove('hidden');
+}
+function selecionarPastaTratar(id,btn){
+  tratCtx.pasta=id;
+  document.querySelectorAll('.tratar-pasta-btn').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+}
+async function toggleTratamento(tipo){
+  tratCtx.tratamentos[tipo]=!tratCtx.tratamentos[tipo];
+  const btn=document.getElementById('btn-tratar-'+tipo);
+  btn.classList.toggle('on',tratCtx.tratamentos[tipo]);
+  await aplicarTratamentosPreview();
+}
+async function aplicarTratamentosPreview(){
+  const status=document.getElementById('tratar-status');
+  const prog=document.getElementById('tratar-prog');
+  const progBar=document.getElementById('tratar-prog-bar');
+  const btnSalvar=document.getElementById('btn-tratar-salvar');
+  ['bg','qual'].forEach(t=>document.getElementById('btn-tratar-'+t).classList.add('loading'));
+  btnSalvar.disabled=true;
+  prog.style.display='';progBar.style.width='10%';
+  let blob=tratCtx.originalBlob;
+  try{
+    if(tratCtx.tratamentos.bg){
+      status.textContent='✂️ Removendo fundo… (1ª vez pode demorar ~30s)';
+      progBar.style.width='30%';
+      blob=await removerFundoImagem(blob);
+      progBar.style.width='60%';
+    }
+    if(tratCtx.tratamentos.qual){
+      status.textContent='✨ Melhorando qualidade…';
+      progBar.style.width='75%';
+      blob=await melhorarQualidade(blob);
+      progBar.style.width='90%';
+    }
+    tratCtx.processedBlob=blob;
+    status.textContent=tratCtx.tratamentos.bg||tratCtx.tratamentos.qual?'✅ Tratamento aplicado! Confira o preview.':'';
+    progBar.style.width='100%';
+    // Atualizar preview
+    const url=URL.createObjectURL(blob);
+    const canvas=document.getElementById('tratar-canvas');
+    const ctx=canvas.getContext('2d');
+    const img=new Image();
+    img.onload=()=>{
+      const maxW=400,maxH=180;
+      const scale=Math.min(maxW/img.naturalWidth,maxH/img.naturalHeight,1);
+      canvas.width=img.naturalWidth*scale;canvas.height=img.naturalHeight*scale;
+      // Checkerboard for transparency
+      if(tratCtx.tratamentos.bg){
+        for(let y=0;y<canvas.height;y+=12)for(let x=0;x<canvas.width;x+=12){
+          ctx.fillStyle=(Math.floor(x/12)+Math.floor(y/12))%2===0?'#ccc':'#fff';
+          ctx.fillRect(x,y,12,12);
+        }
+      } else {ctx.clearRect(0,0,canvas.width,canvas.height);}
+      ctx.drawImage(img,0,0,canvas.width,canvas.height);
+      URL.revokeObjectURL(url);
+    };
+    img.src=url;
+  }catch(err){
+    status.textContent='❌ Erro: '+(err.message||'falha no tratamento');
+    tratCtx.processedBlob=tratCtx.originalBlob;
+  }
+  setTimeout(()=>prog.style.display='none',800);
+  ['bg','qual'].forEach(t=>document.getElementById('btn-tratar-'+t).classList.remove('loading'));
+  btnSalvar.disabled=false;
+}
+async function removerFundoImagem(blob){
+  const status=document.getElementById('tratar-status');
+  if(!window._bgRemovalMod){
+    status.textContent='⬇️ Baixando modelo de IA (apenas 1ª vez ~5MB)…';
+    window._bgRemovalMod=await import('https://cdn.jsdelivr.net/npm/@imgly/background-removal@1.4.5/dist/background-removal.js');
+  }
+  const cfg_={
+    publicPath:'https://cdn.jsdelivr.net/npm/@imgly/background-removal@1.4.5/dist/',
+    debug:false,
+    model:'small',
+  };
+  return await window._bgRemovalMod.removeBackground(blob,cfg_);
+}
+async function melhorarQualidade(blob){
+  return new Promise((resolve,reject)=>{
+    const url=URL.createObjectURL(blob);
+    const img=new Image();
+    img.onload=()=>{
+      const W=img.naturalWidth,H=img.naturalHeight;
+      // Original
+      const c1=document.createElement('canvas');c1.width=W;c1.height=H;
+      const ctx1=c1.getContext('2d');ctx1.drawImage(img,0,0,W,H);
+      const orig=ctx1.getImageData(0,0,W,H);
+      // Blurred (para unsharp mask)
+      const c2=document.createElement('canvas');c2.width=W;c2.height=H;
+      const ctx2=c2.getContext('2d');ctx2.filter='blur(1.2px)';ctx2.drawImage(img,0,0,W,H);
+      const blur=ctx2.getImageData(0,0,W,H);
+      // Unsharp mask + brilho
+      const res=ctx1.createImageData(W,H);
+      const amt=1.25;
+      for(let i=0;i<orig.data.length;i+=4){
+        for(let c=0;c<3;c++){
+          let v=orig.data[i+c]+amt*(orig.data[i+c]-blur.data[i+c]);
+          res.data[i+c]=Math.min(255,Math.max(0,Math.round(v)));
+        }
+        res.data[i+3]=orig.data[i+3];
+      }
+      ctx1.putImageData(res,0,0);
+      // Contraste + saturação
+      const c3=document.createElement('canvas');c3.width=W;c3.height=H;
+      const ctx3=c3.getContext('2d');
+      ctx3.filter='contrast(1.12) brightness(1.04) saturate(1.15)';
+      ctx3.drawImage(c1,0,0);
+      URL.revokeObjectURL(url);
+      const mime=blob.type.includes('png')?'image/png':'image/jpeg';
+      c3.toBlob(b=>resolve(b),mime,0.95);
+    };
+    img.onerror=reject;img.src=url;
+  });
+}
+async function salvarImagemTratada(){
+  if(!cfg.ghToken){mostrarToast('⚠️ Configure o Token GitHub em "Meu Petshop"');return;}
+  const blob=tratCtx.processedBlob||tratCtx.originalBlob;
+  const isBgRemoved=tratCtx.tratamentos.bg;
+  const ext=isBgRemoved?'png':(tratCtx.file.name.match(/\.[^.]+$/)?.[0]||'.jpg').replace('.','');
+  const baseName=tratCtx.file.name.replace(/\.[^.]+$/,'').replace(/[^a-zA-Z0-9_-]/g,'_').substring(0,40);
+  const fileName=`${baseName}.${ext}`;
+  const path=`imagens/${tratCtx.pasta}/${fileName}`;
+  const status=document.getElementById('tratar-status');
+  const btnSalvar=document.getElementById('btn-tratar-salvar');
+  btnSalvar.disabled=true;
+  status.textContent='⏳ Enviando para o GitHub…';
+  try{
+    const base64=await new Promise((res,rej)=>{
+      const r=new FileReader();r.onload=()=>res(r.result.split(',')[1]);r.onerror=rej;r.readAsDataURL(blob);
+    });
+    let sha=undefined;
+    const chk=await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${path}`,{headers:{'Authorization':`token ${cfg.ghToken}`}});
+    if(chk.ok){const d=await chk.json();sha=d.sha;}
+    const resp=await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${path}`,{
+      method:'PUT',
+      headers:{'Authorization':`token ${cfg.ghToken}`,'Content-Type':'application/json'},
+      body:JSON.stringify({message:`Upload tratado: ${fileName}`,content:base64,branch:GH_BRANCH,...(sha?{sha}:{})})
+    });
+    if(resp.ok){
+      document.getElementById('modal-tratar').classList.add('hidden');
+      mostrarToast('✅ Salvo no GitHub!');
+      await carregarImgsGitHub(tratCtx.pasta);
+      // Se a aba atual é diferente da pasta salva, mudar para ela
+      if(pratAbaAtual!==tratCtx.pasta){
+        const tabBtn=document.querySelector(`.prat-tab[data-aba="${tratCtx.pasta}"]`);
+        if(tabBtn)pratAba(tratCtx.pasta,tabBtn);
+      }
+      const rawUrl=`https://raw.githubusercontent.com/${GH_REPO}/${GH_BRANCH}/${path}`;
+      if(isLayerAba()||pratAbaAtual===tratCtx.pasta){
+        if(LAYER_ABAS.includes(tratCtx.pasta)){toggleObject(rawUrl,baseName);}else{pratSelUrl(rawUrl);}
+      }
+    } else {
+      const err=await resp.json();
+      status.textContent='❌ Erro: '+(err.message||resp.status);
+      btnSalvar.disabled=false;
+    }
+  }catch(e){status.textContent='⚠️ Erro de conexão';btnSalvar.disabled=false;}
+}
+function usarLocalSemSalvar(){
+  const blob=tratCtx.processedBlob||tratCtx.originalBlob;
+  const lbl=tratCtx.file.name.replace(/\.[^.]+$/,'').substring(0,22);
+  const url=URL.createObjectURL(blob);
+  const entrada={url,lbl,local:true};
+  uploads.unshift(entrada);
+  document.getElementById('modal-tratar').classList.add('hidden');
+  renderUploadThumbs();
+  if(isLayerAba()){toggleObject(url,lbl);}else{pratSelUrl(url);}
+  mostrarToast('🖼️ Imagem carregada localmente (não salva no GitHub)');
+}
+function cancelarTratamento(){
+  document.getElementById('modal-tratar').classList.add('hidden');
+  tratCtx={file:null,originalBlob:null,processedBlob:null,tratamentos:{bg:false,qual:false},pasta:null};
 }
 function renderUploadThumbs(){
   const wrap=document.getElementById('upload-thumbs');
   if(!wrap)return;
   wrap.innerHTML='';
-  uploads.forEach((u,idx)=>{
+  // Mostra apenas imagens salvas no GitHub (nao locais)
+  uploads.filter(u=>!u.local).forEach((u,idx)=>{
+  const realIdx=uploads.indexOf(u);
     const el=document.createElement('div');
     const inLayer=ed.objects.some(o=>o.url===u.url);
     el.className='prat-item'+(ed.bgUrl===u.url?' sel':inLayer?' in-layer':'');
@@ -944,11 +1156,11 @@ function renderUploadThumbs(){
     const btnDel=document.createElement('button');
     btnDel.className='upload-act-btn upload-act-del';
     btnDel.title='Excluir imagem';btnDel.textContent='🗑';
-    btnDel.onclick=(e)=>{e.stopPropagation();excluirUpload(idx);};
+    btnDel.onclick=(e)=>{e.stopPropagation();excluirUpload(realIdx);};
     const btnMv=document.createElement('button');
     btnMv.className='upload-act-btn upload-act-mv';
     btnMv.title='Mover de pasta';btnMv.textContent='📂';
-    btnMv.onclick=(e)=>{e.stopPropagation();abrirModalMover(idx);};
+    btnMv.onclick=(e)=>{e.stopPropagation();abrirModalMover(realIdx);};
     actions.appendChild(btnDel);
     if(!u.local)actions.appendChild(btnMv);
     el.appendChild(actions);
