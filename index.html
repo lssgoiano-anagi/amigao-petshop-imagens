@@ -80,11 +80,9 @@
     .prat-tab{flex:1;padding:8px 2px;text-align:center;font-size:.68rem;font-weight:800;color:#aaa;cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;transition:all .2s;line-height:1.3;}
     .prat-tab.active{color:var(--verde-esc);border-bottom-color:var(--verde);}
     .prat-body{overflow-y:auto;flex:1;}
-    .prat-search{width:calc(100% - 16px);margin:10px 8px 6px;padding:7px 11px;border:2px solid #e8e8e8;border-radius:20px;font-family:'Nunito',sans-serif;font-size:.8rem;outline:none;}
-    .prat-search:focus{border-color:var(--verde);}
-    .prat-cats{display:flex;gap:5px;flex-wrap:nowrap;overflow-x:auto;padding:0 8px 6px;scrollbar-width:none;}
+    .prat-cats{display:flex;gap:3px;flex-wrap:nowrap;overflow-x:auto;padding:4px 8px 4px;scrollbar-width:none;}
     .prat-cats::-webkit-scrollbar{display:none;}
-    .pcat-btn{padding:4px 10px;border-radius:20px;border:1.5px solid #ddd;background:#fff;cursor:pointer;font-size:.7rem;font-weight:800;white-space:nowrap;transition:all .18s;}
+    .pcat-btn{padding:2px 7px;border-radius:20px;border:1.5px solid #ddd;background:#fff;cursor:pointer;font-size:.6rem;font-weight:800;white-space:nowrap;transition:all .18s;}
     .pcat-btn.active{border-color:var(--verde);background:#e8fdf1;color:var(--verde-esc);}
     .prat-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:6px 8px;}
     .prat-item{position:relative;aspect-ratio:1;border-radius:10px;overflow:hidden;cursor:pointer;border:3px solid transparent;transition:border-color .18s,transform .15s;}
@@ -367,7 +365,6 @@
       <div class="prat-body" id="prat-body">
         <!-- Modelos tab (galeria + fundos mesclados) -->
         <div id="prat-galeria-area">
-          <input class="prat-search" id="prat-srch" placeholder="🔍 Buscar modelo..." oninput="pratBuscar(this.value)"/>
           <div class="prat-cats" id="prat-cats"></div>
           <div id="prat-sel-info" class="prat-sel-info"></div>
           <div id="prat-galeria-import-bar" class="hidden" style="display:flex;align-items:center;justify-content:space-between;padding:4px 8px 2px;">
@@ -442,14 +439,14 @@
 </div>
 <script>
 const CATS=[
-  {id:'todos',lbl:'🐾 Todos'},{id:'cachorro-pequeno',lbl:'🐩 Cão Pequeno'},
-  {id:'cachorro-grande',lbl:'🐕 Cão Grande'},{id:'gato',lbl:'🐱 Gatos'},
-  {id:'banho-tosa',lbl:'✂️ Banho & Tosa'},
-  {id:'nutricao',lbl:'🍖 Nutrição'},
-  {id:'acessorios',lbl:'🎀 Acessórios'},{id:'vacinas',lbl:'💉 Vacinas & Saúde'},
-  {id:'dicas',lbl:'💡 Dicas & Info'},{id:'promocoes',lbl:'🌟 Promoções'},
-  {id:'praia',lbl:'🏖️ Praia & Verão'},{id:'fazenda',lbl:'🌾 Fazenda & Campo'},
-  {id:'adestramento',lbl:'🎓 Adestramento'}
+  {id:'todos',lbl:'Todos'},{id:'cachorro-pequeno',lbl:'Cão Pequeno'},
+  {id:'cachorro-grande',lbl:'Cão Grande'},{id:'gato',lbl:'Gatos'},
+  {id:'banho-tosa',lbl:'Banho & Tosa'},
+  {id:'nutricao',lbl:'Nutrição'},
+  {id:'acessorios',lbl:'Acessórios'},{id:'vacinas',lbl:'Vacinas & Saúde'},
+  {id:'dicas',lbl:'Dicas & Info'},{id:'promocoes',lbl:'Promoções'},
+  {id:'praia',lbl:'Praia & Verão'},{id:'fazenda',lbl:'Fazenda & Campo'},
+  {id:'adestramento',lbl:'Adestramento'}
 ];
 const FOTO_IDS={
   'cachorro-pequeno':[406014,1591939,1254140,1458916,1805164,2106765],
