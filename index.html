@@ -4,6 +4,7 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Criativo Pet – Plataforma de Artes para Petshop</title>
+  <link rel="icon" type="image/svg+xml" href="mascote.svg"/>
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet"/>
   <style>
     :root{--verde:#2ECC71;--verde-esc:#1a9e52;--azul:#3498DB;--laranja:#F39C12;--roxo:#9B59B6;--vermelho:#E74C3C;--bg:#f0faf4;--texto:#1a2e1e;--sombra:0 4px 20px rgba(0,0,0,.12);}
@@ -26,7 +27,7 @@
     /* HEADER */
     header{background:linear-gradient(135deg,#1a9e52 0%,#2ECC71 55%,#F39C12 100%);color:#fff;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 4px 20px rgba(0,0,0,.2);position:sticky;top:0;z-index:100;}
     .header-brand{display:flex;align-items:center;gap:12px;}
-    .header-logo{font-size:2rem;line-height:1;}
+    .header-logo{width:54px;height:54px;flex-shrink:0;filter:drop-shadow(0 2px 4px rgba(0,0,0,.3));}
     .header-title h1{font-family:'Fredoka One',cursive;font-size:1.5rem;line-height:1.1;}
     .header-title p{font-size:.75rem;opacity:.85;font-weight:600;}
     .btn-cfg{background:rgba(255,255,255,.25);border:2px solid rgba(255,255,255,.5);color:#fff;padding:8px 16px;border-radius:20px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:700;font-size:.82rem;transition:all .2s;white-space:nowrap;}
@@ -143,7 +144,7 @@
 <!-- HEADER -->
 <header>
   <div class="header-brand">
-    <div class="header-logo">🐾</div>
+    <img class="header-logo" src="mascote.svg" alt="Mascote Amigão Petshop"/>
     <div class="header-title">
       <h1 id="hdr-nome">Criativo Pet</h1>
       <p>Plataforma de Artes para Petshops</p>
@@ -231,6 +232,8 @@ const CATS=[
   {id:'adestramento',lbl:'🎓 Adestramento'}
 ];
 const FOTO=id=>`https://images.unsplash.com/photo-${id}?w=1080&q=90`;
+// Pre-load mascot SVG for canvas use
+const MASCOTE_IMG=new Image();MASCOTE_IMG.src='mascote.svg';
 const ARTES=[
   {id:'cp01',t:'BANHO & TOSA',s:'Para cães de porte pequeno',tag:'cachorro-pequeno',c:'#2ECC71',f:'1587300003388-59208cc962cb'},
   {id:'cp02',t:'CONSULTA VETERINÁRIA',s:'Seu pequenino merece cuidado',tag:'cachorro-pequeno',c:'#3498DB',f:'1548199973-03cce0bbc87b'},
@@ -436,10 +439,12 @@ function renderThumb(a,canvas){
     ov.addColorStop(0,'rgba(0,0,0,.18)');ov.addColorStop(1,'rgba(0,0,0,.78)');
     ctx.fillStyle=ov;ctx.fillRect(0,0,W,H);
     ctx.fillStyle=a.c;ctx.fillRect(0,0,W,50);
+    // Mascot icon in header
+    if(MASCOTE_IMG.complete&&MASCOTE_IMG.naturalWidth){ctx.drawImage(MASCOTE_IMG,6,2,46,46);}
     ctx.save();ctx.font='bold 18px "Fredoka One",cursive';ctx.fillStyle='#fff';ctx.textBaseline='middle';ctx.textAlign='left';
     const nomeShort=cfg.nome.length>22?cfg.nome.substring(0,22)+'…':cfg.nome;
-    ctx.fillText('🐾 '+nomeShort,10,25);ctx.restore();
-    drawPaw(ctx,W-32,25,14,'rgba(255,255,255,.3)');
+    ctx.shadowColor='rgba(0,0,0,.5)';ctx.shadowBlur=6;
+    ctx.fillText(nomeShort,57,25);ctx.restore();
     ctx.save();ctx.textAlign='left';ctx.textBaseline='bottom';ctx.shadowColor='rgba(0,0,0,.9)';ctx.shadowBlur=10;
     let fs=28;ctx.font=`900 ${fs}px Nunito,sans-serif`;
     while(ctx.measureText(a.t).width>W-32&&fs>14){fs-=2;ctx.font=`900 ${fs}px Nunito,sans-serif`;}
@@ -500,11 +505,12 @@ function renderArte(canvas,cb){
     // Header
     const hg=ctx.createLinearGradient(0,0,W,0);hg.addColorStop(0,v.cor);hg.addColorStop(1,v.cor+'cc');
     ctx.fillStyle=hg;ctx.fillRect(0,0,W,116);
-    ctx.save();ctx.font='62px serif';ctx.textBaseline='middle';ctx.textAlign='left';ctx.fillText('🐾',30,58);ctx.restore();
-    ctx.save();ctx.font='bold 44px "Fredoka One",cursive';ctx.fillStyle='#fff';ctx.shadowColor='rgba(0,0,0,.5)';ctx.shadowBlur=12;
+    // Mascot logo in header bar
+    if(MASCOTE_IMG.complete&&MASCOTE_IMG.naturalWidth){ctx.drawImage(MASCOTE_IMG,12,8,100,100);}
+    ctx.save();ctx.font='bold 44px "Fredoka One",cursive';ctx.fillStyle='#fff';ctx.shadowColor='rgba(0,0,0,.55)';ctx.shadowBlur=14;
     ctx.textBaseline='middle';ctx.textAlign='left';
-    let nw=v.nome;if(ctx.measureText(nw).width>W-160)nw=nw.substring(0,28)+'…';
-    ctx.fillText(nw,112,58);ctx.restore();
+    let nw=v.nome;if(ctx.measureText(nw).width>W-200)nw=nw.substring(0,28)+'…';
+    ctx.fillText(nw,122,58);ctx.restore();
     drawPaw(ctx,W-55,55,26,'rgba(255,255,255,.28)');drawPaw(ctx,W-105,80,18,'rgba(255,255,255,.18)');
     // Destaque tag
     const hDest=v.dest?290:0;
