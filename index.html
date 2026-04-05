@@ -161,6 +161,8 @@
     .upload-status{font-size:.7rem;text-align:center;padding:4px 8px;color:#666;min-height:18px;}
     .gh-token-hint{font-size:.72rem;color:#aaa;margin-top:4px;line-height:1.4;}
     .gh-token-hint a{color:var(--azul);}
+    .prat-item.loading{background:linear-gradient(90deg,#f0f0f0 25%,#e0e0e0 50%,#f0f0f0 75%);background-size:200% 100%;animation:shimmer 1.2s infinite;}
+    @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
   </style>
 </head>
 <body>
@@ -296,8 +298,29 @@ const CATS=[
   {id:'praia',lbl:'🏖️ Praia & Verão'},{id:'fazenda',lbl:'🌾 Fazenda & Campo'},
   {id:'adestramento',lbl:'🎓 Adestramento'}
 ];
-const TAG_FOTO={'cachorro-pequeno':'puppy','cachorro-grande':'dog','gato':'cat','aves':'bird,parrot','peixes':'fish,aquarium','roedores':'hamster,rabbit','banho-tosa':'dog,bath','veterinario':'dog,veterinarian','nutricao':'dog,food','acessorios':'dog,accessories','vacinas':'dog,health','dicas':'dog,cat','promocoes':'puppy','praia':'dog,beach','fazenda':'dog,nature'};
-const FOTO=(tag,idx)=>{const q=TAG_FOTO[tag]||'dog';return`https://loremflickr.com/1080/1080/${q}?lock=${idx}`;};
+const FOTO_IDS={
+  'cachorro-pequeno':[406014,1591939,1254140,1458916,1805164,2106765],
+  'cachorro-grande':[1108099,220742,1851164,2607544,1496372,1477884],
+  'gato':[45201,617278,1404819,1543793,991831,2558605],
+  'aves':[349758,326900,145939,856516,1661179,2820884],
+  'peixes':[128756,37003,1123269,325045,842711,1535288],
+  'roedores':[730896,906018,633166,1828464,45247,583842],
+  'banho-tosa':[1108099,1587300,1254140,2607544,406014,1591939],
+  'veterinario':[1128316,1108099,220742,1404819,617278,45201],
+  'nutricao':[1741205,1108099,617278,220742,45201,1404819],
+  'acessorios':[1404819,3651579,1108099,617278,220742,45201],
+  'vacinas':[1128316,220742,1108099,617278,45201,1404819],
+  'dicas':[1108099,617278,220742,45201,1404819,1254140],
+  'promocoes':[406014,1591939,617278,45201,1108099,220742],
+  'praia':[1108099,1591939,1254140,2607544,220742,617278],
+  'fazenda':[1108099,220742,1851164,1591939,406014,2607544],
+  'adestramento':[1108099,220742,1851164,2607544,1496372,1585669],
+};
+const FOTO=(tag,idx)=>{
+  const ids=FOTO_IDS[tag]||FOTO_IDS['cachorro-grande'];
+  const id=ids[idx%ids.length];
+  return`https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&w=800&h=800&fit=crop`;
+};
 // Pre-load mascot SVG for canvas use
 const MASCOTE_IMG=new Image();MASCOTE_IMG.src='marcote.png';
 const ARTES=[
@@ -505,46 +528,46 @@ function updateSwatchSel(c){document.querySelectorAll('.cswatch').forEach(s=>s.c
 // ── PRATELEIRA ─────────────────────────────────────────
 const PRAT={
   fundos:[
-    {url:null,grad:'linear-gradient(135deg,#1a9e52,#2ECC71)',lbl:'Verde Pet'},
-    {url:null,grad:'linear-gradient(135deg,#3498DB,#1abc9c)',lbl:'Azul Fresco'},
-    {url:null,grad:'linear-gradient(135deg,#F39C12,#e74c3c)',lbl:'Laranja Quente'},
-    {url:null,grad:'linear-gradient(135deg,#9B59B6,#3498DB)',lbl:'Roxo Elegante'},
-    {url:null,grad:'linear-gradient(135deg,#1a2e1e,#2ECC71)',lbl:'Escuro & Verde'},
-    {url:null,grad:'linear-gradient(135deg,#e74c3c,#9B59B6)',lbl:'Vermelho Vivo'},
-    {url:'https://loremflickr.com/480/480/dog,park?lock=10',lbl:'Cão no Parque'},
-    {url:'https://loremflickr.com/480/480/puppy,grass?lock=11',lbl:'Filhote no Jardim'},
-    {url:'https://loremflickr.com/480/480/cat,window?lock=12',lbl:'Gato na Janela'},
-    {url:'https://loremflickr.com/480/480/dog,home?lock=13',lbl:'Pet em Casa'},
-    {url:'https://loremflickr.com/480/480/dog,beach?lock=14',lbl:'Pet na Praia'},
-    {url:'https://loremflickr.com/480/480/cat,sofa?lock=15',lbl:'Gato no Sofá'},
+    {url:'imagens/fundos/verde-natural.svg',lbl:'Verde Natural'},
+    {url:'imagens/fundos/azul-fresco.svg',lbl:'Azul Fresco'},
+    {url:'imagens/fundos/laranja-vibrante.svg',lbl:'Laranja Vibrante'},
+    {url:'imagens/fundos/roxo-elegante.svg',lbl:'Roxo Elegante'},
+    {url:'imagens/fundos/escuro-premium.svg',lbl:'Escuro Premium'},
+    {url:'imagens/fundos/rosa-pet.svg',lbl:'Rosa Pet'},
+    {url:'imagens/fundos/terra-natural.svg',lbl:'Terra Natural'},
+    {url:'imagens/fundos/azul-noite.svg',lbl:'Azul Noite'},
+    {url:null,grad:'linear-gradient(135deg,#2ECC71,#F39C12)',lbl:'Verde Dourado'},
+    {url:null,grad:'linear-gradient(135deg,#E74C3C,#9B59B6)',lbl:'Vermelho Roxo'},
+    {url:null,grad:'linear-gradient(135deg,#3498DB,#2ECC71)',lbl:'Azul Verde'},
+    {url:null,grad:'linear-gradient(135deg,#F39C12,#E74C3C)',lbl:'Fogo'},
   ],
   racao:[
-    {url:'https://loremflickr.com/480/480/dog food,bag?lock=20',lbl:'Ração Cão'},
-    {url:'https://loremflickr.com/480/480/cat food,bag?lock=21',lbl:'Ração Gato'},
-    {url:'https://loremflickr.com/480/480/pet food,package?lock=22',lbl:'Pacote Premium'},
-    {url:'https://loremflickr.com/480/480/dog food,bowl?lock=23',lbl:'Tigela Servida'},
-    {url:'https://loremflickr.com/480/480/kibble,dog?lock=24',lbl:'Ração Seca'},
-    {url:'https://loremflickr.com/480/480/wet food,cat?lock=25',lbl:'Ração Úmida'},
-    {url:'https://loremflickr.com/480/480/treats,dog?lock=26',lbl:'Petiscos Cão'},
-    {url:'https://loremflickr.com/480/480/treats,cat?lock=27',lbl:'Petiscos Gato'},
-    {url:'https://loremflickr.com/480/480/dog,eating?lock=28',lbl:'Cão Comendo'},
-    {url:'https://loremflickr.com/480/480/cat,eating?lock=29',lbl:'Gato Comendo'},
-    {url:'https://loremflickr.com/480/480/puppy,food?lock=30',lbl:'Filhote e Comida'},
-    {url:'https://loremflickr.com/480/480/senior,dog food?lock=31',lbl:'Ração Senior'},
+    {url:'https://images.pexels.com/photos/1741205/pexels-photo-1741205.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Cachorro comendo'},
+    {url:'https://images.pexels.com/photos/5732456/pexels-photo-5732456.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Ração premium'},
+    {url:'https://images.pexels.com/photos/6568501/pexels-photo-6568501.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Tigela de ração'},
+    {url:'https://images.pexels.com/photos/6816866/pexels-photo-6816866.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Pet alimentando'},
+    {url:'https://images.pexels.com/photos/7210748/pexels-photo-7210748.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Gato comendo'},
+    {url:'https://images.pexels.com/photos/4498150/pexels-photo-4498150.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Petiscos'},
+    {url:'https://images.pexels.com/photos/6957641/pexels-photo-6957641.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Ração gato'},
+    {url:'https://images.pexels.com/photos/5255197/pexels-photo-5255197.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Snack pet'},
+    {url:'https://images.pexels.com/photos/8434791/pexels-photo-8434791.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Bowl pet'},
+    {url:'https://images.pexels.com/photos/7210604/pexels-photo-7210604.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Filhote comendo'},
+    {url:'https://images.pexels.com/photos/6957668/pexels-photo-6957668.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Gato e tigela'},
+    {url:'https://images.pexels.com/photos/5255210/pexels-photo-5255210.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Petisco gato'},
   ],
   acessorios:[
-    {url:'https://loremflickr.com/480/480/dog,leash?lock=40',lbl:'Guia & Coleira'},
-    {url:'https://loremflickr.com/480/480/dog,toy?lock=41',lbl:'Brinquedo Cão'},
-    {url:'https://loremflickr.com/480/480/cat,toy?lock=42',lbl:'Brinquedo Gato'},
-    {url:'https://loremflickr.com/480/480/dog,bed?lock=43',lbl:'Caminha Pet'},
-    {url:'https://loremflickr.com/480/480/pet,carrier?lock=44',lbl:'Bolsa Transporte'},
-    {url:'https://loremflickr.com/480/480/dog,collar?lock=45',lbl:'Coleira'},
-    {url:'https://loremflickr.com/480/480/dog,clothes?lock=46',lbl:'Roupinha'},
-    {url:'https://loremflickr.com/480/480/pet,grooming?lock=47',lbl:'Tosa & Higiene'},
-    {url:'https://loremflickr.com/480/480/dog,shampoo?lock=48',lbl:'Shampoo Pet'},
-    {url:'https://loremflickr.com/480/480/aquarium,fish?lock=49',lbl:'Aquário'},
-    {url:'https://loremflickr.com/480/480/bird,cage?lock=50',lbl:'Gaiola'},
-    {url:'https://loremflickr.com/480/480/hamster,cage?lock=51',lbl:'Casinha Roedor'},
+    {url:'https://images.pexels.com/photos/1404819/pexels-photo-1404819.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Gato brinquedo'},
+    {url:'https://images.pexels.com/photos/3651579/pexels-photo-3651579.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Coleira dog'},
+    {url:'https://images.pexels.com/photos/5731871/pexels-photo-5731871.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Caminha pet'},
+    {url:'https://images.pexels.com/photos/6816861/pexels-photo-6816861.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Brinquedo'},
+    {url:'https://images.pexels.com/photos/7210754/pexels-photo-7210754.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Acessório'},
+    {url:'https://images.pexels.com/photos/4587987/pexels-photo-4587987.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Guia passeio'},
+    {url:'https://images.pexels.com/photos/5731873/pexels-photo-5731873.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Bolsa transporte'},
+    {url:'https://images.pexels.com/photos/6957640/pexels-photo-6957640.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Higiene pet'},
+    {url:'https://images.pexels.com/photos/5255213/pexels-photo-5255213.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Escova tosa'},
+    {url:'https://images.pexels.com/photos/4587992/pexels-photo-4587992.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Roupinha dog'},
+    {url:'https://images.pexels.com/photos/6568505/pexels-photo-6568505.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Brinquedo gato'},
+    {url:'https://images.pexels.com/photos/8434796/pexels-photo-8434796.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Cama pet'},
   ],
 };
 let pratAbaAtual='galeria';
