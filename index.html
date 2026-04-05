@@ -444,9 +444,8 @@
 const CATS=[
   {id:'todos',lbl:'🐾 Todos'},{id:'cachorro-pequeno',lbl:'🐩 Cão Pequeno'},
   {id:'cachorro-grande',lbl:'🐕 Cão Grande'},{id:'gato',lbl:'🐱 Gatos'},
-  {id:'aves',lbl:'🐦 Aves'},{id:'peixes',lbl:'🐠 Peixes'},
-  {id:'roedores',lbl:'🐹 Roedores'},{id:'banho-tosa',lbl:'✂️ Banho & Tosa'},
-  {id:'veterinario',lbl:'🏥 Veterinário'},{id:'nutricao',lbl:'🍖 Nutrição'},
+  {id:'banho-tosa',lbl:'✂️ Banho & Tosa'},
+  {id:'nutricao',lbl:'🍖 Nutrição'},
   {id:'acessorios',lbl:'🎀 Acessórios'},{id:'vacinas',lbl:'💉 Vacinas & Saúde'},
   {id:'dicas',lbl:'💡 Dicas & Info'},{id:'promocoes',lbl:'🌟 Promoções'},
   {id:'praia',lbl:'🏖️ Praia & Verão'},{id:'fazenda',lbl:'🌾 Fazenda & Campo'},
@@ -456,11 +455,7 @@ const FOTO_IDS={
   'cachorro-pequeno':[406014,1591939,1254140,1458916,1805164,2106765],
   'cachorro-grande':[1108099,220742,1851164,2607544,1496372,1477884],
   'gato':[45201,617278,1404819,1543793,991831,2558605],
-  'aves':[349758,326900,145939,856516,1661179,2820884],
-  'peixes':[128756,37003,1123269,325045,842711,1535288],
-  'roedores':[730896,906018,633166,1828464,45247,583842],
   'banho-tosa':[1108099,1587300,1254140,2607544,406014,1591939],
-  'veterinario':[1128316,1108099,220742,1404819,617278,45201],
   'nutricao':[1741205,1108099,617278,220742,45201,1404819],
   'acessorios':[1404819,3651579,1108099,617278,220742,45201],
   'vacinas':[1128316,220742,1108099,617278,45201,1404819],
@@ -503,21 +498,6 @@ const ARTES=[
   {id:'ga06',t:'ADOTE COM AMOR',s:'Venha conhecer nossos filhotes!',tag:'gato',c:'#1a9e52',f:'1548802673-380ab8ebc7b7'},
   {id:'ga07',t:'CASTRAÇÃO FELINA',s:'Saúde e qualidade de vida',tag:'gato',c:'#3498DB',f:'1592194996308-7b43878e84a6'},
   {id:'ga08',t:'PROMOÇÃO GATOS',s:'Combo banho + tosa com desconto!',tag:'gato',c:'#9B59B6',f:'1573865526182-f81fcd42eed4'},
-  {id:'av01',t:'AVES & CIA',s:'Tudo para o seu passarinho',tag:'aves',c:'#F39C12',f:'1444464666168-49d633b86797'},
-  {id:'av02',t:'PAPAGAIO & CALOPSITA',s:'Produtos e acessórios para aves',tag:'aves',c:'#2ECC71',f:'1522926193341-e9ffd686c60f'},
-  {id:'av03',t:'RAÇÃO PARA AVES',s:'A melhor nutrição para seu pássaro',tag:'aves',c:'#E74C3C',f:'1516467508483-a7212febe31a'},
-  {id:'av04',t:'SAÚDE DAS AVES',s:'Consulta veterinária especializada',tag:'aves',c:'#3498DB',f:'1452570053594-1b985d6ea890'},
-  {id:'av05',t:'BRINQUEDOS PARA AVES',s:'Entretenimento e bem-estar',tag:'aves',c:'#9B59B6',f:'1471086569966-db3eebc25a59'},
-  {id:'av06',t:'GAIOLAS & VIVEIROS',s:'Conforto e beleza para suas aves',tag:'aves',c:'#1a9e52',f:'1418489098061-ce87b5dc3aee'},
-  {id:'px01',t:'AQUARISMO',s:'Tudo para o seu aquário',tag:'peixes',c:'#3498DB',f:'1520488889-c9ccb7c22da7'},
-  {id:'px02',t:'PEIXES ORNAMENTAIS',s:'As espécies mais belas em estoque',tag:'peixes',c:'#1a9e52',f:'1544551763-46a013bb70d5'},
-  {id:'px03',t:'RAÇÃO PARA PEIXES',s:'Nutrição balanceada para seu aquário',tag:'peixes',c:'#F39C12',f:'1522069213448-443a614da9b6'},
-  {id:'px04',t:'AQUÁRIO DECORADO',s:'Filtros, iluminação e decoração',tag:'peixes',c:'#9B59B6',f:'1584267385494-9fdd9a71ad75'},
-  {id:'px05',t:'PEIXE BETTA',s:'O peixe mais lindo do aquário',tag:'peixes',c:'#E74C3C',f:'1583212292454-1fe6229603b7'},
-  {id:'ro01',t:'HAMSTERS & CIA',s:'Tudo para seus pets pequenos',tag:'roedores',c:'#F39C12',f:'1548767797-d8c844163ef4'},
-  {id:'ro02',t:'COELHOS ADORÁVEIS',s:'Acessórios e alimentos para coelhos',tag:'roedores',c:'#9B59B6',f:'1462093630527-71d44c54db65'},
-  {id:'ro03',t:'RAÇÃO PARA ROEDORES',s:'Nutrição especial para hamsters',tag:'roedores',c:'#2ECC71',f:'1585110396000-c9ffd4e4b308'},
-  {id:'ro04',t:'PORQUINHOS DA ÍNDIA',s:'Produtos especiais para guinea pigs',tag:'roedores',c:'#E74C3C',f:'1548767797-d8c844163ef4'},
   {id:'bt01',t:'BANHO & TOSA',s:'Profissionais experientes e carinhosos',tag:'banho-tosa',c:'#2ECC71',f:'1587300003388-59208cc962cb'},
   {id:'bt02',t:'TOSA HIGIÊNICA',s:'Conforto e higiene para seu pet',tag:'banho-tosa',c:'#3498DB',f:'1548199973-03cce0bbc87b'},
   {id:'bt03',t:'BANHO PREMIUM',s:'Shampoo especial + hidratação',tag:'banho-tosa',c:'#9B59B6',f:'1561037404-61cd46aa615b'},
@@ -526,12 +506,6 @@ const ARTES=[
   {id:'bt06',t:'ESFOLIAÇÃO PET',s:'Pelo saudável e brilhante!',tag:'banho-tosa',c:'#1a9e52',f:'1518020382113-a7e8fc38eac9'},
   {id:'bt07',t:'AGENDAMENTO ONLINE',s:'Reserve seu horário pelo WhatsApp',tag:'banho-tosa',c:'#25D366',f:'1552053831-71594a27632d'},
   {id:'bt08',t:'BANHO A DOMICÍLIO',s:'Comodidade para você e seu pet',tag:'banho-tosa',c:'#3498DB',f:'1537151608828-ea2b11777ee8'},
-  {id:'vt01',t:'CONSULTA VETERINÁRIA',s:'Cuidando da saúde do seu pet',tag:'veterinario',c:'#3498DB',f:'1548802673-380ab8ebc7b7'},
-  {id:'vt02',t:'CHECK-UP COMPLETO',s:'Prevenção é o melhor remédio!',tag:'veterinario',c:'#2ECC71',f:'1583511655826-05700d52f4d1'},
-  {id:'vt03',t:'DERMATOLOGIA PET',s:'Tratamentos para pele e pelo',tag:'veterinario',c:'#F39C12',f:'1548199973-03cce0bbc87b'},
-  {id:'vt04',t:'MICROCHIPAGEM',s:'Identifique e proteja seu pet',tag:'veterinario',c:'#9B59B6',f:'1560807707-8cc77767d783'},
-  {id:'vt05',t:'CASTRAÇÃO',s:'Saúde e qualidade de vida para o pet',tag:'veterinario',c:'#1a9e52',f:'1574158622682-e719b968efd7'},
-  {id:'vt06',t:'ORTOPEDIA PET',s:'Cuidando do sistema locomotor',tag:'veterinario',c:'#E74C3C',f:'1516734212186-a967f81ad0d7'},
   {id:'nt01',t:'RAÇÃO PREMIUM',s:'As melhores marcas com desconto',tag:'nutricao',c:'#E74C3C',f:'1587300003388-59208cc962cb'},
   {id:'nt02',t:'RAÇÃO NATURAL',s:'Alimentação saudável e balanceada',tag:'nutricao',c:'#2ECC71',f:'1537151608828-ea2b11777ee8'},
   {id:'nt03',t:'PETISCOS GOURMET',s:'Snacks deliciosos para recompensar',tag:'nutricao',c:'#F39C12',f:'1601758125946-6ec2ef64daf8'},
@@ -1096,11 +1070,11 @@ async function salvarImagemTratada(){
       const r=new FileReader();r.onload=()=>res(r.result.split(',')[1]);r.onerror=rej;r.readAsDataURL(blob);
     });
     let sha=undefined;
-    const chk=await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${path}`,{headers:{'Authorization':`token ${cfg.ghToken}`}});
+    const chk=await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${path}`,{headers:{'Authorization':`Bearer ${cfg.ghToken}`}});
     if(chk.ok){const d=await chk.json();sha=d.sha;}
     const resp=await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${path}`,{
       method:'PUT',
-      headers:{'Authorization':`token ${cfg.ghToken}`,'Content-Type':'application/json'},
+      headers:{'Authorization':`Bearer ${cfg.ghToken}`,'Content-Type':'application/json'},
       body:JSON.stringify({message:`Upload tratado: ${fileName}`,content:base64,branch:GH_BRANCH,...(sha?{sha}:{})})
     });
     if(resp.ok){
@@ -1117,11 +1091,18 @@ async function salvarImagemTratada(){
         if(LAYER_ABAS.includes(tratCtx.pasta)){toggleObject(rawUrl,baseName);}else{pratSelUrl(rawUrl);}
       }
     } else {
-      const err=await resp.json();
-      status.textContent='❌ Erro: '+(err.message||resp.status);
+      const err=await resp.json().catch(()=>({}));
+      const msg='❌ '+(err.message||`HTTP ${resp.status}`);
+      status.textContent=msg;
+      mostrarToast(msg,6000);
       btnSalvar.disabled=false;
     }
-  }catch(e){status.textContent='⚠️ Erro de conexão';btnSalvar.disabled=false;}
+  }catch(e){
+    const msg='⚠️ '+(e.message||'Erro de conexão');
+    status.textContent=msg;
+    mostrarToast(msg,6000);
+    btnSalvar.disabled=false;
+  }
 }
 function usarLocalSemSalvar(){
   const blob=tratCtx.processedBlob||tratCtx.originalBlob;
@@ -1179,12 +1160,12 @@ async function excluirUpload(idx){
   if(u.ghPath&&cfg.ghToken){
     mostrarToast('⏳ Excluindo do GitHub…',8000);
     try{
-      const check=await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${u.ghPath}`,{headers:{'Authorization':`token ${cfg.ghToken}`}});
+      const check=await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${u.ghPath}`,{headers:{'Authorization':`Bearer ${cfg.ghToken}`}});
       if(check.ok){
         const d=await check.json();
         const resp=await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${u.ghPath}`,{
           method:'DELETE',
-          headers:{'Authorization':`token ${cfg.ghToken}`,'Content-Type':'application/json'},
+          headers:{'Authorization':`Bearer ${cfg.ghToken}`,'Content-Type':'application/json'},
           body:JSON.stringify({message:`Excluído via portal: ${u.lbl}`,sha:d.sha,branch:GH_BRANCH})
         });
         if(resp.ok){mostrarToast('🗑️ Excluído do GitHub!');}
@@ -1240,18 +1221,18 @@ async function confirmarMover(novaPasta){
   const novoCaminho=`imagens/${novaPasta}/${nomeArq}`;
   mostrarToast('⏳ Movendo imagem…',10000);
   try{
-    const getR=await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${ghPath}`,{headers:{'Authorization':`token ${cfg.ghToken}`}});
+    const getR=await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${ghPath}`,{headers:{'Authorization':`Bearer ${cfg.ghToken}`}});
     if(!getR.ok){mostrarToast('❌ Erro ao ler arquivo original');return;}
     const orig=await getR.json();
     const putR=await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${novoCaminho}`,{
       method:'PUT',
-      headers:{'Authorization':`token ${cfg.ghToken}`,'Content-Type':'application/json'},
+      headers:{'Authorization':`Bearer ${cfg.ghToken}`,'Content-Type':'application/json'},
       body:JSON.stringify({message:`Movido para ${novaPasta}: ${nomeArq}`,content:orig.content.replace(/\n/g,''),branch:GH_BRANCH})
     });
     if(!putR.ok){mostrarToast('❌ Erro ao criar na nova pasta');return;}
     await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${ghPath}`,{
       method:'DELETE',
-      headers:{'Authorization':`token ${cfg.ghToken}`,'Content-Type':'application/json'},
+      headers:{'Authorization':`Bearer ${cfg.ghToken}`,'Content-Type':'application/json'},
       body:JSON.stringify({message:`Movido de ${ghPath.split('/')[1]}: ${nomeArq}`,sha:orig.sha,branch:GH_BRANCH})
     });
     const novaUrl=`https://raw.githubusercontent.com/${GH_REPO}/${GH_BRANCH}/${novoCaminho}`;
@@ -1273,7 +1254,7 @@ async function carregarImgsGitHub(pasta){
   sec.classList.remove('hidden');
   try{
     const r=await fetch(`https://api.github.com/repos/${GH_REPO}/contents/imagens/${pasta}`,{
-      headers:{'Authorization':`token ${cfg.ghToken}`}
+      headers:{'Authorization':`Bearer ${cfg.ghToken}`}
     });
     if(!r.ok){sec.classList.add('hidden');return;}
     const files=await r.json();
@@ -1305,12 +1286,12 @@ async function carregarImgsGitHub(pasta){
         if(!confirm(`Excluir "${lbl}"?`))return;
         mostrarToast('⏳ Excluindo…',8000);
         try{
-          const chk=await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${ghPath}`,{headers:{'Authorization':`token ${cfg.ghToken}`}});
+          const chk=await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${ghPath}`,{headers:{'Authorization':`Bearer ${cfg.ghToken}`}});
           if(chk.ok){
             const d=await chk.json();
             const del=await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${ghPath}`,{
               method:'DELETE',
-              headers:{'Authorization':`token ${cfg.ghToken}`,'Content-Type':'application/json'},
+              headers:{'Authorization':`Bearer ${cfg.ghToken}`,'Content-Type':'application/json'},
               body:JSON.stringify({message:`Excluído via portal: ${f.name}`,sha:d.sha,branch:GH_BRANCH})
             });
             if(del.ok){
@@ -1385,7 +1366,7 @@ async function migrarImgsParaGitHub(pasta){
       const nomeArq=urlObj.pathname.split('/').pop().replace(/\?.*$/,'')||`foto-${Date.now()}.jpg`;
       const path=`imagens/${pasta}/${nomeArq}`;
       // Verifica se já existe
-      const chk=await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${path}`,{headers:{'Authorization':`token ${cfg.ghToken}`}});
+      const chk=await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${path}`,{headers:{'Authorization':`Bearer ${cfg.ghToken}`}});
       if(chk.ok){
         item.url=`https://raw.githubusercontent.com/${GH_REPO}/${GH_BRANCH}/${path}`;
         ok++;continue;
@@ -1403,7 +1384,7 @@ async function migrarImgsParaGitHub(pasta){
       // Envia para GitHub
       const put=await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${path}`,{
         method:'PUT',
-        headers:{'Authorization':`token ${cfg.ghToken}`,'Content-Type':'application/json'},
+        headers:{'Authorization':`Bearer ${cfg.ghToken}`,'Content-Type':'application/json'},
         body:JSON.stringify({message:`Importado: ${item.lbl}`,content:base64,branch:GH_BRANCH})
       });
       if(put.ok){
@@ -1456,7 +1437,7 @@ async function migrarFotosGaleria(){
     const path=`imagens/galeria/pexels-${id}.jpg`;
     try{
       // Check if already in GitHub
-      const chk=await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${path}`,{headers:{'Authorization':`token ${cfg.ghToken}`}});
+      const chk=await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${path}`,{headers:{'Authorization':`Bearer ${cfg.ghToken}`}});
       if(chk.ok){
         fotoGhMap[id]=`https://raw.githubusercontent.com/${GH_REPO}/${GH_BRANCH}/${path}`;
         ok++;continue;
@@ -1470,7 +1451,7 @@ async function migrarFotosGaleria(){
       });
       const put=await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${path}`,{
         method:'PUT',
-        headers:{'Authorization':`token ${cfg.ghToken}`,'Content-Type':'application/json'},
+        headers:{'Authorization':`Bearer ${cfg.ghToken}`,'Content-Type':'application/json'},
         body:JSON.stringify({message:`Fundo galeria: pexels-${id}`,content:base64,branch:GH_BRANCH})
       });
       if(put.ok){
