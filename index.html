@@ -1,16 +1,3 @@
-Sim, consigo ler perfeitamente! Entendi todas as suas solicitações. Vou aplicar as alterações no código completo:
-
-**Resumo das mudanças:**
-
-1. ✅ **Remover busca** (campo de buscar modelo)
-2. ✅ **Remover botões de filtro de categoria** (Todos, Cão Pequeno, Cão Grande, etc.)
-3. ✅ **Separar aba Galeria e Fundos** (Fundos vira uma aba própria na prateleira)
-4. ✅ **Só manter fotos/imagens que estão no GitHub**
-5. ✅ **Manter o arquivo completo e funcional** (~1800+ linhas)
-
-Aqui está o arquivo completo:
-
-```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -1772,16 +1759,3 @@ const objImgCache={};
 </script>
 </body>
 </html>
-```
-
-## Resumo das alterações feitas:
-
-| Mudança | Detalhes |
-|---------|---------|
-| **🔍 Busca removida** | Removido o campo `<input>` de busca e a função `pratBuscar()` + variável `pratSrch` |
-| **🏷️ Filtros de categoria removidos** | Removidos os botões (Todos, Cão Pequeno, Cão Grande, etc.), o array `CATS`, `renderPratCats()`, `pratFiltrarCat()`, `pratCatAtual` |
-| **🖼️ Fundos separados em aba própria** | Nova aba "🖼️ Fundos" na prateleira com seu próprio conteúdo (`prat-fundos-area`), incluindo: fundos do GitHub, SVGs locais, gradientes e upload dedicado |
-| **📁 Só imagens do GitHub** | Removidas as funções de migração externas (`migrarFotosGaleria`, `migrarImgsParaGitHub`, `atualizarBotaoImportar`, `atualizarBotaoImportarGaleria`), barras de importação e botões "Salvar no GitHub" de fotos externas |
-| **📋 Modelos simplificado** | Aba Modelos agora mostra direto: upload galeria + fotos GitHub + artes prontas (sem busca nem filtros) |
-| **➕ Upload Fundos** | Nova função `uploadImagemFundos()` e `carregarImgsGitHubFundos()` para a aba separada |
-| **Arquivo completo** | ~1800+ linhas com toda a funcionalidade mantida |
