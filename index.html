@@ -36,13 +36,14 @@
     /* MAIN */
     .main-content{max-width:1400px;margin:0 auto;padding:20px 16px 60px;}
 
-    /* APP LAYOUT — canvas | prateleira (cima) + personalizar + share (baixo) */
+    /* APP LAYOUT */
     .app-top{display:grid;grid-template-columns:360px 1fr;gap:16px;align-items:start;}
     @media(max-width:820px){.app-top{grid-template-columns:1fr;}}
     .canvas-col{display:flex;flex-direction:column;gap:8px;}
     #editor-canvas{width:100%;aspect-ratio:1;display:block;border-radius:10px;box-shadow:0 4px 20px rgba(0,0,0,.15);}
     .canvas-hint{font-size:.68rem;color:#aaa;text-align:center;font-weight:700;}
-    /* PERSONALIZAR — barra abaixo, compacta */
+
+    /* PERSONALIZAR */
     .pers-bottom{background:#fff;border-radius:16px;padding:14px 18px;box-shadow:var(--sombra);margin-top:14px;}
     .pers-fields{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;align-items:end;}
     @media(max-width:1100px){.pers-fields{grid-template-columns:repeat(3,1fr);}}
@@ -52,16 +53,18 @@
     .pers-bottom .finput{padding:7px 10px;font-size:.82rem;}
     .pers-bottom-row2{display:flex;align-items:center;gap:14px;margin-top:12px;flex-wrap:wrap;}
     .cores-label{font-size:.7rem;font-weight:800;color:#888;white-space:nowrap;}
+
     /* SHARE ROW */
     .share-row{display:flex;gap:10px;margin-top:12px;}
     .share-row .btn-share{flex:1;padding:12px 8px;font-size:.84rem;border-radius:12px;}
-    .pers-panel{background:#fff;border-radius:16px;padding:16px;box-shadow:var(--sombra);}
+
     /* upload area */
-    .upload-zone{margin:6px 8px;border:2px dashed #cce8d4;border-radius:10px;padding:10px 8px;text-align:center;cursor:pointer;transition:border-color .2s;}
-    .upload-zone:hover{border-color:var(--verde);}
+    .upload-zone{margin:6px 8px;border:2px dashed #cce8d4;border-radius:10px;padding:10px 8px;text-align:center;cursor:pointer;transition:border-color .2s;background:#f9fffe;}
+    .upload-zone:hover{border-color:var(--verde);background:#e8fdf1;}
     .upload-zone input{display:none;}
+    .upload-zone-inner{display:flex;align-items:center;justify-content:center;gap:6px;}
     .upload-zone span{font-size:.72rem;font-weight:800;color:var(--verde-esc);}
-    .upload-thumbs{display:grid;grid-template-columns:repeat(6,1fr);gap:3px;padding:0 6px 4px;}
+
     /* EDITOR FIELDS */
     .fsec{font-size:.72rem;font-weight:900;text-transform:uppercase;letter-spacing:.08em;color:#aaa;margin:16px 0 8px;}
     .fsec:first-child{margin-top:0;}
@@ -72,16 +75,17 @@
     .color-row{display:flex;gap:8px;flex-wrap:wrap;}
     .cswatch{width:30px;height:30px;border-radius:50%;cursor:pointer;border:3px solid transparent;transition:border-color .15s,transform .15s;}
     .cswatch:hover,.cswatch.sel{border-color:#333;transform:scale(1.15);}
+
     /* PRATELEIRA */
     .prat-panel{background:#fff;border-radius:16px;box-shadow:var(--sombra);overflow:hidden;position:sticky;top:72px;max-height:calc(100vh - 90px);display:flex;flex-direction:column;}
     @media(max-width:820px){.prat-panel{position:static;max-height:70vw;}}
-    .prat-header{padding:14px 16px 0;font-weight:900;font-size:.9rem;color:var(--verde-esc);}
-    .prat-tabs{display:flex;border-bottom:2px solid #f0f0f0;margin-top:8px;flex-shrink:0;}
-    .prat-tab{flex:1;padding:8px 2px;text-align:center;font-size:.68rem;font-weight:800;color:#aaa;cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;transition:all .2s;line-height:1.3;}
+    .prat-header{padding:14px 16px 0;font-weight:900;font-size:.9rem;color:var(--verde-esc);display:flex;align-items:center;gap:6px;}
+    .prat-tabs{display:flex;gap:0;border-bottom:2px solid #f0f0f0;margin-top:10px;flex-shrink:0;}
+    .prat-tab{flex:1;padding:9px 4px;text-align:center;font-size:.72rem;font-weight:800;color:#aaa;cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;transition:all .2s;line-height:1.3;}
     .prat-tab.active{color:var(--verde-esc);border-bottom-color:var(--verde);}
     .prat-body{overflow-y:auto;flex:1;}
     .prat-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:3px;padding:4px 6px;}
-    .prat-item{position:relative;aspect-ratio:1;border-radius:6px;overflow:hidden;cursor:pointer;border:2px solid transparent;transition:border-color .18s,transform .15s;}
+    .prat-item{position:relative;aspect-ratio:1;border-radius:6px;overflow:hidden;cursor:pointer;border:2px solid transparent;transition:border-color .18s,transform .18s;}
     .prat-item:hover{transform:scale(1.04);}
     .prat-item.sel{border-color:var(--verde);}
     .prat-item img,.prat-item canvas{width:100%;height:100%;object-fit:cover;display:block;}
@@ -91,54 +95,19 @@
     .prat-reset:hover{background:#eee;}
     .prat-sel-info{font-size:.7rem;color:var(--verde-esc);font-weight:800;padding:4px 8px;background:#e8fdf1;border-radius:8px;margin:0 8px 6px;display:none;}
     .prat-sel-info.show{display:block;}
-
-    /* PRATELEIRA */
-    .prat-panel{background:#fff;border-radius:16px;box-shadow:var(--sombra);overflow:hidden;}
-    .prat-header{padding:14px 16px 0;font-weight:900;font-size:.9rem;color:var(--verde-esc);display:flex;align-items:center;gap:6px;}
-    .prat-tabs{display:flex;gap:0;border-bottom:2px solid #f0f0f0;margin-top:10px;}
-    .prat-tab{flex:1;padding:9px 4px;text-align:center;font-size:.72rem;font-weight:800;color:#aaa;cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;transition:all .2s;line-height:1.3;}
-    .prat-tab.active{color:var(--verde-esc);border-bottom-color:var(--verde);}
-    .prat-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:3px;padding:4px 6px;}
-    .prat-item{position:relative;aspect-ratio:1;border-radius:6px;overflow:hidden;cursor:pointer;border:2px solid transparent;transition:border-color .18s,transform .18s;}
-    .prat-item:hover{transform:scale(1.04);}
-    .prat-item.sel{border-color:var(--verde);}
-    .prat-item img{width:100%;height:100%;object-fit:cover;display:block;}
-    .prat-item.grad{display:flex;align-items:center;justify-content:center;font-size:.45rem;font-weight:800;color:rgba(255,255,255,.9);text-shadow:0 1px 3px rgba(0,0,0,.5);}
-    .prat-label{position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,.55);color:#fff;font-size:.42rem;font-weight:800;padding:1px 2px;line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-    .prat-reset{margin:0 10px 10px;width:calc(100% - 20px);padding:8px;background:#f5f5f5;border:none;border-radius:9px;cursor:pointer;font-family:'Nunito',sans-serif;font-size:.75rem;font-weight:700;color:#666;}
-    .prat-reset:hover{background:#eee;}
     .panel{background:#fff;border-radius:16px;padding:20px;box-shadow:var(--sombra);}
     .panel-title{font-weight:900;font-size:.95rem;margin-bottom:14px;color:var(--verde-esc);}
-    #editor-canvas{width:100%;aspect-ratio:1;display:block;border-radius:8px;}
-    .fsec{font-size:.72rem;font-weight:900;text-transform:uppercase;letter-spacing:.08em;color:#aaa;margin:18px 0 8px;}
-    .fsec:first-child{margin-top:0;}
-    .frow{margin-bottom:11px;}
-    .frow label{display:block;font-size:.8rem;font-weight:700;color:#555;margin-bottom:4px;}
-    .finput{width:100%;padding:9px 12px;border:2px solid #e0e0e0;border-radius:10px;font-family:'Nunito',sans-serif;font-size:.88rem;outline:none;transition:border-color .2s;}
-    .finput:focus{border-color:var(--verde);}
-    .color-row{display:flex;gap:8px;flex-wrap:wrap;}
-    .cswatch{width:34px;height:34px;border-radius:50%;cursor:pointer;border:3px solid transparent;transition:border-color .15s,transform .15s;}
-    .cswatch:hover,.cswatch.sel{border-color:#333;transform:scale(1.12);}
     .btn-gerar{width:100%;padding:14px;background:linear-gradient(135deg,var(--verde-esc),var(--verde));color:#fff;border:none;border-radius:12px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:900;font-size:1rem;margin-top:14px;transition:opacity .2s,transform .15s;}
     .btn-gerar:hover{opacity:.9;transform:translateY(-1px);}
     .btn-back{width:100%;padding:10px;background:#f2f2f2;color:#666;border:none;border-radius:12px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:700;font-size:.86rem;margin-top:8px;}
     .btn-back:hover{background:#e8e8e8;}
 
     /* SHARE */
-    .share-layout{display:grid;grid-template-columns:1fr 310px;gap:22px;align-items:start;}
-    @media(max-width:900px){.share-layout{grid-template-columns:1fr;}}
-    #share-canvas{width:100%;aspect-ratio:1;display:block;border-radius:8px;}
-    .share-btns{display:flex;flex-direction:column;gap:11px;}
-    .share-info{background:#fff;border-radius:16px;padding:18px;box-shadow:var(--sombra);}
-    .share-info h3{font-size:.95rem;font-weight:800;margin-bottom:6px;}
-    .share-info p{font-size:.8rem;color:#666;line-height:1.5;}
     .btn-share{width:100%;padding:14px;border:none;border-radius:14px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:900;font-size:.92rem;display:flex;align-items:center;justify-content:center;gap:10px;transition:transform .15s,opacity .2s;box-shadow:0 4px 14px rgba(0,0,0,.15);}
     .btn-share:hover{transform:translateY(-2px);opacity:.93;}
     .btn-dl{background:var(--azul);color:#fff;}
     .btn-wpp{background:#25D366;color:#fff;}
     .btn-insta{background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);color:#fff;}
-    .btn-share-sec{background:#f0f0f0;color:#555;width:100%;padding:11px;border:none;border-radius:12px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:700;font-size:.86rem;}
-    .btn-share-sec:hover{background:#e4e4e4;}
 
     /* FORM INLINE */
     .form-row{margin-bottom:11px;}
@@ -151,15 +120,17 @@
     /* TOAST */
     .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:#1a2e1e;color:#fff;padding:12px 22px;border-radius:30px;font-size:.88rem;font-weight:700;z-index:999;transition:transform .3s;pointer-events:none;white-space:nowrap;}
     .toast.show{transform:translateX(-50%) translateY(0);}
+
     /* UPLOAD STATUS */
     .upload-status{font-size:.7rem;text-align:center;padding:4px 8px;color:#666;min-height:18px;}
     .gh-token-hint{font-size:.72rem;color:#aaa;margin-top:4px;line-height:1.4;}
-    .gh-token-hint a{color:var(--azul);}
     .prat-item.loading{background:linear-gradient(90deg,#f0f0f0 25%,#e0e0e0 50%,#f0f0f0 75%);background-size:200% 100%;animation:shimmer 1.2s infinite;}
     @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+
     /* LAYER INDICATOR */
     .prat-item.in-layer{border-color:#F39C12;}
     .prat-item.in-layer::after{content:'✓';position:absolute;top:4px;right:4px;background:#F39C12;color:#fff;border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:900;}
+
     /* LAYERS PANEL */
     .prat-layers{border-top:2px solid #f0f0f0;padding:8px;}
     .prat-layers-title{font-size:.68rem;font-weight:900;color:#888;text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;}
@@ -170,19 +141,32 @@
     .prat-layer-lbl{flex:1;font-size:.7rem;font-weight:700;color:#555;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
     .prat-layer-rm{background:none;border:none;cursor:pointer;font-size:.9rem;color:#E74C3C;padding:2px 4px;flex-shrink:0;}
     .prat-layer-rm:hover{background:#fde;border-radius:50%;}
+
     /* UPLOAD ITEM ACTIONS */
     .upload-item-actions{position:absolute;top:3px;right:3px;display:none;flex-direction:column;gap:3px;z-index:10;}
     .prat-item:hover .upload-item-actions{display:flex;}
     .upload-act-btn{width:22px;height:22px;border-radius:6px;border:none;cursor:pointer;font-size:.65rem;font-weight:900;display:flex;align-items:center;justify-content:center;box-shadow:0 1px 4px rgba(0,0,0,.4);}
     .upload-act-del{background:#E74C3C;color:#fff;}
     .upload-act-mv{background:#3498DB;color:#fff;}
+
     /* MODAL MOVER */
     .pasta-opcoes{display:flex;flex-direction:column;gap:8px;margin:12px 0;}
     .pasta-opt-btn{padding:10px 14px;border:2px solid #e0e0e0;border-radius:12px;background:#fafafa;cursor:pointer;font-family:'Nunito',sans-serif;font-size:.9rem;font-weight:700;text-align:left;transition:all .15s;}
     .pasta-opt-btn:hover{border-color:var(--verde);background:#e8fdf1;color:var(--verde-esc);}
     .prat-tab-mode{font-size:.58rem;background:#e8fdf1;color:var(--verde-esc);border-radius:6px;padding:1px 5px;display:block;margin-top:2px;}
+
     /* FUNDOS SECTION inside galeria */
     .prat-sec-lbl{font-size:.68rem;font-weight:900;text-transform:uppercase;letter-spacing:.08em;color:#aaa;padding:8px 8px 4px;margin-top:4px;}
+
+    /* FILTROS CATEGORIA */
+    .prat-cats-wrap{padding:6px 8px 2px;display:flex;flex-direction:column;gap:4px;}
+    .pcat-search{width:100%;padding:5px 8px;border:1.5px solid #e0e0e0;border-radius:8px;font-family:'Nunito',sans-serif;font-size:.72rem;outline:none;}
+    .pcat-search:focus{border-color:var(--verde);}
+    .prat-cats{display:flex;flex-wrap:wrap;gap:3px;}
+    .pcat-btn{padding:3px 8px;border:1.5px solid #e8e8e8;border-radius:8px;background:#fafafa;cursor:pointer;font-family:'Nunito',sans-serif;font-size:.62rem;font-weight:700;color:#888;transition:all .15s;white-space:nowrap;}
+    .pcat-btn:hover{border-color:var(--verde);color:var(--verde-esc);}
+    .pcat-btn.active{border-color:var(--verde);background:#e8fdf1;color:var(--verde-esc);}
+
     /* TRANSFORM PANEL */
     .transform-panel{background:#fff;border-radius:12px;padding:10px 12px;box-shadow:0 2px 12px rgba(0,0,0,.1);border:2px solid #F39C12;margin-top:8px;}
     .tp-title{font-size:.78rem;font-weight:900;color:#E65100;margin-bottom:8px;display:flex;align-items:center;justify-content:space-between;}
@@ -196,6 +180,7 @@
     canvas{cursor:default;}
     canvas.dragging{cursor:grabbing!important;}
     canvas.hovering{cursor:grab;}
+
     /* MODAL TRATAR IMAGEM */
     .tratar-preview-wrap{display:flex;justify-content:center;align-items:center;min-height:120px;max-height:200px;background:#f4f4f4;border-radius:12px;overflow:hidden;margin:10px 0;position:relative;}
     #tratar-canvas{max-width:100%;max-height:200px;display:block;}
@@ -211,6 +196,13 @@
     .tratar-prog{height:4px;background:#e8fdf1;border-radius:4px;overflow:hidden;margin:4px 0;display:none;}
     .tratar-prog-bar{height:100%;background:var(--verde);width:0%;transition:width .3s;border-radius:4px;}
     .btn-usar-local{background:none;border:none;color:#aaa;font-size:.75rem;cursor:pointer;text-decoration:underline;padding:4px;}
+
+    /* SECAO GALERIA MODELOS - upload inline */
+    .galeria-upload-bar{display:flex;align-items:center;gap:6px;padding:4px 8px;background:#f9fffe;border-bottom:1px solid #e8f5ec;}
+    .galeria-upload-btn{padding:4px 10px;background:var(--verde-esc);color:#fff;border:none;border-radius:8px;cursor:pointer;font-family:'Nunito',sans-serif;font-size:.65rem;font-weight:800;white-space:nowrap;transition:opacity .2s;}
+    .galeria-upload-btn:hover{opacity:.85;}
+    .galeria-upload-input{display:none;}
+    .galeria-sec-title{font-size:.62rem;font-weight:800;color:#aaa;flex:1;}
   </style>
 </head>
 <body>
@@ -305,7 +297,6 @@
 
 <!-- MAIN APP -->
 <div class="main-content">
-  <!-- TOPO: canvas + prateleira -->
   <div class="app-top">
 
     <!-- Canvas -->
@@ -359,35 +350,64 @@
         <div class="prat-tab" data-aba="acessorios" onclick="pratAba('acessorios',this)">🎾<br>Acess.<span class="prat-tab-mode">+camada</span></div>
       </div>
       <div class="prat-body" id="prat-body">
-        <!-- Modelos tab (galeria + fundos mesclados) -->
+
+        <!-- ABA GALERIA / MODELOS -->
         <div id="prat-galeria-area">
+          <!-- Filtros de categoria — sempre visíveis -->
+          <div class="prat-cats-wrap">
+            <input class="pcat-search" id="prat-search" placeholder="🔍 Buscar modelo…" oninput="pratBuscar(this.value)"/>
+            <div class="prat-cats" id="prat-cats"></div>
+          </div>
+
+          <!-- Upload de imagem para a galeria (salva no GitHub/galeria) -->
+          <div class="galeria-upload-bar">
+            <span class="galeria-sec-title">🖼️ Modelos GitHub</span>
+            <input type="file" id="galeria-upload-input" accept="image/*" class="galeria-upload-input" onchange="uploadImagemGaleria(this)"/>
+            <button class="galeria-upload-btn" onclick="document.getElementById('galeria-upload-input').click()">➕ Adicionar imagem</button>
+          </div>
+
           <div id="prat-sel-info" class="prat-sel-info"></div>
+
+          <!-- Botão migrar fundos externos para GitHub -->
           <div id="prat-galeria-import-bar" class="hidden" style="display:flex;align-items:center;justify-content:space-between;padding:4px 8px 2px;">
             <span style="font-size:.65rem;font-weight:800;color:#aaa;" id="prat-galeria-import-lbl"></span>
             <button style="font-size:.65rem;background:var(--verde-esc);color:#fff;border:none;border-radius:8px;padding:3px 8px;cursor:pointer;font-weight:800;" onclick="migrarFotosGaleria()">⬇️ Salvar fundos no GitHub</button>
           </div>
           <div id="prat-galeria-import-prog" style="display:none;font-size:.7rem;color:var(--verde-esc);padding:2px 8px;font-weight:800;"></div>
+
+          <!-- Imagens da galeria salvas no GitHub -->
+          <div id="prat-gh-galeria-section">
+            <div class="prat-sec-lbl">📁 Fotos salvas no GitHub</div>
+            <div class="prat-grid" id="prat-gh-galeria-grid"></div>
+          </div>
+
+          <!-- Modelos (artes) — canvas thumbnails -->
+          <div class="prat-sec-lbl">🎨 Artes prontas</div>
           <div class="prat-grid" id="prat-galeria-grid"></div>
+
           <!-- Fundos inline -->
           <div class="prat-sec-lbl">🖼️ Fundos & Gradientes</div>
           <div class="prat-grid" id="prat-fundos-grid"></div>
         </div>
-        <!-- Fundos/Ração/Acessórios tab -->
+
+        <!-- ABA OUTRAS (pets/racao/acessorios) -->
         <div id="prat-outras-area" class="hidden">
           <div id="prat-sel-info2" class="prat-sel-info"></div>
-          <!-- Upload de imagem própria -->
+          <!-- Upload de imagem -->
           <div class="upload-zone" onclick="document.getElementById('upload-input').click()" id="upload-zone-wrap">
             <input type="file" id="upload-input" accept="image/*" onchange="uploadImagem(this)"/>
-            <span>➕ Adicionar minha foto</span>
+            <div class="upload-zone-inner">
+              <span>➕ Adicionar minha foto</span>
+            </div>
           </div>
           <!-- Uploads do usuário (sessão atual) -->
-          <div class="upload-thumbs" id="upload-thumbs"></div>
+          <div class="upload-thumbs" id="upload-thumbs" style="display:grid;grid-template-columns:repeat(6,1fr);gap:3px;padding:0 6px 4px;"></div>
           <!-- Imagens já salvas no GitHub -->
           <div id="prat-gh-section" class="hidden">
             <div class="prat-sec-lbl">📁 Salvas no GitHub</div>
             <div class="prat-grid" id="prat-gh-grid"></div>
           </div>
-          <!-- Fotos padrão (externas ou já migradas) -->
+          <!-- Fotos padrão -->
           <div id="prat-padrao-section">
             <div class="prat-sec-lbl" id="prat-padrao-lbl" style="display:flex;align-items:center;justify-content:space-between;">
               <span>🖼️ Fotos padrão</span>
@@ -398,6 +418,7 @@
           <div class="prat-grid" id="prat-outras-grid"></div>
           <button class="prat-reset" id="prat-reset-btn" onclick="pratReset()">↩ Foto padrão da arte</button>
         </div>
+
         <!-- Camadas ativas -->
         <div class="prat-layers hidden" id="prat-layers">
           <div class="prat-layers-title">📌 Camadas no card:</div>
@@ -409,7 +430,7 @@
 
   </div><!-- /app-top -->
 
-  <!-- BAIXO: Personalizar compacto + Compartilhar -->
+  <!-- BAIXO: Personalizar + Compartilhar -->
   <div class="pers-bottom">
     <div class="pers-fields">
       <div class="frow"><label>👤 Nome</label><input class="finput" id="ed-nome" oninput="schedRender()"/></div>
@@ -443,9 +464,11 @@ const CATS=[
   {id:'praia',lbl:'Praia & Verão'},{id:'fazenda',lbl:'Fazenda & Campo'},
   {id:'adestramento',lbl:'Adestramento'}
 ];
+
+// Somente IDs — imagens vêm EXCLUSIVAMENTE do GitHub
 const FOTO_IDS={
   'cachorro-pequeno':[406014,1591939,1254140,1458916,1805164,2106765],
-  'cachorro-grande':[1108099,220742,1851164,2607544,1496372,1477884],
+  'cachorro-grande':[1108099,220742,1851164,2607544,1496372,1884779],
   'gato':[45201,617278,1404819,1543793,991831,2558605],
   'banho-tosa':[1108099,1587300,1254140,2607544,406014,1591939],
   'nutricao':[1741205,1108099,617278,220742,45201,1404819],
@@ -457,8 +480,13 @@ const FOTO_IDS={
   'fazenda':[1108099,220742,1851164,1591939,406014,2607544],
   'adestramento':[1108099,220742,1851164,2607544,1496372,1585669],
 };
+
+// Mapa de IDs para URLs no GitHub (populado via localStorage + FOTO_GH_STATIC)
 let fotoGhMap={};
-const FOTO_GH_STATIC={220742:'https://raw.githubusercontent.com/lssgoiano-anagi/amigao-petshop-imagens/main/imagens/galeria/pexels-220742.jpg',
+
+// URLs estáticas no GitHub — ÚNICA fonte de imagens para os modelos
+const FOTO_GH_STATIC={
+  220742:'https://raw.githubusercontent.com/lssgoiano-anagi/amigao-petshop-imagens/main/imagens/galeria/pexels-220742.jpg',
   406014:'https://raw.githubusercontent.com/lssgoiano-anagi/amigao-petshop-imagens/main/imagens/galeria/pexels-406014.jpg',
   617278:'https://raw.githubusercontent.com/lssgoiano-anagi/amigao-petshop-imagens/main/imagens/galeria/pexels-617278.jpg',
   991831:'https://raw.githubusercontent.com/lssgoiano-anagi/amigao-petshop-imagens/main/imagens/galeria/pexels-991831.jpg',
@@ -469,103 +497,111 @@ const FOTO_GH_STATIC={220742:'https://raw.githubusercontent.com/lssgoiano-anagi/
   1458916:'https://raw.githubusercontent.com/lssgoiano-anagi/amigao-petshop-imagens/main/imagens/galeria/pexels-1458916.jpg',
   1496372:'https://raw.githubusercontent.com/lssgoiano-anagi/amigao-petshop-imagens/main/imagens/galeria/pexels-1496372.jpg',
   1543793:'https://raw.githubusercontent.com/lssgoiano-anagi/amigao-petshop-imagens/main/imagens/galeria/pexels-1543793.jpg',
+  1585669:'https://raw.githubusercontent.com/lssgoiano-anagi/amigao-petshop-imagens/main/imagens/galeria/pexels-1585669.jpg',
+  1587300:'https://raw.githubusercontent.com/lssgoiano-anagi/amigao-petshop-imagens/main/imagens/galeria/pexels-1587300.jpg',
   1591939:'https://raw.githubusercontent.com/lssgoiano-anagi/amigao-petshop-imagens/main/imagens/galeria/pexels-1591939.jpg',
   1741205:'https://raw.githubusercontent.com/lssgoiano-anagi/amigao-petshop-imagens/main/imagens/galeria/pexels-1741205.jpg',
   1805164:'https://raw.githubusercontent.com/lssgoiano-anagi/amigao-petshop-imagens/main/imagens/galeria/pexels-1805164.jpg',
   1851164:'https://raw.githubusercontent.com/lssgoiano-anagi/amigao-petshop-imagens/main/imagens/galeria/pexels-1851164.jpg',
+  1884779:'https://raw.githubusercontent.com/lssgoiano-anagi/amigao-petshop-imagens/main/imagens/galeria/pexels-1884779.jpg',
   2106765:'https://raw.githubusercontent.com/lssgoiano-anagi/amigao-petshop-imagens/main/imagens/galeria/pexels-2106765.jpg',
   2558605:'https://raw.githubusercontent.com/lssgoiano-anagi/amigao-petshop-imagens/main/imagens/galeria/pexels-2558605.jpg',
   2607544:'https://raw.githubusercontent.com/lssgoiano-anagi/amigao-petshop-imagens/main/imagens/galeria/pexels-2607544.jpg',
-  3651579:'https://raw.githubusercontent.com/lssgoiano-anagi/amigao-petshop-imagens/main/imagens/galeria/pexels-3651579.jpg'};
+  3651579:'https://raw.githubusercontent.com/lssgoiano-anagi/amigao-petshop-imagens/main/imagens/galeria/pexels-3651579.jpg',
+  45201:'https://raw.githubusercontent.com/lssgoiano-anagi/amigao-petshop-imagens/main/imagens/galeria/pexels-45201.jpg',
+};
+
+// Retorna URL da foto — SOMENTE GitHub, nunca externo
 const FOTO=(tag,idx)=>{
   const ids=FOTO_IDS[tag]||FOTO_IDS['cachorro-grande'];
   const id=ids[idx%ids.length];
   return FOTO_GH_STATIC[id]||fotoGhMap[id]||null;
 };
-// Pre-load mascot SVG for canvas use
+
 const MASCOTE_IMG=new Image();MASCOTE_IMG.src='marcote.png';
+
 const ARTES=[
-  {id:'cp01',t:'BANHO & TOSA',s:'Para cães de porte pequeno',tag:'cachorro-pequeno',c:'#2ECC71',f:'1587300003388-59208cc962cb'},
-  {id:'cp02',t:'CONSULTA VETERINÁRIA',s:'Seu pequenino merece cuidado',tag:'cachorro-pequeno',c:'#3498DB',f:'1548199973-03cce0bbc87b'},
-  {id:'cp03',t:'SUPER PROMOÇÃO!',s:'Banho + Tosa com preço especial',tag:'cachorro-pequeno',c:'#F39C12',f:'1576201836106-db1758fd1c97'},
-  {id:'cp04',t:'RAÇÃO ESPECIAL',s:'Nutrição para raças pequenas',tag:'cachorro-pequeno',c:'#E74C3C',f:'1453227588014-c43a7d008db4'},
-  {id:'cp05',t:'ACESSÓRIOS PET',s:'Coleiras, roupinhas e muito mais!',tag:'cachorro-pequeno',c:'#9B59B6',f:'1601758228041-f3b2795255f1'},
-  {id:'cp06',t:'CLUBE FIDELIDADE',s:'Acumule pontos a cada banho!',tag:'cachorro-pequeno',c:'#1a9e52',f:'1583337130417-3346a1be7dee'},
-  {id:'cp07',t:'PETISCO GOURMET',s:'Delícias para o seu pequenino',tag:'cachorro-pequeno',c:'#F39C12',f:'1518020382113-a7e8fc38eac9'},
-  {id:'cp08',t:'TOSA CRIATIVA',s:'Looks modernos para seu pet!',tag:'cachorro-pequeno',c:'#9B59B6',f:'1552053831-71594a27632d'},
-  {id:'cg01',t:'ADESTRAMENTO',s:'Cães de porte grande e médio',tag:'cachorro-grande',c:'#E74C3C',f:'1552053831-71594a27632d'},
-  {id:'cg02',t:'RAÇÃO PREMIUM',s:'Nutrição completa para raças grandes',tag:'cachorro-grande',c:'#1a9e52',f:'1537151608828-ea2b11777ee8'},
-  {id:'cg03',t:'BANHO ESPECIAL',s:'Cuidado e carinho para cães grandes',tag:'cachorro-grande',c:'#9B59B6',f:'1561037404-61cd46aa615b'},
-  {id:'cg04',t:'PASSEIO SEGURO',s:'Guias, coleiras e peitorais top',tag:'cachorro-grande',c:'#3498DB',f:'1477884213360-7e9d7dcc1e48'},
-  {id:'cg05',t:'SAÚDE & BEM-ESTAR',s:'Vacinas e consultas em dia',tag:'cachorro-grande',c:'#F39C12',f:'1583511655826-05700d52f4d1'},
-  {id:'cg06',t:'PROMOÇÃO RELÂMPAGO',s:'Somente esta semana!',tag:'cachorro-grande',c:'#E74C3C',f:'1558788353-f76d92427f16'},
-  {id:'cg07',t:'GOLDEN ESPECIAL',s:'Banho completo com perfume premium',tag:'cachorro-grande',c:'#F39C12',f:'1587300003388-59208cc962cb'},
-  {id:'cg08',t:'PET FELIZ',s:'Seu melhor amigo em boas mãos',tag:'cachorro-grande',c:'#2ECC71',f:'1534361960057-19f4434a73d9'},
-  {id:'ga01',t:'TOSA FELINA',s:'Especialistas em cuidar de gatos',tag:'gato',c:'#9B59B6',f:'1514888286974-6c03e2ca1dba'},
-  {id:'ga02',t:'CONSULTA FELINA',s:'A saúde do seu gato em boas mãos',tag:'gato',c:'#3498DB',f:'1573865526739-10659fec78a5'},
-  {id:'ga03',t:'RAÇÃO PARA GATOS',s:'As melhores marcas em estoque',tag:'gato',c:'#F39C12',f:'1495360010541-f48722b4b6b8'},
-  {id:'ga04',t:'ACESSÓRIOS FELINOS',s:'Arranhadores, casinhas e brinquedos',tag:'gato',c:'#E74C3C',f:'1533743983-a4f61bf1bb8b'},
-  {id:'ga05',t:'BANHO SEM ESTRESSE',s:'Técnica especial para gatos',tag:'gato',c:'#2ECC71',f:'1574158622682-e719b968efd7'},
-  {id:'ga06',t:'ADOTE COM AMOR',s:'Venha conhecer nossos filhotes!',tag:'gato',c:'#1a9e52',f:'1548802673-380ab8ebc7b7'},
-  {id:'ga07',t:'CASTRAÇÃO FELINA',s:'Saúde e qualidade de vida',tag:'gato',c:'#3498DB',f:'1592194996308-7b43878e84a6'},
-  {id:'ga08',t:'PROMOÇÃO GATOS',s:'Combo banho + tosa com desconto!',tag:'gato',c:'#9B59B6',f:'1573865526182-f81fcd42eed4'},
-  {id:'bt01',t:'BANHO & TOSA',s:'Profissionais experientes e carinhosos',tag:'banho-tosa',c:'#2ECC71',f:'1587300003388-59208cc962cb'},
-  {id:'bt02',t:'TOSA HIGIÊNICA',s:'Conforto e higiene para seu pet',tag:'banho-tosa',c:'#3498DB',f:'1548199973-03cce0bbc87b'},
-  {id:'bt03',t:'BANHO PREMIUM',s:'Shampoo especial + hidratação',tag:'banho-tosa',c:'#9B59B6',f:'1561037404-61cd46aa615b'},
-  {id:'bt04',t:'TOSA MODINHA',s:'Looks estilosos para seu pet!',tag:'banho-tosa',c:'#E74C3C',f:'1576201836106-db1758fd1c97'},
-  {id:'bt05',t:'COMBO COMPLETO',s:'Banho + Tosa + Hidratação',tag:'banho-tosa',c:'#F39C12',f:'1583337130417-3346a1be7dee'},
-  {id:'bt06',t:'ESFOLIAÇÃO PET',s:'Pelo saudável e brilhante!',tag:'banho-tosa',c:'#1a9e52',f:'1518020382113-a7e8fc38eac9'},
-  {id:'bt07',t:'AGENDAMENTO ONLINE',s:'Reserve seu horário pelo WhatsApp',tag:'banho-tosa',c:'#25D366',f:'1552053831-71594a27632d'},
-  {id:'bt08',t:'BANHO A DOMICÍLIO',s:'Comodidade para você e seu pet',tag:'banho-tosa',c:'#3498DB',f:'1537151608828-ea2b11777ee8'},
-  {id:'nt01',t:'RAÇÃO PREMIUM',s:'As melhores marcas com desconto',tag:'nutricao',c:'#E74C3C',f:'1587300003388-59208cc962cb'},
-  {id:'nt02',t:'RAÇÃO NATURAL',s:'Alimentação saudável e balanceada',tag:'nutricao',c:'#2ECC71',f:'1537151608828-ea2b11777ee8'},
-  {id:'nt03',t:'PETISCOS GOURMET',s:'Snacks deliciosos para recompensar',tag:'nutricao',c:'#F39C12',f:'1601758125946-6ec2ef64daf8'},
-  {id:'nt04',t:'SUPLEMENTOS PET',s:'Vitaminas e minerais essenciais',tag:'nutricao',c:'#3498DB',f:'1548199973-03cce0bbc87b'},
-  {id:'nt05',t:'DIETA ESPECIAL',s:'Para pets com necessidades específicas',tag:'nutricao',c:'#9B59B6',f:'1514888286974-6c03e2ca1dba'},
-  {id:'nt06',t:'PROMOÇÃO RAÇÃO',s:'Compre 3 leve 4 na linha premium!',tag:'nutricao',c:'#E74C3C',f:'1453227588014-c43a7d008db4'},
-  {id:'ac01',t:'ACESSÓRIOS PET',s:'Coleiras, guias e muito mais!',tag:'acessorios',c:'#9B59B6',f:'1601758228041-f3b2795255f1'},
-  {id:'ac02',t:'ROUPINHAS PET',s:'Estilo e conforto para seu pet',tag:'acessorios',c:'#F39C12',f:'1583337130417-3346a1be7dee'},
-  {id:'ac03',t:'CAMINHAS & CASINHAS',s:'O melhor descanso para seu pet',tag:'acessorios',c:'#E74C3C',f:'1548802673-380ab8ebc7b7'},
-  {id:'ac04',t:'BRINQUEDOS',s:'Diversão e entretenimento para pets',tag:'acessorios',c:'#2ECC71',f:'1518020382113-a7e8fc38eac9'},
-  {id:'ac05',t:'TRANSPORTE SEGURO',s:'Caixas e bolsas de transporte',tag:'acessorios',c:'#3498DB',f:'1477884213360-7e9d7dcc1e48'},
-  {id:'vc01',t:'VACINA ANTIRRÁBICA',s:'Proteja seu pet e sua família',tag:'vacinas',c:'#E74C3C',f:'1560807707-8cc77767d783'},
-  {id:'vc02',t:'V10 CANINA',s:'Imunização completa para cães',tag:'vacinas',c:'#3498DB',f:'1583511655826-05700d52f4d1'},
-  {id:'vc03',t:'VACINA FELINA',s:'Proteção total para seu gato',tag:'vacinas',c:'#9B59B6',f:'1514888286974-6c03e2ca1dba'},
-  {id:'vc04',t:'VERMIFUGAÇÃO',s:'Saúde do pet começa por dentro',tag:'vacinas',c:'#2ECC71',f:'1548199973-03cce0bbc87b'},
-  {id:'vc05',t:'ANTIPULGAS',s:'Carrapatos, pulgas e bernes',tag:'vacinas',c:'#F39C12',f:'1561037404-61cd46aa615b'},
-  {id:'dk01',t:'VOCÊ SABIA?',s:'Cães precisam de banho a cada 15 dias',tag:'dicas',c:'#3498DB',f:'1587300003388-59208cc962cb'},
-  {id:'dk02',t:'DICA DE SAÚDE',s:'Gatos devem beber bastante água',tag:'dicas',c:'#9B59B6',f:'1573865526739-10659fec78a5'},
-  {id:'dk03',t:'FIQUE ATENTO!',s:'Vacinas em dia protegem a família toda',tag:'dicas',c:'#E74C3C',f:'1548802673-380ab8ebc7b7'},
-  {id:'dk04',t:'NUTRIÇÃO CORRETA',s:'Ração de qualidade faz toda diferença',tag:'dicas',c:'#2ECC71',f:'1537151608828-ea2b11777ee8'},
-  {id:'dk05',t:'CUIDADO NO VERÃO',s:'Pets precisam de hidratação extra',tag:'dicas',c:'#F39C12',f:'1507525428034-b723cf961d3e'},
-  {id:'dk06',t:'EXERCÍCIO É SAÚDE',s:'Passeios diários são essenciais',tag:'dicas',c:'#1a9e52',f:'1477884213360-7e9d7dcc1e48'},
-  {id:'dk07',t:'IDENTIFIQUE SEU PET',s:'Microchip garante o retorno seguro',tag:'dicas',c:'#9B59B6',f:'1560807707-8cc77767d783'},
-  {id:'dk08',t:'DENTE SAUDÁVEL',s:'Escovação regular previne doenças',tag:'dicas',c:'#3498DB',f:'1601758125946-6ec2ef64daf8'},
-  {id:'dk09',t:'STRESS DO PET',s:'Sinais de que seu pet precisa de ajuda',tag:'dicas',c:'#E74C3C',f:'1514888286974-6c03e2ca1dba'},
-  {id:'dk10',t:'BEM-ESTAR ANIMAL',s:'Amor e carinho fazem toda diferença!',tag:'dicas',c:'#F39C12',f:'1583337130417-3346a1be7dee'},
-  {id:'pm01',t:'MEGA PROMOÇÃO!',s:'Descontos imperdíveis essa semana',tag:'promocoes',c:'#E74C3C',f:'1548199973-03cce0bbc87b'},
-  {id:'pm02',t:'PROMOÇÃO RELÂMPAGO',s:'Por tempo limitado! Corra!',tag:'promocoes',c:'#F39C12',f:'1576201836106-db1758fd1c97'},
-  {id:'pm03',t:'DESCONTO ESPECIAL',s:'Só para clientes do WhatsApp!',tag:'promocoes',c:'#25D366',f:'1587300003388-59208cc962cb'},
-  {id:'pm04',t:'COMBO PET',s:'Banho + Tosa + Hidratação',tag:'promocoes',c:'#9B59B6',f:'1552053831-71594a27632d'},
-  {id:'pm05',t:'FIDELIDADE PREMIADA',s:'Na 5ª visita ganhe um banho grátis!',tag:'promocoes',c:'#2ECC71',f:'1583337130417-3346a1be7dee'},
-  {id:'pm06',t:'SEGUNDA FELIZ',s:'Todo Monday: 20% off no banho!',tag:'promocoes',c:'#3498DB',f:'1477884213360-7e9d7dcc1e48'},
-  {id:'pm07',t:'ANIVERSÁRIO DO PET',s:'Mês do nascimento com desconto!',tag:'promocoes',c:'#E74C3C',f:'1518020382113-a7e8fc38eac9'},
-  {id:'pm08',t:'INDIQUE E GANHE',s:'Indique amigos e ganhe prêmios!',tag:'promocoes',c:'#F39C12',f:'1560807707-8cc77767d783'},
-  {id:'pr01',t:'VERÃO COM SEU PET',s:'Banho pós-praia com desconto!',tag:'praia',c:'#F39C12',f:'1507525428034-b723cf961d3e'},
-  {id:'pr02',t:'PASSEIO NA PRAIA',s:'Produtos para o verão do seu pet',tag:'praia',c:'#3498DB',f:'1519046904884-53103b34b206'},
-  {id:'pr03',t:'FÉRIAS FELIZES',s:'Cuide do pet antes de viajar!',tag:'praia',c:'#2ECC71',f:'1473116763249-9ba006682a52'},
-  {id:'pr04',t:'PROTEÇÃO SOLAR PET',s:'Proteja seu pet do sol forte',tag:'praia',c:'#E74C3C',f:'1507525428034-b723cf961d3e'},
-  {id:'pr05',t:'HIDRATAÇÃO NO VERÃO',s:'Banho extra + hidratação do pelo',tag:'praia',c:'#9B59B6',f:'1519046904884-53103b34b206'},
-  {id:'fz01',t:'PETS NA NATUREZA',s:'Ração e acessórios para o campo',tag:'fazenda',c:'#1a9e52',f:'1500595046743-cd271d694d30'},
-  {id:'fz02',t:'VIDA NO CAMPO',s:'Seu pet feliz na chácara!',tag:'fazenda',c:'#F39C12',f:'1464822759023-fed622ff2c3b'},
-  {id:'fz03',t:'AVENTURA NA FAZENDA',s:'Produtos para pets aventureiros',tag:'fazenda',c:'#E74C3C',f:'1500534314209-a25ddb2bd429'},
-  {id:'fz04',t:'AR LIVRE & SAÚDE',s:'Antiparasitários e vacinas em dia',tag:'fazenda',c:'#2ECC71',f:'1441974231531-c6227db76b6e'},
-  {id:'fz05',t:'PET RURAL',s:'Cuidados especiais no campo',tag:'fazenda',c:'#9B59B6',f:'1500595046743-cd271d694d30'},
-  {id:'ad01',t:'ADESTRAMENTO',s:'Comportamento saudável e equilibrado',tag:'adestramento',c:'#E74C3C',f:'1552053831-71594a27632d'},
-  {id:'ad02',t:'CURSO DE OBEDIÊNCIA',s:'Cão obediente = família feliz!',tag:'adestramento',c:'#3498DB',f:'1477884213360-7e9d7dcc1e48'},
-  {id:'ad03',t:'ADESTRAMENTO BÁSICO',s:'Primeiros comandos essenciais',tag:'adestramento',c:'#2ECC71',f:'1537151608828-ea2b11777ee8'},
-  {id:'ad04',t:'SOCIALIZAÇÃO PET',s:'Pets felizes com outros animais',tag:'adestramento',c:'#F39C12',f:'1548199973-03cce0bbc87b'},
-  {id:'ad05',t:'CONTROLE COMPORTAMENTAL',s:'Sem stress para vizinhos e família',tag:'adestramento',c:'#9B59B6',f:'1558788353-f76d92427f16'},
+  {id:'cp01',t:'BANHO & TOSA',s:'Para cães de porte pequeno',tag:'cachorro-pequeno',c:'#2ECC71'},
+  {id:'cp02',t:'CONSULTA VETERINÁRIA',s:'Seu pequenino merece cuidado',tag:'cachorro-pequeno',c:'#3498DB'},
+  {id:'cp03',t:'SUPER PROMOÇÃO!',s:'Banho + Tosa com preço especial',tag:'cachorro-pequeno',c:'#F39C12'},
+  {id:'cp04',t:'RAÇÃO ESPECIAL',s:'Nutrição para raças pequenas',tag:'cachorro-pequeno',c:'#E74C3C'},
+  {id:'cp05',t:'ACESSÓRIOS PET',s:'Coleiras, roupinhas e muito mais!',tag:'cachorro-pequeno',c:'#9B59B6'},
+  {id:'cp06',t:'CLUBE FIDELIDADE',s:'Acumule pontos a cada banho!',tag:'cachorro-pequeno',c:'#1a9e52'},
+  {id:'cp07',t:'PETISCO GOURMET',s:'Delícias para o seu pequenino',tag:'cachorro-pequeno',c:'#F39C12'},
+  {id:'cp08',t:'TOSA CRIATIVA',s:'Looks modernos para seu pet!',tag:'cachorro-pequeno',c:'#9B59B6'},
+  {id:'cg01',t:'ADESTRAMENTO',s:'Cães de porte grande e médio',tag:'cachorro-grande',c:'#E74C3C'},
+  {id:'cg02',t:'RAÇÃO PREMIUM',s:'Nutrição completa para raças grandes',tag:'cachorro-grande',c:'#1a9e52'},
+  {id:'cg03',t:'BANHO ESPECIAL',s:'Cuidado e carinho para cães grandes',tag:'cachorro-grande',c:'#9B59B6'},
+  {id:'cg04',t:'PASSEIO SEGURO',s:'Guias, coleiras e peitorais top',tag:'cachorro-grande',c:'#3498DB'},
+  {id:'cg05',t:'SAÚDE & BEM-ESTAR',s:'Vacinas e consultas em dia',tag:'cachorro-grande',c:'#F39C12'},
+  {id:'cg06',t:'PROMOÇÃO RELÂMPAGO',s:'Somente esta semana!',tag:'cachorro-grande',c:'#E74C3C'},
+  {id:'cg07',t:'GOLDEN ESPECIAL',s:'Banho completo com perfume premium',tag:'cachorro-grande',c:'#F39C12'},
+  {id:'cg08',t:'PET FELIZ',s:'Seu melhor amigo em boas mãos',tag:'cachorro-grande',c:'#2ECC71'},
+  {id:'ga01',t:'TOSA FELINA',s:'Especialistas em cuidar de gatos',tag:'gato',c:'#9B59B6'},
+  {id:'ga02',t:'CONSULTA FELINA',s:'A saúde do seu gato em boas mãos',tag:'gato',c:'#3498DB'},
+  {id:'ga03',t:'RAÇÃO PARA GATOS',s:'As melhores marcas em estoque',tag:'gato',c:'#F39C12'},
+  {id:'ga04',t:'ACESSÓRIOS FELINOS',s:'Arranhadores, casinhas e brinquedos',tag:'gato',c:'#E74C3C'},
+  {id:'ga05',t:'BANHO SEM ESTRESSE',s:'Técnica especial para gatos',tag:'gato',c:'#2ECC71'},
+  {id:'ga06',t:'ADOTE COM AMOR',s:'Venha conhecer nossos filhotes!',tag:'gato',c:'#1a9e52'},
+  {id:'ga07',t:'CASTRAÇÃO FELINA',s:'Saúde e qualidade de vida',tag:'gato',c:'#3498DB'},
+  {id:'ga08',t:'PROMOÇÃO GATOS',s:'Combo banho + tosa com desconto!',tag:'gato',c:'#9B59B6'},
+  {id:'bt01',t:'BANHO & TOSA',s:'Profissionais experientes e carinhosos',tag:'banho-tosa',c:'#2ECC71'},
+  {id:'bt02',t:'TOSA HIGIÊNICA',s:'Conforto e higiene para seu pet',tag:'banho-tosa',c:'#3498DB'},
+  {id:'bt03',t:'BANHO PREMIUM',s:'Shampoo especial + hidratação',tag:'banho-tosa',c:'#9B59B6'},
+  {id:'bt04',t:'TOSA MODINHA',s:'Looks estilosos para seu pet!',tag:'banho-tosa',c:'#E74C3C'},
+  {id:'bt05',t:'COMBO COMPLETO',s:'Banho + Tosa + Hidratação',tag:'banho-tosa',c:'#F39C12'},
+  {id:'bt06',t:'ESFOLIAÇÃO PET',s:'Pelo saudável e brilhante!',tag:'banho-tosa',c:'#1a9e52'},
+  {id:'bt07',t:'AGENDAMENTO ONLINE',s:'Reserve seu horário pelo WhatsApp',tag:'banho-tosa',c:'#25D366'},
+  {id:'bt08',t:'BANHO A DOMICÍLIO',s:'Comodidade para você e seu pet',tag:'banho-tosa',c:'#3498DB'},
+  {id:'nt01',t:'RAÇÃO PREMIUM',s:'As melhores marcas com desconto',tag:'nutricao',c:'#E74C3C'},
+  {id:'nt02',t:'RAÇÃO NATURAL',s:'Alimentação saudável e balanceada',tag:'nutricao',c:'#2ECC71'},
+  {id:'nt03',t:'PETISCOS GOURMET',s:'Snacks deliciosos para recompensar',tag:'nutricao',c:'#F39C12'},
+  {id:'nt04',t:'SUPLEMENTOS PET',s:'Vitaminas e minerais essenciais',tag:'nutricao',c:'#3498DB'},
+  {id:'nt05',t:'DIETA ESPECIAL',s:'Para pets com necessidades específicas',tag:'nutricao',c:'#9B59B6'},
+  {id:'nt06',t:'PROMOÇÃO RAÇÃO',s:'Compre 3 leve 4 na linha premium!',tag:'nutricao',c:'#E74C3C'},
+  {id:'ac01',t:'ACESSÓRIOS PET',s:'Coleiras, guias e muito mais!',tag:'acessorios',c:'#9B59B6'},
+  {id:'ac02',t:'ROUPINHAS PET',s:'Estilo e conforto para seu pet',tag:'acessorios',c:'#F39C12'},
+  {id:'ac03',t:'CAMINHAS & CASINHAS',s:'O melhor descanso para seu pet',tag:'acessorios',c:'#E74C3C'},
+  {id:'ac04',t:'BRINQUEDOS',s:'Diversão e entretenimento para pets',tag:'acessorios',c:'#2ECC71'},
+  {id:'ac05',t:'TRANSPORTE SEGURO',s:'Caixas e bolsas de transporte',tag:'acessorios',c:'#3498DB'},
+  {id:'vc01',t:'VACINA ANTIRRÁBICA',s:'Proteja seu pet e sua família',tag:'vacinas',c:'#E74C3C'},
+  {id:'vc02',t:'V10 CANINA',s:'Imunização completa para cães',tag:'vacinas',c:'#3498DB'},
+  {id:'vc03',t:'VACINA FELINA',s:'Proteção total para seu gato',tag:'vacinas',c:'#9B59B6'},
+  {id:'vc04',t:'VERMIFUGAÇÃO',s:'Saúde do pet começa por dentro',tag:'vacinas',c:'#2ECC71'},
+  {id:'vc05',t:'ANTIPULGAS',s:'Carrapatos, pulgas e bernes',tag:'vacinas',c:'#F39C12'},
+  {id:'dk01',t:'VOCÊ SABIA?',s:'Cães precisam de banho a cada 15 dias',tag:'dicas',c:'#3498DB'},
+  {id:'dk02',t:'DICA DE SAÚDE',s:'Gatos devem beber bastante água',tag:'dicas',c:'#9B59B6'},
+  {id:'dk03',t:'FIQUE ATENTO!',s:'Vacinas em dia protegem a família toda',tag:'dicas',c:'#E74C3C'},
+  {id:'dk04',t:'NUTRIÇÃO CORRETA',s:'Ração de qualidade faz toda diferença',tag:'dicas',c:'#2ECC71'},
+  {id:'dk05',t:'CUIDADO NO VERÃO',s:'Pets precisam de hidratação extra',tag:'dicas',c:'#F39C12'},
+  {id:'dk06',t:'EXERCÍCIO É SAÚDE',s:'Passeios diários são essenciais',tag:'dicas',c:'#1a9e52'},
+  {id:'dk07',t:'IDENTIFIQUE SEU PET',s:'Microchip garante o retorno seguro',tag:'dicas',c:'#9B59B6'},
+  {id:'dk08',t:'DENTE SAUDÁVEL',s:'Escovação regular previne doenças',tag:'dicas',c:'#3498DB'},
+  {id:'dk09',t:'STRESS DO PET',s:'Sinais de que seu pet precisa de ajuda',tag:'dicas',c:'#E74C3C'},
+  {id:'dk10',t:'BEM-ESTAR ANIMAL',s:'Amor e carinho fazem toda diferença!',tag:'dicas',c:'#F39C12'},
+  {id:'pm01',t:'MEGA PROMOÇÃO!',s:'Descontos imperdíveis essa semana',tag:'promocoes',c:'#E74C3C'},
+  {id:'pm02',t:'PROMOÇÃO RELÂMPAGO',s:'Por tempo limitado! Corra!',tag:'promocoes',c:'#F39C12'},
+  {id:'pm03',t:'DESCONTO ESPECIAL',s:'Só para clientes do WhatsApp!',tag:'promocoes',c:'#25D366'},
+  {id:'pm04',t:'COMBO PET',s:'Banho + Tosa + Hidratação',tag:'promocoes',c:'#9B59B6'},
+  {id:'pm05',t:'FIDELIDADE PREMIADA',s:'Na 5ª visita ganhe um banho grátis!',tag:'promocoes',c:'#2ECC71'},
+  {id:'pm06',t:'SEGUNDA FELIZ',s:'Todo Monday: 20% off no banho!',tag:'promocoes',c:'#3498DB'},
+  {id:'pm07',t:'ANIVERSÁRIO DO PET',s:'Mês do nascimento com desconto!',tag:'promocoes',c:'#E74C3C'},
+  {id:'pm08',t:'INDIQUE E GANHE',s:'Indique amigos e ganhe prêmios!',tag:'promocoes',c:'#F39C12'},
+  {id:'pr01',t:'VERÃO COM SEU PET',s:'Banho pós-praia com desconto!',tag:'praia',c:'#F39C12'},
+  {id:'pr02',t:'PASSEIO NA PRAIA',s:'Produtos para o verão do seu pet',tag:'praia',c:'#3498DB'},
+  {id:'pr03',t:'FÉRIAS FELIZES',s:'Cuide do pet antes de viajar!',tag:'praia',c:'#2ECC71'},
+  {id:'pr04',t:'PROTEÇÃO SOLAR PET',s:'Proteja seu pet do sol forte',tag:'praia',c:'#E74C3C'},
+  {id:'pr05',t:'HIDRATAÇÃO NO VERÃO',s:'Banho extra + hidratação do pelo',tag:'praia',c:'#9B59B6'},
+  {id:'fz01',t:'PETS NA NATUREZA',s:'Ração e acessórios para o campo',tag:'fazenda',c:'#1a9e52'},
+  {id:'fz02',t:'VIDA NO CAMPO',s:'Seu pet feliz na chácara!',tag:'fazenda',c:'#F39C12'},
+  {id:'fz03',t:'AVENTURA NA FAZENDA',s:'Produtos para pets aventureiros',tag:'fazenda',c:'#E74C3C'},
+  {id:'fz04',t:'AR LIVRE & SAÚDE',s:'Antiparasitários e vacinas em dia',tag:'fazenda',c:'#2ECC71'},
+  {id:'fz05',t:'PET RURAL',s:'Cuidados especiais no campo',tag:'fazenda',c:'#9B59B6'},
+  {id:'ad01',t:'ADESTRAMENTO',s:'Comportamento saudável e equilibrado',tag:'adestramento',c:'#E74C3C'},
+  {id:'ad02',t:'CURSO DE OBEDIÊNCIA',s:'Cão obediente = família feliz!',tag:'adestramento',c:'#3498DB'},
+  {id:'ad03',t:'ADESTRAMENTO BÁSICO',s:'Primeiros comandos essenciais',tag:'adestramento',c:'#2ECC71'},
+  {id:'ad04',t:'SOCIALIZAÇÃO PET',s:'Pets felizes com outros animais',tag:'adestramento',c:'#F39C12'},
+  {id:'ad05',t:'CONTROLE COMPORTAMENTAL',s:'Sem stress para vizinhos e família',tag:'adestramento',c:'#9B59B6'},
 ];
 
 // ── STATE ──────────────────────────────────────────────
@@ -579,9 +615,19 @@ let renderTmr=null;
 // ── BOOT ───────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded',()=>{
   const saved=localStorage.getItem('petcfg');
-  if(saved){const s=JSON.parse(saved);if(s.nome==='Amigão Petshop'||s.nome==='Amigão Pet Shop 🐾🐾')s.nome='Amigão Pet Shop 🐾';cfg={...cfg,...s};document.getElementById('modal-cfg').classList.add('hidden');}
+  if(saved){
+    const s=JSON.parse(saved);
+    if(s.nome==='Amigão Petshop'||s.nome==='Amigão Pet Shop 🐾🐾')s.nome='Amigão Pet Shop 🐾';
+    cfg={...cfg,...s};
+    document.getElementById('modal-cfg').classList.add('hidden');
+  }
   carregarMigracoes();
-  atualizarHdr();preencherEditor();renderCores();renderPratCats();renderPratGaleria();renderPratFundos();atualizarBotaoImportarGaleria();initCanvasInteraction();
+  atualizarHdr();preencherEditor();renderCores();
+  renderPratCats();renderPratGaleria();renderPratFundos();
+  atualizarBotaoImportarGaleria();
+  // Carrega imagens da galeria do GitHub ao iniciar
+  if(cfg.ghToken)carregarImgsGitHubGaleria();
+  initCanvasInteraction();
 });
 
 // ── CONFIG ─────────────────────────────────────────────
@@ -603,18 +649,26 @@ function salvarCfg(){
   localStorage.setItem('petcfg',JSON.stringify(cfg));
   document.getElementById('modal-cfg').classList.add('hidden');
   atualizarHdr();preencherEditor();schedRender();
+  if(cfg.ghToken)carregarImgsGitHubGaleria();
 }
 function atualizarHdr(){
   document.getElementById('hdr-nome').textContent=cfg.nome;
   document.getElementById('hdr-cfg-lbl').textContent='Meu Petshop';
 }
 
-// ── GALLERY (legacy stubs) ──────────────────────────────
-function irPara(){}
+// ── GALLERY THUMBNAILS ─────────────────────────────────
 function renderThumb(a,canvas){
   const ctx=canvas.getContext('2d');const W=540,H=540;
   canvas.width=W;canvas.height=H;
-  const img=new Image();img.crossOrigin='anonymous';img.src=FOTO(a.tag,ARTES.indexOf(a));
+  const fotoUrl=FOTO(a.tag,ARTES.indexOf(a));
+  if(!fotoUrl){
+    // Sem imagem: mostra placeholder com cor
+    ctx.fillStyle=a.c;ctx.fillRect(0,0,W,H);
+    ctx.font='60px serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('🐾',W/2,H/2-20);
+    ctx.font='bold 20px Nunito,sans-serif';ctx.fillStyle='rgba(255,255,255,.8)';ctx.fillText(a.t,W/2,H/2+40);
+    return;
+  }
+  const img=new Image();img.crossOrigin='anonymous';img.src=fotoUrl;
   const draw=()=>{
     ctx.clearRect(0,0,W,H);
     const sc=Math.max(W/img.naturalWidth,H/img.naturalHeight);
@@ -624,12 +678,10 @@ function renderThumb(a,canvas){
     ov.addColorStop(0,'rgba(0,0,0,.18)');ov.addColorStop(1,'rgba(0,0,0,.78)');
     ctx.fillStyle=ov;ctx.fillRect(0,0,W,H);
     ctx.fillStyle=a.c;ctx.fillRect(0,0,W,50);
-    // Mascot icon in header
     if(MASCOTE_IMG.complete&&MASCOTE_IMG.naturalWidth){ctx.drawImage(MASCOTE_IMG,6,2,46,46);}
     ctx.save();ctx.font='bold 18px "Fredoka One",cursive';ctx.fillStyle='#fff';ctx.textBaseline='middle';ctx.textAlign='left';
     const nomeShort=cfg.nome.length>30?cfg.nome.substring(0,30)+'…':cfg.nome;
-    ctx.shadowColor='rgba(0,0,0,.5)';ctx.shadowBlur=6;
-    ctx.fillText(nomeShort,57,25);ctx.restore();
+    ctx.shadowColor='rgba(0,0,0,.5)';ctx.shadowBlur=6;ctx.fillText(nomeShort,57,25);ctx.restore();
     ctx.save();ctx.textAlign='left';ctx.textBaseline='bottom';ctx.shadowColor='rgba(0,0,0,.9)';ctx.shadowBlur=10;
     let fs=28;ctx.font=`900 ${fs}px Nunito,sans-serif`;
     while(ctx.measureText(a.t).width>W-32&&fs>14){fs-=2;ctx.font=`900 ${fs}px Nunito,sans-serif`;}
@@ -641,12 +693,11 @@ function renderThumb(a,canvas){
     ctx.strokeStyle=a.c;ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(16,H-36);ctx.lineTo(W-16,H-36);ctx.stroke();
     ctx.save();ctx.font='bold 13px Nunito,sans-serif';ctx.fillStyle='rgba(255,255,255,.7)';ctx.textBaseline='bottom';ctx.textAlign='left';
     ctx.fillText('📱 '+cfg.wpp,16,H-8);ctx.restore();
-    canvas.parentElement.querySelector('.thumb-loading')?.remove();
   };
   if(img.complete&&img.naturalWidth)draw();
-  else{img.onload=draw;img.onerror=()=>{ctx.fillStyle=a.c;ctx.fillRect(0,0,W,H);ctx.font='80px serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('🐾',W/2,H/2);canvas.parentElement.querySelector('.thumb-loading')?.remove();};}
+  else{img.onload=draw;img.onerror=()=>{ctx.fillStyle=a.c;ctx.fillRect(0,0,W,H);ctx.font='80px serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('🐾',W/2,H/2);};}
 }
-function selecionarArte(id){pratSelArte(id);}
+
 function preencherEditor(){
   document.getElementById('ed-nome').value=cfg.nome;
   document.getElementById('ed-wpp').value=cfg.wpp;
@@ -686,28 +737,32 @@ const PRAT={
   racao:[],
   acessorios:[],
 };
+
 let pratAbaAtual='galeria';
 let pratCatAtual='todos';
 let pratSrch='';
+
 function pratAba(aba,btn){
   pratAbaAtual=aba;
   document.querySelectorAll('.prat-tab').forEach(t=>t.classList.remove('active'));
   btn.classList.add('active');
   const galArea=document.getElementById('prat-galeria-area');
   const outArea=document.getElementById('prat-outras-area');
-  const resetBtn=document.getElementById('prat-reset-btn');
   if(aba==='galeria'){
     galArea.classList.remove('hidden');outArea.classList.add('hidden');
     renderPratGaleria();renderPratFundos();atualizarBotaoImportarGaleria();
+    if(cfg.ghToken)carregarImgsGitHubGaleria();
   } else {
     galArea.classList.add('hidden');outArea.classList.remove('hidden');
-    resetBtn.style.display='none';
+    document.getElementById('prat-reset-btn').style.display='none';
     renderPratOutras();
     atualizarBotaoImportar(aba);
     carregarImgsGitHub(aba);
   }
 }
+
 function pratBuscar(v){pratSrch=v.toLowerCase();renderPratGaleria();}
+
 function renderPratFundos(){
   const grid=document.getElementById('prat-fundos-grid');
   if(!grid)return;
@@ -727,20 +782,23 @@ function renderPratFundos(){
     grid.appendChild(el);
   });
 }
+
 function pratFiltrarCat(cat,btn){
   pratCatAtual=cat;
   document.querySelectorAll('.pcat-btn').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');renderPratGaleria();atualizarBotaoImportarGaleria();
 }
+
 function renderPratCats(){
   document.getElementById('prat-cats').innerHTML=
     CATS.map(c=>`<button class="pcat-btn${c.id===pratCatAtual?' active':''}" onclick="pratFiltrarCat('${c.id}',this)">${c.lbl}</button>`).join('');
 }
+
 function renderPratGaleria(){
   const lista=ARTES.filter(a=>{
     const mc=pratCatAtual==='todos'||a.tag===pratCatAtual;
     const ms=!pratSrch||a.t.toLowerCase().includes(pratSrch)||a.s.toLowerCase().includes(pratSrch);
-    const temImagem=!!FOTO(a.tag,ARTES.indexOf(a)); // só exibe se tiver imagem no GitHub
+    const temImagem=!!FOTO(a.tag,ARTES.indexOf(a));
     return mc&&ms&&temImagem;
   });
   const grid=document.getElementById('prat-galeria-grid');
@@ -760,54 +818,37 @@ function renderPratGaleria(){
   if(ed.arte){info.textContent='✅ Selecionado: '+ed.arte.t;info.classList.add('show');}
   else{info.classList.remove('show');}
 }
+
 function pratSelArte(id){
   const a=ARTES.find(x=>x.id===id);if(!a)return;
   ed.arte=a;ed.titulo=a.t;ed.sub=a.s;ed.cor=a.c;
   preencherEditor();renderPratGaleria();schedRender();
 }
+
 const LAYER_ABAS=['pets','racao','acessorios'];
 function isLayerAba(){return LAYER_ABAS.includes(pratAbaAtual);}
+
 function renderPratOutras(){
   const grid=document.getElementById('prat-outras-grid');
   grid.innerHTML='';
   const items=PRAT[pratAbaAtual]||[];
   items.forEach(item=>{
     const el=document.createElement('div');
-    const isBg=pratAbaAtual==='fundos';
-    if(isBg){
-      el.className='prat-item'+(ed.bgUrl===item.url&&item.url?' sel':ed.bgGrad===item.grad&&item.grad?' sel':'');
-      if(item.grad&&!item.url){
-        el.classList.add('grad');el.style.background=item.grad;el.textContent=item.lbl;
-        el.onclick=()=>pratSelGrad(item.grad);
-      } else {
-        const img=document.createElement('img');img.src=item.url;img.alt=item.lbl;img.loading='lazy';
-        const lbl=document.createElement('div');lbl.className='prat-label';lbl.textContent=item.lbl;
-        el.appendChild(img);el.appendChild(lbl);
-        el.onclick=()=>pratSelUrl(item.url);
-      }
-    } else {
-      const inLayer=ed.objects.some(o=>o.url===item.url);
-      el.className='prat-item'+(inLayer?' in-layer':'');
-      const img=document.createElement('img');img.src=item.url;img.alt=item.lbl;img.loading='lazy';
-      const lbl=document.createElement('div');lbl.className='prat-label';lbl.textContent=item.lbl;
-      el.appendChild(img);el.appendChild(lbl);
-      el.onclick=()=>toggleObject(item.url,item.lbl);
-    }
+    const inLayer=ed.objects.some(o=>o.url===item.url);
+    el.className='prat-item'+(inLayer?' in-layer':'');
+    const img=document.createElement('img');img.src=item.url;img.alt=item.lbl;img.loading='lazy';
+    const lbl=document.createElement('div');lbl.className='prat-label';lbl.textContent=item.lbl;
+    el.appendChild(img);el.appendChild(lbl);
+    el.onclick=()=>toggleObject(item.url,item.lbl);
     grid.appendChild(el);
   });
   renderUploadThumbs();
-  // layers panel
   renderLayersPanel();
   const info=document.getElementById('prat-sel-info2');
-  if(pratAbaAtual==='fundos'){
-    const sel=(items.find(i=>i.url===ed.bgUrl||i.grad===ed.bgGrad))||(uploads.find(u=>u.url===ed.bgUrl));
-    if(sel){info.textContent='✅ '+(sel.lbl||'Foto selecionada');info.classList.add('show');}
-    else{info.classList.remove('show');}
-  } else {
-    if(ed.objects.length){info.textContent=`📌 ${ed.objects.length} camada(s) no card`;info.classList.add('show');}
-    else{info.classList.remove('show');}
-  }
+  if(ed.objects.length){info.textContent=`📌 ${ed.objects.length} camada(s) no card`;info.classList.add('show');}
+  else{info.classList.remove('show');}
 }
+
 function pratSelUrl(url){
   ed.bgUrl=url;ed.bgGrad=null;renderPratOutras();schedRender();
 }
@@ -817,7 +858,8 @@ function pratSelGrad(grad){
 function pratReset(){
   ed.bgUrl=null;ed.bgGrad=null;renderPratOutras();schedRender();
 }
-const OBJ_BASE_H=380; // px em canvas 1080
+
+const OBJ_BASE_H=380;
 function toggleObject(url,lbl){
   const idx=ed.objects.findIndex(o=>o.url===url);
   if(idx>=0){
@@ -825,9 +867,8 @@ function toggleObject(url,lbl){
     ed.objects.splice(idx,1);
     mostrarToast('🗑️ '+lbl+' removido');
   } else {
-    // Posição default: centro-inferior, ligeiramente escalonado por qtd
     const n=ed.objects.length;
-    const xOff=(n%3-1)*200; // espalha horizontalmente
+    const xOff=(n%3-1)*200;
     ed.objects.push({url,lbl,x:540+xOff,y:850,scale:1.0,rot:0,flipH:false});
     ed.selectedObjIdx=ed.objects.length-1;
     mostrarToast('✅ '+lbl+' adicionado! Arraste no canvas para posicionar.');
@@ -875,24 +916,45 @@ function mostrarToast(msg,dur=3000){
   clearTimeout(toastTmr);toastTmr=setTimeout(()=>t.classList.remove('show'),dur);
 }
 
-// ── UPLOAD DE IMAGENS ──────────────────────────────────
+// ── UPLOAD DE IMAGENS (abas Pets/Ração/Acess.) ─────────
 let uploads=[];
 function uploadImagem(input){
   const file=input.files[0];if(!file)return;
   input.value='';
-  abrirTratamento(file);
+  abrirTratamento(file,'outras');
+}
+
+// ── UPLOAD DE IMAGEM PARA GALERIA (Aba Modelos) ────────
+function uploadImagemGaleria(input){
+  const file=input.files[0];if(!file)return;
+  input.value='';
+  abrirTratamento(file,'galeria');
 }
 
 // ── TRATAMENTO DE IMAGEM ────────────────────────────────
-let tratCtx={file:null,originalBlob:null,processedBlob:null,tratamentos:{bg:false,qual:false},pasta:null};
+// contextoUpload: 'outras' | 'galeria'
+let tratCtx={file:null,originalBlob:null,processedBlob:null,tratamentos:{bg:false,qual:false},pasta:null,contexto:'outras'};
 
-function _pastaDefault(){
+const PASTAS_GH=[
+  {id:'pets',lbl:'🐾 Pets (animais)'},
+  {id:'racao',lbl:'🍖 Ração & Petiscos'},
+  {id:'acessorios',lbl:'🎀 Acessórios'},
+  {id:'fundos',lbl:'🖼️ Fundos'},
+];
+const PASTAS_GH_GALERIA=[
+  {id:'galeria',lbl:'🎨 Galeria (modelos)'},
+  ...PASTAS_GH
+];
+
+function _pastaDefault(contexto){
+  if(contexto==='galeria')return'galeria';
   const abas=['pets','racao','acessorios','fundos'];
   return abas.includes(pratAbaAtual)?pratAbaAtual:'pets';
 }
-function abrirTratamento(file){
-  tratCtx={file,originalBlob:file,processedBlob:file,tratamentos:{bg:false,qual:false},pasta:_pastaDefault()};
-  // Reset UI
+
+function abrirTratamento(file,contexto='outras'){
+  const pasta=_pastaDefault(contexto);
+  tratCtx={file,originalBlob:file,processedBlob:file,tratamentos:{bg:false,qual:false},pasta,contexto};
   ['bg','qual'].forEach(t=>{
     const b=document.getElementById('btn-tratar-'+t);
     if(b){b.classList.remove('on','loading');}
@@ -900,9 +962,10 @@ function abrirTratamento(file){
   document.getElementById('tratar-status').textContent='';
   document.getElementById('tratar-prog').style.display='none';
   document.getElementById('btn-tratar-salvar').disabled=false;
-  // Pasta buttons
+  // Pasta buttons (galeria mostra opção galeria + outras; outros só mostram as pastas normais)
+  const listaPastas=contexto==='galeria'?PASTAS_GH_GALERIA:PASTAS_GH;
   const row=document.getElementById('tratar-pasta-row');
-  row.innerHTML=PASTAS_GH.map(p=>`<button class="tratar-pasta-btn${p.id===tratCtx.pasta?' on':''}" onclick="selecionarPastaTratar('${p.id}',this)">${p.lbl}</button>`).join('');
+  row.innerHTML=listaPastas.map(p=>`<button class="tratar-pasta-btn${p.id===pasta?' on':''}" onclick="selecionarPastaTratar('${p.id}',this)">${p.lbl}</button>`).join('');
   // Preview
   const canvas=document.getElementById('tratar-canvas');
   const ctx=canvas.getContext('2d');
@@ -918,17 +981,20 @@ function abrirTratamento(file){
   img.src=url;
   document.getElementById('modal-tratar').classList.remove('hidden');
 }
+
 function selecionarPastaTratar(id,btn){
   tratCtx.pasta=id;
   document.querySelectorAll('.tratar-pasta-btn').forEach(b=>b.classList.remove('on'));
   btn.classList.add('on');
 }
+
 async function toggleTratamento(tipo){
   tratCtx.tratamentos[tipo]=!tratCtx.tratamentos[tipo];
   const btn=document.getElementById('btn-tratar-'+tipo);
   btn.classList.toggle('on',tratCtx.tratamentos[tipo]);
   await aplicarTratamentosPreview();
 }
+
 async function aplicarTratamentosPreview(){
   const status=document.getElementById('tratar-status');
   const prog=document.getElementById('tratar-prog');
@@ -954,7 +1020,6 @@ async function aplicarTratamentosPreview(){
     tratCtx.processedBlob=blob;
     status.textContent=tratCtx.tratamentos.bg||tratCtx.tratamentos.qual?'✅ Tratamento aplicado! Confira o preview.':'';
     progBar.style.width='100%';
-    // Atualizar preview
     const url=URL.createObjectURL(blob);
     const canvas=document.getElementById('tratar-canvas');
     const ctx=canvas.getContext('2d');
@@ -963,7 +1028,6 @@ async function aplicarTratamentosPreview(){
       const maxW=400,maxH=180;
       const scale=Math.min(maxW/img.naturalWidth,maxH/img.naturalHeight,1);
       canvas.width=img.naturalWidth*scale;canvas.height=img.naturalHeight*scale;
-      // Checkerboard for transparency
       if(tratCtx.tratamentos.bg){
         for(let y=0;y<canvas.height;y+=12)for(let x=0;x<canvas.width;x+=12){
           ctx.fillStyle=(Math.floor(x/12)+Math.floor(y/12))%2===0?'#ccc':'#fff';
@@ -982,34 +1046,49 @@ async function aplicarTratamentosPreview(){
   ['bg','qual'].forEach(t=>document.getElementById('btn-tratar-'+t).classList.remove('loading'));
   btnSalvar.disabled=false;
 }
+
+// ── REMOVER FUNDO — com fallback entre CDNs ────────────
 async function removerFundoImagem(blob){
   const status=document.getElementById('tratar-status');
   if(!window._bgRemovalMod){
     status.textContent='⬇️ Baixando modelo de IA (apenas 1ª vez ~5MB)…';
-    window._bgRemovalMod=await import('https://cdn.jsdelivr.net/npm/@imgly/background-removal@1.4.5/dist/background-removal.js');
+    // Tenta unpkg primeiro; cai para jsdelivr como fallback
+    const cdns=[
+      'https://unpkg.com/@imgly/background-removal@1.4.5/dist/background-removal.js',
+      'https://cdn.jsdelivr.net/npm/@imgly/background-removal@1.4.5/dist/background-removal.js',
+    ];
+    let lastErr=null;
+    for(const cdn of cdns){
+      try{
+        window._bgRemovalMod=await import(/* webpackIgnore: true */cdn);
+        window._bgRemovalPublicPath=cdn.replace(/background-removal\.js$/,'');
+        break;
+      }catch(e){lastErr=e;window._bgRemovalMod=null;}
+    }
+    if(!window._bgRemovalMod){
+      throw new Error('Não foi possível carregar o modelo de remoção de fundo. Verifique sua conexão.');
+    }
   }
   const cfg_={
-    publicPath:'https://cdn.jsdelivr.net/npm/@imgly/background-removal@1.4.5/dist/',
+    publicPath: window._bgRemovalPublicPath||'https://unpkg.com/@imgly/background-removal@1.4.5/dist/',
     debug:false,
     model:'small',
   };
   return await window._bgRemovalMod.removeBackground(blob,cfg_);
 }
+
 async function melhorarQualidade(blob){
   return new Promise((resolve,reject)=>{
     const url=URL.createObjectURL(blob);
     const img=new Image();
     img.onload=()=>{
       const W=img.naturalWidth,H=img.naturalHeight;
-      // Original
       const c1=document.createElement('canvas');c1.width=W;c1.height=H;
       const ctx1=c1.getContext('2d');ctx1.drawImage(img,0,0,W,H);
       const orig=ctx1.getImageData(0,0,W,H);
-      // Blurred (para unsharp mask)
       const c2=document.createElement('canvas');c2.width=W;c2.height=H;
       const ctx2=c2.getContext('2d');ctx2.filter='blur(1.2px)';ctx2.drawImage(img,0,0,W,H);
       const blur=ctx2.getImageData(0,0,W,H);
-      // Unsharp mask + brilho
       const res=ctx1.createImageData(W,H);
       const amt=1.25;
       for(let i=0;i<orig.data.length;i+=4){
@@ -1020,7 +1099,6 @@ async function melhorarQualidade(blob){
         res.data[i+3]=orig.data[i+3];
       }
       ctx1.putImageData(res,0,0);
-      // Contraste + saturação
       const c3=document.createElement('canvas');c3.width=W;c3.height=H;
       const ctx3=c3.getContext('2d');
       ctx3.filter='contrast(1.12) brightness(1.04) saturate(1.15)';
@@ -1032,6 +1110,7 @@ async function melhorarQualidade(blob){
     img.onerror=reject;img.src=url;
   });
 }
+
 async function salvarImagemTratada(){
   if(!cfg.ghToken){mostrarToast('⚠️ Configure o Token GitHub em "Meu Petshop"');return;}
   const blob=tratCtx.processedBlob||tratCtx.originalBlob;
@@ -1059,38 +1138,34 @@ async function salvarImagemTratada(){
     if(resp.ok){
       document.getElementById('modal-tratar').classList.add('hidden');
       mostrarToast('✅ Salvo no GitHub!');
-      await carregarImgsGitHub(tratCtx.pasta);
-      // Se a aba atual é diferente da pasta salva, mudar para ela
-      if(pratAbaAtual!==tratCtx.pasta){
-        const tabBtn=document.querySelector(`.prat-tab[data-aba="${tratCtx.pasta}"]`);
-        if(tabBtn)pratAba(tratCtx.pasta,tabBtn);
-      }
       const rawUrl=`https://raw.githubusercontent.com/${GH_REPO}/${GH_BRANCH}/${path}`;
-      if(isLayerAba()||pratAbaAtual===tratCtx.pasta){
-        if(LAYER_ABAS.includes(tratCtx.pasta)){toggleObject(rawUrl,baseName);}else{pratSelUrl(rawUrl);}
+      if(tratCtx.pasta==='galeria'){
+        // Recarrega galeria
+        await carregarImgsGitHubGaleria();
+        // Usa como fundo
+        ed.bgUrl=rawUrl;ed.bgGrad=null;schedRender();
+      } else {
+        await carregarImgsGitHub(tratCtx.pasta);
+        if(pratAbaAtual!==tratCtx.pasta){
+          const tabBtn=document.querySelector(`.prat-tab[data-aba="${tratCtx.pasta}"]`);
+          if(tabBtn)pratAba(tratCtx.pasta,tabBtn);
+        }
+        if(LAYER_ABAS.includes(tratCtx.pasta)){toggleObject(rawUrl,baseName);}
+        else{pratSelUrl(rawUrl);}
       }
     } else {
       const err=await resp.json().catch(()=>({}));
-      const msg='❌ '+(err.message||`HTTP ${resp.status}`)+' — imagem removida da página.';
-      status.textContent=msg;
-      mostrarToast(msg,6000);
-      // Upload falhou: remove da lista local e fecha o modal
-      uploads=uploads.filter(u=>u.url!==URL.createObjectURL(blob));
-      document.getElementById('modal-tratar').classList.add('hidden');
-      renderUploadThumbs();
+      status.textContent='❌ '+(err.message||`HTTP ${resp.status}`);
+      mostrarToast('❌ Erro ao salvar no GitHub',5000);
       btnSalvar.disabled=false;
     }
   }catch(e){
-    const msg='⚠️ '+(e.message||'Erro de conexão')+' — imagem removida da página.';
-    status.textContent=msg;
-    mostrarToast(msg,6000);
-    // Erro de rede: remove da lista local e fecha o modal
-    uploads=uploads.filter(u=>u.local!==true||u._pendente===true);
-    document.getElementById('modal-tratar').classList.add('hidden');
-    renderUploadThumbs();
+    status.textContent='⚠️ '+(e.message||'Erro de conexão');
+    mostrarToast('⚠️ Erro de conexão',5000);
     btnSalvar.disabled=false;
   }
 }
+
 function usarLocalSemSalvar(){
   const blob=tratCtx.processedBlob||tratCtx.originalBlob;
   const lbl=tratCtx.file.name.replace(/\.[^.]+$/,'').substring(0,22);
@@ -1098,28 +1173,32 @@ function usarLocalSemSalvar(){
   const entrada={url,lbl,local:true};
   uploads.unshift(entrada);
   document.getElementById('modal-tratar').classList.add('hidden');
-  renderUploadThumbs();
-  if(isLayerAba()){toggleObject(url,lbl);}else{pratSelUrl(url);}
+  if(tratCtx.contexto==='galeria'){
+    ed.bgUrl=url;ed.bgGrad=null;schedRender();
+  } else {
+    renderUploadThumbs();
+    if(isLayerAba()){toggleObject(url,lbl);}else{pratSelUrl(url);}
+  }
   mostrarToast('🖼️ Imagem carregada localmente (não salva no GitHub)');
 }
+
 function cancelarTratamento(){
   document.getElementById('modal-tratar').classList.add('hidden');
-  tratCtx={file:null,originalBlob:null,processedBlob:null,tratamentos:{bg:false,qual:false},pasta:null};
+  tratCtx={file:null,originalBlob:null,processedBlob:null,tratamentos:{bg:false,qual:false},pasta:null,contexto:'outras'};
 }
+
 function renderUploadThumbs(){
   const wrap=document.getElementById('upload-thumbs');
   if(!wrap)return;
   wrap.innerHTML='';
-  // Mostra apenas imagens salvas no GitHub (nao locais)
-  uploads.filter(u=>!u.local).forEach((u,idx)=>{
-  const realIdx=uploads.indexOf(u);
+  uploads.filter(u=>!u.local).forEach((u)=>{
+    const realIdx=uploads.indexOf(u);
     const el=document.createElement('div');
     const inLayer=ed.objects.some(o=>o.url===u.url);
     el.className='prat-item'+(ed.bgUrl===u.url?' sel':inLayer?' in-layer':'');
     const img=document.createElement('img');img.src=u.url;img.alt=u.lbl;
-    const lbl=document.createElement('div');lbl.className='prat-label';lbl.textContent=(u.local?'📱 ':'☁️ ')+u.lbl;
+    const lbl=document.createElement('div');lbl.className='prat-label';lbl.textContent='☁️ '+u.lbl;
     el.appendChild(img);el.appendChild(lbl);
-    // Action buttons (delete + move)
     const actions=document.createElement('div');actions.className='upload-item-actions';
     const btnDel=document.createElement('button');
     btnDel.className='upload-act-btn upload-act-del';
@@ -1129,8 +1208,7 @@ function renderUploadThumbs(){
     btnMv.className='upload-act-btn upload-act-mv';
     btnMv.title='Mover de pasta';btnMv.textContent='📂';
     btnMv.onclick=(e)=>{e.stopPropagation();abrirModalMover(realIdx);};
-    actions.appendChild(btnDel);
-    if(!u.local)actions.appendChild(btnMv);
+    actions.appendChild(btnDel);actions.appendChild(btnMv);
     el.appendChild(actions);
     el.onclick=()=>{
       if(isLayerAba()){toggleObject(u.url,u.lbl);}else{pratSelUrl(u.url);}
@@ -1139,11 +1217,11 @@ function renderUploadThumbs(){
     wrap.appendChild(el);
   });
 }
+
 async function excluirUpload(idx){
   const u=uploads[idx];
   if(!u)return;
   if(!confirm(`Excluir "${u.lbl}"?`))return;
-  // Remove from GitHub if saved there
   if(u.ghPath&&cfg.ghToken){
     mostrarToast('⏳ Excluindo do GitHub…',8000);
     try{
@@ -1160,20 +1238,13 @@ async function excluirUpload(idx){
       }
     }catch(e){mostrarToast('⚠️ Erro de conexão');}
   }
-  // Remove from canvas if in use
   if(ed.bgUrl===u.url){ed.bgUrl='';schedRender();}
   ed.objects=ed.objects.filter(o=>o.url!==u.url);
   uploads.splice(idx,1);
   renderUploadThumbs();schedRender();
   if(!u.ghPath)mostrarToast('🗑️ Imagem removida!');
 }
-const PASTAS_GH=[
-  {id:'pets',lbl:'🐾 Pets (animais)'},
-  {id:'racao',lbl:'🍖 Ração & Petiscos'},
-  {id:'acessorios',lbl:'🎀 Acessórios'},
-  {id:'fundos',lbl:'🖼️ Fundos'},
-];
-// moverTarget: {ghPath, url, onSuccess}
+
 let moverTarget=null;
 function abrirModalMover(idx){
   const u=uploads[idx];if(!u||!u.ghPath)return;
@@ -1183,19 +1254,27 @@ function abrirModalMover(idx){
   });
 }
 function abrirModalMoverGH(ghPath,url){
-  _abrirMoverDialog(ghPath,url,(novaUrl,novoPath)=>{
+  _abrirMoverDialog(ghPath,url,(novaUrl)=>{
     carregarImgsGitHub(pratAbaAtual);
-    // Atualiza canvas se estava em uso
     if(ed.bgUrl===url)ed.bgUrl=novaUrl;
     ed.objects.forEach(o=>{if(o.url===url)o.url=novaUrl;});
+    schedRender();
+  });
+}
+function abrirModalMoverGaleria(ghPath,url){
+  _abrirMoverDialog(ghPath,url,(novaUrl)=>{
+    carregarImgsGitHubGaleria();
+    if(ed.bgUrl===url)ed.bgUrl=novaUrl;
     schedRender();
   });
 }
 function _abrirMoverDialog(ghPath,url,onSuccess){
   const pastaAtual=ghPath.split('/')[1]||'';
   moverTarget={ghPath,url,onSuccess};
+  // Destinos incluem galeria
+  const todasPastas=[{id:'galeria',lbl:'🎨 Galeria (modelos)'},...PASTAS_GH];
   const opcoes=document.getElementById('modal-mover-opcoes');
-  opcoes.innerHTML=PASTAS_GH.filter(p=>p.id!==pastaAtual).map(p=>
+  opcoes.innerHTML=todasPastas.filter(p=>p.id!==pastaAtual).map(p=>
     `<button class="pasta-opt-btn" onclick="confirmarMover('${p.id}')">${p.lbl}</button>`
   ).join('');
   document.getElementById('modal-mover').classList.remove('hidden');
@@ -1209,7 +1288,7 @@ async function confirmarMover(novaPasta){
   mostrarToast('⏳ Movendo imagem…',10000);
   try{
     const getR=await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${ghPath}`,{headers:{'Authorization':`Bearer ${cfg.ghToken}`}});
-    if(!getR.ok){const d=await getR.json().catch(()=>({}));mostrarToast(`❌ Erro ao ler original: ${getR.status} – ${d.message||''}`);return;}
+    if(!getR.ok){mostrarToast(`❌ Erro ao ler original: ${getR.status}`);return;}
     const orig=await getR.json();
     const putR=await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${novoCaminho}`,{
       method:'PUT',
@@ -1227,11 +1306,72 @@ async function confirmarMover(novaPasta){
     ed.objects.forEach(o=>{if(o.url===url)o.url=novaUrl;});
     onSuccess(novaUrl,novoCaminho);
     schedRender();
-    mostrarToast(`✅ Movido para "${PASTAS_GH.find(p=>p.id===novaPasta)?.lbl||novaPasta}"!`);
+    const todasPastas=[{id:'galeria',lbl:'Galeria'},...PASTAS_GH];
+    mostrarToast(`✅ Movido para "${todasPastas.find(p=>p.id===novaPasta)?.lbl||novaPasta}"!`);
   }catch(e){mostrarToast('⚠️ Erro de conexão ao mover');}
 }
 
-// ── IMAGENS DO GITHUB ──────────────────────────────────
+// ── IMAGENS DO GITHUB — aba galeria ───────────────────
+async function carregarImgsGitHubGaleria(){
+  if(!cfg.ghToken)return;
+  const grid=document.getElementById('prat-gh-galeria-grid');
+  if(!grid)return;
+  grid.innerHTML='<div style="font-size:.72rem;color:#aaa;padding:6px 8px;">Carregando…</div>';
+  try{
+    const r=await fetch(`https://api.github.com/repos/${GH_REPO}/contents/imagens/galeria`,{
+      headers:{'Authorization':`Bearer ${cfg.ghToken}`}
+    });
+    if(!r.ok){grid.innerHTML='<div style="font-size:.72rem;color:#aaa;padding:4px 8px;">Pasta galeria não encontrada.</div>';return;}
+    const files=await r.json();
+    const imgs=files.filter(f=>f.type==='file'&&/\.(jpg|jpeg|png|gif|webp|svg)$/i.test(f.name));
+    if(!imgs.length){grid.innerHTML='<div style="font-size:.72rem;color:#aaa;padding:4px 8px;">Nenhuma imagem na galeria.</div>';return;}
+    grid.innerHTML='';
+    imgs.forEach(f=>{
+      const rawUrl=`https://raw.githubusercontent.com/${GH_REPO}/${GH_BRANCH}/imagens/galeria/${f.name}`;
+      const ghPath=`imagens/galeria/${f.name}`;
+      const lbl=f.name.replace(/\.[^.]+$/,'').substring(0,22);
+      const el=document.createElement('div');
+      el.className='prat-item'+(ed.bgUrl===rawUrl?' sel':'');
+      const img=document.createElement('img');img.src=rawUrl;img.alt=lbl;img.loading='lazy';
+      const lblEl=document.createElement('div');lblEl.className='prat-label';lblEl.textContent='📁 '+lbl;
+      el.appendChild(img);el.appendChild(lblEl);
+      el.onclick=()=>{ed.bgUrl=rawUrl;ed.bgGrad=null;schedRender();carregarImgsGitHubGaleria();};
+      // Botões ação (excluir + mover)
+      const actions=document.createElement('div');actions.className='upload-item-actions';
+      const btnDel=document.createElement('button');
+      btnDel.className='upload-act-btn upload-act-del';btnDel.title='Excluir';btnDel.textContent='🗑';
+      btnDel.onclick=async(e)=>{
+        e.stopPropagation();
+        if(!confirm(`Excluir "${lbl}"?`))return;
+        mostrarToast('⏳ Excluindo…',8000);
+        try{
+          const chk=await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${ghPath}`,{headers:{'Authorization':`Bearer ${cfg.ghToken}`}});
+          if(chk.ok){
+            const d=await chk.json();
+            const del=await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${ghPath}`,{
+              method:'DELETE',
+              headers:{'Authorization':`Bearer ${cfg.ghToken}`,'Content-Type':'application/json'},
+              body:JSON.stringify({message:`Excluído via portal: ${f.name}`,sha:d.sha,branch:GH_BRANCH})
+            });
+            if(del.ok){
+              if(ed.bgUrl===rawUrl){ed.bgUrl='';schedRender();}
+              mostrarToast('🗑️ Excluído!');
+              carregarImgsGitHubGaleria();
+            }else{mostrarToast('❌ Erro ao excluir');}
+          }
+        }catch(ex){mostrarToast('⚠️ Erro de conexão');}
+      };
+      const btnMv=document.createElement('button');
+      btnMv.className='upload-act-btn upload-act-mv';btnMv.title='Mover pasta';btnMv.textContent='📂';
+      btnMv.onclick=(e)=>{e.stopPropagation();abrirModalMoverGaleria(ghPath,rawUrl);};
+      actions.appendChild(btnDel);actions.appendChild(btnMv);
+      el.appendChild(actions);
+      grid.appendChild(el);
+    });
+  }catch(ex){grid.innerHTML='<div style="font-size:.72rem;color:#f00;padding:4px 8px;">Erro ao carregar.</div>';}
+}
+
+// ── IMAGENS DO GITHUB — abas pets/racao/acessorios ────
 async function carregarImgsGitHub(pasta){
   if(!cfg.ghToken)return;
   const sec=document.getElementById('prat-gh-section');
@@ -1253,7 +1393,6 @@ async function carregarImgsGitHub(pasta){
       const rawUrl=`https://raw.githubusercontent.com/${GH_REPO}/${GH_BRANCH}/imagens/${pasta}/${f.name}`;
       const ghPath=`imagens/${pasta}/${f.name}`;
       const lbl=f.name.replace(/\.[^.]+$/,'').substring(0,22);
-      const isBg=pasta==='fundos';
       const inLayer=ed.objects.some(o=>o.url===rawUrl);
       const el=document.createElement('div');
       el.className='prat-item'+(ed.bgUrl===rawUrl?' sel':inLayer?' in-layer':'');
@@ -1261,10 +1400,9 @@ async function carregarImgsGitHub(pasta){
       const lblEl=document.createElement('div');lblEl.className='prat-label';lblEl.textContent='📁 '+lbl;
       el.appendChild(img);el.appendChild(lblEl);
       el.onclick=()=>{
-        if(isBg){pratSelUrl(rawUrl);}else{toggleObject(rawUrl,lbl);}
+        toggleObject(rawUrl,lbl);
         carregarImgsGitHub(pasta);
       };
-      // Botoes acao
       const actions=document.createElement('div');actions.className='upload-item-actions';
       const btnDel=document.createElement('button');
       btnDel.className='upload-act-btn upload-act-del';btnDel.title='Excluir';btnDel.textContent='🗑';
@@ -1284,8 +1422,7 @@ async function carregarImgsGitHub(pasta){
             if(del.ok){
               if(ed.bgUrl===rawUrl){ed.bgUrl='';schedRender();}
               ed.objects=ed.objects.filter(o=>o.url!==rawUrl);
-              mostrarToast('🗑️ Excluído!');
-              carregarImgsGitHub(pasta);
+              mostrarToast('🗑️ Excluído!');carregarImgsGitHub(pasta);
             }else{mostrarToast('❌ Erro ao excluir');}
           }
         }catch(ex){mostrarToast('⚠️ Erro de conexão');}
@@ -1330,12 +1467,8 @@ function atualizarBotaoImportar(pasta){
   if(!btn)return;
   const itens=PRAT[pasta]||[];
   const pendentes=itens.filter(it=>it.url&&!it.url.startsWith('imagens/')&&!it.url.includes('raw.githubusercontent.com'));
-  if(!cfg.ghToken||pendentes.length===0){
-    btn.style.display='none';
-  } else {
-    btn.style.display='';
-    btn.textContent=`⬇️ Salvar ${pendentes.length} no GitHub`;
-  }
+  if(!cfg.ghToken||pendentes.length===0){btn.style.display='none';}
+  else{btn.style.display='';btn.textContent=`⬇️ Salvar ${pendentes.length} no GitHub`;}
 }
 async function migrarImgsParaGitHub(pasta){
   if(!cfg.ghToken){mostrarToast('⚠️ Configure o Token GitHub primeiro');return;}
@@ -1355,12 +1488,7 @@ async function migrarImgsParaGitHub(pasta){
       const chk=await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${path}`,{headers:{'Authorization':`Bearer ${cfg.ghToken}`}});
       if(chk.ok){item.url=`https://raw.githubusercontent.com/${GH_REPO}/${GH_BRANCH}/${path}`;ok++;continue;}
       const imgResp=await fetch(item.url);
-      if(!imgResp.ok){
-        msgs.push(`${item.lbl}: imagem retornou HTTP ${imgResp.status}`);
-        erros++;
-        PRAT[pasta]=PRAT[pasta].filter(x=>x!==item);
-        continue;
-      }
+      if(!imgResp.ok){msgs.push(`${item.lbl}: HTTP ${imgResp.status}`);erros++;PRAT[pasta]=PRAT[pasta].filter(x=>x!==item);continue;}
       const blob=await imgResp.blob();
       const base64=await new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result.split(',')[1]);r.onerror=rej;r.readAsDataURL(blob);});
       const put=await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${path}`,{
@@ -1369,36 +1497,19 @@ async function migrarImgsParaGitHub(pasta){
         body:JSON.stringify({message:`Importado: ${item.lbl}`,content:base64,branch:GH_BRANCH})
       });
       if(put.ok){item.url=`https://raw.githubusercontent.com/${GH_REPO}/${GH_BRANCH}/${path}`;ok++;}
-      else{
-        const d=await put.json().catch(()=>({}));
-        msgs.push(`${item.lbl}: GitHub ${put.status} – ${d.message||'sem detalhe'}`);
-        erros++;
-        // Falhou: remove da lista para não aparecer na página
-        PRAT[pasta]=PRAT[pasta].filter(x=>x!==item);
-      }
-    }catch(e){
-      msgs.push(`${item.lbl}: ${e.message||e}`);
-      erros++;
-      // Erro de rede: remove da lista para não aparecer na página
-      PRAT[pasta]=PRAT[pasta].filter(x=>x!==item);
-    }
+      else{const d=await put.json().catch(()=>({}));msgs.push(`${item.lbl}: GitHub ${put.status}`);erros++;PRAT[pasta]=PRAT[pasta].filter(x=>x!==item);}
+    }catch(e){msgs.push(`${item.lbl}: ${e.message||e}`);erros++;PRAT[pasta]=PRAT[pasta].filter(x=>x!==item);}
   }
   if(prog)prog.style.display='none';
   if(btn)btn.disabled=false;
   salvarMigracao(pasta);renderPratOutras();atualizarBotaoImportar(pasta);carregarImgsGitHub(pasta);
-  if(erros){
-    const detalhe=msgs.slice(0,3).join(' | ')+(msgs.length>3?` (+${msgs.length-3} mais)`:'');
-    mostrarToast(`❌ ${erros} item(ns) removido(s) por falha no upload: ${detalhe}`,10000);
-  } else {mostrarToast(`✅ ${ok} fotos salvas no GitHub!`);}
+  if(erros){const detalhe=msgs.slice(0,3).join(' | ')+(msgs.length>3?` (+${msgs.length-3} mais)`:'');mostrarToast(`❌ ${erros} removido(s) por falha: ${detalhe}`,10000);}
+  else{mostrarToast(`✅ ${ok} fotos salvas no GitHub!`);}
 }
 
 // ── MIGRAR FUNDOS DOS MODELOS PARA GITHUB ──────────────
 function getIdsParaTag(tag){
-  if(tag==='todos'){
-    const all=new Set();
-    Object.values(FOTO_IDS).forEach(arr=>arr.forEach(id=>all.add(id)));
-    return [...all];
-  }
+  if(tag==='todos'){const all=new Set();Object.values(FOTO_IDS).forEach(arr=>arr.forEach(id=>all.add(id)));return[...all];}
   return FOTO_IDS[tag]||[];
 }
 function atualizarBotaoImportarGaleria(){
@@ -1406,16 +1517,15 @@ function atualizarBotaoImportarGaleria(){
   const lbl=document.getElementById('prat-galeria-import-lbl');
   if(!bar||!cfg.ghToken)return bar&&(bar.classList.add('hidden'),undefined);
   const ids=getIdsParaTag(pratCatAtual);
-  const pendentes=ids.filter(id=>!fotoGhMap[id]);
+  const pendentes=ids.filter(id=>!fotoGhMap[id]&&!FOTO_GH_STATIC[id]);
   if(!pendentes.length){bar.classList.add('hidden');return;}
-  bar.classList.remove('hidden');
-  bar.style.display='flex';
+  bar.classList.remove('hidden');bar.style.display='flex';
   lbl.textContent=`${pendentes.length} fundos externos`;
 }
 async function migrarFotosGaleria(){
   if(!cfg.ghToken){mostrarToast('⚠️ Configure o Token GitHub primeiro');return;}
   const ids=getIdsParaTag(pratCatAtual);
-  const pendentes=ids.filter(id=>!fotoGhMap[id]);
+  const pendentes=ids.filter(id=>!fotoGhMap[id]&&!FOTO_GH_STATIC[id]);
   if(!pendentes.length){mostrarToast('✅ Todos os fundos já estão no GitHub!');return;}
   const bar=document.getElementById('prat-galeria-import-bar');
   const prog=document.getElementById('prat-galeria-import-prog');
@@ -1427,39 +1537,19 @@ async function migrarFotosGaleria(){
     const path=`imagens/galeria/pexels-${id}.jpg`;
     try{
       const chk=await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${path}`,{headers:{'Authorization':`Bearer ${cfg.ghToken}`}});
-      if(chk.ok){
-        fotoGhMap[id]=`https://raw.githubusercontent.com/${GH_REPO}/${GH_BRANCH}/${path}`;
-        ok++;
-      } else {
-        // Não existe no GitHub — remove da galeria
-        msgs.push(`pexels-${id}: não encontrado no GitHub`);
-        erros++;
-        delete fotoGhMap[id];
-        Object.keys(FOTO_IDS).forEach(tag=>{
-          FOTO_IDS[tag]=FOTO_IDS[tag].filter(x=>x!==id);
-        });
-      }
-    }catch(e){
-      msgs.push(`pexels-${id}: ${e.message||e}`);
-      erros++;
-      delete fotoGhMap[id];
-      Object.keys(FOTO_IDS).forEach(tag=>{
-        FOTO_IDS[tag]=FOTO_IDS[tag].filter(x=>x!==id);
-      });
-    }
+      if(chk.ok){fotoGhMap[id]=`https://raw.githubusercontent.com/${GH_REPO}/${GH_BRANCH}/${path}`;ok++;}
+      else{msgs.push(`pexels-${id}: não encontrado`);erros++;delete fotoGhMap[id];Object.keys(FOTO_IDS).forEach(tag=>{FOTO_IDS[tag]=FOTO_IDS[tag].filter(x=>x!==id);});}
+    }catch(e){msgs.push(`pexels-${id}: ${e.message||e}`);erros++;delete fotoGhMap[id];Object.keys(FOTO_IDS).forEach(tag=>{FOTO_IDS[tag]=FOTO_IDS[tag].filter(x=>x!==id);});}
   }
   if(prog)prog.style.display='none';
   localStorage.setItem(FOTO_GH_KEY,JSON.stringify(fotoGhMap));
   renderPratGaleria();atualizarBotaoImportarGaleria();
-  if(erros){
-    const detalhe=msgs.slice(0,3).join(' | ')+(msgs.length>3?` (+${msgs.length-3} mais)`:'');
-    mostrarToast(`❌ ${erros} item(ns) removido(s) por falha: ${detalhe}`,10000);
-  } else {mostrarToast(`✅ ${ok} fundos salvos no GitHub!`);}
+  if(erros){mostrarToast(`❌ ${erros} removido(s) por falha`,8000);}
+  else{mostrarToast(`✅ ${ok} fundos OK no GitHub!`);}
 }
 
 // ── CANVAS RENDER ──────────────────────────────────────
 function schedRender(){
-  // Preload object images for hit-test cache
   ed.objects.forEach(o=>{
     if(!objImgCache[o.url]){const img=new Image();img.crossOrigin='anonymous';img.src=o.url;objImgCache[o.url]=img;}
   });
@@ -1490,7 +1580,6 @@ function drawObjects(ctx,W,H,cb,showSel=true){
       const ih=OBJ_BASE_H*obj.scale;
       const iw=ih*ar;
       const r=20;
-      // Pass 1: shadow rect (no clip)
       ctx.save();
       ctx.translate(obj.x,obj.y);
       if(obj.rot)ctx.rotate(obj.rot*Math.PI/180);
@@ -1498,7 +1587,6 @@ function drawObjects(ctx,W,H,cb,showSel=true){
       rrectPath(ctx,-iw/2,-ih/2,iw,ih,r);
       ctx.fillStyle='rgba(0,0,0,.01)';ctx.fill();
       ctx.restore();
-      // Pass 2: image with rounded clip
       ctx.save();
       ctx.translate(obj.x,obj.y);
       if(obj.rot)ctx.rotate(obj.rot*Math.PI/180);
@@ -1507,7 +1595,6 @@ function drawObjects(ctx,W,H,cb,showSel=true){
       ctx.clip();
       ctx.drawImage(img,-iw/2,-ih/2,iw,ih);
       ctx.restore();
-      // Selection outline
       if(showSel&&ed.selectedObjIdx===i){
         ctx.save();
         ctx.translate(obj.x,obj.y);
@@ -1567,7 +1654,6 @@ function renderArte(canvas,cb){
   canvas.width=W;canvas.height=H;
   const isExport=!!cb;
   const afterBg=()=>drawObjects(ctx,W,H,()=>drawArteTexto(ctx,v,W,H,cb),!isExport);
-  // Gradient background (no image)
   if(ed.bgGrad&&!ed.bgUrl){
     const cols=ed.bgGrad.match(/#[0-9a-fA-F]{3,6}/g)||['#1a2e1e','#2ECC71'];
     const g=ctx.createLinearGradient(0,0,W,H);
@@ -1576,6 +1662,7 @@ function renderArte(canvas,cb){
     afterBg();return;
   }
   const src=ed.bgUrl||FOTO(ed.arte.tag,ARTES.indexOf(ed.arte));
+  if(!src){ctx.fillStyle=v.cor;ctx.fillRect(0,0,W,H);afterBg();return;}
   const img=new Image();img.crossOrigin='anonymous';img.src=src;
   const draw=()=>{
     ctx.clearRect(0,0,W,H);
@@ -1595,7 +1682,6 @@ function drawPaw(ctx,cx,cy,sz,color){
   [-0.55,-0.18,.18,.55].forEach(a=>{ctx.beginPath();ctx.ellipse(cx+Math.sin(a)*sz*.5,cy-Math.cos(a)*sz*.2,sz*.2,sz*.25,a,0,Math.PI*2);ctx.fill();});
   ctx.restore();
 }
-// rrect is now rrectPath (defined in drawObjects section)
 function rrect(ctx,x,y,w,h,r){rrectPath(ctx,x,y,w,h,r);}
 
 // ── SHARING ────────────────────────────────────────────
@@ -1658,20 +1744,11 @@ function moveObj(dx,dy){
   o.y=Math.min(1200,Math.max(-120,o.y+dy));
   schedRender();
 }
-function centerObj(){
-  const o=selectedObj();if(!o)return;
-  o.x=540;schedRender();
-}
-function flipObj(){
-  const o=selectedObj();if(!o)return;
-  o.flipH=!o.flipH;schedRender();
-}
-function removeSelectedObj(){
-  if(ed.selectedObjIdx<0)return;
-  removeObject(ed.selectedObjIdx);
-}
+function centerObj(){const o=selectedObj();if(!o)return;o.x=540;schedRender();}
+function flipObj(){const o=selectedObj();if(!o)return;o.flipH=!o.flipH;schedRender();}
+function removeSelectedObj(){if(ed.selectedObjIdx<0)return;removeObject(ed.selectedObjIdx);}
 
-// ── CANVAS INTERACTION (drag to move layers) ───────────
+// ── CANVAS INTERACTION (drag) ──────────────────────────
 let dragState=null;
 function initCanvasInteraction(){
   const cv=document.getElementById('editor-canvas');
@@ -1711,8 +1788,7 @@ function initCanvasInteraction(){
       updateTransformPanel();schedRender();
       e.preventDefault();
     } else {
-      ed.selectedObjIdx=-1;
-      updateTransformPanel();schedRender();
+      ed.selectedObjIdx=-1;updateTransformPanel();schedRender();
     }
   }
   function onMove(e){
@@ -1735,7 +1811,6 @@ function initCanvasInteraction(){
   cv.addEventListener('touchmove',onMove,{passive:false});
   cv.addEventListener('touchend',onUp);
 }
-// Image cache for hit-testing bounds
 const objImgCache={};
 </script>
 </body>
