@@ -11,8 +11,6 @@
     *{box-sizing:border-box;margin:0;padding:0;}
     body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--texto);min-height:100vh;}
     .hidden{display:none!important;}
-
-    /* MODAL */
     .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:300;display:flex;align-items:center;justify-content:center;padding:20px;}
     .modal-box{background:#fff;border-radius:20px;padding:28px;max-width:460px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.3);}
     .modal-box h2{font-family:'Fredoka One',cursive;font-size:1.6rem;color:var(--verde-esc);margin-bottom:6px;}
@@ -23,8 +21,6 @@
     .insta-steps{list-style:none;margin:12px 0;}
     .insta-steps li{display:flex;gap:10px;align-items:flex-start;margin-bottom:10px;font-size:.88rem;line-height:1.4;}
     .insta-steps .num{width:24px;height:24px;min-width:24px;border-radius:50%;background:linear-gradient(135deg,#f09433,#dc2743,#bc1888);color:#fff;font-size:.75rem;font-weight:900;display:flex;align-items:center;justify-content:center;}
-
-    /* HEADER */
     header{background:linear-gradient(135deg,#1a9e52 0%,#2ECC71 55%,#F39C12 100%);color:#fff;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 4px 20px rgba(0,0,0,.2);position:sticky;top:0;z-index:100;}
     .header-brand{display:flex;align-items:center;gap:12px;}
     .header-logo{width:54px;height:54px;flex-shrink:0;filter:drop-shadow(0 2px 4px rgba(0,0,0,.3));}
@@ -32,18 +28,12 @@
     .header-title p{font-size:.75rem;opacity:.85;font-weight:600;}
     .btn-cfg{background:rgba(255,255,255,.25);border:2px solid rgba(255,255,255,.5);color:#fff;padding:8px 16px;border-radius:20px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:700;font-size:.82rem;transition:all .2s;white-space:nowrap;}
     .btn-cfg:hover{background:rgba(255,255,255,.38);}
-
-    /* MAIN */
     .main-content{max-width:1400px;margin:0 auto;padding:20px 16px 60px;}
-
-    /* APP LAYOUT */
     .app-top{display:grid;grid-template-columns:360px 1fr;gap:16px;align-items:start;}
     @media(max-width:820px){.app-top{grid-template-columns:1fr;}}
     .canvas-col{display:flex;flex-direction:column;gap:8px;}
     #editor-canvas{width:100%;aspect-ratio:1;display:block;border-radius:10px;box-shadow:0 4px 20px rgba(0,0,0,.15);}
     .canvas-hint{font-size:.68rem;color:#aaa;text-align:center;font-weight:700;}
-
-    /* PERSONALIZAR */
     .pers-bottom{background:#fff;border-radius:16px;padding:14px 18px;box-shadow:var(--sombra);margin-top:14px;}
     .pers-fields{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;align-items:end;}
     @media(max-width:1100px){.pers-fields{grid-template-columns:repeat(3,1fr);}}
@@ -53,21 +43,13 @@
     .pers-bottom .finput{padding:7px 10px;font-size:.82rem;}
     .pers-bottom-row2{display:flex;align-items:center;gap:14px;margin-top:12px;flex-wrap:wrap;}
     .cores-label{font-size:.7rem;font-weight:800;color:#888;white-space:nowrap;}
-
-    /* SHARE ROW */
     .share-row{display:flex;gap:10px;margin-top:12px;}
     .share-row .btn-share{flex:1;padding:12px 8px;font-size:.84rem;border-radius:12px;}
-
-    /* upload area */
     .upload-zone{margin:6px 8px;border:2px dashed #cce8d4;border-radius:10px;padding:10px 8px;text-align:center;cursor:pointer;transition:border-color .2s;background:#f9fffe;}
     .upload-zone:hover{border-color:var(--verde);background:#e8fdf1;}
     .upload-zone input{display:none;}
     .upload-zone-inner{display:flex;align-items:center;justify-content:center;gap:6px;}
     .upload-zone span{font-size:.72rem;font-weight:800;color:var(--verde-esc);}
-
-    /* EDITOR FIELDS */
-    .fsec{font-size:.72rem;font-weight:900;text-transform:uppercase;letter-spacing:.08em;color:#aaa;margin:16px 0 8px;}
-    .fsec:first-child{margin-top:0;}
     .frow{margin-bottom:10px;}
     .frow label{display:block;font-size:.78rem;font-weight:700;color:#555;margin-bottom:3px;}
     .finput{width:100%;padding:8px 11px;border:2px solid #e0e0e0;border-radius:10px;font-family:'Nunito',sans-serif;font-size:.86rem;outline:none;transition:border-color .2s;}
@@ -75,8 +57,6 @@
     .color-row{display:flex;gap:8px;flex-wrap:wrap;}
     .cswatch{width:30px;height:30px;border-radius:50%;cursor:pointer;border:3px solid transparent;transition:border-color .15s,transform .15s;}
     .cswatch:hover,.cswatch.sel{border-color:#333;transform:scale(1.15);}
-
-    /* PRATELEIRA */
     .prat-panel{background:#fff;border-radius:16px;box-shadow:var(--sombra);overflow:hidden;position:sticky;top:72px;max-height:calc(100vh - 90px);display:flex;flex-direction:column;}
     @media(max-width:820px){.prat-panel{position:static;max-height:70vw;}}
     .prat-header{padding:14px 16px 0;font-weight:900;font-size:.9rem;color:var(--verde-esc);display:flex;align-items:center;gap:6px;}
@@ -95,41 +75,21 @@
     .prat-reset:hover{background:#eee;}
     .prat-sel-info{font-size:.7rem;color:var(--verde-esc);font-weight:800;padding:4px 8px;background:#e8fdf1;border-radius:8px;margin:0 8px 6px;display:none;}
     .prat-sel-info.show{display:block;}
-    .panel{background:#fff;border-radius:16px;padding:20px;box-shadow:var(--sombra);}
-    .panel-title{font-weight:900;font-size:.95rem;margin-bottom:14px;color:var(--verde-esc);}
-    .btn-gerar{width:100%;padding:14px;background:linear-gradient(135deg,var(--verde-esc),var(--verde));color:#fff;border:none;border-radius:12px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:900;font-size:1rem;margin-top:14px;transition:opacity .2s,transform .15s;}
-    .btn-gerar:hover{opacity:.9;transform:translateY(-1px);}
-    .btn-back{width:100%;padding:10px;background:#f2f2f2;color:#666;border:none;border-radius:12px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:700;font-size:.86rem;margin-top:8px;}
-    .btn-back:hover{background:#e8e8e8;}
-
-    /* SHARE */
     .btn-share{width:100%;padding:14px;border:none;border-radius:14px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:900;font-size:.92rem;display:flex;align-items:center;justify-content:center;gap:10px;transition:transform .15s,opacity .2s;box-shadow:0 4px 14px rgba(0,0,0,.15);}
     .btn-share:hover{transform:translateY(-2px);opacity:.93;}
     .btn-dl{background:var(--azul);color:#fff;}
     .btn-wpp{background:#25D366;color:#fff;}
     .btn-insta{background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);color:#fff;}
-
-    /* FORM INLINE */
     .form-row{margin-bottom:11px;}
     .form-row label{display:block;font-size:.8rem;font-weight:700;color:#555;margin-bottom:4px;}
     .form-input{width:100%;padding:9px 12px;border:2px solid #e0e0e0;border-radius:10px;font-family:'Nunito',sans-serif;font-size:.88rem;outline:none;transition:border-color .2s;}
     .form-input:focus{border-color:var(--verde);}
-
     @media(max-width:600px){header{padding:12px 14px;}.header-title h1{font-size:1.2rem;}.main-content{padding:12px 10px 50px;}.share-row .btn-share{font-size:.74rem;padding:11px 4px;}}
-
-    /* TOAST */
     .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:#1a2e1e;color:#fff;padding:12px 22px;border-radius:30px;font-size:.88rem;font-weight:700;z-index:999;transition:transform .3s;pointer-events:none;white-space:nowrap;}
     .toast.show{transform:translateX(-50%) translateY(0);}
-
     .gh-token-hint{font-size:.72rem;color:#aaa;margin-top:4px;line-height:1.4;}
-    .prat-item.loading{background:linear-gradient(90deg,#f0f0f0 25%,#e0e0e0 50%,#f0f0f0 75%);background-size:200% 100%;animation:shimmer 1.2s infinite;}
-    @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
-
-    /* LAYER INDICATOR */
     .prat-item.in-layer{border-color:#F39C12;}
     .prat-item.in-layer::after{content:'✓';position:absolute;top:4px;right:4px;background:#F39C12;color:#fff;border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:900;}
-
-    /* LAYERS PANEL */
     .prat-layers{border-top:2px solid #f0f0f0;padding:8px;}
     .prat-layers-title{font-size:.68rem;font-weight:900;color:#888;text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;}
     .prat-layer-item{display:flex;align-items:center;gap:6px;padding:4px 6px;border-radius:8px;margin-bottom:4px;cursor:pointer;border:2px solid transparent;transition:border-color .15s;}
@@ -139,24 +99,16 @@
     .prat-layer-lbl{flex:1;font-size:.7rem;font-weight:700;color:#555;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
     .prat-layer-rm{background:none;border:none;cursor:pointer;font-size:.9rem;color:#E74C3C;padding:2px 4px;flex-shrink:0;}
     .prat-layer-rm:hover{background:#fde;border-radius:50%;}
-
-    /* UPLOAD ITEM ACTIONS */
     .upload-item-actions{position:absolute;top:3px;right:3px;display:none;flex-direction:column;gap:3px;z-index:10;}
     .prat-item:hover .upload-item-actions{display:flex;}
     .upload-act-btn{width:22px;height:22px;border-radius:6px;border:none;cursor:pointer;font-size:.65rem;font-weight:900;display:flex;align-items:center;justify-content:center;box-shadow:0 1px 4px rgba(0,0,0,.4);}
     .upload-act-del{background:#E74C3C;color:#fff;}
     .upload-act-mv{background:#3498DB;color:#fff;}
-
-    /* MODAL MOVER */
     .pasta-opcoes{display:flex;flex-direction:column;gap:8px;margin:12px 0;}
     .pasta-opt-btn{padding:10px 14px;border:2px solid #e0e0e0;border-radius:12px;background:#fafafa;cursor:pointer;font-family:'Nunito',sans-serif;font-size:.9rem;font-weight:700;text-align:left;transition:all .15s;}
     .pasta-opt-btn:hover{border-color:var(--verde);background:#e8fdf1;color:var(--verde-esc);}
     .prat-tab-mode{font-size:.58rem;background:#e8fdf1;color:var(--verde-esc);border-radius:6px;padding:1px 5px;display:block;margin-top:2px;}
-
-    /* FUNDOS SECTION */
     .prat-sec-lbl{font-size:.68rem;font-weight:900;text-transform:uppercase;letter-spacing:.08em;color:#aaa;padding:8px 8px 4px;margin-top:4px;}
-
-    /* TRANSFORM PANEL */
     .transform-panel{background:#fff;border-radius:12px;padding:10px 12px;box-shadow:0 2px 12px rgba(0,0,0,.1);border:2px solid #F39C12;margin-top:8px;}
     .tp-title{font-size:.78rem;font-weight:900;color:#E65100;margin-bottom:8px;display:flex;align-items:center;justify-content:space-between;}
     .tp-row{display:flex;align-items:center;gap:5px;margin-bottom:6px;flex-wrap:wrap;}
@@ -169,8 +121,6 @@
     canvas{cursor:default;}
     canvas.dragging{cursor:grabbing!important;}
     canvas.hovering{cursor:grab;}
-
-    /* MODAL TRATAR IMAGEM */
     .tratar-preview-wrap{display:flex;justify-content:center;align-items:center;min-height:120px;max-height:200px;background:#f4f4f4;border-radius:12px;overflow:hidden;margin:10px 0;position:relative;}
     #tratar-canvas{max-width:100%;max-height:200px;display:block;}
     .tratar-opts{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0;}
@@ -185,158 +135,93 @@
     .tratar-prog{height:4px;background:#e8fdf1;border-radius:4px;overflow:hidden;margin:4px 0;display:none;}
     .tratar-prog-bar{height:100%;background:var(--verde);width:0%;transition:width .3s;border-radius:4px;}
     .btn-usar-local{background:none;border:none;color:#aaa;font-size:.75rem;cursor:pointer;text-decoration:underline;padding:4px;}
-
-    /* GALERIA UPLOAD BAR */
     .galeria-upload-bar{display:flex;align-items:center;gap:6px;padding:4px 8px;background:#f9fffe;border-bottom:1px solid #e8f5ec;}
     .galeria-upload-btn{padding:4px 10px;background:var(--verde-esc);color:#fff;border:none;border-radius:8px;cursor:pointer;font-family:'Nunito',sans-serif;font-size:.65rem;font-weight:800;white-space:nowrap;transition:opacity .2s;}
     .galeria-upload-btn:hover{opacity:.85;}
     .galeria-upload-input{display:none;}
     .galeria-sec-title{font-size:.62rem;font-weight:800;color:#aaa;flex:1;}
-
-    /* FUNDOS UPLOAD BAR */
-    .fundos-upload-bar{display:flex;align-items:center;gap:6px;padding:4px 8px;background:#f9fffe;border-bottom:1px solid #e8f5ec;}
-    .fundos-upload-btn{padding:4px 10px;background:var(--verde-esc);color:#fff;border:none;border-radius:8px;cursor:pointer;font-family:'Nunito',sans-serif;font-size:.65rem;font-weight:800;white-space:nowrap;transition:opacity .2s;}
-    .fundos-upload-btn:hover{opacity:.85;}
-    .fundos-upload-input{display:none;}
   </style>
 </head>
 <body>
-
-<!-- MODAL CONFIG -->
+<!-- MODAIS -->
 <div class="modal-overlay" id="modal-cfg">
   <div class="modal-box">
     <h2>🐾 Configure seu Petshop</h2>
-    <p class="modal-sub">Essas informações aparecerão em todas as suas artes. Você pode alterar a qualquer momento clicando em <b>Meu Petshop</b>.</p>
+    <p class="modal-sub">Essas informações aparecerão em todas as suas artes.</p>
     <div class="form-row"><label>Nome do Petshop *</label><input class="form-input" id="cfg-nome" placeholder="Ex: Petshop Amigão" maxlength="40"/></div>
     <div class="form-row"><label>WhatsApp</label><input class="form-input" id="cfg-wpp" placeholder="(XX) XXXXX-XXXX" maxlength="20"/></div>
     <div class="form-row"><label>Cidade / UF</label><input class="form-input" id="cfg-cidade" placeholder="Sua Cidade - UF" maxlength="30"/></div>
-    <div class="form-row"><label>Instagram (opcional)</label><input class="form-input" id="cfg-insta" placeholder="@seupetshop" maxlength="30"/></div>
+    <div class="form-row"><label>Instagram</label><input class="form-input" id="cfg-insta" placeholder="@seupetshop" maxlength="30"/></div>
     <div class="form-row">
-      <label>🔑 Token GitHub (para salvar fotos no repositório)</label>
+      <label>🔑 Token GitHub</label>
       <input class="form-input" id="cfg-ghtoken" placeholder="ghp_xxxxxxxxxxxx" maxlength="100" type="password"/>
-      <p class="gh-token-hint">Crie em <b>GitHub → Settings → Developer settings → Personal access tokens → Fine-grained</b> com permissão <b>Contents: Read and Write</b> no repositório.</p>
+      <p class="gh-token-hint">Crie em <b>GitHub → Settings → Developer settings → Personal access tokens → Fine-grained</b> com permissão <b>Contents: Read and Write</b>.</p>
     </div>
     <div class="modal-actions"><button class="btn-primary" onclick="salvarCfg()">✅ Salvar e Começar</button></div>
   </div>
 </div>
-
-<!-- TOAST -->
 <div class="toast" id="toast"></div>
-
-<!-- MODAL INSTAGRAM -->
-<div class="modal-overlay hidden" id="modal-insta">
-  <div class="modal-box">
-    <h2 style="background:linear-gradient(135deg,#f09433,#dc2743,#bc1888);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">📸 Postar no Instagram</h2>
-    <p class="modal-sub">A imagem foi baixada! Siga os passos abaixo:</p>
-    <ul class="insta-steps">
-      <li><span class="num">1</span><span>Abra o aplicativo do <strong>Instagram</strong> no celular</span></li>
-      <li><span class="num">2</span><span>Toque no <strong>+</strong> para criar novo post ou Story</span></li>
-      <li><span class="num">3</span><span>Selecione a <strong>imagem baixada</strong> da sua galeria de fotos</span></li>
-      <li><span class="num">4</span><span>Adicione uma <strong>legenda</strong> com hashtags: #petshop #cãeseamigos #gatosfelizes</span></li>
-      <li><span class="num">5</span><span>Toque em <strong>Compartilhar</strong> e pronto! 🎉</span></li>
-    </ul>
-    <p style="font-size:.78rem;color:#999;margin-top:8px;">💡 Poste também nos Stories para mais alcance!</p>
-    <div class="modal-actions"><button class="btn-primary" onclick="document.getElementById('modal-insta').classList.add('hidden')">✅ Entendi!</button></div>
+<div class="modal-overlay hidden" id="modal-insta"><div class="modal-box">
+  <h2 style="background:linear-gradient(135deg,#f09433,#dc2743,#bc1888);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">📸 Instagram</h2>
+  <p class="modal-sub">A imagem foi baixada!</p>
+  <ul class="insta-steps">
+    <li><span class="num">1</span><span>Abra o <strong>Instagram</strong></span></li>
+    <li><span class="num">2</span><span>Toque no <strong>+</strong></span></li>
+    <li><span class="num">3</span><span>Selecione a <strong>imagem baixada</strong></span></li>
+    <li><span class="num">4</span><span>Adicione <strong>legenda</strong></span></li>
+    <li><span class="num">5</span><span><strong>Compartilhe</strong> 🎉</span></li>
+  </ul>
+  <div class="modal-actions"><button class="btn-primary" onclick="document.getElementById('modal-insta').classList.add('hidden')">✅ Entendi!</button></div>
+</div></div>
+<div class="modal-overlay hidden" id="modal-mover"><div class="modal-box">
+  <h2>📂 Mover Imagem</h2>
+  <p class="modal-sub">Escolha a pasta de destino:</p>
+  <div class="pasta-opcoes" id="modal-mover-opcoes"></div>
+  <div class="modal-actions"><button class="btn-secondary" onclick="document.getElementById('modal-mover').classList.add('hidden')">Cancelar</button></div>
+</div></div>
+<div class="modal-overlay hidden" id="modal-tratar"><div class="modal-box" style="max-width:480px;">
+  <h2>🖼️ Tratar Imagem</h2>
+  <p class="modal-sub">Aplique tratamentos antes de salvar:</p>
+  <div class="tratar-preview-wrap"><canvas id="tratar-canvas"></canvas></div>
+  <div class="tratar-status" id="tratar-status"></div>
+  <div class="tratar-prog" id="tratar-prog"><div class="tratar-prog-bar" id="tratar-prog-bar"></div></div>
+  <div class="tratar-opts">
+    <button class="tratar-toggle" id="btn-tratar-bg" onclick="toggleTratamento('bg')">✂️ Remover fundo</button>
+    <button class="tratar-toggle" id="btn-tratar-qual" onclick="toggleTratamento('qual')">✨ Melhorar qualidade</button>
   </div>
-</div>
-
-<!-- MODAL MOVER IMAGEM -->
-<div class="modal-overlay hidden" id="modal-mover">
-  <div class="modal-box">
-    <h2>📂 Mover Imagem</h2>
-    <p class="modal-sub">Escolha a pasta de destino para a imagem:</p>
-    <div class="pasta-opcoes" id="modal-mover-opcoes"></div>
-    <div class="modal-actions">
-      <button class="btn-secondary" onclick="document.getElementById('modal-mover').classList.add('hidden')">Cancelar</button>
-    </div>
+  <div style="font-size:.72rem;font-weight:800;color:#888;margin-top:6px;">📂 Pasta de destino:</div>
+  <div class="tratar-pasta-row" id="tratar-pasta-row"></div>
+  <div class="modal-actions" style="margin-top:14px;">
+    <button class="btn-primary" id="btn-tratar-salvar" onclick="salvarImagemTratada()">💾 Salvar no GitHub</button>
+    <button class="btn-secondary" onclick="cancelarTratamento()">❌ Cancelar</button>
   </div>
-</div>
-
-<!-- MODAL TRATAR IMAGEM -->
-<div class="modal-overlay hidden" id="modal-tratar">
-  <div class="modal-box" style="max-width:480px;">
-    <h2>🖼️ Tratar Imagem</h2>
-    <p class="modal-sub">Aplique tratamentos antes de salvar no GitHub:</p>
-    <div class="tratar-preview-wrap">
-      <canvas id="tratar-canvas"></canvas>
-    </div>
-    <div class="tratar-status" id="tratar-status"></div>
-    <div class="tratar-prog" id="tratar-prog"><div class="tratar-prog-bar" id="tratar-prog-bar"></div></div>
-    <div class="tratar-opts">
-      <button class="tratar-toggle" id="btn-tratar-bg" onclick="toggleTratamento('bg')">✂️ Remover fundo</button>
-      <button class="tratar-toggle" id="btn-tratar-qual" onclick="toggleTratamento('qual')">✨ Melhorar qualidade</button>
-    </div>
-    <div style="font-size:.72rem;font-weight:800;color:#888;margin-top:6px;">📂 Pasta de destino:</div>
-    <div class="tratar-pasta-row" id="tratar-pasta-row"></div>
-    <div class="modal-actions" style="margin-top:14px;">
-      <button class="btn-primary" id="btn-tratar-salvar" onclick="salvarImagemTratada()">💾 Salvar no GitHub</button>
-      <button class="btn-secondary" onclick="cancelarTratamento()">❌ Cancelar</button>
-    </div>
-    <div style="text-align:center;margin-top:6px;">
-      <button class="btn-usar-local" onclick="usarLocalSemSalvar()">⏭️ Usar sem salvar no GitHub</button>
-    </div>
-  </div>
-</div>
+  <div style="text-align:center;margin-top:6px;"><button class="btn-usar-local" onclick="usarLocalSemSalvar()">⏭️ Usar sem salvar</button></div>
+</div></div>
+<!-- FIM MODAIS -->
 
 <!-- HEADER -->
 <header>
   <div class="header-brand">
-    <img class="header-logo" src="marcote.png" alt="Mascote Amigão Pet Shop"/>
-    <div class="header-title">
-      <h1 id="hdr-nome">Criativo Pet</h1>
-      <p>Plataforma de Artes para Petshops</p>
-    </div>
+    <img class="header-logo" src="marcote.png" alt="Mascote"/>
+    <div class="header-title"><h1 id="hdr-nome">Criativo Pet</h1><p>Plataforma de Artes para Petshops</p></div>
   </div>
   <button class="btn-cfg" onclick="abrirCfg()">⚙️ <span id="hdr-cfg-lbl">Configurar</span></button>
 </header>
 
-<!-- MAIN APP -->
+<!-- MAIN -->
 <div class="main-content">
   <div class="app-top">
-
-    <!-- Canvas -->
     <div class="canvas-col">
       <canvas id="editor-canvas"></canvas>
-      <div class="canvas-hint">Preview — exporta em 1080×1080px • Arraste as camadas no canvas</div>
-      <!-- Transform panel -->
+      <div class="canvas-hint">Preview — exporta em 1080×1080px • Arraste camadas no canvas</div>
       <div class="transform-panel hidden" id="transform-panel">
-        <div class="tp-title">
-          <span>🎯 <span id="tp-name">Camada</span></span>
-          <button class="tp-btn danger" onclick="removeSelectedObj()">🗑️ Remover</button>
-        </div>
-        <div class="tp-row">
-          <span class="tp-lbl">Posição:</span>
-          <button class="tp-btn" onclick="moveObj(-150,0)" title="Esquerda">◀◀</button>
-          <button class="tp-btn" onclick="moveObj(-60,0)">◀</button>
-          <button class="tp-btn" onclick="centerObj()">⊕</button>
-          <button class="tp-btn" onclick="moveObj(60,0)">▶</button>
-          <button class="tp-btn" onclick="moveObj(150,0)" title="Direita">▶▶</button>
-          <button class="tp-btn" onclick="moveObj(0,-80)">▲</button>
-          <button class="tp-btn" onclick="moveObj(0,80)">▼</button>
-        </div>
-        <div class="tp-row">
-          <span class="tp-lbl">Rotação:</span>
-          <button class="tp-btn" onclick="rotateObj(-90)">↺90</button>
-          <button class="tp-btn" onclick="rotateObj(-15)">↺15</button>
-          <button class="tp-btn" onclick="rotateObj(0,true)">0°</button>
-          <button class="tp-btn" onclick="rotateObj(15)">↻15</button>
-          <button class="tp-btn" onclick="rotateObj(90)">↻90</button>
-          <span class="tp-val" id="tp-rot">0°</span>
-        </div>
-        <div class="tp-row">
-          <span class="tp-lbl">Tamanho:</span>
-          <button class="tp-btn" onclick="scaleObj(0.6)">−−</button>
-          <button class="tp-btn" onclick="scaleObj(0.85)">−</button>
-          <span class="tp-val" id="tp-scale">100%</span>
-          <button class="tp-btn" onclick="scaleObj(1.18)">+</button>
-          <button class="tp-btn" onclick="scaleObj(1.5)">++</button>
-          <button class="tp-btn" onclick="flipObj()">⟺ Espelhar</button>
-        </div>
+        <div class="tp-title"><span>🎯 <span id="tp-name">Camada</span></span><button class="tp-btn danger" onclick="removeSelectedObj()">🗑️</button></div>
+        <div class="tp-row"><span class="tp-lbl">Posição:</span><button class="tp-btn" onclick="moveObj(-150,0)">◀◀</button><button class="tp-btn" onclick="moveObj(-60,0)">◀</button><button class="tp-btn" onclick="centerObj()">⊕</button><button class="tp-btn" onclick="moveObj(60,0)">▶</button><button class="tp-btn" onclick="moveObj(150,0)">▶▶</button><button class="tp-btn" onclick="moveObj(0,-80)">▲</button><button class="tp-btn" onclick="moveObj(0,80)">▼</button></div>
+        <div class="tp-row"><span class="tp-lbl">Rotação:</span><button class="tp-btn" onclick="rotateObj(-90)">↺90</button><button class="tp-btn" onclick="rotateObj(-15)">↺15</button><button class="tp-btn" onclick="rotateObj(0,true)">0°</button><button class="tp-btn" onclick="rotateObj(15)">↻15</button><button class="tp-btn" onclick="rotateObj(90)">↻90</button><span class="tp-val" id="tp-rot">0°</span></div>
+        <div class="tp-row"><span class="tp-lbl">Tamanho:</span><button class="tp-btn" onclick="scaleObj(0.6)">−−</button><button class="tp-btn" onclick="scaleObj(0.85)">−</button><span class="tp-val" id="tp-scale">100%</span><button class="tp-btn" onclick="scaleObj(1.18)">+</button><button class="tp-btn" onclick="scaleObj(1.5)">++</button><button class="tp-btn" onclick="flipObj()">⟺</button></div>
       </div>
     </div>
-
-    <!-- PRATELEIRA -->
-    <div class="prat-panel" id="prat-panel">
+    <div class="prat-panel">
       <div class="prat-header">🗂️ Prateleira</div>
       <div class="prat-tabs">
         <div class="prat-tab active" data-aba="galeria" onclick="pratAba('galeria',this)">📋<br>Modelos</div>
@@ -346,1416 +231,502 @@
         <div class="prat-tab" data-aba="acessorios" onclick="pratAba('acessorios',this)">🎾<br>Acess.<span class="prat-tab-mode">+camada</span></div>
       </div>
       <div class="prat-body" id="prat-body">
-
-        <!-- ABA GALERIA / MODELOS -->
+        <!-- ABA GALERIA -->
         <div id="prat-galeria-area">
-          <!-- Upload de imagem para a galeria -->
-          <div class="galeria-upload-bar">
-            <span class="galeria-sec-title">🖼️ Modelos GitHub</span>
-            <input type="file" id="galeria-upload-input" accept="image/*" class="galeria-upload-input" onchange="uploadImagemGaleria(this)"/>
-            <button class="galeria-upload-btn" onclick="document.getElementById('galeria-upload-input').click()">➕ Adicionar imagem</button>
-          </div>
-
+          <div class="galeria-upload-bar"><span class="galeria-sec-title">🖼️ Modelos</span><input type="file" id="galeria-upload-input" accept="image/*" class="galeria-upload-input" onchange="uploadImagemGaleria(this)"/><button class="galeria-upload-btn" onclick="document.getElementById('galeria-upload-input').click()">➕ Adicionar</button></div>
           <div id="prat-sel-info" class="prat-sel-info"></div>
-
-          <!-- Imagens da galeria salvas no GitHub -->
-          <div id="prat-gh-galeria-section">
-            <div class="prat-sec-lbl">📁 Fotos salvas no GitHub</div>
-            <div class="prat-grid" id="prat-gh-galeria-grid"></div>
-          </div>
-
-          <!-- Modelos (artes) — canvas thumbnails -->
+          <div id="prat-gh-galeria-section"><div class="prat-sec-lbl">📁 Fotos GitHub</div><div class="prat-grid" id="prat-gh-galeria-grid"></div></div>
           <div class="prat-sec-lbl">🎨 Artes prontas</div>
           <div class="prat-grid" id="prat-galeria-grid"></div>
         </div>
-
-        <!-- ABA FUNDOS (separada) -->
+        <!-- ABA FUNDOS -->
         <div id="prat-fundos-area" class="hidden">
-          <div class="fundos-upload-bar">
-            <span class="galeria-sec-title">🖼️ Fundos</span>
-            <input type="file" id="fundos-upload-input" accept="image/*" class="fundos-upload-input" onchange="uploadImagemFundos(this)"/>
-            <button class="fundos-upload-btn" onclick="document.getElementById('fundos-upload-input').click()">➕ Adicionar fundo</button>
-          </div>
-
-          <!-- Fundos salvos no GitHub -->
-          <div id="prat-gh-fundos-section">
-            <div class="prat-sec-lbl">📁 Fundos salvos no GitHub</div>
-            <div class="prat-grid" id="prat-gh-fundos-grid"></div>
-          </div>
-
-          <!-- Fundos SVG locais + Gradientes -->
-          <div class="prat-sec-lbl">🎨 Fundos & Gradientes</div>
+          <div class="galeria-upload-bar"><span class="galeria-sec-title">🖼️ Fundos</span><input type="file" id="fundos-upload-input" accept="image/*" class="galeria-upload-input" onchange="uploadImagemFundos(this)"/><button class="galeria-upload-btn" onclick="document.getElementById('fundos-upload-input').click()">➕ Adicionar</button></div>
+          <div id="prat-gh-fundos-section"><div class="prat-sec-lbl">📁 Fundos GitHub</div><div class="prat-grid" id="prat-gh-fundos-grid"></div></div>
+          <div class="prat-sec-lbl">🎨 Gradientes</div>
           <div class="prat-grid" id="prat-fundos-grid"></div>
-
-          <button class="prat-reset" onclick="pratReset()">↩ Remover fundo personalizado</button>
+          <button class="prat-reset" onclick="pratReset()">↩ Remover fundo</button>
         </div>
-
-        <!-- ABA OUTRAS (pets/racao/acessorios) -->
+        <!-- ABA CAMADAS -->
         <div id="prat-outras-area" class="hidden">
           <div id="prat-sel-info2" class="prat-sel-info"></div>
-          <!-- Upload de imagem -->
-          <div class="upload-zone" onclick="document.getElementById('upload-input').click()" id="upload-zone-wrap">
-            <input type="file" id="upload-input" accept="image/*" onchange="uploadImagem(this)"/>
-            <div class="upload-zone-inner">
-              <span>➕ Adicionar minha foto</span>
-            </div>
-          </div>
-          <!-- Uploads do usuário (sessão atual) -->
-          <div class="upload-thumbs" id="upload-thumbs" style="display:grid;grid-template-columns:repeat(6,1fr);gap:3px;padding:0 6px 4px;"></div>
-          <!-- Imagens já salvas no GitHub -->
-          <div id="prat-gh-section" class="hidden">
-            <div class="prat-sec-lbl">📁 Salvas no GitHub</div>
-            <div class="prat-grid" id="prat-gh-grid"></div>
-          </div>
+          <div class="upload-zone" onclick="document.getElementById('upload-input').click()"><input type="file" id="upload-input" accept="image/*" onchange="uploadImagem(this)"/><div class="upload-zone-inner"><span>➕ Adicionar minha foto</span></div></div>
+          <div id="upload-thumbs" style="display:grid;grid-template-columns:repeat(6,1fr);gap:3px;padding:0 6px 4px;"></div>
+          <div id="prat-gh-section" class="hidden"><div class="prat-sec-lbl">📁 GitHub</div><div class="prat-grid" id="prat-gh-grid"></div></div>
           <div class="prat-grid" id="prat-outras-grid"></div>
-          <button class="prat-reset" id="prat-reset-btn" style="display:none;" onclick="pratReset()">↩ Foto padrão da arte</button>
         </div>
-
-        <!-- Camadas ativas -->
         <div class="prat-layers hidden" id="prat-layers">
           <div class="prat-layers-title">📌 Camadas no card:</div>
           <div id="prat-layers-list"></div>
-          <button class="prat-reset" style="background:#fff3e0;color:#E65100;" onclick="limparObjetos()">🗑️ Limpar todas as camadas</button>
+          <button class="prat-reset" style="background:#fff3e0;color:#E65100;" onclick="limparObjetos()">🗑️ Limpar camadas</button>
         </div>
       </div>
     </div>
-
-  </div><!-- /app-top -->
-
-  <!-- BAIXO: Personalizar + Compartilhar -->
+  </div>
   <div class="pers-bottom">
     <div class="pers-fields">
       <div class="frow"><label>👤 Nome</label><input class="finput" id="ed-nome" oninput="schedRender()"/></div>
       <div class="frow"><label>📱 WhatsApp</label><input class="finput" id="ed-wpp" oninput="schedRender()"/></div>
-      <div class="frow"><label>📍 Cidade / UF</label><input class="finput" id="ed-cidade" oninput="schedRender()"/></div>
+      <div class="frow"><label>📍 Cidade</label><input class="finput" id="ed-cidade" oninput="schedRender()"/></div>
       <div class="frow"><label>✏️ Título</label><input class="finput" id="ed-titulo" oninput="schedRender()" maxlength="40"/></div>
       <div class="frow"><label>📝 Subtítulo</label><input class="finput" id="ed-sub" oninput="schedRender()" maxlength="60"/></div>
       <div class="frow"><label>🏷️ Destaque</label><input class="finput" id="ed-dest" placeholder="Ex: R$ 39,90!" oninput="schedRender()" maxlength="36"/></div>
     </div>
-    <div class="pers-bottom-row2">
-      <span class="cores-label">🎨 Cor:</span>
-      <div class="color-row" id="color-row"></div>
-    </div>
+    <div class="pers-bottom-row2"><span class="cores-label">🎨 Cor:</span><div class="color-row" id="color-row"></div></div>
   </div>
-
   <div class="share-row">
     <button class="btn-share btn-dl" onclick="baixar()">⬇️ Baixar PNG</button>
     <button class="btn-share btn-wpp" onclick="sharWpp()">💬 WhatsApp</button>
     <button class="btn-share btn-insta" onclick="sharInsta()">📸 Instagram</button>
   </div>
-
 </div>
+
 <script>
-// ── FOTO IDS — imagens EXCLUSIVAMENTE do GitHub ────────
-const FOTO_IDS={
-  'cachorro-pequeno':[406014,1591939,1254140,1458916,1805164,2106765],
-  'cachorro-grande':[1108099,220742,1851164,2607544,1496372,1884779],
-  'gato':[45201,617278,1404819,1543793,991831,2558605],
-  'banho-tosa':[1108099,1587300,1254140,2607544,406014,1591939],
-  'nutricao':[1741205,1108099,617278,220742,45201,1404819],
-  'acessorios':[1404819,3651579,1108099,617278,220742,45201],
-  'vacinas':[1128316,220742,1108099,617278,45201,1404819],
-  'dicas':[1108099,617278,220742,45201,1404819,1254140],
-  'promocoes':[406014,1591939,617278,45201,1108099,220742],
-  'praia':[1108099,1591939,1254140,2607544,220742,617278],
-  'fazenda':[1108099,220742,1851164,1591939,406014,2607544],
-  'adestramento':[1108099,220742,1851164,2607544,1496372,1585669],
-};
-
+/* ═══════════════════════════════════════════════════════
+   DADOS E CONSTANTES
+   ═══════════════════════════════════════════════════════ */
+const FOTO_IDS={'cachorro-pequeno':[406014,1591939,1254140,1458916,1805164,2106765],'cachorro-grande':[1108099,220742,1851164,2607544,1496372,1884779],'gato':[45201,617278,1404819,1543793,991831,2558605],'banho-tosa':[1108099,1587300,1254140,2607544,406014,1591939],'nutricao':[1741205,1108099,617278,220742,45201,1404819],'acessorios':[1404819,3651579,1108099,617278,220742,45201],'vacinas':[1128316,220742,1108099,617278,45201,1404819],'dicas':[1108099,617278,220742,45201,1404819,1254140],'promocoes':[406014,1591939,617278,45201,1108099,220742],'praia':[1108099,1591939,1254140,2607544,220742,617278],'fazenda':[1108099,220742,1851164,1591939,406014,2607544],'adestramento':[1108099,220742,1851164,2607544,1496372,1585669]};
 let fotoGhMap={};
-
-// URLs estáticas no GitHub — ÚNICA fonte de imagens para os modelos
-const FOTO_GH_STATIC={
-  220742:'https://raw.githubusercontent.com/lssgoiano-anagi/amigao-petshop-imagens/main/imagens/galeria/pexels-220742.jpg',
-  406014:'https://raw.githubusercontent.com/lssgoiano-anagi/amigao-petshop-imagens/main/imagens/galeria/pexels-406014.jpg',
-  617278:'https://raw.githubusercontent.com/lssgoiano-anagi/amigao-petshop-imagens/main/imagens/galeria/pexels-617278.jpg',
-  991831:'https://raw.githubusercontent.com/lssgoiano-anagi/amigao-petshop-imagens/main/imagens/galeria/pexels-991831.jpg',
-  1108099:'https://raw.githubusercontent.com/lssgoiano-anagi/amigao-petshop-imagens/main/imagens/galeria/pexels-1108099.jpg',
-  1128316:'https://raw.githubusercontent.com/lssgoiano-anagi/amigao-petshop-imagens/main/imagens/galeria/pexels-1128316.jpg',
-  1254140:'https://raw.githubusercontent.com/lssgoiano-anagi/amigao-petshop-imagens/main/imagens/galeria/pexels-1254140.jpg',
-  1404819:'https://raw.githubusercontent.com/lssgoiano-anagi/amigao-petshop-imagens/main/imagens/galeria/pexels-1404819.jpg',
-  1458916:'https://raw.githubusercontent.com/lssgoiano-anagi/amigao-petshop-imagens/main/imagens/galeria/pexels-1458916.jpg',
-  1496372:'https://raw.githubusercontent.com/lssgoiano-anagi/amigao-petshop-imagens/main/imagens/galeria/pexels-1496372.jpg',
-  1543793:'https://raw.githubusercontent.com/lssgoiano-anagi/amigao-petshop-imagens/main/imagens/galeria/pexels-1543793.jpg',
-  1585669:'https://raw.githubusercontent.com/lssgoiano-anagi/amigao-petshop-imagens/main/imagens/galeria/pexels-1585669.jpg',
-  1587300:'https://raw.githubusercontent.com/lssgoiano-anagi/amigao-petshop-imagens/main/imagens/galeria/pexels-1587300.jpg',
-  1591939:'https://raw.githubusercontent.com/lssgoiano-anagi/amigao-petshop-imagens/main/imagens/galeria/pexels-1591939.jpg',
-  1741205:'https://raw.githubusercontent.com/lssgoiano-anagi/amigao-petshop-imagens/main/imagens/galeria/pexels-1741205.jpg',
-  1805164:'https://raw.githubusercontent.com/lssgoiano-anagi/amigao-petshop-imagens/main/imagens/galeria/pexels-1805164.jpg',
-  1851164:'https://raw.githubusercontent.com/lssgoiano-anagi/amigao-petshop-imagens/main/imagens/galeria/pexels-1851164.jpg',
-  1884779:'https://raw.githubusercontent.com/lssgoiano-anagi/amigao-petshop-imagens/main/imagens/galeria/pexels-1884779.jpg',
-  2106765:'https://raw.githubusercontent.com/lssgoiano-anagi/amigao-petshop-imagens/main/imagens/galeria/pexels-2106765.jpg',
-  2558605:'https://raw.githubusercontent.com/lssgoiano-anagi/amigao-petshop-imagens/main/imagens/galeria/pexels-2558605.jpg',
-  2607544:'https://raw.githubusercontent.com/lssgoiano-anagi/amigao-petshop-imagens/main/imagens/galeria/pexels-2607544.jpg',
-  3651579:'https://raw.githubusercontent.com/lssgoiano-anagi/amigao-petshop-imagens/main/imagens/galeria/pexels-3651579.jpg',
-  45201:'https://raw.githubusercontent.com/lssgoiano-anagi/amigao-petshop-imagens/main/imagens/galeria/pexels-45201.jpg',
-};
-
-// Retorna URL da foto — SOMENTE GitHub
-const FOTO=(tag,idx)=>{
-  const ids=FOTO_IDS[tag]||FOTO_IDS['cachorro-grande'];
-  const id=ids[idx%ids.length];
-  return FOTO_GH_STATIC[id]||fotoGhMap[id]||null;
-};
-
+const FOTO_GH_STATIC={220742:'https://raw.githubusercontent.com/lssgoiano-anagi/amigao-petshop-imagens/main/imagens/galeria/pexels-220742.jpg',406014:'https://raw.githubusercontent.com/lssgoiano-anagi/amigao-petshop-imagens/main/imagens/galeria/pexels-406014.jpg',617278:'https://raw.githubusercontent.com/lssgoiano-anagi/amigao-petshop-imagens/main/imagens/galeria/pexels-617278.jpg',991831:'https://raw.githubusercontent.com/lssgoiano-anagi/amigao-petshop-imagens/main/imagens/galeria/pexels-991831.jpg',1108099:'https://raw.githubusercontent.com/lssgoiano-anagi/amigao-petshop-imagens/main/imagens/galeria/pexels-1108099.jpg',1128316:'https://raw.githubusercontent.com/lssgoiano-anagi/amigao-petshop-imagens/main/imagens/galeria/pexels-1128316.jpg',1254140:'https://raw.githubusercontent.com/lssgoiano-anagi/amigao-petshop-imagens/main/imagens/galeria/pexels-1254140.jpg',1404819:'https://raw.githubusercontent.com/lssgoiano-anagi/amigao-petshop-imagens/main/imagens/galeria/pexels-1404819.jpg',1458916:'https://raw.githubusercontent.com/lssgoiano-anagi/amigao-petshop-imagens/main/imagens/galeria/pexels-1458916.jpg',1496372:'https://raw.githubusercontent.com/lssgoiano-anagi/amigao-petshop-imagens/main/imagens/galeria/pexels-1496372.jpg',1543793:'https://raw.githubusercontent.com/lssgoiano-anagi/amigao-petshop-imagens/main/imagens/galeria/pexels-1543793.jpg',1585669:'https://raw.githubusercontent.com/lssgoiano-anagi/amigao-petshop-imagens/main/imagens/galeria/pexels-1585669.jpg',1587300:'https://raw.githubusercontent.com/lssgoiano-anagi/amigao-petshop-imagens/main/imagens/galeria/pexels-1587300.jpg',1591939:'https://raw.githubusercontent.com/lssgoiano-anagi/amigao-petshop-imagens/main/imagens/galeria/pexels-1591939.jpg',1741205:'https://raw.githubusercontent.com/lssgoiano-anagi/amigao-petshop-imagens/main/imagens/galeria/pexels-1741205.jpg',1805164:'https://raw.githubusercontent.com/lssgoiano-anagi/amigao-petshop-imagens/main/imagens/galeria/pexels-1805164.jpg',1851164:'https://raw.githubusercontent.com/lssgoiano-anagi/amigao-petshop-imagens/main/imagens/galeria/pexels-1851164.jpg',1884779:'https://raw.githubusercontent.com/lssgoiano-anagi/amigao-petshop-imagens/main/imagens/galeria/pexels-1884779.jpg',2106765:'https://raw.githubusercontent.com/lssgoiano-anagi/amigao-petshop-imagens/main/imagens/galeria/pexels-2106765.jpg',2558605:'https://raw.githubusercontent.com/lssgoiano-anagi/amigao-petshop-imagens/main/imagens/galeria/pexels-2558605.jpg',2607544:'https://raw.githubusercontent.com/lssgoiano-anagi/amigao-petshop-imagens/main/imagens/galeria/pexels-2607544.jpg',3651579:'https://raw.githubusercontent.com/lssgoiano-anagi/amigao-petshop-imagens/main/imagens/galeria/pexels-3651579.jpg',45201:'https://raw.githubusercontent.com/lssgoiano-anagi/amigao-petshop-imagens/main/imagens/galeria/pexels-45201.jpg'};
+const FOTO=(tag,idx)=>{const ids=FOTO_IDS[tag]||FOTO_IDS['cachorro-grande'];const id=ids[idx%ids.length];return FOTO_GH_STATIC[id]||fotoGhMap[id]||null;};
 const MASCOTE_IMG=new Image();MASCOTE_IMG.src='marcote.png';
-
-// ── ARTES (modelos) ────────────────────────────────────
 const ARTES=[
-  {id:'cp01',t:'BANHO & TOSA',s:'Para cães de porte pequeno',tag:'cachorro-pequeno',c:'#2ECC71'},
-  {id:'cp02',t:'CONSULTA VETERINÁRIA',s:'Seu pequenino merece cuidado',tag:'cachorro-pequeno',c:'#3498DB'},
-  {id:'cp03',t:'SUPER PROMOÇÃO!',s:'Banho + Tosa com preço especial',tag:'cachorro-pequeno',c:'#F39C12'},
-  {id:'cp04',t:'RAÇÃO ESPECIAL',s:'Nutrição para raças pequenas',tag:'cachorro-pequeno',c:'#E74C3C'},
-  {id:'cp05',t:'ACESSÓRIOS PET',s:'Coleiras, roupinhas e muito mais!',tag:'cachorro-pequeno',c:'#9B59B6'},
-  {id:'cp06',t:'CLUBE FIDELIDADE',s:'Acumule pontos a cada banho!',tag:'cachorro-pequeno',c:'#1a9e52'},
-  {id:'cp07',t:'PETISCO GOURMET',s:'Delícias para o seu pequenino',tag:'cachorro-pequeno',c:'#F39C12'},
-  {id:'cp08',t:'TOSA CRIATIVA',s:'Looks modernos para seu pet!',tag:'cachorro-pequeno',c:'#9B59B6'},
-  {id:'cg01',t:'ADESTRAMENTO',s:'Cães de porte grande e médio',tag:'cachorro-grande',c:'#E74C3C'},
-  {id:'cg02',t:'RAÇÃO PREMIUM',s:'Nutrição completa para raças grandes',tag:'cachorro-grande',c:'#1a9e52'},
-  {id:'cg03',t:'BANHO ESPECIAL',s:'Cuidado e carinho para cães grandes',tag:'cachorro-grande',c:'#9B59B6'},
-  {id:'cg04',t:'PASSEIO SEGURO',s:'Guias, coleiras e peitorais top',tag:'cachorro-grande',c:'#3498DB'},
-  {id:'cg05',t:'SAÚDE & BEM-ESTAR',s:'Vacinas e consultas em dia',tag:'cachorro-grande',c:'#F39C12'},
-  {id:'cg06',t:'PROMOÇÃO RELÂMPAGO',s:'Somente esta semana!',tag:'cachorro-grande',c:'#E74C3C'},
-  {id:'cg07',t:'GOLDEN ESPECIAL',s:'Banho completo com perfume premium',tag:'cachorro-grande',c:'#F39C12'},
-  {id:'cg08',t:'PET FELIZ',s:'Seu melhor amigo em boas mãos',tag:'cachorro-grande',c:'#2ECC71'},
-  {id:'ga01',t:'TOSA FELINA',s:'Especialistas em cuidar de gatos',tag:'gato',c:'#9B59B6'},
-  {id:'ga02',t:'CONSULTA FELINA',s:'A saúde do seu gato em boas mãos',tag:'gato',c:'#3498DB'},
-  {id:'ga03',t:'RAÇÃO PARA GATOS',s:'As melhores marcas em estoque',tag:'gato',c:'#F39C12'},
-  {id:'ga04',t:'ACESSÓRIOS FELINOS',s:'Arranhadores, casinhas e brinquedos',tag:'gato',c:'#E74C3C'},
-  {id:'ga05',t:'BANHO SEM ESTRESSE',s:'Técnica especial para gatos',tag:'gato',c:'#2ECC71'},
-  {id:'ga06',t:'ADOTE COM AMOR',s:'Venha conhecer nossos filhotes!',tag:'gato',c:'#1a9e52'},
-  {id:'ga07',t:'CASTRAÇÃO FELINA',s:'Saúde e qualidade de vida',tag:'gato',c:'#3498DB'},
-  {id:'ga08',t:'PROMOÇÃO GATOS',s:'Combo banho + tosa com desconto!',tag:'gato',c:'#9B59B6'},
-  {id:'bt01',t:'BANHO & TOSA',s:'Profissionais experientes e carinhosos',tag:'banho-tosa',c:'#2ECC71'},
-  {id:'bt02',t:'TOSA HIGIÊNICA',s:'Conforto e higiene para seu pet',tag:'banho-tosa',c:'#3498DB'},
-  {id:'bt03',t:'BANHO PREMIUM',s:'Shampoo especial + hidratação',tag:'banho-tosa',c:'#9B59B6'},
-  {id:'bt04',t:'TOSA MODINHA',s:'Looks estilosos para seu pet!',tag:'banho-tosa',c:'#E74C3C'},
-  {id:'bt05',t:'COMBO COMPLETO',s:'Banho + Tosa + Hidratação',tag:'banho-tosa',c:'#F39C12'},
-  {id:'bt06',t:'ESFOLIAÇÃO PET',s:'Pelo saudável e brilhante!',tag:'banho-tosa',c:'#1a9e52'},
-  {id:'bt07',t:'AGENDAMENTO ONLINE',s:'Reserve seu horário pelo WhatsApp',tag:'banho-tosa',c:'#25D366'},
-  {id:'bt08',t:'BANHO A DOMICÍLIO',s:'Comodidade para você e seu pet',tag:'banho-tosa',c:'#3498DB'},
-  {id:'nt01',t:'RAÇÃO PREMIUM',s:'As melhores marcas com desconto',tag:'nutricao',c:'#E74C3C'},
-  {id:'nt02',t:'RAÇÃO NATURAL',s:'Alimentação saudável e balanceada',tag:'nutricao',c:'#2ECC71'},
-  {id:'nt03',t:'PETISCOS GOURMET',s:'Snacks deliciosos para recompensar',tag:'nutricao',c:'#F39C12'},
-  {id:'nt04',t:'SUPLEMENTOS PET',s:'Vitaminas e minerais essenciais',tag:'nutricao',c:'#3498DB'},
-  {id:'nt05',t:'DIETA ESPECIAL',s:'Para pets com necessidades específicas',tag:'nutricao',c:'#9B59B6'},
-  {id:'nt06',t:'PROMOÇÃO RAÇÃO',s:'Compre 3 leve 4 na linha premium!',tag:'nutricao',c:'#E74C3C'},
-  {id:'ac01',t:'ACESSÓRIOS PET',s:'Coleiras, guias e muito mais!',tag:'acessorios',c:'#9B59B6'},
-  {id:'ac02',t:'ROUPINHAS PET',s:'Estilo e conforto para seu pet',tag:'acessorios',c:'#F39C12'},
-  {id:'ac03',t:'CAMINHAS & CASINHAS',s:'O melhor descanso para seu pet',tag:'acessorios',c:'#E74C3C'},
-  {id:'ac04',t:'BRINQUEDOS',s:'Diversão e entretenimento para pets',tag:'acessorios',c:'#2ECC71'},
-  {id:'ac05',t:'TRANSPORTE SEGURO',s:'Caixas e bolsas de transporte',tag:'acessorios',c:'#3498DB'},
-  {id:'vc01',t:'VACINA ANTIRRÁBICA',s:'Proteja seu pet e sua família',tag:'vacinas',c:'#E74C3C'},
-  {id:'vc02',t:'V10 CANINA',s:'Imunização completa para cães',tag:'vacinas',c:'#3498DB'},
-  {id:'vc03',t:'VACINA FELINA',s:'Proteção total para seu gato',tag:'vacinas',c:'#9B59B6'},
-  {id:'vc04',t:'VERMIFUGAÇÃO',s:'Saúde do pet começa por dentro',tag:'vacinas',c:'#2ECC71'},
-  {id:'vc05',t:'ANTIPULGAS',s:'Carrapatos, pulgas e bernes',tag:'vacinas',c:'#F39C12'},
-  {id:'dk01',t:'VOCÊ SABIA?',s:'Cães precisam de banho a cada 15 dias',tag:'dicas',c:'#3498DB'},
-  {id:'dk02',t:'DICA DE SAÚDE',s:'Gatos devem beber bastante água',tag:'dicas',c:'#9B59B6'},
-  {id:'dk03',t:'FIQUE ATENTO!',s:'Vacinas em dia protegem a família toda',tag:'dicas',c:'#E74C3C'},
-  {id:'dk04',t:'NUTRIÇÃO CORRETA',s:'Ração de qualidade faz toda diferença',tag:'dicas',c:'#2ECC71'},
-  {id:'dk05',t:'CUIDADO NO VERÃO',s:'Pets precisam de hidratação extra',tag:'dicas',c:'#F39C12'},
-  {id:'dk06',t:'EXERCÍCIO É SAÚDE',s:'Passeios diários são essenciais',tag:'dicas',c:'#1a9e52'},
-  {id:'dk07',t:'IDENTIFIQUE SEU PET',s:'Microchip garante o retorno seguro',tag:'dicas',c:'#9B59B6'},
-  {id:'dk08',t:'DENTE SAUDÁVEL',s:'Escovação regular previne doenças',tag:'dicas',c:'#3498DB'},
-  {id:'dk09',t:'STRESS DO PET',s:'Sinais de que seu pet precisa de ajuda',tag:'dicas',c:'#E74C3C'},
-  {id:'dk10',t:'BEM-ESTAR ANIMAL',s:'Amor e carinho fazem toda diferença!',tag:'dicas',c:'#F39C12'},
-  {id:'pm01',t:'MEGA PROMOÇÃO!',s:'Descontos imperdíveis essa semana',tag:'promocoes',c:'#E74C3C'},
-  {id:'pm02',t:'PROMOÇÃO RELÂMPAGO',s:'Por tempo limitado! Corra!',tag:'promocoes',c:'#F39C12'},
-  {id:'pm03',t:'DESCONTO ESPECIAL',s:'Só para clientes do WhatsApp!',tag:'promocoes',c:'#25D366'},
-  {id:'pm04',t:'COMBO PET',s:'Banho + Tosa + Hidratação',tag:'promocoes',c:'#9B59B6'},
-  {id:'pm05',t:'FIDELIDADE PREMIADA',s:'Na 5ª visita ganhe um banho grátis!',tag:'promocoes',c:'#2ECC71'},
-  {id:'pm06',t:'SEGUNDA FELIZ',s:'Todo Monday: 20% off no banho!',tag:'promocoes',c:'#3498DB'},
-  {id:'pm07',t:'ANIVERSÁRIO DO PET',s:'Mês do nascimento com desconto!',tag:'promocoes',c:'#E74C3C'},
-  {id:'pm08',t:'INDIQUE E GANHE',s:'Indique amigos e ganhe prêmios!',tag:'promocoes',c:'#F39C12'},
-  {id:'pr01',t:'VERÃO COM SEU PET',s:'Banho pós-praia com desconto!',tag:'praia',c:'#F39C12'},
-  {id:'pr02',t:'PASSEIO NA PRAIA',s:'Produtos para o verão do seu pet',tag:'praia',c:'#3498DB'},
-  {id:'pr03',t:'FÉRIAS FELIZES',s:'Cuide do pet antes de viajar!',tag:'praia',c:'#2ECC71'},
-  {id:'pr04',t:'PROTEÇÃO SOLAR PET',s:'Proteja seu pet do sol forte',tag:'praia',c:'#E74C3C'},
-  {id:'pr05',t:'HIDRATAÇÃO NO VERÃO',s:'Banho extra + hidratação do pelo',tag:'praia',c:'#9B59B6'},
-  {id:'fz01',t:'PETS NA NATUREZA',s:'Ração e acessórios para o campo',tag:'fazenda',c:'#1a9e52'},
-  {id:'fz02',t:'VIDA NO CAMPO',s:'Seu pet feliz na chácara!',tag:'fazenda',c:'#F39C12'},
-  {id:'fz03',t:'AVENTURA NA FAZENDA',s:'Produtos para pets aventureiros',tag:'fazenda',c:'#E74C3C'},
-  {id:'fz04',t:'AR LIVRE & SAÚDE',s:'Antiparasitários e vacinas em dia',tag:'fazenda',c:'#2ECC71'},
-  {id:'fz05',t:'PET RURAL',s:'Cuidados especiais no campo',tag:'fazenda',c:'#9B59B6'},
-  {id:'ad01',t:'ADESTRAMENTO',s:'Comportamento saudável e equilibrado',tag:'adestramento',c:'#E74C3C'},
-  {id:'ad02',t:'CURSO DE OBEDIÊNCIA',s:'Cão obediente = família feliz!',tag:'adestramento',c:'#3498DB'},
-  {id:'ad03',t:'ADESTRAMENTO BÁSICO',s:'Primeiros comandos essenciais',tag:'adestramento',c:'#2ECC71'},
-  {id:'ad04',t:'SOCIALIZAÇÃO PET',s:'Pets felizes com outros animais',tag:'adestramento',c:'#F39C12'},
-  {id:'ad05',t:'CONTROLE COMPORTAMENTAL',s:'Sem stress para vizinhos e família',tag:'adestramento',c:'#9B59B6'},
+{id:'cp01',t:'BANHO & TOSA',s:'Para cães de porte pequeno',tag:'cachorro-pequeno',c:'#2ECC71'},
+{id:'cp02',t:'CONSULTA VETERINÁRIA',s:'Seu pequenino merece cuidado',tag:'cachorro-pequeno',c:'#3498DB'},
+{id:'cp03',t:'SUPER PROMOÇÃO!',s:'Banho + Tosa com preço especial',tag:'cachorro-pequeno',c:'#F39C12'},
+{id:'cp04',t:'RAÇÃO ESPECIAL',s:'Nutrição para raças pequenas',tag:'cachorro-pequeno',c:'#E74C3C'},
+{id:'cp05',t:'ACESSÓRIOS PET',s:'Coleiras, roupinhas e muito mais!',tag:'cachorro-pequeno',c:'#9B59B6'},
+{id:'cp06',t:'CLUBE FIDELIDADE',s:'Acumule pontos a cada banho!',tag:'cachorro-pequeno',c:'#1a9e52'},
+{id:'cp07',t:'PETISCO GOURMET',s:'Delícias para o seu pequenino',tag:'cachorro-pequeno',c:'#F39C12'},
+{id:'cp08',t:'TOSA CRIATIVA',s:'Looks modernos para seu pet!',tag:'cachorro-pequeno',c:'#9B59B6'},
+{id:'cg01',t:'ADESTRAMENTO',s:'Cães de porte grande e médio',tag:'cachorro-grande',c:'#E74C3C'},
+{id:'cg02',t:'RAÇÃO PREMIUM',s:'Nutrição completa para raças grandes',tag:'cachorro-grande',c:'#1a9e52'},
+{id:'cg03',t:'BANHO ESPECIAL',s:'Cuidado e carinho para cães grandes',tag:'cachorro-grande',c:'#9B59B6'},
+{id:'cg04',t:'PASSEIO SEGURO',s:'Guias, coleiras e peitorais top',tag:'cachorro-grande',c:'#3498DB'},
+{id:'cg05',t:'SAÚDE & BEM-ESTAR',s:'Vacinas e consultas em dia',tag:'cachorro-grande',c:'#F39C12'},
+{id:'cg06',t:'PROMOÇÃO RELÂMPAGO',s:'Somente esta semana!',tag:'cachorro-grande',c:'#E74C3C'},
+{id:'cg07',t:'GOLDEN ESPECIAL',s:'Banho completo com perfume premium',tag:'cachorro-grande',c:'#F39C12'},
+{id:'cg08',t:'PET FELIZ',s:'Seu melhor amigo em boas mãos',tag:'cachorro-grande',c:'#2ECC71'},
+{id:'ga01',t:'TOSA FELINA',s:'Especialistas em cuidar de gatos',tag:'gato',c:'#9B59B6'},
+{id:'ga02',t:'CONSULTA FELINA',s:'A saúde do seu gato em boas mãos',tag:'gato',c:'#3498DB'},
+{id:'ga03',t:'RAÇÃO PARA GATOS',s:'As melhores marcas em estoque',tag:'gato',c:'#F39C12'},
+{id:'ga04',t:'ACESSÓRIOS FELINOS',s:'Arranhadores, casinhas e brinquedos',tag:'gato',c:'#E74C3C'},
+{id:'ga05',t:'BANHO SEM ESTRESSE',s:'Técnica especial para gatos',tag:'gato',c:'#2ECC71'},
+{id:'ga06',t:'ADOTE COM AMOR',s:'Venha conhecer nossos filhotes!',tag:'gato',c:'#1a9e52'},
+{id:'ga07',t:'CASTRAÇÃO FELINA',s:'Saúde e qualidade de vida',tag:'gato',c:'#3498DB'},
+{id:'ga08',t:'PROMOÇÃO GATOS',s:'Combo banho + tosa com desconto!',tag:'gato',c:'#9B59B6'},
+{id:'bt01',t:'BANHO & TOSA',s:'Profissionais experientes e carinhosos',tag:'banho-tosa',c:'#2ECC71'},
+{id:'bt02',t:'TOSA HIGIÊNICA',s:'Conforto e higiene para seu pet',tag:'banho-tosa',c:'#3498DB'},
+{id:'bt03',t:'BANHO PREMIUM',s:'Shampoo especial + hidratação',tag:'banho-tosa',c:'#9B59B6'},
+{id:'bt04',t:'TOSA MODINHA',s:'Looks estilosos para seu pet!',tag:'banho-tosa',c:'#E74C3C'},
+{id:'bt05',t:'COMBO COMPLETO',s:'Banho + Tosa + Hidratação',tag:'banho-tosa',c:'#F39C12'},
+{id:'bt06',t:'ESFOLIAÇÃO PET',s:'Pelo saudável e brilhante!',tag:'banho-tosa',c:'#1a9e52'},
+{id:'bt07',t:'AGENDAMENTO ONLINE',s:'Reserve pelo WhatsApp',tag:'banho-tosa',c:'#25D366'},
+{id:'bt08',t:'BANHO A DOMICÍLIO',s:'Comodidade para você e seu pet',tag:'banho-tosa',c:'#3498DB'},
+{id:'nt01',t:'RAÇÃO PREMIUM',s:'As melhores marcas com desconto',tag:'nutricao',c:'#E74C3C'},
+{id:'nt02',t:'RAÇÃO NATURAL',s:'Alimentação saudável e balanceada',tag:'nutricao',c:'#2ECC71'},
+{id:'nt03',t:'PETISCOS GOURMET',s:'Snacks deliciosos para recompensar',tag:'nutricao',c:'#F39C12'},
+{id:'nt04',t:'SUPLEMENTOS PET',s:'Vitaminas e minerais essenciais',tag:'nutricao',c:'#3498DB'},
+{id:'nt05',t:'DIETA ESPECIAL',s:'Para pets com necessidades específicas',tag:'nutricao',c:'#9B59B6'},
+{id:'nt06',t:'PROMOÇÃO RAÇÃO',s:'Compre 3 leve 4 na linha premium!',tag:'nutricao',c:'#E74C3C'},
+{id:'ac01',t:'ACESSÓRIOS PET',s:'Coleiras, guias e muito mais!',tag:'acessorios',c:'#9B59B6'},
+{id:'ac02',t:'ROUPINHAS PET',s:'Estilo e conforto para seu pet',tag:'acessorios',c:'#F39C12'},
+{id:'ac03',t:'CAMINHAS & CASINHAS',s:'O melhor descanso para seu pet',tag:'acessorios',c:'#E74C3C'},
+{id:'ac04',t:'BRINQUEDOS',s:'Diversão e entretenimento',tag:'acessorios',c:'#2ECC71'},
+{id:'ac05',t:'TRANSPORTE SEGURO',s:'Caixas e bolsas de transporte',tag:'acessorios',c:'#3498DB'},
+{id:'vc01',t:'VACINA ANTIRRÁBICA',s:'Proteja seu pet e sua família',tag:'vacinas',c:'#E74C3C'},
+{id:'vc02',t:'V10 CANINA',s:'Imunização completa para cães',tag:'vacinas',c:'#3498DB'},
+{id:'vc03',t:'VACINA FELINA',s:'Proteção total para seu gato',tag:'vacinas',c:'#9B59B6'},
+{id:'vc04',t:'VERMIFUGAÇÃO',s:'Saúde começa por dentro',tag:'vacinas',c:'#2ECC71'},
+{id:'vc05',t:'ANTIPULGAS',s:'Carrapatos, pulgas e bernes',tag:'vacinas',c:'#F39C12'},
+{id:'dk01',t:'VOCÊ SABIA?',s:'Cães precisam de banho a cada 15 dias',tag:'dicas',c:'#3498DB'},
+{id:'dk02',t:'DICA DE SAÚDE',s:'Gatos devem beber bastante água',tag:'dicas',c:'#9B59B6'},
+{id:'dk03',t:'FIQUE ATENTO!',s:'Vacinas em dia protegem a família',tag:'dicas',c:'#E74C3C'},
+{id:'dk04',t:'NUTRIÇÃO CORRETA',s:'Ração de qualidade faz diferença',tag:'dicas',c:'#2ECC71'},
+{id:'dk05',t:'CUIDADO NO VERÃO',s:'Pets precisam de hidratação extra',tag:'dicas',c:'#F39C12'},
+{id:'dk06',t:'EXERCÍCIO É SAÚDE',s:'Passeios diários são essenciais',tag:'dicas',c:'#1a9e52'},
+{id:'dk07',t:'IDENTIFIQUE SEU PET',s:'Microchip garante retorno seguro',tag:'dicas',c:'#9B59B6'},
+{id:'dk08',t:'DENTE SAUDÁVEL',s:'Escovação previne doenças',tag:'dicas',c:'#3498DB'},
+{id:'dk09',t:'STRESS DO PET',s:'Sinais de que precisa de ajuda',tag:'dicas',c:'#E74C3C'},
+{id:'dk10',t:'BEM-ESTAR ANIMAL',s:'Amor e carinho fazem diferença!',tag:'dicas',c:'#F39C12'},
+{id:'pm01',t:'MEGA PROMOÇÃO!',s:'Descontos imperdíveis essa semana',tag:'promocoes',c:'#E74C3C'},
+{id:'pm02',t:'PROMOÇÃO RELÂMPAGO',s:'Por tempo limitado! Corra!',tag:'promocoes',c:'#F39C12'},
+{id:'pm03',t:'DESCONTO ESPECIAL',s:'Só para clientes do WhatsApp!',tag:'promocoes',c:'#25D366'},
+{id:'pm04',t:'COMBO PET',s:'Banho + Tosa + Hidratação',tag:'promocoes',c:'#9B59B6'},
+{id:'pm05',t:'FIDELIDADE PREMIADA',s:'5ª visita ganhe banho grátis!',tag:'promocoes',c:'#2ECC71'},
+{id:'pm06',t:'SEGUNDA FELIZ',s:'20% off no banho!',tag:'promocoes',c:'#3498DB'},
+{id:'pm07',t:'ANIVERSÁRIO DO PET',s:'Mês do nascimento com desconto!',tag:'promocoes',c:'#E74C3C'},
+{id:'pm08',t:'INDIQUE E GANHE',s:'Indique amigos e ganhe prêmios!',tag:'promocoes',c:'#F39C12'},
+{id:'pr01',t:'VERÃO COM SEU PET',s:'Banho pós-praia com desconto!',tag:'praia',c:'#F39C12'},
+{id:'pr02',t:'PASSEIO NA PRAIA',s:'Produtos para o verão',tag:'praia',c:'#3498DB'},
+{id:'pr03',t:'FÉRIAS FELIZES',s:'Cuide do pet antes de viajar!',tag:'praia',c:'#2ECC71'},
+{id:'pr04',t:'PROTEÇÃO SOLAR PET',s:'Proteja do sol forte',tag:'praia',c:'#E74C3C'},
+{id:'pr05',t:'HIDRATAÇÃO NO VERÃO',s:'Banho + hidratação do pelo',tag:'praia',c:'#9B59B6'},
+{id:'fz01',t:'PETS NA NATUREZA',s:'Ração e acessórios para o campo',tag:'fazenda',c:'#1a9e52'},
+{id:'fz02',t:'VIDA NO CAMPO',s:'Seu pet feliz na chácara!',tag:'fazenda',c:'#F39C12'},
+{id:'fz03',t:'AVENTURA NA FAZENDA',s:'Produtos para pets aventureiros',tag:'fazenda',c:'#E74C3C'},
+{id:'fz04',t:'AR LIVRE & SAÚDE',s:'Antiparasitários e vacinas em dia',tag:'fazenda',c:'#2ECC71'},
+{id:'fz05',t:'PET RURAL',s:'Cuidados especiais no campo',tag:'fazenda',c:'#9B59B6'},
+{id:'ad01',t:'ADESTRAMENTO',s:'Comportamento saudável',tag:'adestramento',c:'#E74C3C'},
+{id:'ad02',t:'CURSO DE OBEDIÊNCIA',s:'Cão obediente = família feliz!',tag:'adestramento',c:'#3498DB'},
+{id:'ad03',t:'ADESTRAMENTO BÁSICO',s:'Primeiros comandos essenciais',tag:'adestramento',c:'#2ECC71'},
+{id:'ad04',t:'SOCIALIZAÇÃO PET',s:'Pets felizes com outros animais',tag:'adestramento',c:'#F39C12'},
+{id:'ad05',t:'CONTROLE COMPORTAMENTAL',s:'Sem stress para a família',tag:'adestramento',c:'#9B59B6'},
 ];
 
-// ── STATE ──────────────────────────────────────────────
 const CORES=['#2ECC71','#3498DB','#F39C12','#E74C3C','#9B59B6','#1a9e52','#E91E63','#FF9800','#00BCD4','#795548'];
 let cfg={nome:'Amigão Pet Shop 🐾',wpp:'(XX) XXXXX-XXXX',cidade:'Sua Cidade',insta:'',ghToken:''};
 const GH_REPO='lssgoiano-anagi/amigao-petshop-imagens';
 const GH_BRANCH='main';
 let ed={arte:null,titulo:'',sub:'',dest:'',cor:'#2ECC71',bgUrl:null,bgGrad:null,objects:[],selectedObjIdx:-1};
 let renderTmr=null;
-
-// ── PRATELEIRA DATA ────────────────────────────────────
-const PRAT={
-  fundos:[
-    {url:'imagens/fundos/verde-natural.svg',lbl:'Verde Natural'},
-    {url:'imagens/fundos/azul-fresco.svg',lbl:'Azul Fresco'},
-    {url:'imagens/fundos/laranja-vibrante.svg',lbl:'Laranja Vibrante'},
-    {url:'imagens/fundos/roxo-elegante.svg',lbl:'Roxo Elegante'},
-    {url:'imagens/fundos/escuro-premium.svg',lbl:'Escuro Premium'},
-    {url:'imagens/fundos/rosa-pet.svg',lbl:'Rosa Pet'},
-    {url:'imagens/fundos/terra-natural.svg',lbl:'Terra Natural'},
-    {url:'imagens/fundos/azul-noite.svg',lbl:'Azul Noite'},
-    {url:null,grad:'linear-gradient(135deg,#2ECC71,#F39C12)',lbl:'Verde Dourado'},
-    {url:null,grad:'linear-gradient(135deg,#E74C3C,#9B59B6)',lbl:'Vermelho Roxo'},
-    {url:null,grad:'linear-gradient(135deg,#3498DB,#2ECC71)',lbl:'Azul Verde'},
-    {url:null,grad:'linear-gradient(135deg,#F39C12,#E74C3C)',lbl:'Fogo'},
-  ],
-  pets:[],
-  racao:[],
-  acessorios:[],
-};
-
+const PRAT={fundos:[
+  {url:'imagens/fundos/verde-natural.svg',lbl:'Verde Natural'},{url:'imagens/fundos/azul-fresco.svg',lbl:'Azul Fresco'},
+  {url:'imagens/fundos/laranja-vibrante.svg',lbl:'Laranja Vibrante'},{url:'imagens/fundos/roxo-elegante.svg',lbl:'Roxo Elegante'},
+  {url:'imagens/fundos/escuro-premium.svg',lbl:'Escuro Premium'},{url:'imagens/fundos/rosa-pet.svg',lbl:'Rosa Pet'},
+  {url:'imagens/fundos/terra-natural.svg',lbl:'Terra Natural'},{url:'imagens/fundos/azul-noite.svg',lbl:'Azul Noite'},
+  {url:null,grad:'linear-gradient(135deg,#2ECC71,#F39C12)',lbl:'Verde Dourado'},
+  {url:null,grad:'linear-gradient(135deg,#E74C3C,#9B59B6)',lbl:'Vermelho Roxo'},
+  {url:null,grad:'linear-gradient(135deg,#3498DB,#2ECC71)',lbl:'Azul Verde'},
+  {url:null,grad:'linear-gradient(135deg,#F39C12,#E74C3C)',lbl:'Fogo'},
+],pets:[],racao:[],acessorios:[]};
 let pratAbaAtual='galeria';
+const LAYER_ABAS=['pets','racao','acessorios'];
+const OBJ_BASE_H=380;
+let uploads=[];
+let toastTmr=null;
+let dragState=null;
+const objImgCache={};
+const PASTAS_GH=[{id:'pets',lbl:'🐾 Pets'},{id:'racao',lbl:'🍖 Ração'},{id:'acessorios',lbl:'🎀 Acessórios'},{id:'fundos',lbl:'🖼️ Fundos'}];
+const PASTAS_GH_GALERIA=[{id:'galeria',lbl:'🎨 Galeria'},...PASTAS_GH];
+let tratCtx={file:null,originalBlob:null,processedBlob:null,tratamentos:{bg:false,qual:false},pasta:null,contexto:'outras'};
+let moverTarget=null;
+/* ═══════════════════════════════════════════════════════
+   FUNÇÕES CORE
+   ═══════════════════════════════════════════════════════ */
 
-// ── BOOT ───────────────────────────────────────────────
+// BOOT
 document.addEventListener('DOMContentLoaded',()=>{
   const saved=localStorage.getItem('petcfg');
-  if(saved){
-    const s=JSON.parse(saved);
-    if(s.nome==='Amigão Petshop'||s.nome==='Amigão Pet Shop 🐾🐾')s.nome='Amigão Pet Shop 🐾';
-    cfg={...cfg,...s};
-    document.getElementById('modal-cfg').classList.add('hidden');
-  }
-  carregarMigracoes();
-  atualizarHdr();preencherEditor();renderCores();
-  renderPratGaleria();renderPratFundos();
+  if(saved){const s=JSON.parse(saved);cfg={...cfg,...s};document.getElementById('modal-cfg').classList.add('hidden');}
+  try{fotoGhMap=JSON.parse(localStorage.getItem('fotoGhMap_v1')||'{}');}catch(e){}
+  atualizarHdr();preencherEditor();renderCores();renderPratGaleria();renderPratFundos();
   if(cfg.ghToken){carregarImgsGitHubGaleria();carregarImgsGitHubFundos();}
-  initCanvasInteraction();
+  initCanvasInteraction();schedRender();
 });
 
-// ── CONFIG ─────────────────────────────────────────────
-function abrirCfg(){
-  document.getElementById('cfg-nome').value=cfg.nome;
-  document.getElementById('cfg-wpp').value=cfg.wpp;
-  document.getElementById('cfg-cidade').value=cfg.cidade;
-  document.getElementById('cfg-insta').value=cfg.insta||'';
-  document.getElementById('cfg-ghtoken').value=cfg.ghToken||'';
-  document.getElementById('modal-cfg').classList.remove('hidden');
-}
-function salvarCfg(){
-  const n=document.getElementById('cfg-nome').value.trim();
-  if(!n){alert('Informe o nome do petshop!');return;}
-  cfg.nome=n;cfg.wpp=document.getElementById('cfg-wpp').value.trim()||'(XX) XXXXX-XXXX';
-  cfg.cidade=document.getElementById('cfg-cidade').value.trim()||'Sua Cidade';
-  cfg.insta=document.getElementById('cfg-insta').value.trim();
-  cfg.ghToken=document.getElementById('cfg-ghtoken').value.trim();
-  localStorage.setItem('petcfg',JSON.stringify(cfg));
-  document.getElementById('modal-cfg').classList.add('hidden');
-  atualizarHdr();preencherEditor();schedRender();
-  if(cfg.ghToken){carregarImgsGitHubGaleria();carregarImgsGitHubFundos();}
-}
-function atualizarHdr(){
-  document.getElementById('hdr-nome').textContent=cfg.nome;
-  document.getElementById('hdr-cfg-lbl').textContent='Meu Petshop';
-}
-
-// ── GALLERY THUMBNAILS ─────────────────────────────────
-function renderThumb(a,canvas){
-  const ctx=canvas.getContext('2d');const W=540,H=540;
-  canvas.width=W;canvas.height=H;
-  const fotoUrl=FOTO(a.tag,ARTES.indexOf(a));
-  if(!fotoUrl){
-    ctx.fillStyle=a.c;ctx.fillRect(0,0,W,H);
-    ctx.font='60px serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('🐾',W/2,H/2-20);
-    ctx.font='bold 20px Nunito,sans-serif';ctx.fillStyle='rgba(255,255,255,.8)';ctx.fillText(a.t,W/2,H/2+40);
-    return;
-  }
-  const img=new Image();img.crossOrigin='anonymous';img.src=fotoUrl;
-  const draw=()=>{
-    ctx.clearRect(0,0,W,H);
-    const sc=Math.max(W/img.naturalWidth,H/img.naturalHeight);
-    const iw=img.naturalWidth*sc,ih=img.naturalHeight*sc;
-    ctx.drawImage(img,(W-iw)/2,(H-ih)/2,iw,ih);
-    const ov=ctx.createLinearGradient(0,0,0,H);
-    ov.addColorStop(0,'rgba(0,0,0,.18)');ov.addColorStop(1,'rgba(0,0,0,.78)');
-    ctx.fillStyle=ov;ctx.fillRect(0,0,W,H);
-    ctx.fillStyle=a.c;ctx.fillRect(0,0,W,50);
-    if(MASCOTE_IMG.complete&&MASCOTE_IMG.naturalWidth){ctx.drawImage(MASCOTE_IMG,6,2,46,46);}
-    ctx.save();ctx.font='bold 18px "Fredoka One",cursive';ctx.fillStyle='#fff';ctx.textBaseline='middle';ctx.textAlign='left';
-    const nomeShort=cfg.nome.length>30?cfg.nome.substring(0,30)+'…':cfg.nome;
-    ctx.shadowColor='rgba(0,0,0,.5)';ctx.shadowBlur=6;ctx.fillText(nomeShort,57,25);ctx.restore();
-    ctx.save();ctx.textAlign='left';ctx.textBaseline='bottom';ctx.shadowColor='rgba(0,0,0,.9)';ctx.shadowBlur=10;
-    let fs=28;ctx.font=`900 ${fs}px Nunito,sans-serif`;
-    while(ctx.measureText(a.t).width>W-32&&fs>14){fs-=2;ctx.font=`900 ${fs}px Nunito,sans-serif`;}
-    ctx.fillStyle=a.c;ctx.fillText(a.t,16,H-78);ctx.fillStyle='#fff';ctx.fillText(a.t,15,H-79);ctx.restore();
-    ctx.save();ctx.textAlign='left';ctx.textBaseline='bottom';ctx.font=`bold 15px Nunito,sans-serif`;
-    ctx.fillStyle='rgba(255,255,255,.88)';ctx.shadowColor='rgba(0,0,0,.8)';ctx.shadowBlur=6;
-    let sub=a.s;if(ctx.measureText(sub).width>W-32)sub=sub.substring(0,32)+'…';
-    ctx.fillText(sub,16,H-46);ctx.restore();
-    ctx.strokeStyle=a.c;ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(16,H-36);ctx.lineTo(W-16,H-36);ctx.stroke();
-    ctx.save();ctx.font='bold 13px Nunito,sans-serif';ctx.fillStyle='rgba(255,255,255,.7)';ctx.textBaseline='bottom';ctx.textAlign='left';
-    ctx.fillText('📱 '+cfg.wpp,16,H-8);ctx.restore();
-  };
-  if(img.complete&&img.naturalWidth)draw();
-  else{img.onload=draw;img.onerror=()=>{ctx.fillStyle=a.c;ctx.fillRect(0,0,W,H);ctx.font='80px serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('🐾',W/2,H/2);};}
-}
-
-function preencherEditor(){
-  document.getElementById('ed-nome').value=cfg.nome;
-  document.getElementById('ed-wpp').value=cfg.wpp;
-  document.getElementById('ed-cidade').value=cfg.cidade;
-  document.getElementById('ed-titulo').value=ed.arte?.t||ed.titulo;
-  document.getElementById('ed-sub').value=ed.arte?.s||ed.sub;
-  document.getElementById('ed-dest').value='';
-  updateSwatchSel(ed.cor);
-}
-
-// ── COLORS ─────────────────────────────────────────────
-function renderCores(){
-  document.getElementById('color-row').innerHTML=CORES.map(c=>
-    `<div class="cswatch${c===ed.cor?' sel':''}" data-c="${c}" style="background:${c}" onclick="selCor('${c}')"></div>`
-  ).join('');
-}
+// CONFIG
+function abrirCfg(){document.getElementById('cfg-nome').value=cfg.nome;document.getElementById('cfg-wpp').value=cfg.wpp;document.getElementById('cfg-cidade').value=cfg.cidade;document.getElementById('cfg-insta').value=cfg.insta||'';document.getElementById('cfg-ghtoken').value=cfg.ghToken||'';document.getElementById('modal-cfg').classList.remove('hidden');}
+function salvarCfg(){const n=document.getElementById('cfg-nome').value.trim();if(!n){alert('Informe o nome!');return;}cfg.nome=n;cfg.wpp=document.getElementById('cfg-wpp').value.trim()||'(XX) XXXXX-XXXX';cfg.cidade=document.getElementById('cfg-cidade').value.trim()||'Sua Cidade';cfg.insta=document.getElementById('cfg-insta').value.trim();cfg.ghToken=document.getElementById('cfg-ghtoken').value.trim();localStorage.setItem('petcfg',JSON.stringify(cfg));document.getElementById('modal-cfg').classList.add('hidden');atualizarHdr();preencherEditor();schedRender();if(cfg.ghToken){carregarImgsGitHubGaleria();carregarImgsGitHubFundos();}}
+function atualizarHdr(){document.getElementById('hdr-nome').textContent=cfg.nome;document.getElementById('hdr-cfg-lbl').textContent='Meu Petshop';}
+function preencherEditor(){document.getElementById('ed-nome').value=cfg.nome;document.getElementById('ed-wpp').value=cfg.wpp;document.getElementById('ed-cidade').value=cfg.cidade;document.getElementById('ed-titulo').value=ed.arte?.t||ed.titulo||'SEU PETSHOP';document.getElementById('ed-sub').value=ed.arte?.s||ed.sub||'Selecione um modelo ao lado';document.getElementById('ed-dest').value='';updateSwatchSel(ed.cor);}
+function renderCores(){document.getElementById('color-row').innerHTML=CORES.map(c=>`<div class="cswatch${c===ed.cor?' sel':''}" data-c="${c}" style="background:${c}" onclick="selCor('${c}')"></div>`).join('');}
 function selCor(c){ed.cor=c;updateSwatchSel(c);schedRender();}
 function updateSwatchSel(c){document.querySelectorAll('.cswatch').forEach(s=>s.classList.toggle('sel',s.dataset.c===c));}
+function mostrarToast(msg,dur=3000){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(toastTmr);toastTmr=setTimeout(()=>t.classList.remove('show'),dur);}
+function isLayerAba(){return LAYER_ABAS.includes(pratAbaAtual);}
 
-// ── PRATELEIRA ABAS ────────────────────────────────────
+// ★ GARANTIR ARTE BASE — sem isso o canvas não renderiza
+function garantirArteBase(){
+  if(!ed.arte){
+    ed.arte={id:'_custom',t:'SEU PETSHOP',s:'Personalize sua arte!',tag:'cachorro-grande',c:ed.cor||'#2ECC71'};
+    ed.titulo=ed.arte.t;ed.sub=ed.arte.s;
+    preencherEditor();
+  }
+}
+
+// THUMBNAILS
+function renderThumb(a,canvas){
+  const ctx=canvas.getContext('2d');const W=540,H=540;canvas.width=W;canvas.height=H;
+  const fotoUrl=FOTO(a.tag,ARTES.indexOf(a));
+  if(!fotoUrl){ctx.fillStyle=a.c;ctx.fillRect(0,0,W,H);ctx.font='60px serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('🐾',W/2,H/2-20);ctx.font='bold 20px Nunito,sans-serif';ctx.fillStyle='rgba(255,255,255,.8)';ctx.fillText(a.t,W/2,H/2+40);return;}
+  const img=new Image();img.crossOrigin='anonymous';img.src=fotoUrl;
+  const draw=()=>{ctx.clearRect(0,0,W,H);const sc=Math.max(W/img.naturalWidth,H/img.naturalHeight);const iw=img.naturalWidth*sc,ih=img.naturalHeight*sc;ctx.drawImage(img,(W-iw)/2,(H-ih)/2,iw,ih);const ov=ctx.createLinearGradient(0,0,0,H);ov.addColorStop(0,'rgba(0,0,0,.18)');ov.addColorStop(1,'rgba(0,0,0,.78)');ctx.fillStyle=ov;ctx.fillRect(0,0,W,H);ctx.fillStyle=a.c;ctx.fillRect(0,0,W,50);if(MASCOTE_IMG.complete&&MASCOTE_IMG.naturalWidth)ctx.drawImage(MASCOTE_IMG,6,2,46,46);ctx.save();ctx.font='bold 18px "Fredoka One",cursive';ctx.fillStyle='#fff';ctx.textBaseline='middle';ctx.textAlign='left';ctx.shadowColor='rgba(0,0,0,.5)';ctx.shadowBlur=6;ctx.fillText(cfg.nome.substring(0,30),57,25);ctx.restore();ctx.save();ctx.textAlign='left';ctx.textBaseline='bottom';ctx.shadowColor='rgba(0,0,0,.9)';ctx.shadowBlur=10;let fs=28;ctx.font=`900 ${fs}px Nunito,sans-serif`;while(ctx.measureText(a.t).width>W-32&&fs>14){fs-=2;ctx.font=`900 ${fs}px Nunito,sans-serif`;}ctx.fillStyle=a.c;ctx.fillText(a.t,16,H-78);ctx.fillStyle='#fff';ctx.fillText(a.t,15,H-79);ctx.restore();ctx.save();ctx.textAlign='left';ctx.textBaseline='bottom';ctx.font='bold 15px Nunito,sans-serif';ctx.fillStyle='rgba(255,255,255,.88)';ctx.shadowColor='rgba(0,0,0,.8)';ctx.shadowBlur=6;ctx.fillText(a.s.substring(0,32),16,H-46);ctx.restore();ctx.strokeStyle=a.c;ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(16,H-36);ctx.lineTo(W-16,H-36);ctx.stroke();ctx.save();ctx.font='bold 13px Nunito,sans-serif';ctx.fillStyle='rgba(255,255,255,.7)';ctx.textBaseline='bottom';ctx.textAlign='left';ctx.fillText('📱 '+cfg.wpp,16,H-8);ctx.restore();};
+  if(img.complete&&img.naturalWidth)draw();else{img.onload=draw;img.onerror=()=>{ctx.fillStyle=a.c;ctx.fillRect(0,0,W,H);ctx.font='80px serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('🐾',W/2,H/2);};}
+}
+
+// PRATELEIRA ABAS
 function pratAba(aba,btn){
   pratAbaAtual=aba;
   document.querySelectorAll('.prat-tab').forEach(t=>t.classList.remove('active'));
   btn.classList.add('active');
-  const galArea=document.getElementById('prat-galeria-area');
-  const fundosArea=document.getElementById('prat-fundos-area');
-  const outArea=document.getElementById('prat-outras-area');
-  galArea.classList.add('hidden');
-  fundosArea.classList.add('hidden');
-  outArea.classList.add('hidden');
-  if(aba==='galeria'){
-    galArea.classList.remove('hidden');
-    renderPratGaleria();
-    if(cfg.ghToken)carregarImgsGitHubGaleria();
-  } else if(aba==='fundos'){
-    fundosArea.classList.remove('hidden');
-    renderPratFundos();
-    if(cfg.ghToken)carregarImgsGitHubFundos();
-  } else {
-    outArea.classList.remove('hidden');
-    document.getElementById('prat-reset-btn').style.display='none';
-    renderPratOutras();
-    carregarImgsGitHub(aba);
-  }
+  document.getElementById('prat-galeria-area').classList.add('hidden');
+  document.getElementById('prat-fundos-area').classList.add('hidden');
+  document.getElementById('prat-outras-area').classList.add('hidden');
+  if(aba==='galeria'){document.getElementById('prat-galeria-area').classList.remove('hidden');renderPratGaleria();if(cfg.ghToken)carregarImgsGitHubGaleria();}
+  else if(aba==='fundos'){document.getElementById('prat-fundos-area').classList.remove('hidden');renderPratFundos();if(cfg.ghToken)carregarImgsGitHubFundos();}
+  else{document.getElementById('prat-outras-area').classList.remove('hidden');renderPratOutras();if(cfg.ghToken)carregarImgsGitHub(aba);}
 }
 
-// ── RENDER FUNDOS (aba separada) ───────────────────────
-function renderPratFundos(){
-  const grid=document.getElementById('prat-fundos-grid');
-  if(!grid)return;
-  grid.innerHTML='';
-  PRAT.fundos.forEach(item=>{
-    const el=document.createElement('div');
-    el.className='prat-item'+(ed.bgUrl===item.url&&item.url?' sel':ed.bgGrad===item.grad&&item.grad?' sel':'');
-    if(item.grad&&!item.url){
-      el.classList.add('grad');el.style.background=item.grad;el.textContent=item.lbl;
-      el.onclick=()=>pratSelGrad(item.grad);
-    } else {
-      const img=document.createElement('img');img.src=item.url;img.alt=item.lbl;img.loading='lazy';
-      const lbl=document.createElement('div');lbl.className='prat-label';lbl.textContent=item.lbl;
-      el.appendChild(img);el.appendChild(lbl);
-      el.onclick=()=>pratSelUrl(item.url);
-    }
-    grid.appendChild(el);
-  });
-}
-
-// ── RENDER GALERIA (modelos — sem busca, sem filtros) ──
+// RENDER GALERIA
 function renderPratGaleria(){
-  const lista=ARTES.filter(a=>{
-    const temImagem=!!FOTO(a.tag,ARTES.indexOf(a));
-    return temImagem;
-  });
-  const grid=document.getElementById('prat-galeria-grid');
-  grid.innerHTML='';
-  lista.forEach((a,i)=>{
-    const el=document.createElement('div');
-    el.className='prat-item'+(ed.arte?.id===a.id?' sel':'');
-    const cv=document.createElement('canvas');
-    el.appendChild(cv);
-    const lbl=document.createElement('div');lbl.className='prat-label';lbl.textContent=a.t;
-    el.appendChild(lbl);
-    el.onclick=()=>pratSelArte(a.id);
-    grid.appendChild(el);
-    setTimeout(()=>renderThumb(a,cv),i*30);
-  });
+  const lista=ARTES.filter(a=>!!FOTO(a.tag,ARTES.indexOf(a)));
+  const grid=document.getElementById('prat-galeria-grid');grid.innerHTML='';
+  lista.forEach((a,i)=>{const el=document.createElement('div');el.className='prat-item'+(ed.arte?.id===a.id?' sel':'');const cv=document.createElement('canvas');el.appendChild(cv);const lbl=document.createElement('div');lbl.className='prat-label';lbl.textContent=a.t;el.appendChild(lbl);el.onclick=()=>pratSelArte(a.id);grid.appendChild(el);setTimeout(()=>renderThumb(a,cv),i*30);});
   const info=document.getElementById('prat-sel-info');
-  if(ed.arte){info.textContent='✅ Selecionado: '+ed.arte.t;info.classList.add('show');}
-  else{info.classList.remove('show');}
+  if(ed.arte&&ed.arte.id!=='_custom'){info.textContent='✅ '+ed.arte.t;info.classList.add('show');}else{info.classList.remove('show');}
+}
+function pratSelArte(id){const a=ARTES.find(x=>x.id===id);if(!a)return;ed.arte=a;ed.titulo=a.t;ed.sub=a.s;ed.cor=a.c;ed.bgUrl=null;ed.bgGrad=null;preencherEditor();renderPratGaleria();schedRender();}
+
+// RENDER FUNDOS
+function renderPratFundos(){
+  const grid=document.getElementById('prat-fundos-grid');if(!grid)return;grid.innerHTML='';
+  PRAT.fundos.forEach(item=>{const el=document.createElement('div');el.className='prat-item'+(ed.bgUrl===item.url&&item.url?' sel':ed.bgGrad===item.grad&&item.grad?' sel':'');
+    if(item.grad&&!item.url){el.classList.add('grad');el.style.background=item.grad;el.textContent=item.lbl;el.onclick=()=>pratSelGrad(item.grad);}
+    else{const img=document.createElement('img');img.src=item.url;img.alt=item.lbl;img.loading='lazy';const lbl=document.createElement('div');lbl.className='prat-label';lbl.textContent=item.lbl;el.appendChild(img);el.appendChild(lbl);el.onclick=()=>pratSelUrl(item.url);}
+    grid.appendChild(el);});
 }
 
-function pratSelArte(id){
-  const a=ARTES.find(x=>x.id===id);if(!a)return;
-  ed.arte=a;ed.titulo=a.t;ed.sub=a.s;ed.cor=a.c;
-  preencherEditor();renderPratGaleria();schedRender();
-}
+// ★ SELEÇÕES COM garantirArteBase
+function pratSelUrl(url){garantirArteBase();ed.bgUrl=url;ed.bgGrad=null;schedRender();if(pratAbaAtual==='fundos')renderPratFundos();}
+function pratSelGrad(grad){garantirArteBase();ed.bgGrad=grad;ed.bgUrl=null;schedRender();if(pratAbaAtual==='fundos')renderPratFundos();}
+function pratReset(){ed.bgUrl=null;ed.bgGrad=null;schedRender();if(pratAbaAtual==='fundos')renderPratFundos();else renderPratOutras();}
 
-const LAYER_ABAS=['pets','racao','acessorios'];
-function isLayerAba(){return LAYER_ABAS.includes(pratAbaAtual);}
-
+// RENDER OUTRAS (pets/racao/acess)
 function renderPratOutras(){
-  const grid=document.getElementById('prat-outras-grid');
-  grid.innerHTML='';
-  const items=PRAT[pratAbaAtual]||[];
-  items.forEach(item=>{
-    const el=document.createElement('div');
-    const inLayer=ed.objects.some(o=>o.url===item.url);
-    el.className='prat-item'+(inLayer?' in-layer':'');
-    const img=document.createElement('img');img.src=item.url;img.alt=item.lbl;img.loading='lazy';
-    const lbl=document.createElement('div');lbl.className='prat-label';lbl.textContent=item.lbl;
-    el.appendChild(img);el.appendChild(lbl);
-    el.onclick=()=>toggleObject(item.url,item.lbl);
-    grid.appendChild(el);
-  });
-  renderUploadThumbs();
-  renderLayersPanel();
-  const info=document.getElementById('prat-sel-info2');
-  if(ed.objects.length){info.textContent=`📌 ${ed.objects.length} camada(s) no card`;info.classList.add('show');}
-  else{info.classList.remove('show');}
+  const grid=document.getElementById('prat-outras-grid');grid.innerHTML='';
+  (PRAT[pratAbaAtual]||[]).forEach(item=>{const el=document.createElement('div');const inL=ed.objects.some(o=>o.url===item.url);el.className='prat-item'+(inL?' in-layer':'');const img=document.createElement('img');img.src=item.url;img.alt=item.lbl;img.loading='lazy';const lbl=document.createElement('div');lbl.className='prat-label';lbl.textContent=item.lbl;el.appendChild(img);el.appendChild(lbl);el.onclick=()=>toggleObject(item.url,item.lbl);grid.appendChild(el);});
+  renderUploadThumbs();renderLayersPanel();
+  const info=document.getElementById('prat-sel-info2');if(ed.objects.length){info.textContent=`📌 ${ed.objects.length} camada(s)`;info.classList.add('show');}else{info.classList.remove('show');}
 }
 
-function pratSelUrl(url){
-  ed.bgUrl=url;ed.bgGrad=null;schedRender();
-  if(pratAbaAtual==='fundos')renderPratFundos();
-}
-function pratSelGrad(grad){
-  ed.bgGrad=grad;ed.bgUrl=null;schedRender();
-  if(pratAbaAtual==='fundos')renderPratFundos();
-}
-function pratReset(){
-  ed.bgUrl=null;ed.bgGrad=null;schedRender();
-  if(pratAbaAtual==='fundos')renderPratFundos();
-  else renderPratOutras();
-}
-
-const OBJ_BASE_H=380;
+// OBJETOS/CAMADAS
 function toggleObject(url,lbl){
+  garantirArteBase();
   const idx=ed.objects.findIndex(o=>o.url===url);
-  if(idx>=0){
-    if(ed.selectedObjIdx===idx)ed.selectedObjIdx=-1;
-    ed.objects.splice(idx,1);
-    mostrarToast('🗑️ '+lbl+' removido');
-  } else {
-    const n=ed.objects.length;
-    const xOff=(n%3-1)*200;
-    ed.objects.push({url,lbl,x:540+xOff,y:850,scale:1.0,rot:0,flipH:false});
-    ed.selectedObjIdx=ed.objects.length-1;
-    mostrarToast('✅ '+lbl+' adicionado! Arraste no canvas para posicionar.');
-  }
+  if(idx>=0){if(ed.selectedObjIdx===idx)ed.selectedObjIdx=-1;ed.objects.splice(idx,1);mostrarToast('🗑️ '+lbl+' removido');}
+  else{const n=ed.objects.length;ed.objects.push({url,lbl,x:540+(n%3-1)*200,y:850,scale:1.0,rot:0,flipH:false});ed.selectedObjIdx=ed.objects.length-1;mostrarToast('✅ '+lbl+' adicionado!');}
   renderPratOutras();updateTransformPanel();schedRender();
 }
-function removeObject(idx){
-  const o=ed.objects[idx];
-  ed.objects.splice(idx,1);
-  if(ed.selectedObjIdx===idx)ed.selectedObjIdx=-1;
-  else if(ed.selectedObjIdx>idx)ed.selectedObjIdx--;
-  mostrarToast('🗑️ '+(o?.lbl||'Item')+' removido');
-  renderPratOutras();updateTransformPanel();schedRender();
-}
-function limparObjetos(){
-  ed.objects=[];ed.selectedObjIdx=-1;mostrarToast('🗑️ Camadas limpas');
-  renderPratOutras();updateTransformPanel();schedRender();
-}
+function removeObject(idx){const o=ed.objects[idx];ed.objects.splice(idx,1);if(ed.selectedObjIdx===idx)ed.selectedObjIdx=-1;else if(ed.selectedObjIdx>idx)ed.selectedObjIdx--;mostrarToast('🗑️ '+(o?.lbl||'Item')+' removido');renderPratOutras();updateTransformPanel();schedRender();}
+function limparObjetos(){ed.objects=[];ed.selectedObjIdx=-1;mostrarToast('🗑️ Camadas limpas');renderPratOutras();updateTransformPanel();schedRender();}
 function renderLayersPanel(){
-  const panel=document.getElementById('prat-layers');
-  const list=document.getElementById('prat-layers-list');
-  if(!panel||!list)return;
-  if(ed.objects.length===0){panel.classList.add('hidden');return;}
-  panel.classList.remove('hidden');
-  list.innerHTML='';
-  ed.objects.forEach((o,i)=>{
-    const row=document.createElement('div');
-    row.className='prat-layer-item'+(ed.selectedObjIdx===i?' sel':'');
-    row.onclick=()=>{ed.selectedObjIdx=(ed.selectedObjIdx===i?-1:i);renderLayersPanel();updateTransformPanel();schedRender();};
-    const thumb=document.createElement('img');thumb.className='prat-layer-thumb';thumb.src=o.url;thumb.alt=o.lbl;
-    const lbl=document.createElement('span');lbl.className='prat-layer-lbl';
-    lbl.textContent=(i===ed.selectedObjIdx?'▶ ':'')+o.lbl+(o.rot?` ${o.rot}°`:'');
-    const rm=document.createElement('button');rm.className='prat-layer-rm';rm.textContent='✕';rm.title='Remover';
-    rm.onclick=e=>{e.stopPropagation();removeObject(i);};
-    row.appendChild(thumb);row.appendChild(lbl);row.appendChild(rm);
-    list.appendChild(row);
-  });
+  const panel=document.getElementById('prat-layers');const list=document.getElementById('prat-layers-list');if(!panel||!list)return;
+  if(!ed.objects.length){panel.classList.add('hidden');return;}panel.classList.remove('hidden');list.innerHTML='';
+  ed.objects.forEach((o,i)=>{const row=document.createElement('div');row.className='prat-layer-item'+(ed.selectedObjIdx===i?' sel':'');row.onclick=()=>{ed.selectedObjIdx=(ed.selectedObjIdx===i?-1:i);renderLayersPanel();updateTransformPanel();schedRender();};
+    const thumb=document.createElement('img');thumb.className='prat-layer-thumb';thumb.src=o.url;
+    const lbl=document.createElement('span');lbl.className='prat-layer-lbl';lbl.textContent=(ed.selectedObjIdx===i?'▶ ':'')+o.lbl;
+    const rm=document.createElement('button');rm.className='prat-layer-rm';rm.textContent='✕';rm.onclick=e=>{e.stopPropagation();removeObject(i);};
+    row.appendChild(thumb);row.appendChild(lbl);row.appendChild(rm);list.appendChild(row);});
 }
 
-// ── TOAST ──────────────────────────────────────────────
-let toastTmr=null;
-function mostrarToast(msg,dur=3000){
-  const t=document.getElementById('toast');
-  t.textContent=msg;t.classList.add('show');
-  clearTimeout(toastTmr);toastTmr=setTimeout(()=>t.classList.remove('show'),dur);
-}
-
-// ── UPLOAD DE IMAGENS ──────────────────────────────────
-let uploads=[];
-function uploadImagem(input){
-  const file=input.files[0];if(!file)return;
-  input.value='';
-  abrirTratamento(file,'outras');
-}
-function uploadImagemGaleria(input){
-  const file=input.files[0];if(!file)return;
-  input.value='';
-  abrirTratamento(file,'galeria');
-}
-function uploadImagemFundos(input){
-  const file=input.files[0];if(!file)return;
-  input.value='';
-  abrirTratamento(file,'fundos');
-}
-
-// ── TRATAMENTO DE IMAGEM ────────────────────────────────
-let tratCtx={file:null,originalBlob:null,processedBlob:null,tratamentos:{bg:false,qual:false},pasta:null,contexto:'outras'};
-
-const PASTAS_GH=[
-  {id:'pets',lbl:'🐾 Pets (animais)'},
-  {id:'racao',lbl:'🍖 Ração & Petiscos'},
-  {id:'acessorios',lbl:'🎀 Acessórios'},
-  {id:'fundos',lbl:'🖼️ Fundos'},
-];
-const PASTAS_GH_GALERIA=[
-  {id:'galeria',lbl:'🎨 Galeria (modelos)'},
-  ...PASTAS_GH
-];
-
-function _pastaDefault(contexto){
-  if(contexto==='galeria')return'galeria';
-  if(contexto==='fundos')return'fundos';
-  const abas=['pets','racao','acessorios','fundos'];
-  return abas.includes(pratAbaAtual)?pratAbaAtual:'pets';
-}
-
-function abrirTratamento(file,contexto='outras'){
-  const pasta=_pastaDefault(contexto);
-  tratCtx={file,originalBlob:file,processedBlob:file,tratamentos:{bg:false,qual:false},pasta,contexto};
-  ['bg','qual'].forEach(t=>{
-    const b=document.getElementById('btn-tratar-'+t);
-    if(b){b.classList.remove('on','loading');}
-  });
-  document.getElementById('tratar-status').textContent='';
-  document.getElementById('tratar-prog').style.display='none';
-  document.getElementById('btn-tratar-salvar').disabled=false;
-  const listaPastas=(contexto==='galeria'||contexto==='fundos')?PASTAS_GH_GALERIA:PASTAS_GH;
-  const row=document.getElementById('tratar-pasta-row');
-  row.innerHTML=listaPastas.map(p=>`<button class="tratar-pasta-btn${p.id===pasta?' on':''}" onclick="selecionarPastaTratar('${p.id}',this)">${p.lbl}</button>`).join('');
-  const canvas=document.getElementById('tratar-canvas');
-  const ctx=canvas.getContext('2d');
-  const img=new Image();
-  const url=URL.createObjectURL(file);
-  img.onload=()=>{
-    const maxW=400,maxH=180;
-    const scale=Math.min(maxW/img.naturalWidth,maxH/img.naturalHeight,1);
-    canvas.width=img.naturalWidth*scale;canvas.height=img.naturalHeight*scale;
-    ctx.drawImage(img,0,0,canvas.width,canvas.height);
-    URL.revokeObjectURL(url);
-  };
-  img.src=url;
-  document.getElementById('modal-tratar').classList.remove('hidden');
-}
-
-function selecionarPastaTratar(id,btn){
-  tratCtx.pasta=id;
-  document.querySelectorAll('.tratar-pasta-btn').forEach(b=>b.classList.remove('on'));
-  btn.classList.add('on');
-}
-
-async function toggleTratamento(tipo){
-  tratCtx.tratamentos[tipo]=!tratCtx.tratamentos[tipo];
-  const btn=document.getElementById('btn-tratar-'+tipo);
-  btn.classList.toggle('on',tratCtx.tratamentos[tipo]);
-  await aplicarTratamentosPreview();
-}
-
-async function aplicarTratamentosPreview(){
-  const status=document.getElementById('tratar-status');
-  const prog=document.getElementById('tratar-prog');
-  const progBar=document.getElementById('tratar-prog-bar');
-  const btnSalvar=document.getElementById('btn-tratar-salvar');
-  ['bg','qual'].forEach(t=>document.getElementById('btn-tratar-'+t).classList.add('loading'));
-  btnSalvar.disabled=true;
-  prog.style.display='';progBar.style.width='10%';
-  let blob=tratCtx.originalBlob;
-  try{
-    if(tratCtx.tratamentos.bg){
-      status.textContent='✂️ Removendo fundo… (1ª vez pode demorar ~30s)';
-      progBar.style.width='30%';
-      blob=await removerFundoImagem(blob);
-      progBar.style.width='60%';
-    }
-    if(tratCtx.tratamentos.qual){
-      status.textContent='✨ Melhorando qualidade…';
-      progBar.style.width='75%';
-      blob=await melhorarQualidade(blob);
-      progBar.style.width='90%';
-    }
-    tratCtx.processedBlob=blob;
-    status.textContent=tratCtx.tratamentos.bg||tratCtx.tratamentos.qual?'✅ Tratamento aplicado! Confira o preview.':'';
-    progBar.style.width='100%';
-    const url=URL.createObjectURL(blob);
-    const canvas=document.getElementById('tratar-canvas');
-    const ctx=canvas.getContext('2d');
-    const img=new Image();
-    img.onload=()=>{
-      const maxW=400,maxH=180;
-      const scale=Math.min(maxW/img.naturalWidth,maxH/img.naturalHeight,1);
-      canvas.width=img.naturalWidth*scale;canvas.height=img.naturalHeight*scale;
-      if(tratCtx.tratamentos.bg){
-        for(let y=0;y<canvas.height;y+=12)for(let x=0;x<canvas.width;x+=12){
-          ctx.fillStyle=(Math.floor(x/12)+Math.floor(y/12))%2===0?'#ccc':'#fff';
-          ctx.fillRect(x,y,12,12);
-        }
-      } else {ctx.clearRect(0,0,canvas.width,canvas.height);}
-      ctx.drawImage(img,0,0,canvas.width,canvas.height);
-      URL.revokeObjectURL(url);
-    };
-    img.src=url;
-  }catch(err){
-    status.textContent='❌ Erro: '+(err.message||'falha no tratamento');
-    tratCtx.processedBlob=tratCtx.originalBlob;
-  }
-  setTimeout(()=>prog.style.display='none',800);
-  ['bg','qual'].forEach(t=>document.getElementById('btn-tratar-'+t).classList.remove('loading'));
-  btnSalvar.disabled=false;
-}
-
-async function removerFundoImagem(blob){
-  const status=document.getElementById('tratar-status');
-  if(!window._bgRemovalMod){
-    status.textContent='⬇️ Baixando modelo de IA (apenas 1ª vez ~5MB)…';
-    const cdns=[
-      'https://unpkg.com/@imgly/background-removal@1.4.5/dist/background-removal.js',
-      'https://cdn.jsdelivr.net/npm/@imgly/background-removal@1.4.5/dist/background-removal.js',
-    ];
-    let lastErr=null;
-    for(const cdn of cdns){
-      try{
-        window._bgRemovalMod=await import(/* webpackIgnore: true */cdn);
-        window._bgRemovalPublicPath=cdn.replace(/background-removal\.js$/,'');
-        break;
-      }catch(e){lastErr=e;window._bgRemovalMod=null;}
-    }
-    if(!window._bgRemovalMod){
-      throw new Error('Não foi possível carregar o modelo de remoção de fundo. Verifique sua conexão.');
-    }
-  }
-  const cfg_={
-    publicPath: window._bgRemovalPublicPath||'https://unpkg.com/@imgly/background-removal@1.4.5/dist/',
-    debug:false,model:'small',
-  };
-  return await window._bgRemovalMod.removeBackground(blob,cfg_);
-}
-
-async function melhorarQualidade(blob){
-  return new Promise((resolve,reject)=>{
-    const url=URL.createObjectURL(blob);
-    const img=new Image();
-    img.onload=()=>{
-      const W=img.naturalWidth,H=img.naturalHeight;
-      const c1=document.createElement('canvas');c1.width=W;c1.height=H;
-      const ctx1=c1.getContext('2d');ctx1.drawImage(img,0,0,W,H);
-      const orig=ctx1.getImageData(0,0,W,H);
-      const c2=document.createElement('canvas');c2.width=W;c2.height=H;
-      const ctx2=c2.getContext('2d');ctx2.filter='blur(1.2px)';ctx2.drawImage(img,0,0,W,H);
-      const blur=ctx2.getImageData(0,0,W,H);
-      const res=ctx1.createImageData(W,H);
-      const amt=1.25;
-      for(let i=0;i<orig.data.length;i+=4){
-        for(let c=0;c<3;c++){
-          let v=orig.data[i+c]+amt*(orig.data[i+c]-blur.data[i+c]);
-          res.data[i+c]=Math.min(255,Math.max(0,Math.round(v)));
-        }
-        res.data[i+3]=orig.data[i+3];
-      }
-      ctx1.putImageData(res,0,0);
-      const c3=document.createElement('canvas');c3.width=W;c3.height=H;
-      const ctx3=c3.getContext('2d');
-      ctx3.filter='contrast(1.12) brightness(1.04) saturate(1.15)';
-      ctx3.drawImage(c1,0,0);
-      URL.revokeObjectURL(url);
-      const mime=blob.type.includes('png')?'image/png':'image/jpeg';
-      c3.toBlob(b=>resolve(b),mime,0.95);
-    };
-    img.onerror=reject;img.src=url;
-  });
-}
-
-async function salvarImagemTratada(){
-  if(!cfg.ghToken){mostrarToast('⚠️ Configure o Token GitHub em "Meu Petshop"');return;}
-  const blob=tratCtx.processedBlob||tratCtx.originalBlob;
-  const isBgRemoved=tratCtx.tratamentos.bg;
-  const ext=isBgRemoved?'png':(tratCtx.file.name.match(/\.[^.]+$/)?.[0]||'.jpg').replace('.','');
-  const baseName=tratCtx.file.name.replace(/\.[^.]+$/,'').replace(/[^a-zA-Z0-9_-]/g,'_').substring(0,40);
-  const fileName=`${baseName}.${ext}`;
-  const path=`imagens/${tratCtx.pasta}/${fileName}`;
-  const status=document.getElementById('tratar-status');
-  const btnSalvar=document.getElementById('btn-tratar-salvar');
-  btnSalvar.disabled=true;
-  status.textContent='⏳ Enviando para o GitHub…';
-  try{
-    const base64=await new Promise((res,rej)=>{
-      const r=new FileReader();r.onload=()=>res(r.result.split(',')[1]);r.onerror=rej;r.readAsDataURL(blob);
-    });
-    let sha=undefined;
-    const chk=await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${path}`,{headers:{'Authorization':`Bearer ${cfg.ghToken}`}});
-    if(chk.ok){const d=await chk.json();sha=d.sha;}
-    const resp=await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${path}`,{
-      method:'PUT',
-      headers:{'Authorization':`Bearer ${cfg.ghToken}`,'Content-Type':'application/json'},
-      body:JSON.stringify({message:`Upload tratado: ${fileName}`,content:base64,branch:GH_BRANCH,...(sha?{sha}:{})})
-    });
-    if(resp.ok){
-      document.getElementById('modal-tratar').classList.add('hidden');
-      mostrarToast('✅ Salvo no GitHub!');
-      const rawUrl=`https://raw.githubusercontent.com/${GH_REPO}/${GH_BRANCH}/${path}`;
-      if(tratCtx.pasta==='galeria'){
-        await carregarImgsGitHubGaleria();
-        ed.bgUrl=rawUrl;ed.bgGrad=null;schedRender();
-      } else if(tratCtx.pasta==='fundos'){
-        await carregarImgsGitHubFundos();
-        ed.bgUrl=rawUrl;ed.bgGrad=null;schedRender();
-      } else {
-        await carregarImgsGitHub(tratCtx.pasta);
-        if(pratAbaAtual!==tratCtx.pasta){
-          const tabBtn=document.querySelector(`.prat-tab[data-aba="${tratCtx.pasta}"]`);
-          if(tabBtn)pratAba(tratCtx.pasta,tabBtn);
-        }
-        if(LAYER_ABAS.includes(tratCtx.pasta)){toggleObject(rawUrl,baseName);}
-        else{pratSelUrl(rawUrl);}
-      }
-    } else {
-      const err=await resp.json().catch(()=>({}));
-      status.textContent='❌ '+(err.message||`HTTP ${resp.status}`);
-      mostrarToast('❌ Erro ao salvar no GitHub',5000);
-      btnSalvar.disabled=false;
-    }
-  }catch(e){
-    status.textContent='⚠️ '+(e.message||'Erro de conexão');
-    mostrarToast('⚠️ Erro de conexão',5000);
-    btnSalvar.disabled=false;
-  }
-}
-
-function usarLocalSemSalvar(){
-  const blob=tratCtx.processedBlob||tratCtx.originalBlob;
-  const lbl=tratCtx.file.name.replace(/\.[^.]+$/,'').substring(0,22);
-  const url=URL.createObjectURL(blob);
-  const entrada={url,lbl,local:true};
-  uploads.unshift(entrada);
-  document.getElementById('modal-tratar').classList.add('hidden');
-  if(tratCtx.contexto==='galeria'||tratCtx.contexto==='fundos'){
-    ed.bgUrl=url;ed.bgGrad=null;schedRender();
-  } else {
-    renderUploadThumbs();
-    if(isLayerAba()){toggleObject(url,lbl);}else{pratSelUrl(url);}
-  }
-  mostrarToast('🖼️ Imagem carregada localmente (não salva no GitHub)');
-}
-
-function cancelarTratamento(){
-  document.getElementById('modal-tratar').classList.add('hidden');
-  tratCtx={file:null,originalBlob:null,processedBlob:null,tratamentos:{bg:false,qual:false},pasta:null,contexto:'outras'};
-}
+// UPLOADS
+function uploadImagem(input){const f=input.files[0];if(!f)return;input.value='';abrirTratamento(f,'outras');}
+function uploadImagemGaleria(input){const f=input.files[0];if(!f)return;input.value='';abrirTratamento(f,'galeria');}
+function uploadImagemFundos(input){const f=input.files[0];if(!f)return;input.value='';abrirTratamento(f,'fundos');}
 
 function renderUploadThumbs(){
-  const wrap=document.getElementById('upload-thumbs');
-  if(!wrap)return;
-  wrap.innerHTML='';
-  uploads.filter(u=>!u.local).forEach((u)=>{
-    const realIdx=uploads.indexOf(u);
-    const el=document.createElement('div');
-    const inLayer=ed.objects.some(o=>o.url===u.url);
-    el.className='prat-item'+(ed.bgUrl===u.url?' sel':inLayer?' in-layer':'');
-    const img=document.createElement('img');img.src=u.url;img.alt=u.lbl;
-    const lbl=document.createElement('div');lbl.className='prat-label';lbl.textContent='☁️ '+u.lbl;
-    el.appendChild(img);el.appendChild(lbl);
-    const actions=document.createElement('div');actions.className='upload-item-actions';
-    const btnDel=document.createElement('button');
-    btnDel.className='upload-act-btn upload-act-del';
-    btnDel.title='Excluir imagem';btnDel.textContent='🗑';
-    btnDel.onclick=(e)=>{e.stopPropagation();excluirUpload(realIdx);};
-    const btnMv=document.createElement('button');
-    btnMv.className='upload-act-btn upload-act-mv';
-    btnMv.title='Mover de pasta';btnMv.textContent='📂';
-    btnMv.onclick=(e)=>{e.stopPropagation();abrirModalMover(realIdx);};
-    actions.appendChild(btnDel);actions.appendChild(btnMv);
-    el.appendChild(actions);
-    el.onclick=()=>{
-      if(isLayerAba()){toggleObject(u.url,u.lbl);}else{pratSelUrl(u.url);}
-      renderUploadThumbs();
-    };
-    wrap.appendChild(el);
-  });
+  const wrap=document.getElementById('upload-thumbs');if(!wrap)return;wrap.innerHTML='';
+  uploads.filter(u=>!u.local).forEach(u=>{const ri=uploads.indexOf(u);const el=document.createElement('div');const inL=ed.objects.some(o=>o.url===u.url);el.className='prat-item'+(ed.bgUrl===u.url?' sel':inL?' in-layer':'');
+    const img=document.createElement('img');img.src=u.url;const lbl=document.createElement('div');lbl.className='prat-label';lbl.textContent='☁️ '+u.lbl;el.appendChild(img);el.appendChild(lbl);
+    const act=document.createElement('div');act.className='upload-item-actions';
+    const bd=document.createElement('button');bd.className='upload-act-btn upload-act-del';bd.textContent='🗑';bd.onclick=e=>{e.stopPropagation();excluirUpload(ri);};
+    const bm=document.createElement('button');bm.className='upload-act-btn upload-act-mv';bm.textContent='📂';bm.onclick=e=>{e.stopPropagation();if(u.ghPath)abrirModalMover(ri);};
+    act.appendChild(bd);act.appendChild(bm);el.appendChild(act);
+    el.onclick=()=>{if(isLayerAba())toggleObject(u.url,u.lbl);else pratSelUrl(u.url);renderUploadThumbs();};
+    wrap.appendChild(el);});
 }
 
-async function excluirUpload(idx){
-  const u=uploads[idx];if(!u)return;
-  if(!confirm(`Excluir "${u.lbl}"?`))return;
-  if(u.ghPath&&cfg.ghToken){
-    mostrarToast('⏳ Excluindo do GitHub…',8000);
-    try{
-      const check=await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${u.ghPath}`,{headers:{'Authorization':`Bearer ${cfg.ghToken}`}});
-      if(check.ok){
-        const d=await check.json();
-        const resp=await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${u.ghPath}`,{
-          method:'DELETE',
-          headers:{'Authorization':`Bearer ${cfg.ghToken}`,'Content-Type':'application/json'},
-          body:JSON.stringify({message:`Excluído via portal: ${u.lbl}`,sha:d.sha,branch:GH_BRANCH})
-        });
-        if(resp.ok){mostrarToast('🗑️ Excluído do GitHub!');}
-        else{mostrarToast('❌ Erro ao excluir do GitHub');return;}
-      }
-    }catch(e){mostrarToast('⚠️ Erro de conexão');}
-  }
-  if(ed.bgUrl===u.url){ed.bgUrl='';schedRender();}
-  ed.objects=ed.objects.filter(o=>o.url!==u.url);
-  uploads.splice(idx,1);
-  renderUploadThumbs();schedRender();
-  if(!u.ghPath)mostrarToast('🗑️ Imagem removida!');
+async function excluirUpload(idx){const u=uploads[idx];if(!u||!confirm(`Excluir "${u.lbl}"?`))return;
+  if(u.ghPath&&cfg.ghToken){mostrarToast('⏳ Excluindo…',8000);try{const chk=await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${u.ghPath}`,{headers:{'Authorization':`Bearer ${cfg.ghToken}`}});if(chk.ok){const d=await chk.json();await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${u.ghPath}`,{method:'DELETE',headers:{'Authorization':`Bearer ${cfg.ghToken}`,'Content-Type':'application/json'},body:JSON.stringify({message:`Excluído: ${u.lbl}`,sha:d.sha,branch:GH_BRANCH})});mostrarToast('🗑️ Excluído!');}}catch(e){mostrarToast('⚠️ Erro');}}
+  if(ed.bgUrl===u.url){ed.bgUrl='';schedRender();}ed.objects=ed.objects.filter(o=>o.url!==u.url);uploads.splice(idx,1);renderUploadThumbs();schedRender();}/* ═══════════════════════════════════════════════════════
+   TRATAMENTO, GITHUB, MOVER
+   ═══════════════════════════════════════════════════════ */
+function _pastaDefault(ctx){if(ctx==='galeria')return'galeria';if(ctx==='fundos')return'fundos';return LAYER_ABAS.includes(pratAbaAtual)?pratAbaAtual:'pets';}
+function abrirTratamento(file,contexto='outras'){
+  const pasta=_pastaDefault(contexto);tratCtx={file,originalBlob:file,processedBlob:file,tratamentos:{bg:false,qual:false},pasta,contexto};
+  ['bg','qual'].forEach(t=>{const b=document.getElementById('btn-tratar-'+t);if(b)b.classList.remove('on','loading');});
+  document.getElementById('tratar-status').textContent='';document.getElementById('tratar-prog').style.display='none';document.getElementById('btn-tratar-salvar').disabled=false;
+  const lp=(contexto==='galeria'||contexto==='fundos')?PASTAS_GH_GALERIA:PASTAS_GH;
+  document.getElementById('tratar-pasta-row').innerHTML=lp.map(p=>`<button class="tratar-pasta-btn${p.id===pasta?' on':''}" onclick="selecionarPastaTratar('${p.id}',this)">${p.lbl}</button>`).join('');
+  const canvas=document.getElementById('tratar-canvas');const ctx=canvas.getContext('2d');const img=new Image();const url=URL.createObjectURL(file);
+  img.onload=()=>{const s=Math.min(400/img.naturalWidth,180/img.naturalHeight,1);canvas.width=img.naturalWidth*s;canvas.height=img.naturalHeight*s;ctx.drawImage(img,0,0,canvas.width,canvas.height);URL.revokeObjectURL(url);};img.src=url;
+  document.getElementById('modal-tratar').classList.remove('hidden');
+}
+function selecionarPastaTratar(id,btn){tratCtx.pasta=id;document.querySelectorAll('.tratar-pasta-btn').forEach(b=>b.classList.remove('on'));btn.classList.add('on');}
+async function toggleTratamento(tipo){tratCtx.tratamentos[tipo]=!tratCtx.tratamentos[tipo];document.getElementById('btn-tratar-'+tipo).classList.toggle('on',tratCtx.tratamentos[tipo]);await aplicarTratamentosPreview();}
+async function aplicarTratamentosPreview(){
+  const st=document.getElementById('tratar-status'),pg=document.getElementById('tratar-prog'),pb=document.getElementById('tratar-prog-bar'),bs=document.getElementById('btn-tratar-salvar');
+  ['bg','qual'].forEach(t=>document.getElementById('btn-tratar-'+t).classList.add('loading'));bs.disabled=true;pg.style.display='';pb.style.width='10%';
+  let blob=tratCtx.originalBlob;
+  try{if(tratCtx.tratamentos.bg){st.textContent='✂️ Removendo fundo…';pb.style.width='30%';blob=await removerFundoImagem(blob);pb.style.width='60%';}
+    if(tratCtx.tratamentos.qual){st.textContent='✨ Melhorando…';pb.style.width='75%';blob=await melhorarQualidade(blob);pb.style.width='90%';}
+    tratCtx.processedBlob=blob;st.textContent=(tratCtx.tratamentos.bg||tratCtx.tratamentos.qual)?'✅ Aplicado!':'';pb.style.width='100%';
+    const url=URL.createObjectURL(blob);const canvas=document.getElementById('tratar-canvas');const ctx=canvas.getContext('2d');const img=new Image();
+    img.onload=()=>{const s=Math.min(400/img.naturalWidth,180/img.naturalHeight,1);canvas.width=img.naturalWidth*s;canvas.height=img.naturalHeight*s;
+      if(tratCtx.tratamentos.bg){for(let y=0;y<canvas.height;y+=12)for(let x=0;x<canvas.width;x+=12){ctx.fillStyle=(Math.floor(x/12)+Math.floor(y/12))%2===0?'#ccc':'#fff';ctx.fillRect(x,y,12,12);}}else ctx.clearRect(0,0,canvas.width,canvas.height);
+      ctx.drawImage(img,0,0,canvas.width,canvas.height);URL.revokeObjectURL(url);};img.src=url;
+  }catch(err){st.textContent='❌ '+err.message;tratCtx.processedBlob=tratCtx.originalBlob;}
+  setTimeout(()=>pg.style.display='none',800);['bg','qual'].forEach(t=>document.getElementById('btn-tratar-'+t).classList.remove('loading'));bs.disabled=false;
+}
+async function removerFundoImagem(blob){
+  if(!window._bgRemovalMod){document.getElementById('tratar-status').textContent='⬇️ Baixando IA…';
+    for(const cdn of['https://unpkg.com/@imgly/background-removal@1.4.5/dist/background-removal.js','https://cdn.jsdelivr.net/npm/@imgly/background-removal@1.4.5/dist/background-removal.js']){
+      try{window._bgRemovalMod=await import(cdn);window._bgRemovalPublicPath=cdn.replace(/background-removal\.js$/,'');break;}catch(e){window._bgRemovalMod=null;}}
+    if(!window._bgRemovalMod)throw new Error('Falha ao carregar IA');}
+  return await window._bgRemovalMod.removeBackground(blob,{publicPath:window._bgRemovalPublicPath,debug:false,model:'small'});
+}
+async function melhorarQualidade(blob){return new Promise((res,rej)=>{const url=URL.createObjectURL(blob);const img=new Image();img.onload=()=>{const W=img.naturalWidth,H=img.naturalHeight;const c1=document.createElement('canvas');c1.width=W;c1.height=H;const x1=c1.getContext('2d');x1.drawImage(img,0,0);const od=x1.getImageData(0,0,W,H);const c2=document.createElement('canvas');c2.width=W;c2.height=H;const x2=c2.getContext('2d');x2.filter='blur(1.2px)';x2.drawImage(img,0,0);const bd=x2.getImageData(0,0,W,H);const rd=x1.createImageData(W,H);for(let i=0;i<od.data.length;i+=4){for(let c=0;c<3;c++){let v=od.data[i+c]+1.25*(od.data[i+c]-bd.data[i+c]);rd.data[i+c]=Math.min(255,Math.max(0,Math.round(v)));}rd.data[i+3]=od.data[i+3];}x1.putImageData(rd,0,0);const c3=document.createElement('canvas');c3.width=W;c3.height=H;const x3=c3.getContext('2d');x3.filter='contrast(1.12) brightness(1.04) saturate(1.15)';x3.drawImage(c1,0,0);URL.revokeObjectURL(url);c3.toBlob(b=>res(b),blob.type.includes('png')?'image/png':'image/jpeg',0.95);};img.onerror=rej;img.src=url;});}
+
+async function salvarImagemTratada(){
+  if(!cfg.ghToken){mostrarToast('⚠️ Configure Token GitHub');return;}
+  const blob=tratCtx.processedBlob||tratCtx.originalBlob;const ext=tratCtx.tratamentos.bg?'png':(tratCtx.file.name.match(/\.[^.]+$/)?.[0]||'.jpg').replace('.','');
+  const bn=tratCtx.file.name.replace(/\.[^.]+$/,'').replace(/[^a-zA-Z0-9_-]/g,'_').substring(0,40);const fn=`${bn}.${ext}`;const path=`imagens/${tratCtx.pasta}/${fn}`;
+  const st=document.getElementById('tratar-status');const bs=document.getElementById('btn-tratar-salvar');bs.disabled=true;st.textContent='⏳ Enviando…';
+  try{const b64=await new Promise((r,j)=>{const rd=new FileReader();rd.onload=()=>r(rd.result.split(',')[1]);rd.onerror=j;rd.readAsDataURL(blob);});
+    let sha;const chk=await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${path}`,{headers:{'Authorization':`Bearer ${cfg.ghToken}`}});if(chk.ok){sha=(await chk.json()).sha;}
+    const resp=await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${path}`,{method:'PUT',headers:{'Authorization':`Bearer ${cfg.ghToken}`,'Content-Type':'application/json'},body:JSON.stringify({message:`Upload: ${fn}`,content:b64,branch:GH_BRANCH,...(sha?{sha}:{})})});
+    if(resp.ok){document.getElementById('modal-tratar').classList.add('hidden');mostrarToast('✅ Salvo!');const raw=`https://raw.githubusercontent.com/${GH_REPO}/${GH_BRANCH}/${path}`;
+      if(tratCtx.pasta==='galeria'){await carregarImgsGitHubGaleria();garantirArteBase();ed.bgUrl=raw;ed.bgGrad=null;schedRender();}
+      else if(tratCtx.pasta==='fundos'){await carregarImgsGitHubFundos();garantirArteBase();ed.bgUrl=raw;ed.bgGrad=null;schedRender();}
+      else{await carregarImgsGitHub(tratCtx.pasta);if(LAYER_ABAS.includes(tratCtx.pasta))toggleObject(raw,bn);else pratSelUrl(raw);}
+    }else{const err=await resp.json().catch(()=>({}));st.textContent='❌ '+(err.message||resp.status);bs.disabled=false;}
+  }catch(e){st.textContent='⚠️ '+e.message;bs.disabled=false;}}
+
+function usarLocalSemSalvar(){const blob=tratCtx.processedBlob||tratCtx.originalBlob;const lbl=tratCtx.file.name.replace(/\.[^.]+$/,'').substring(0,22);const url=URL.createObjectURL(blob);uploads.unshift({url,lbl,local:true});document.getElementById('modal-tratar').classList.add('hidden');garantirArteBase();
+  if(tratCtx.contexto==='galeria'||tratCtx.contexto==='fundos'){ed.bgUrl=url;ed.bgGrad=null;schedRender();}else{renderUploadThumbs();if(isLayerAba())toggleObject(url,lbl);else pratSelUrl(url);}mostrarToast('🖼️ Carregada localmente');}
+function cancelarTratamento(){document.getElementById('modal-tratar').classList.add('hidden');}
+
+// MOVER
+function abrirModalMover(idx){const u=uploads[idx];if(!u||!u.ghPath)return;_abrirMoverDialog(u.ghPath,u.url,nv=>{u.url=nv;u.ghPath=`imagens/${nv.split('/imagens/')[1]}`;renderUploadThumbs();});}
+function abrirModalMoverGH(p,u){_abrirMoverDialog(p,u,()=>{carregarImgsGitHub(pratAbaAtual);schedRender();});}
+function abrirModalMoverGaleria(p,u){_abrirMoverDialog(p,u,()=>{carregarImgsGitHubGaleria();schedRender();});}
+function abrirModalMoverFundos(p,u){_abrirMoverDialog(p,u,()=>{carregarImgsGitHubFundos();schedRender();});}
+function _abrirMoverDialog(ghPath,url,onOk){const pa=ghPath.split('/')[1];moverTarget={ghPath,url,onSuccess:onOk};const all=[{id:'galeria',lbl:'🎨 Galeria'},...PASTAS_GH];document.getElementById('modal-mover-opcoes').innerHTML=all.filter(p=>p.id!==pa).map(p=>`<button class="pasta-opt-btn" onclick="confirmarMover('${p.id}')">${p.lbl}</button>`).join('');document.getElementById('modal-mover').classList.remove('hidden');}
+async function confirmarMover(np){document.getElementById('modal-mover').classList.add('hidden');if(!moverTarget||!cfg.ghToken)return;const{ghPath,url,onSuccess}=moverTarget;const nm=ghPath.split('/').pop();const nc=`imagens/${np}/${nm}`;mostrarToast('⏳ Movendo…',10000);
+  try{const g=await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${ghPath}`,{headers:{'Authorization':`Bearer ${cfg.ghToken}`}});if(!g.ok)return;const o=await g.json();
+    const p=await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${nc}`,{method:'PUT',headers:{'Authorization':`Bearer ${cfg.ghToken}`,'Content-Type':'application/json'},body:JSON.stringify({message:`Movido: ${nm}`,content:o.content.replace(/\n/g,''),branch:GH_BRANCH})});if(!p.ok)return;
+    await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${ghPath}`,{method:'DELETE',headers:{'Authorization':`Bearer ${cfg.ghToken}`,'Content-Type':'application/json'},body:JSON.stringify({message:`Movido: ${nm}`,sha:o.sha,branch:GH_BRANCH})});
+    const nv=`https://raw.githubusercontent.com/${GH_REPO}/${GH_BRANCH}/${nc}`;if(ed.bgUrl===url)ed.bgUrl=nv;ed.objects.forEach(x=>{if(x.url===url)x.url=nv;});onSuccess(nv);schedRender();mostrarToast('✅ Movido!');
+  }catch(e){mostrarToast('⚠️ Erro');}}
+
+// GITHUB LOADERS
+function _ghItemActions(el,ghPath,rawUrl,onDel,onMov){
+  const act=document.createElement('div');act.className='upload-item-actions';
+  const bd=document.createElement('button');bd.className='upload-act-btn upload-act-del';bd.textContent='🗑';bd.onclick=async e=>{e.stopPropagation();if(!confirm('Excluir?'))return;mostrarToast('⏳…',8000);try{const c=await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${ghPath}`,{headers:{'Authorization':`Bearer ${cfg.ghToken}`}});if(c.ok){const d=await c.json();const r=await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${ghPath}`,{method:'DELETE',headers:{'Authorization':`Bearer ${cfg.ghToken}`,'Content-Type':'application/json'},body:JSON.stringify({message:'Excluído',sha:d.sha,branch:GH_BRANCH})});if(r.ok){if(ed.bgUrl===rawUrl){ed.bgUrl='';schedRender();}ed.objects=ed.objects.filter(o=>o.url!==rawUrl);mostrarToast('🗑️ Excluído!');onDel();}}}catch(x){mostrarToast('⚠️ Erro');}};
+  const bm=document.createElement('button');bm.className='upload-act-btn upload-act-mv';bm.textContent='📂';bm.onclick=e=>{e.stopPropagation();onMov();};
+  act.appendChild(bd);act.appendChild(bm);el.appendChild(act);
 }
 
-// ── MOVER IMAGEM ───────────────────────────────────────
-let moverTarget=null;
-function abrirModalMover(idx){
-  const u=uploads[idx];if(!u||!u.ghPath)return;
-  _abrirMoverDialog(u.ghPath,u.url,(novaUrl)=>{
-    u.url=novaUrl;u.ghPath=`imagens/${novaUrl.split('/imagens/')[1]}`;
-    renderUploadThumbs();
-  });
-}
-function abrirModalMoverGH(ghPath,url){
-  _abrirMoverDialog(ghPath,url,(novaUrl)=>{
-    carregarImgsGitHub(pratAbaAtual);
-    if(ed.bgUrl===url)ed.bgUrl=novaUrl;
-    ed.objects.forEach(o=>{if(o.url===url)o.url=novaUrl;});
-    schedRender();
-  });
-}
-function abrirModalMoverGaleria(ghPath,url){
-  _abrirMoverDialog(ghPath,url,(novaUrl)=>{
-    carregarImgsGitHubGaleria();
-    if(ed.bgUrl===url)ed.bgUrl=novaUrl;
-    schedRender();
-  });
-}
-function abrirModalMoverFundos(ghPath,url){
-  _abrirMoverDialog(ghPath,url,(novaUrl)=>{
-    carregarImgsGitHubFundos();
-    if(ed.bgUrl===url)ed.bgUrl=novaUrl;
-    schedRender();
-  });
-}
-function _abrirMoverDialog(ghPath,url,onSuccess){
-  const pastaAtual=ghPath.split('/')[1]||'';
-  moverTarget={ghPath,url,onSuccess};
-  const todasPastas=[{id:'galeria',lbl:'🎨 Galeria (modelos)'},...PASTAS_GH];
-  const opcoes=document.getElementById('modal-mover-opcoes');
-  opcoes.innerHTML=todasPastas.filter(p=>p.id!==pastaAtual).map(p=>
-    `<button class="pasta-opt-btn" onclick="confirmarMover('${p.id}')">${p.lbl}</button>`
-  ).join('');
-  document.getElementById('modal-mover').classList.remove('hidden');
-}
-async function confirmarMover(novaPasta){
-  document.getElementById('modal-mover').classList.add('hidden');
-  if(!moverTarget||!cfg.ghToken)return;
-  const {ghPath,url,onSuccess}=moverTarget;
-  const nomeArq=ghPath.split('/').pop();
-  const novoCaminho=`imagens/${novaPasta}/${nomeArq}`;
-  mostrarToast('⏳ Movendo imagem…',10000);
-  try{
-    const getR=await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${ghPath}`,{headers:{'Authorization':`Bearer ${cfg.ghToken}`}});
-    if(!getR.ok){mostrarToast(`❌ Erro ao ler original: ${getR.status}`);return;}
-    const orig=await getR.json();
-    const putR=await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${novoCaminho}`,{
-      method:'PUT',
-      headers:{'Authorization':`Bearer ${cfg.ghToken}`,'Content-Type':'application/json'},
-      body:JSON.stringify({message:`Movido para ${novaPasta}: ${nomeArq}`,content:orig.content.replace(/\n/g,''),branch:GH_BRANCH})
-    });
-    if(!putR.ok){const d=await putR.json().catch(()=>({}));mostrarToast(`❌ Erro ao mover: ${putR.status} – ${d.message||''}`);return;}
-    await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${ghPath}`,{
-      method:'DELETE',
-      headers:{'Authorization':`Bearer ${cfg.ghToken}`,'Content-Type':'application/json'},
-      body:JSON.stringify({message:`Movido de ${ghPath.split('/')[1]}: ${nomeArq}`,sha:orig.sha,branch:GH_BRANCH})
-    });
-    const novaUrl=`https://raw.githubusercontent.com/${GH_REPO}/${GH_BRANCH}/${novoCaminho}`;
-    if(ed.bgUrl===url)ed.bgUrl=novaUrl;
-    ed.objects.forEach(o=>{if(o.url===url)o.url=novaUrl;});
-    onSuccess(novaUrl,novoCaminho);
-    schedRender();
-    const todasPastas=[{id:'galeria',lbl:'Galeria'},...PASTAS_GH];
-    mostrarToast(`✅ Movido para "${todasPastas.find(p=>p.id===novaPasta)?.lbl||novaPasta}"!`);
-  }catch(e){mostrarToast('⚠️ Erro de conexão ao mover');}
-}
-
-// ── IMAGENS DO GITHUB — aba galeria ───────────────────
 async function carregarImgsGitHubGaleria(){
-  if(!cfg.ghToken)return;
-  const grid=document.getElementById('prat-gh-galeria-grid');
-  if(!grid)return;
+  if(!cfg.ghToken)return;const grid=document.getElementById('prat-gh-galeria-grid');if(!grid)return;
   grid.innerHTML='<div style="font-size:.72rem;color:#aaa;padding:6px 8px;">Carregando…</div>';
-  try{
-    const r=await fetch(`https://api.github.com/repos/${GH_REPO}/contents/imagens/galeria`,{
-      headers:{'Authorization':`Bearer ${cfg.ghToken}`}
-    });
-    if(!r.ok){grid.innerHTML='<div style="font-size:.72rem;color:#aaa;padding:4px 8px;">Pasta galeria não encontrada.</div>';return;}
-    const files=await r.json();
-    const imgs=files.filter(f=>f.type==='file'&&/\.(jpg|jpeg|png|gif|webp|svg)$/i.test(f.name));
-    if(!imgs.length){grid.innerHTML='<div style="font-size:.72rem;color:#aaa;padding:4px 8px;">Nenhuma imagem na galeria.</div>';return;}
-    grid.innerHTML='';
-    imgs.forEach(f=>{
-      const rawUrl=`https://raw.githubusercontent.com/${GH_REPO}/${GH_BRANCH}/imagens/galeria/${f.name}`;
-      const ghPath=`imagens/galeria/${f.name}`;
-      const lbl=f.name.replace(/\.[^.]+$/,'').substring(0,22);
-      const el=document.createElement('div');
-      el.className='prat-item'+(ed.bgUrl===rawUrl?' sel':'');
-      const img=document.createElement('img');img.src=rawUrl;img.alt=lbl;img.loading='lazy';
-      const lblEl=document.createElement('div');lblEl.className='prat-label';lblEl.textContent='📁 '+lbl;
-      el.appendChild(img);el.appendChild(lblEl);
-      el.onclick=()=>{ed.bgUrl=rawUrl;ed.bgGrad=null;schedRender();carregarImgsGitHubGaleria();};
-      const actions=document.createElement('div');actions.className='upload-item-actions';
-      const btnDel=document.createElement('button');
-      btnDel.className='upload-act-btn upload-act-del';btnDel.title='Excluir';btnDel.textContent='🗑';
-      btnDel.onclick=async(e)=>{
-        e.stopPropagation();
-        if(!confirm(`Excluir "${lbl}"?`))return;
-        mostrarToast('⏳ Excluindo…',8000);
-        try{
-          const chk=await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${ghPath}`,{headers:{'Authorization':`Bearer ${cfg.ghToken}`}});
-          if(chk.ok){
-            const d=await chk.json();
-            const del=await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${ghPath}`,{
-              method:'DELETE',
-              headers:{'Authorization':`Bearer ${cfg.ghToken}`,'Content-Type':'application/json'},
-              body:JSON.stringify({message:`Excluído via portal: ${f.name}`,sha:d.sha,branch:GH_BRANCH})
-            });
-            if(del.ok){
-              if(ed.bgUrl===rawUrl){ed.bgUrl='';schedRender();}
-              mostrarToast('🗑️ Excluído!');carregarImgsGitHubGaleria();
-            }else{mostrarToast('❌ Erro ao excluir');}
-          }
-        }catch(ex){mostrarToast('⚠️ Erro de conexão');}
-      };
-      const btnMv=document.createElement('button');
-      btnMv.className='upload-act-btn upload-act-mv';btnMv.title='Mover pasta';btnMv.textContent='📂';
-      btnMv.onclick=(e)=>{e.stopPropagation();abrirModalMoverGaleria(ghPath,rawUrl);};
-      actions.appendChild(btnDel);actions.appendChild(btnMv);
-      el.appendChild(actions);
-      grid.appendChild(el);
-    });
-  }catch(ex){grid.innerHTML='<div style="font-size:.72rem;color:#f00;padding:4px 8px;">Erro ao carregar.</div>';}
-}
+  try{const r=await fetch(`https://api.github.com/repos/${GH_REPO}/contents/imagens/galeria`,{headers:{'Authorization':`Bearer ${cfg.ghToken}`}});if(!r.ok){grid.innerHTML='';return;}
+    const files=(await r.json()).filter(f=>f.type==='file'&&/\.(jpg|jpeg|png|gif|webp|svg)$/i.test(f.name));if(!files.length){grid.innerHTML='';return;}grid.innerHTML='';
+    files.forEach(f=>{const raw=`https://raw.githubusercontent.com/${GH_REPO}/${GH_BRANCH}/imagens/galeria/${f.name}`;const gp=`imagens/galeria/${f.name}`;const lbl=f.name.replace(/\.[^.]+$/,'').substring(0,22);
+      const el=document.createElement('div');el.className='prat-item'+(ed.bgUrl===raw?' sel':'');const img=document.createElement('img');img.src=raw;img.loading='lazy';const lb=document.createElement('div');lb.className='prat-label';lb.textContent='📁 '+lbl;el.appendChild(img);el.appendChild(lb);
+      el.onclick=()=>{garantirArteBase();ed.bgUrl=raw;ed.bgGrad=null;schedRender();carregarImgsGitHubGaleria();};
+      _ghItemActions(el,gp,raw,()=>carregarImgsGitHubGaleria(),()=>abrirModalMoverGaleria(gp,raw));grid.appendChild(el);});
+  }catch(x){grid.innerHTML='';}}
 
-// ── IMAGENS DO GITHUB — aba fundos ────────────────────
 async function carregarImgsGitHubFundos(){
-  if(!cfg.ghToken)return;
-  const grid=document.getElementById('prat-gh-fundos-grid');
-  if(!grid)return;
+  if(!cfg.ghToken)return;const grid=document.getElementById('prat-gh-fundos-grid');if(!grid)return;
   grid.innerHTML='<div style="font-size:.72rem;color:#aaa;padding:6px 8px;">Carregando…</div>';
-  try{
-    const r=await fetch(`https://api.github.com/repos/${GH_REPO}/contents/imagens/fundos`,{
-      headers:{'Authorization':`Bearer ${cfg.ghToken}`}
-    });
-    if(!r.ok){grid.innerHTML='<div style="font-size:.72rem;color:#aaa;padding:4px 8px;">Pasta fundos não encontrada.</div>';return;}
-    const files=await r.json();
-    const imgs=files.filter(f=>f.type==='file'&&/\.(jpg|jpeg|png|gif|webp|svg)$/i.test(f.name));
-    if(!imgs.length){grid.innerHTML='<div style="font-size:.72rem;color:#aaa;padding:4px 8px;">Nenhum fundo salvo.</div>';return;}
-    grid.innerHTML='';
-    imgs.forEach(f=>{
-      const rawUrl=`https://raw.githubusercontent.com/${GH_REPO}/${GH_BRANCH}/imagens/fundos/${f.name}`;
-      const ghPath=`imagens/fundos/${f.name}`;
-      const lbl=f.name.replace(/\.[^.]+$/,'').substring(0,22);
-      const el=document.createElement('div');
-      el.className='prat-item'+(ed.bgUrl===rawUrl?' sel':'');
-      const img=document.createElement('img');img.src=rawUrl;img.alt=lbl;img.loading='lazy';
-      const lblEl=document.createElement('div');lblEl.className='prat-label';lblEl.textContent='📁 '+lbl;
-      el.appendChild(img);el.appendChild(lblEl);
-      el.onclick=()=>{ed.bgUrl=rawUrl;ed.bgGrad=null;schedRender();carregarImgsGitHubFundos();};
-      const actions=document.createElement('div');actions.className='upload-item-actions';
-      const btnDel=document.createElement('button');
-      btnDel.className='upload-act-btn upload-act-del';btnDel.title='Excluir';btnDel.textContent='🗑';
-      btnDel.onclick=async(e)=>{
-        e.stopPropagation();
-        if(!confirm(`Excluir "${lbl}"?`))return;
-        mostrarToast('⏳ Excluindo…',8000);
-        try{
-          const chk=await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${ghPath}`,{headers:{'Authorization':`Bearer ${cfg.ghToken}`}});
-          if(chk.ok){
-            const d=await chk.json();
-            const del=await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${ghPath}`,{
-              method:'DELETE',
-              headers:{'Authorization':`Bearer ${cfg.ghToken}`,'Content-Type':'application/json'},
-              body:JSON.stringify({message:`Excluído: ${f.name}`,sha:d.sha,branch:GH_BRANCH})
-            });
-            if(del.ok){
-              if(ed.bgUrl===rawUrl){ed.bgUrl='';schedRender();}
-              mostrarToast('🗑️ Excluído!');carregarImgsGitHubFundos();
-            }else{mostrarToast('❌ Erro ao excluir');}
-          }
-        }catch(ex){mostrarToast('⚠️ Erro de conexão');}
-      };
-      const btnMv=document.createElement('button');
-      btnMv.className='upload-act-btn upload-act-mv';btnMv.title='Mover pasta';btnMv.textContent='📂';
-      btnMv.onclick=(e)=>{e.stopPropagation();abrirModalMoverFundos(ghPath,rawUrl);};
-      actions.appendChild(btnDel);actions.appendChild(btnMv);
-      el.appendChild(actions);
-      grid.appendChild(el);
-    });
-  }catch(ex){grid.innerHTML='<div style="font-size:.72rem;color:#f00;padding:4px 8px;">Erro ao carregar.</div>';}
-}
+  try{const r=await fetch(`https://api.github.com/repos/${GH_REPO}/contents/imagens/fundos`,{headers:{'Authorization':`Bearer ${cfg.ghToken}`}});if(!r.ok){grid.innerHTML='';return;}
+    const files=(await r.json()).filter(f=>f.type==='file'&&/\.(jpg|jpeg|png|gif|webp|svg)$/i.test(f.name));if(!files.length){grid.innerHTML='';return;}grid.innerHTML='';
+    files.forEach(f=>{const raw=`https://raw.githubusercontent.com/${GH_REPO}/${GH_BRANCH}/imagens/fundos/${f.name}`;const gp=`imagens/fundos/${f.name}`;const lbl=f.name.replace(/\.[^.]+$/,'').substring(0,22);
+      const el=document.createElement('div');el.className='prat-item'+(ed.bgUrl===raw?' sel':'');const img=document.createElement('img');img.src=raw;img.loading='lazy';const lb=document.createElement('div');lb.className='prat-label';lb.textContent='📁 '+lbl;el.appendChild(img);el.appendChild(lb);
+      el.onclick=()=>{garantirArteBase();ed.bgUrl=raw;ed.bgGrad=null;schedRender();carregarImgsGitHubFundos();};
+      _ghItemActions(el,gp,raw,()=>carregarImgsGitHubFundos(),()=>abrirModalMoverFundos(gp,raw));grid.appendChild(el);});
+  }catch(x){grid.innerHTML='';}}
 
-// ── IMAGENS DO GITHUB — abas pets/racao/acessorios ────
 async function carregarImgsGitHub(pasta){
-  if(!cfg.ghToken)return;
-  const sec=document.getElementById('prat-gh-section');
-  const grid=document.getElementById('prat-gh-grid');
-  if(!sec||!grid)return;
-  grid.innerHTML='<div style="font-size:.72rem;color:#aaa;padding:6px 8px;">Carregando…</div>';
-  sec.classList.remove('hidden');
-  try{
-    const r=await fetch(`https://api.github.com/repos/${GH_REPO}/contents/imagens/${pasta}`,{
-      headers:{'Authorization':`Bearer ${cfg.ghToken}`}
-    });
-    if(!r.ok){sec.classList.add('hidden');return;}
-    const files=await r.json();
-    const imgs=files.filter(f=>f.type==='file'&&/\.(jpg|jpeg|png|gif|webp|svg)$/i.test(f.name));
-    if(!imgs.length){sec.classList.add('hidden');return;}
-    sec.classList.remove('hidden');
-    grid.innerHTML='';
-    imgs.forEach(f=>{
-      const rawUrl=`https://raw.githubusercontent.com/${GH_REPO}/${GH_BRANCH}/imagens/${pasta}/${f.name}`;
-      const ghPath=`imagens/${pasta}/${f.name}`;
-      const lbl=f.name.replace(/\.[^.]+$/,'').substring(0,22);
-      const inLayer=ed.objects.some(o=>o.url===rawUrl);
-      const el=document.createElement('div');
-      el.className='prat-item'+(ed.bgUrl===rawUrl?' sel':inLayer?' in-layer':'');
-      const img=document.createElement('img');img.src=rawUrl;img.alt=lbl;img.loading='lazy';
-      const lblEl=document.createElement('div');lblEl.className='prat-label';lblEl.textContent='📁 '+lbl;
-      el.appendChild(img);el.appendChild(lblEl);
-      el.onclick=()=>{
-        toggleObject(rawUrl,lbl);
-        carregarImgsGitHub(pasta);
-      };
-      const actions=document.createElement('div');actions.className='upload-item-actions';
-      const btnDel=document.createElement('button');
-      btnDel.className='upload-act-btn upload-act-del';btnDel.title='Excluir';btnDel.textContent='🗑';
-      btnDel.onclick=async(e)=>{
-        e.stopPropagation();
-        if(!confirm(`Excluir "${lbl}"?`))return;
-        mostrarToast('⏳ Excluindo…',8000);
-        try{
-          const chk=await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${ghPath}`,{headers:{'Authorization':`Bearer ${cfg.ghToken}`}});
-          if(chk.ok){
-            const d=await chk.json();
-            const del=await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${ghPath}`,{
-              method:'DELETE',
-              headers:{'Authorization':`Bearer ${cfg.ghToken}`,'Content-Type':'application/json'},
-              body:JSON.stringify({message:`Excluído via portal: ${f.name}`,sha:d.sha,branch:GH_BRANCH})
-            });
-            if(del.ok){
-              if(ed.bgUrl===rawUrl){ed.bgUrl='';schedRender();}
-              ed.objects=ed.objects.filter(o=>o.url!==rawUrl);
-              mostrarToast('🗑️ Excluído!');carregarImgsGitHub(pasta);
-            }else{mostrarToast('❌ Erro ao excluir');}
-          }
-        }catch(ex){mostrarToast('⚠️ Erro de conexão');}
-      };
-      const btnMv=document.createElement('button');
-      btnMv.className='upload-act-btn upload-act-mv';btnMv.title='Mover pasta';btnMv.textContent='📂';
-      btnMv.onclick=(e)=>{e.stopPropagation();abrirModalMoverGH(ghPath,rawUrl);};
-      actions.appendChild(btnDel);actions.appendChild(btnMv);
-      el.appendChild(actions);
-      grid.appendChild(el);
-    });
-  }catch(ex){sec.classList.add('hidden');}
-}
+  if(!cfg.ghToken)return;const sec=document.getElementById('prat-gh-section');const grid=document.getElementById('prat-gh-grid');if(!sec||!grid)return;
+  grid.innerHTML='<div style="font-size:.72rem;color:#aaa;padding:6px 8px;">Carregando…</div>';sec.classList.remove('hidden');
+  try{const r=await fetch(`https://api.github.com/repos/${GH_REPO}/contents/imagens/${pasta}`,{headers:{'Authorization':`Bearer ${cfg.ghToken}`}});if(!r.ok){sec.classList.add('hidden');return;}
+    const files=(await r.json()).filter(f=>f.type==='file'&&/\.(jpg|jpeg|png|gif|webp|svg)$/i.test(f.name));if(!files.length){sec.classList.add('hidden');return;}grid.innerHTML='';
+    files.forEach(f=>{const raw=`https://raw.githubusercontent.com/${GH_REPO}/${GH_BRANCH}/imagens/${pasta}/${f.name}`;const gp=`imagens/${pasta}/${f.name}`;const lbl=f.name.replace(/\.[^.]+$/,'').substring(0,22);
+      const inL=ed.objects.some(o=>o.url===raw);const el=document.createElement('div');el.className='prat-item'+(inL?' in-layer':'');const img=document.createElement('img');img.src=raw;img.loading='lazy';const lb=document.createElement('div');lb.className='prat-label';lb.textContent='📁 '+lbl;el.appendChild(img);el.appendChild(lb);
+      el.onclick=()=>{toggleObject(raw,lbl);carregarImgsGitHub(pasta);};
+      _ghItemActions(el,gp,raw,()=>carregarImgsGitHub(pasta),()=>abrirModalMoverGH(gp,raw));grid.appendChild(el);});
+  }catch(x){sec.classList.add('hidden');}}
+/* ═══════════════════════════════════════════════════════
+   CANVAS RENDER + INTERAÇÃO + SHARING
+   ═══════════════════════════════════════════════════════ */
+function schedRender(){ed.objects.forEach(o=>{if(!objImgCache[o.url]){const i=new Image();i.crossOrigin='anonymous';i.src=o.url;objImgCache[o.url]=i;}});clearTimeout(renderTmr);renderTmr=setTimeout(()=>renderArte(document.getElementById('editor-canvas')),150);}
+function rrectPath(c,x,y,w,h,r){c.beginPath();c.moveTo(x+r,y);c.lineTo(x+w-r,y);c.quadraticCurveTo(x+w,y,x+w,y+r);c.lineTo(x+w,y+h-r);c.quadraticCurveTo(x+w,y+h,x+w-r,y+h);c.lineTo(x+r,y+h);c.quadraticCurveTo(x,y+h,x,y+h-r);c.lineTo(x,y+r);c.quadraticCurveTo(x,y,x+r,y);c.closePath();}
+function drawPaw(c,cx,cy,sz,col){c.save();c.fillStyle=col;c.beginPath();c.ellipse(cx,cy+sz*.25,sz*.4,sz*.35,0,0,Math.PI*2);c.fill();[-0.55,-0.18,.18,.55].forEach(a=>{c.beginPath();c.ellipse(cx+Math.sin(a)*sz*.5,cy-Math.cos(a)*sz*.2,sz*.2,sz*.25,a,0,Math.PI*2);c.fill();});c.restore();}
 
-// ── MIGRAÇÕES (localStorage) ───────────────────────────
-const PRAT_MIGRADO_KEY='pratMigrado_v1';
-const FOTO_GH_KEY='fotoGhMap_v1';
-function carregarMigracoes(){
-  try{
-    const saved=JSON.parse(localStorage.getItem(PRAT_MIGRADO_KEY)||'{}');
-    ['pets','racao','acessorios'].forEach(pasta=>{
-      if(!saved[pasta])return;
-      saved[pasta].forEach(m=>{
-        const item=PRAT[pasta].find(i=>i.lbl===m.lbl);
-        if(item&&m.url)item.url=m.url;
-      });
-    });
-  }catch(e){}
-  try{
-    fotoGhMap=JSON.parse(localStorage.getItem(FOTO_GH_KEY)||'{}');
-  }catch(e){}
-}
-
-// ── CANVAS RENDER ──────────────────────────────────────
-function schedRender(){
-  ed.objects.forEach(o=>{
-    if(!objImgCache[o.url]){const img=new Image();img.crossOrigin='anonymous';img.src=o.url;objImgCache[o.url]=img;}
-  });
-  clearTimeout(renderTmr);renderTmr=setTimeout(()=>renderArte(document.getElementById('editor-canvas')),150);
-}
-function rrectPath(ctx,x,y,w,h,r){
-  ctx.beginPath();
-  ctx.moveTo(x+r,y);ctx.lineTo(x+w-r,y);ctx.quadraticCurveTo(x+w,y,x+w,y+r);
-  ctx.lineTo(x+w,y+h-r);ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);
-  ctx.lineTo(x+r,y+h);ctx.quadraticCurveTo(x,y+h,x,y+h-r);
-  ctx.lineTo(x,y+r);ctx.quadraticCurveTo(x,y,x+r,y);
-  ctx.closePath();
-}
 function drawObjects(ctx,W,H,cb,showSel=true){
-  const objs=ed.objects;
-  if(!objs.length){if(cb)cb();return;}
-  let loaded=0;
-  const imgs=objs.map(obj=>{
-    const img=new Image();img.crossOrigin='anonymous';
-    img.onload=img.onerror=()=>{loaded++;if(loaded===objs.length)render();};
-    img.src=obj.url;return img;
-  });
-  if(imgs.every(i=>i.complete)){render();return;}
-  function render(){
-    objs.forEach((obj,i)=>{
-      const img=imgs[i];if(!img.naturalWidth)return;
-      const ar=img.naturalWidth/img.naturalHeight;
-      const ih=OBJ_BASE_H*obj.scale;
-      const iw=ih*ar;
-      const r=20;
-      ctx.save();
-      ctx.translate(obj.x,obj.y);
-      if(obj.rot)ctx.rotate(obj.rot*Math.PI/180);
-      ctx.shadowColor='rgba(0,0,0,.45)';ctx.shadowBlur=30;ctx.shadowOffsetX=10;ctx.shadowOffsetY=16;
-      rrectPath(ctx,-iw/2,-ih/2,iw,ih,r);
-      ctx.fillStyle='rgba(0,0,0,.01)';ctx.fill();
-      ctx.restore();
-      ctx.save();
-      ctx.translate(obj.x,obj.y);
-      if(obj.rot)ctx.rotate(obj.rot*Math.PI/180);
-      if(obj.flipH)ctx.scale(-1,1);
-      rrectPath(ctx,-iw/2,-ih/2,iw,ih,r);
-      ctx.clip();
-      ctx.drawImage(img,-iw/2,-ih/2,iw,ih);
-      ctx.restore();
-      if(showSel&&ed.selectedObjIdx===i){
-        ctx.save();
-        ctx.translate(obj.x,obj.y);
-        if(obj.rot)ctx.rotate(obj.rot*Math.PI/180);
-        ctx.strokeStyle='#F39C12';ctx.lineWidth=10;ctx.setLineDash([28,14]);
-        ctx.shadowColor='rgba(0,0,0,.5)';ctx.shadowBlur=8;
-        ctx.strokeRect(-iw/2-8,-ih/2-8,iw+16,ih+16);
-        ctx.setLineDash([]);ctx.restore();
-      }
-    });
-    if(cb)cb();
-  }
+  const objs=ed.objects;if(!objs.length){if(cb)cb();return;}
+  let ld=0;const imgs=objs.map(o=>{const i=new Image();i.crossOrigin='anonymous';i.onload=i.onerror=()=>{ld++;if(ld===objs.length)rr();};i.src=o.url;return i;});
+  if(imgs.every(i=>i.complete)){rr();return;}
+  function rr(){objs.forEach((o,i)=>{const im=imgs[i];if(!im.naturalWidth)return;const ar=im.naturalWidth/im.naturalHeight;const ih=OBJ_BASE_H*o.scale;const iw=ih*ar;const r=20;
+    ctx.save();ctx.translate(o.x,o.y);if(o.rot)ctx.rotate(o.rot*Math.PI/180);ctx.shadowColor='rgba(0,0,0,.45)';ctx.shadowBlur=30;ctx.shadowOffsetX=10;ctx.shadowOffsetY=16;rrectPath(ctx,-iw/2,-ih/2,iw,ih,r);ctx.fillStyle='rgba(0,0,0,.01)';ctx.fill();ctx.restore();
+    ctx.save();ctx.translate(o.x,o.y);if(o.rot)ctx.rotate(o.rot*Math.PI/180);if(o.flipH)ctx.scale(-1,1);rrectPath(ctx,-iw/2,-ih/2,iw,ih,r);ctx.clip();ctx.drawImage(im,-iw/2,-ih/2,iw,ih);ctx.restore();
+    if(showSel&&ed.selectedObjIdx>=0&&ed.selectedObjIdx===i){ctx.save();ctx.translate(o.x,o.y);if(o.rot)ctx.rotate(o.rot*Math.PI/180);ctx.strokeStyle='#F39C12';ctx.lineWidth=10;ctx.setLineDash([28,14]);ctx.shadowColor='rgba(0,0,0,.5)';ctx.shadowBlur=8;ctx.strokeRect(-iw/2-8,-ih/2-8,iw+16,ih+16);ctx.setLineDash([]);ctx.restore();}
+  });if(cb)cb();}
 }
+
 function getEdVals(){return{nome:document.getElementById('ed-nome')?.value||cfg.nome,wpp:document.getElementById('ed-wpp')?.value||cfg.wpp,cidade:document.getElementById('ed-cidade')?.value||cfg.cidade,titulo:document.getElementById('ed-titulo')?.value||ed.titulo,sub:document.getElementById('ed-sub')?.value||ed.sub,dest:document.getElementById('ed-dest')?.value||'',cor:ed.cor};}
+
 function drawArteTexto(ctx,v,W,H,cb){
-  const ov=ctx.createLinearGradient(0,0,0,H);
-  ov.addColorStop(0,'rgba(0,0,0,.22)');ov.addColorStop(.4,'rgba(0,0,0,.08)');ov.addColorStop(1,'rgba(0,0,0,.9)');
-  ctx.fillStyle=ov;ctx.fillRect(0,0,W,H);
-  const hg=ctx.createLinearGradient(0,0,W,0);hg.addColorStop(0,v.cor);hg.addColorStop(1,v.cor+'cc');
-  ctx.fillStyle=hg;ctx.fillRect(0,0,W,116);
-  if(MASCOTE_IMG.complete&&MASCOTE_IMG.naturalWidth){ctx.drawImage(MASCOTE_IMG,12,8,100,100);}
-  ctx.save();ctx.font='bold 44px "Fredoka One",cursive';ctx.fillStyle='#fff';ctx.shadowColor='rgba(0,0,0,.55)';ctx.shadowBlur=14;
-  ctx.textBaseline='middle';ctx.textAlign='left';
-  let nw=v.nome;if(ctx.measureText(nw).width>W-200)nw=nw.substring(0,28)+'…';
-  ctx.fillText(nw,122,58);ctx.restore();
+  const ov=ctx.createLinearGradient(0,0,0,H);ov.addColorStop(0,'rgba(0,0,0,.22)');ov.addColorStop(.4,'rgba(0,0,0,.08)');ov.addColorStop(1,'rgba(0,0,0,.9)');ctx.fillStyle=ov;ctx.fillRect(0,0,W,H);
+  const hg=ctx.createLinearGradient(0,0,W,0);hg.addColorStop(0,v.cor);hg.addColorStop(1,v.cor+'cc');ctx.fillStyle=hg;ctx.fillRect(0,0,W,116);
+  if(MASCOTE_IMG.complete&&MASCOTE_IMG.naturalWidth)ctx.drawImage(MASCOTE_IMG,12,8,100,100);
+  ctx.save();ctx.font='bold 44px "Fredoka One",cursive';ctx.fillStyle='#fff';ctx.shadowColor='rgba(0,0,0,.55)';ctx.shadowBlur=14;ctx.textBaseline='middle';ctx.textAlign='left';let nw=v.nome;if(ctx.measureText(nw).width>W-200)nw=nw.substring(0,28)+'…';ctx.fillText(nw,122,58);ctx.restore();
   drawPaw(ctx,W-55,55,26,'rgba(255,255,255,.28)');drawPaw(ctx,W-105,80,18,'rgba(255,255,255,.18)');
-  const hDest=v.dest?290:0;
-  if(v.dest){
-    ctx.save();ctx.font='bold 34px Nunito,sans-serif';
-    const tw=ctx.measureText(v.dest).width;
-    const tx=42,ty=H-360,th=58,trad=10;
-    ctx.fillStyle=v.cor;rrect(ctx,tx,ty,tw+44,th,trad);ctx.fill();
-    ctx.fillStyle='#fff';ctx.textBaseline='middle';ctx.textAlign='left';
-    ctx.shadowColor='rgba(0,0,0,.4)';ctx.shadowBlur=6;ctx.fillText(v.dest,tx+22,ty+29);ctx.restore();
-  }
-  ctx.save();ctx.textAlign='left';ctx.textBaseline='bottom';ctx.shadowColor='rgba(0,0,0,.95)';ctx.shadowBlur=24;
-  let fs=80;ctx.font=`900 ${fs}px Nunito,sans-serif`;
-  while(ctx.measureText(v.titulo).width>W-80&&fs>30){fs-=3;ctx.font=`900 ${fs}px Nunito,sans-serif`;}
-  const titleY=H-208-hDest;
-  ctx.fillStyle=v.cor;ctx.fillText(v.titulo,44,titleY+2);ctx.fillStyle='#fff';ctx.fillText(v.titulo,42,titleY);ctx.restore();
-  ctx.save();ctx.textAlign='left';ctx.textBaseline='bottom';ctx.font='bold 40px Nunito,sans-serif';
-  ctx.fillStyle='rgba(255,255,255,.92)';ctx.shadowColor='rgba(0,0,0,.8)';ctx.shadowBlur=14;
-  ctx.fillText(v.sub,42,H-136-hDest);ctx.restore();
-  ctx.save();ctx.strokeStyle=v.cor;ctx.lineWidth=5;
-  ctx.beginPath();ctx.moveTo(42,H-112-hDest);ctx.lineTo(W-42,H-112-hDest);ctx.stroke();ctx.restore();
-  ctx.save();ctx.textAlign='left';ctx.textBaseline='bottom';ctx.font='bold 32px Nunito,sans-serif';
-  ctx.fillStyle='rgba(255,255,255,.88)';ctx.shadowColor='rgba(0,0,0,.7)';ctx.shadowBlur=10;
-  ctx.fillText(`📱 ${v.wpp}  •  📍 ${v.cidade}`,42,H-44);
-  ctx.font='italic 25px Nunito,sans-serif';ctx.fillStyle='rgba(255,255,255,.58)';
-  ctx.fillText('Porque seu pet merece o melhor! 🐶🐱',42,H-12);ctx.restore();
+  const hD=v.dest?290:0;
+  if(v.dest){ctx.save();ctx.font='bold 34px Nunito,sans-serif';const tw=ctx.measureText(v.dest).width;ctx.fillStyle=v.cor;rrectPath(ctx,42,H-360,tw+44,58,10);ctx.fill();ctx.fillStyle='#fff';ctx.textBaseline='middle';ctx.textAlign='left';ctx.shadowColor='rgba(0,0,0,.4)';ctx.shadowBlur=6;ctx.fillText(v.dest,64,H-331);ctx.restore();}
+  ctx.save();ctx.textAlign='left';ctx.textBaseline='bottom';ctx.shadowColor='rgba(0,0,0,.95)';ctx.shadowBlur=24;let fs=80;ctx.font=`900 ${fs}px Nunito,sans-serif`;while(ctx.measureText(v.titulo).width>W-80&&fs>30){fs-=3;ctx.font=`900 ${fs}px Nunito,sans-serif`;}const tY=H-208-hD;ctx.fillStyle=v.cor;ctx.fillText(v.titulo,44,tY+2);ctx.fillStyle='#fff';ctx.fillText(v.titulo,42,tY);ctx.restore();
+  ctx.save();ctx.textAlign='left';ctx.textBaseline='bottom';ctx.font='bold 40px Nunito,sans-serif';ctx.fillStyle='rgba(255,255,255,.92)';ctx.shadowColor='rgba(0,0,0,.8)';ctx.shadowBlur=14;ctx.fillText(v.sub,42,H-136-hD);ctx.restore();
+  ctx.save();ctx.strokeStyle=v.cor;ctx.lineWidth=5;ctx.beginPath();ctx.moveTo(42,H-112-hD);ctx.lineTo(W-42,H-112-hD);ctx.stroke();ctx.restore();
+  ctx.save();ctx.textAlign='left';ctx.textBaseline='bottom';ctx.font='bold 32px Nunito,sans-serif';ctx.fillStyle='rgba(255,255,255,.88)';ctx.shadowColor='rgba(0,0,0,.7)';ctx.shadowBlur=10;ctx.fillText(`📱 ${v.wpp}  •  📍 ${v.cidade}`,42,H-44);ctx.font='italic 25px Nunito,sans-serif';ctx.fillStyle='rgba(255,255,255,.58)';ctx.fillText('Porque seu pet merece o melhor! 🐶🐱',42,H-12);ctx.restore();
   if(cb)cb();
 }
+
+// ★ RENDER ARTE — com tela vazia quando não tem arte
 function renderArte(canvas,cb){
-  if(!ed.arte)return;
-  const v=getEdVals();
-  const ctx=canvas.getContext('2d');const W=1080,H=1080;
-  canvas.width=W;canvas.height=H;
-  const isExport=!!cb;
-  const afterBg=()=>drawObjects(ctx,W,H,()=>drawArteTexto(ctx,v,W,H,cb),!isExport);
-  if(ed.bgGrad&&!ed.bgUrl){
-    const cols=ed.bgGrad.match(/#[0-9a-fA-F]{3,6}/g)||['#1a2e1e','#2ECC71'];
-    const g=ctx.createLinearGradient(0,0,W,H);
-    cols.forEach((c,i)=>g.addColorStop(i/Math.max(cols.length-1,1),c));
-    ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
-    afterBg();return;
+  const ctx=canvas.getContext('2d');const W=1080,H=1080;canvas.width=W;canvas.height=H;
+  if(!ed.arte){
+    ctx.fillStyle='#f0faf4';ctx.fillRect(0,0,W,H);ctx.fillStyle='#ccc';ctx.font='120px serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('🐾',W/2,H/2-60);
+    ctx.font='bold 36px Nunito,sans-serif';ctx.fillStyle='#bbb';ctx.fillText('Selecione um modelo ou fundo',W/2,H/2+60);
+    ctx.font='bold 24px Nunito,sans-serif';ctx.fillStyle='#ddd';ctx.fillText('na prateleira ao lado →',W/2,H/2+110);
+    if(cb)cb();return;
   }
+  const v=getEdVals();const isExp=!!cb;
+  const afterBg=()=>drawObjects(ctx,W,H,()=>drawArteTexto(ctx,v,W,H,cb),!isExp);
+  if(ed.bgGrad&&!ed.bgUrl){const cols=ed.bgGrad.match(/#[0-9a-fA-F]{3,6}/g)||['#1a2e1e','#2ECC71'];const g=ctx.createLinearGradient(0,0,W,H);cols.forEach((c,i)=>g.addColorStop(i/Math.max(cols.length-1,1),c));ctx.fillStyle=g;ctx.fillRect(0,0,W,H);afterBg();return;}
   const src=ed.bgUrl||FOTO(ed.arte.tag,ARTES.indexOf(ed.arte));
   if(!src){ctx.fillStyle=v.cor;ctx.fillRect(0,0,W,H);afterBg();return;}
   const img=new Image();img.crossOrigin='anonymous';img.src=src;
-  const draw=()=>{
-    ctx.clearRect(0,0,W,H);
-    const sc=Math.max(W/img.naturalWidth,H/img.naturalHeight);
-    const iw=img.naturalWidth*sc,ih=img.naturalHeight*sc;
-    ctx.drawImage(img,(W-iw)/2,(H-ih)/2,iw,ih);
-    afterBg();
-  };
-  if(img.complete&&img.naturalWidth)draw();
-  else{img.onload=draw;img.onerror=()=>{ctx.fillStyle=v.cor;ctx.fillRect(0,0,W,H);ctx.font='160px serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('🐾',W/2,H/2);if(cb)cb();};}
+  const draw=()=>{ctx.clearRect(0,0,W,H);const sc=Math.max(W/img.naturalWidth,H/img.naturalHeight);const iw=img.naturalWidth*sc,ih=img.naturalHeight*sc;ctx.drawImage(img,(W-iw)/2,(H-ih)/2,iw,ih);afterBg();};
+  if(img.complete&&img.naturalWidth)draw();else{img.onload=draw;img.onerror=()=>{ctx.fillStyle=v.cor;ctx.fillRect(0,0,W,H);ctx.font='160px serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('🐾',W/2,H/2);if(cb)cb();};}
 }
 
-// ── DRAW HELPERS ───────────────────────────────────────
-function drawPaw(ctx,cx,cy,sz,color){
-  ctx.save();ctx.fillStyle=color;
-  ctx.beginPath();ctx.ellipse(cx,cy+sz*.25,sz*.4,sz*.35,0,0,Math.PI*2);ctx.fill();
-  [-0.55,-0.18,.18,.55].forEach(a=>{ctx.beginPath();ctx.ellipse(cx+Math.sin(a)*sz*.5,cy-Math.cos(a)*sz*.2,sz*.2,sz*.25,a,0,Math.PI*2);ctx.fill();});
-  ctx.restore();
-}
-function rrect(ctx,x,y,w,h,r){rrectPath(ctx,x,y,w,h,r);}
-
-// ── SHARING ────────────────────────────────────────────
-function getNomeArq(){
-  const n=cfg.nome.toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9-]/g,'');
-  const t=ed.titulo.toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9-]/g,'');
-  return `${n}-${t}.png`;
-}
-function getCanvas(){return document.getElementById('editor-canvas');}
-function baixar(){
-  const c=getCanvas();
-  const a=document.createElement('a');a.download=getNomeArq();a.href=c.toDataURL('image/png');a.click();
-}
-async function sharWpp(){
-  const canvas=getCanvas();
-  const texto=`${ed.titulo}\n${ed.sub}\n\n📱 ${cfg.wpp} • 📍 ${cfg.cidade}`;
-  if(navigator.share){
-    canvas.toBlob(async blob=>{
-      const file=new File([blob],'arte-petshop.png',{type:'image/png'});
-      if(navigator.canShare&&navigator.canShare({files:[file]})){
-        try{await navigator.share({files:[file],title:cfg.nome,text:texto});return;}catch(e){}
-      }
-      baixar();setTimeout(()=>window.open(`https://wa.me/?text=${encodeURIComponent(texto)}`,'_blank'),700);
-    },'image/png');
-  } else {
-    baixar();
-    setTimeout(()=>window.open(`https://web.whatsapp.com/send?text=${encodeURIComponent(texto)}`,'_blank'),700);
-  }
-}
-function sharInsta(){
-  baixar();
-  setTimeout(()=>document.getElementById('modal-insta').classList.remove('hidden'),600);
-}
-
-// ── TRANSFORM CONTROLS ─────────────────────────────────
+// TRANSFORM
 function selectedObj(){return ed.selectedObjIdx>=0&&ed.selectedObjIdx<ed.objects.length?ed.objects[ed.selectedObjIdx]:null;}
-function updateTransformPanel(){
-  const panel=document.getElementById('transform-panel');
-  const o=selectedObj();
-  if(!o){panel.classList.add('hidden');renderLayersPanel();return;}
-  panel.classList.remove('hidden');
-  document.getElementById('tp-name').textContent=o.lbl;
-  document.getElementById('tp-scale').textContent=Math.round(o.scale*100)+'%';
-  document.getElementById('tp-rot').textContent=(Math.round(o.rot||0))+'°';
-  renderLayersPanel();
-}
-function rotateObj(deg,abs=false){
-  const o=selectedObj();if(!o)return;
-  o.rot=abs?deg:((o.rot||0)+deg+720)%360;
-  updateTransformPanel();schedRender();
-}
-function scaleObj(factor){
-  const o=selectedObj();if(!o)return;
-  o.scale=Math.min(4,Math.max(0.15,o.scale*factor));
-  updateTransformPanel();schedRender();
-}
-function moveObj(dx,dy){
-  const o=selectedObj();if(!o)return;
-  o.x=Math.min(1200,Math.max(-120,o.x+dx));
-  o.y=Math.min(1200,Math.max(-120,o.y+dy));
-  schedRender();
-}
+function updateTransformPanel(){const p=document.getElementById('transform-panel');const o=selectedObj();if(!o){p.classList.add('hidden');renderLayersPanel();return;}p.classList.remove('hidden');document.getElementById('tp-name').textContent=o.lbl;document.getElementById('tp-scale').textContent=Math.round(o.scale*100)+'%';document.getElementById('tp-rot').textContent=Math.round(o.rot||0)+'°';renderLayersPanel();}
+function rotateObj(d,abs=false){const o=selectedObj();if(!o)return;o.rot=abs?d:((o.rot||0)+d+720)%360;updateTransformPanel();schedRender();}
+function scaleObj(f){const o=selectedObj();if(!o)return;o.scale=Math.min(4,Math.max(0.15,o.scale*f));updateTransformPanel();schedRender();}
+function moveObj(dx,dy){const o=selectedObj();if(!o)return;o.x=Math.min(1200,Math.max(-120,o.x+dx));o.y=Math.min(1200,Math.max(-120,o.y+dy));schedRender();}
 function centerObj(){const o=selectedObj();if(!o)return;o.x=540;schedRender();}
 function flipObj(){const o=selectedObj();if(!o)return;o.flipH=!o.flipH;schedRender();}
 function removeSelectedObj(){if(ed.selectedObjIdx<0)return;removeObject(ed.selectedObjIdx);}
 
-// ── CANVAS INTERACTION (drag) ──────────────────────────
-let dragState=null;
+// ★ CANVAS INTERACTION — desseleciona corretamente
 function initCanvasInteraction(){
   const cv=document.getElementById('editor-canvas');
-  function cvPt(e){
-    const r=cv.getBoundingClientRect();
-    const src=e.touches?e.touches[0]:e;
-    return{x:(src.clientX-r.left)*(1080/r.width),y:(src.clientY-r.top)*(1080/r.height)};
-  }
-  function objBounds(obj){
-    const img=objImgCache[obj.url];
-    if(!img||!img.naturalWidth)return{iw:OBJ_BASE_H*obj.scale,ih:OBJ_BASE_H*obj.scale};
-    const ar=img.naturalWidth/img.naturalHeight;
-    const ih=OBJ_BASE_H*obj.scale;
-    return{iw:ih*ar,ih};
-  }
-  function hitTest(pt){
-    for(let i=ed.objects.length-1;i>=0;i--){
-      const o=ed.objects[i];
-      const{iw,ih}=objBounds(o);
-      const dx=pt.x-o.x,dy=pt.y-o.y;
-      const rad=-(o.rot||0)*Math.PI/180;
-      const lx=dx*Math.cos(rad)-dy*Math.sin(rad);
-      const ly=dx*Math.sin(rad)+dy*Math.cos(rad);
-      if(Math.abs(lx)<=iw/2+20&&Math.abs(ly)<=ih/2+20)return i;
-    }
-    return -1;
-  }
-  function onDown(e){
-    if(e.target!==cv)return;
-    const pt=cvPt(e);
-    const idx=hitTest(pt);
-    if(idx>=0){
-      ed.selectedObjIdx=idx;
-      const o=ed.objects[idx];
-      dragState={idx,sx:pt.x,sy:pt.y,ox:o.x,oy:o.y};
-      cv.classList.add('dragging');
-      updateTransformPanel();schedRender();
-      e.preventDefault();
-    } else {
-      ed.selectedObjIdx=-1;updateTransformPanel();schedRender();
-    }
-  }
-  function onMove(e){
-    const pt=cvPt(e);
-    if(dragState){
-      const o=ed.objects[dragState.idx];
-      if(o){o.x=dragState.ox+(pt.x-dragState.sx);o.y=dragState.oy+(pt.y-dragState.sy);schedRender();}
-      e.preventDefault();
-    } else {
-      const idx=hitTest(pt);
-      cv.classList.toggle('hovering',idx>=0&&!dragState);
-    }
-  }
+  function cvPt(e){const r=cv.getBoundingClientRect();const s=e.touches?e.touches[0]:e;return{x:(s.clientX-r.left)*(1080/r.width),y:(s.clientY-r.top)*(1080/r.height)};}
+  function objBounds(o){const im=objImgCache[o.url];if(!im||!im.naturalWidth)return{iw:OBJ_BASE_H*o.scale,ih:OBJ_BASE_H*o.scale};const ar=im.naturalWidth/im.naturalHeight;const ih=OBJ_BASE_H*o.scale;return{iw:ih*ar,ih};}
+  function hitTest(pt){for(let i=ed.objects.length-1;i>=0;i--){const o=ed.objects[i];const{iw,ih}=objBounds(o);const dx=pt.x-o.x,dy=pt.y-o.y;const rad=-(o.rot||0)*Math.PI/180;const lx=dx*Math.cos(rad)-dy*Math.sin(rad);const ly=dx*Math.sin(rad)+dy*Math.cos(rad);if(Math.abs(lx)<=iw/2+20&&Math.abs(ly)<=ih/2+20)return i;}return-1;}
+  function onDown(e){if(e.target!==cv)return;const pt=cvPt(e);const idx=hitTest(pt);
+    if(idx>=0){ed.selectedObjIdx=idx;const o=ed.objects[idx];dragState={idx,sx:pt.x,sy:pt.y,ox:o.x,oy:o.y};cv.classList.add('dragging');updateTransformPanel();schedRender();e.preventDefault();}
+    else{if(ed.selectedObjIdx>=0){ed.selectedObjIdx=-1;updateTransformPanel();renderLayersPanel();schedRender();}}}
+  function onMove(e){const pt=cvPt(e);if(dragState){const o=ed.objects[dragState.idx];if(o){o.x=dragState.ox+(pt.x-dragState.sx);o.y=dragState.oy+(pt.y-dragState.sy);schedRender();}e.preventDefault();}else{cv.classList.toggle('hovering',hitTest(pt)>=0);}}
   function onUp(){dragState=null;cv.classList.remove('dragging');}
-  cv.addEventListener('mousedown',onDown);
-  cv.addEventListener('mousemove',onMove);
-  cv.addEventListener('mouseup',onUp);
-  cv.addEventListener('mouseleave',onUp);
-  cv.addEventListener('touchstart',onDown,{passive:false});
-  cv.addEventListener('touchmove',onMove,{passive:false});
-  cv.addEventListener('touchend',onUp);
+  cv.addEventListener('mousedown',onDown);cv.addEventListener('mousemove',onMove);cv.addEventListener('mouseup',onUp);cv.addEventListener('mouseleave',onUp);
+  cv.addEventListener('touchstart',onDown,{passive:false});cv.addEventListener('touchmove',onMove,{passive:false});cv.addEventListener('touchend',onUp);
 }
-const objImgCache={};
+
+// SHARING
+function getNomeArq(){return(cfg.nome+'-'+ed.titulo).toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9-]/g,'')+'.png';}
+function getCanvas(){return document.getElementById('editor-canvas');}
+function baixar(){const c=getCanvas();const a=document.createElement('a');a.download=getNomeArq();a.href=c.toDataURL('image/png');a.click();}
+async function sharWpp(){const canvas=getCanvas();const texto=`${ed.titulo}\n${ed.sub}\n\n📱 ${cfg.wpp} • 📍 ${cfg.cidade}`;
+  if(navigator.share){canvas.toBlob(async blob=>{const file=new File([blob],'arte.png',{type:'image/png'});if(navigator.canShare&&navigator.canShare({files:[file]})){try{await navigator.share({files:[file],title:cfg.nome,text:texto});return;}catch(e){}}baixar();setTimeout(()=>window.open(`https://wa.me/?text=${encodeURIComponent(texto)}`,'_blank'),700);},'image/png');}
+  else{baixar();setTimeout(()=>window.open(`https://web.whatsapp.com/send?text=${encodeURIComponent(texto)}`,'_blank'),700);}}
+function sharInsta(){baixar();setTimeout(()=>document.getElementById('modal-insta').classList.remove('hidden'),600);}
 </script>
 </body>
 </html>
