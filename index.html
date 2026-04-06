@@ -458,10 +458,29 @@ const FOTO_IDS={
   'adestramento':[1108099,220742,1851164,2607544,1496372,1585669],
 };
 let fotoGhMap={};
+const FOTO_GH_STATIC={220742:'https://raw.githubusercontent.com/lssgoiano-anagi/amigao-petshop-imagens/main/imagens/galeria/pexels-220742.jpg',
+  406014:'https://raw.githubusercontent.com/lssgoiano-anagi/amigao-petshop-imagens/main/imagens/galeria/pexels-406014.jpg',
+  617278:'https://raw.githubusercontent.com/lssgoiano-anagi/amigao-petshop-imagens/main/imagens/galeria/pexels-617278.jpg',
+  991831:'https://raw.githubusercontent.com/lssgoiano-anagi/amigao-petshop-imagens/main/imagens/galeria/pexels-991831.jpg',
+  1108099:'https://raw.githubusercontent.com/lssgoiano-anagi/amigao-petshop-imagens/main/imagens/galeria/pexels-1108099.jpg',
+  1128316:'https://raw.githubusercontent.com/lssgoiano-anagi/amigao-petshop-imagens/main/imagens/galeria/pexels-1128316.jpg',
+  1254140:'https://raw.githubusercontent.com/lssgoiano-anagi/amigao-petshop-imagens/main/imagens/galeria/pexels-1254140.jpg',
+  1404819:'https://raw.githubusercontent.com/lssgoiano-anagi/amigao-petshop-imagens/main/imagens/galeria/pexels-1404819.jpg',
+  1458916:'https://raw.githubusercontent.com/lssgoiano-anagi/amigao-petshop-imagens/main/imagens/galeria/pexels-1458916.jpg',
+  1496372:'https://raw.githubusercontent.com/lssgoiano-anagi/amigao-petshop-imagens/main/imagens/galeria/pexels-1496372.jpg',
+  1543793:'https://raw.githubusercontent.com/lssgoiano-anagi/amigao-petshop-imagens/main/imagens/galeria/pexels-1543793.jpg',
+  1591939:'https://raw.githubusercontent.com/lssgoiano-anagi/amigao-petshop-imagens/main/imagens/galeria/pexels-1591939.jpg',
+  1741205:'https://raw.githubusercontent.com/lssgoiano-anagi/amigao-petshop-imagens/main/imagens/galeria/pexels-1741205.jpg',
+  1805164:'https://raw.githubusercontent.com/lssgoiano-anagi/amigao-petshop-imagens/main/imagens/galeria/pexels-1805164.jpg',
+  1851164:'https://raw.githubusercontent.com/lssgoiano-anagi/amigao-petshop-imagens/main/imagens/galeria/pexels-1851164.jpg',
+  2106765:'https://raw.githubusercontent.com/lssgoiano-anagi/amigao-petshop-imagens/main/imagens/galeria/pexels-2106765.jpg',
+  2558605:'https://raw.githubusercontent.com/lssgoiano-anagi/amigao-petshop-imagens/main/imagens/galeria/pexels-2558605.jpg',
+  2607544:'https://raw.githubusercontent.com/lssgoiano-anagi/amigao-petshop-imagens/main/imagens/galeria/pexels-2607544.jpg',
+  3651579:'https://raw.githubusercontent.com/lssgoiano-anagi/amigao-petshop-imagens/main/imagens/galeria/pexels-3651579.jpg'};
 const FOTO=(tag,idx)=>{
   const ids=FOTO_IDS[tag]||FOTO_IDS['cachorro-grande'];
   const id=ids[idx%ids.length];
-  return fotoGhMap[id]||null;
+  return FOTO_GH_STATIC[id]||fotoGhMap[id]||null;
 };
 // Pre-load mascot SVG for canvas use
 const MASCOTE_IMG=new Image();MASCOTE_IMG.src='marcote.png';
