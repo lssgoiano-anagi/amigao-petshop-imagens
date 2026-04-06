@@ -1,3 +1,16 @@
+Sim, consigo ler perfeitamente! Entendi todas as suas solicitações. Vou aplicar as alterações no código completo:
+
+**Resumo das mudanças:**
+
+1. ✅ **Remover busca** (campo de buscar modelo)
+2. ✅ **Remover botões de filtro de categoria** (Todos, Cão Pequeno, Cão Grande, etc.)
+3. ✅ **Separar aba Galeria e Fundos** (Fundos vira uma aba própria na prateleira)
+4. ✅ **Só manter fotos/imagens que estão no GitHub**
+5. ✅ **Manter o arquivo completo e funcional** (~1800+ linhas)
+
+Aqui está o arquivo completo:
+
+```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -121,8 +134,6 @@
     .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:#1a2e1e;color:#fff;padding:12px 22px;border-radius:30px;font-size:.88rem;font-weight:700;z-index:999;transition:transform .3s;pointer-events:none;white-space:nowrap;}
     .toast.show{transform:translateX(-50%) translateY(0);}
 
-    /* UPLOAD STATUS */
-    .upload-status{font-size:.7rem;text-align:center;padding:4px 8px;color:#666;min-height:18px;}
     .gh-token-hint{font-size:.72rem;color:#aaa;margin-top:4px;line-height:1.4;}
     .prat-item.loading{background:linear-gradient(90deg,#f0f0f0 25%,#e0e0e0 50%,#f0f0f0 75%);background-size:200% 100%;animation:shimmer 1.2s infinite;}
     @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
@@ -155,17 +166,8 @@
     .pasta-opt-btn:hover{border-color:var(--verde);background:#e8fdf1;color:var(--verde-esc);}
     .prat-tab-mode{font-size:.58rem;background:#e8fdf1;color:var(--verde-esc);border-radius:6px;padding:1px 5px;display:block;margin-top:2px;}
 
-    /* FUNDOS SECTION inside galeria */
+    /* FUNDOS SECTION */
     .prat-sec-lbl{font-size:.68rem;font-weight:900;text-transform:uppercase;letter-spacing:.08em;color:#aaa;padding:8px 8px 4px;margin-top:4px;}
-
-    /* FILTROS CATEGORIA */
-    .prat-cats-wrap{padding:6px 8px 2px;display:flex;flex-direction:column;gap:4px;}
-    .pcat-search{width:100%;padding:5px 8px;border:1.5px solid #e0e0e0;border-radius:8px;font-family:'Nunito',sans-serif;font-size:.72rem;outline:none;}
-    .pcat-search:focus{border-color:var(--verde);}
-    .prat-cats{display:flex;flex-wrap:wrap;gap:3px;}
-    .pcat-btn{padding:3px 8px;border:1.5px solid #e8e8e8;border-radius:8px;background:#fafafa;cursor:pointer;font-family:'Nunito',sans-serif;font-size:.62rem;font-weight:700;color:#888;transition:all .15s;white-space:nowrap;}
-    .pcat-btn:hover{border-color:var(--verde);color:var(--verde-esc);}
-    .pcat-btn.active{border-color:var(--verde);background:#e8fdf1;color:var(--verde-esc);}
 
     /* TRANSFORM PANEL */
     .transform-panel{background:#fff;border-radius:12px;padding:10px 12px;box-shadow:0 2px 12px rgba(0,0,0,.1);border:2px solid #F39C12;margin-top:8px;}
@@ -197,12 +199,18 @@
     .tratar-prog-bar{height:100%;background:var(--verde);width:0%;transition:width .3s;border-radius:4px;}
     .btn-usar-local{background:none;border:none;color:#aaa;font-size:.75rem;cursor:pointer;text-decoration:underline;padding:4px;}
 
-    /* SECAO GALERIA MODELOS - upload inline */
+    /* GALERIA UPLOAD BAR */
     .galeria-upload-bar{display:flex;align-items:center;gap:6px;padding:4px 8px;background:#f9fffe;border-bottom:1px solid #e8f5ec;}
     .galeria-upload-btn{padding:4px 10px;background:var(--verde-esc);color:#fff;border:none;border-radius:8px;cursor:pointer;font-family:'Nunito',sans-serif;font-size:.65rem;font-weight:800;white-space:nowrap;transition:opacity .2s;}
     .galeria-upload-btn:hover{opacity:.85;}
     .galeria-upload-input{display:none;}
     .galeria-sec-title{font-size:.62rem;font-weight:800;color:#aaa;flex:1;}
+
+    /* FUNDOS UPLOAD BAR */
+    .fundos-upload-bar{display:flex;align-items:center;gap:6px;padding:4px 8px;background:#f9fffe;border-bottom:1px solid #e8f5ec;}
+    .fundos-upload-btn{padding:4px 10px;background:var(--verde-esc);color:#fff;border:none;border-radius:8px;cursor:pointer;font-family:'Nunito',sans-serif;font-size:.65rem;font-weight:800;white-space:nowrap;transition:opacity .2s;}
+    .fundos-upload-btn:hover{opacity:.85;}
+    .fundos-upload-input{display:none;}
   </style>
 </head>
 <body>
@@ -345,6 +353,7 @@
       <div class="prat-header">🗂️ Prateleira</div>
       <div class="prat-tabs">
         <div class="prat-tab active" data-aba="galeria" onclick="pratAba('galeria',this)">📋<br>Modelos</div>
+        <div class="prat-tab" data-aba="fundos" onclick="pratAba('fundos',this)">🖼️<br>Fundos</div>
         <div class="prat-tab" data-aba="pets" onclick="pratAba('pets',this)">🐾<br>Pets<span class="prat-tab-mode">+camada</span></div>
         <div class="prat-tab" data-aba="racao" onclick="pratAba('racao',this)">🥫<br>Ração<span class="prat-tab-mode">+camada</span></div>
         <div class="prat-tab" data-aba="acessorios" onclick="pratAba('acessorios',this)">🎾<br>Acess.<span class="prat-tab-mode">+camada</span></div>
@@ -353,13 +362,7 @@
 
         <!-- ABA GALERIA / MODELOS -->
         <div id="prat-galeria-area">
-          <!-- Filtros de categoria — sempre visíveis -->
-          <div class="prat-cats-wrap">
-            <input class="pcat-search" id="prat-search" placeholder="🔍 Buscar modelo…" oninput="pratBuscar(this.value)"/>
-            <div class="prat-cats" id="prat-cats"></div>
-          </div>
-
-          <!-- Upload de imagem para a galeria (salva no GitHub/galeria) -->
+          <!-- Upload de imagem para a galeria -->
           <div class="galeria-upload-bar">
             <span class="galeria-sec-title">🖼️ Modelos GitHub</span>
             <input type="file" id="galeria-upload-input" accept="image/*" class="galeria-upload-input" onchange="uploadImagemGaleria(this)"/>
@@ -367,13 +370,6 @@
           </div>
 
           <div id="prat-sel-info" class="prat-sel-info"></div>
-
-          <!-- Botão migrar fundos externos para GitHub -->
-          <div id="prat-galeria-import-bar" class="hidden" style="display:flex;align-items:center;justify-content:space-between;padding:4px 8px 2px;">
-            <span style="font-size:.65rem;font-weight:800;color:#aaa;" id="prat-galeria-import-lbl"></span>
-            <button style="font-size:.65rem;background:var(--verde-esc);color:#fff;border:none;border-radius:8px;padding:3px 8px;cursor:pointer;font-weight:800;" onclick="migrarFotosGaleria()">⬇️ Salvar fundos no GitHub</button>
-          </div>
-          <div id="prat-galeria-import-prog" style="display:none;font-size:.7rem;color:var(--verde-esc);padding:2px 8px;font-weight:800;"></div>
 
           <!-- Imagens da galeria salvas no GitHub -->
           <div id="prat-gh-galeria-section">
@@ -384,10 +380,27 @@
           <!-- Modelos (artes) — canvas thumbnails -->
           <div class="prat-sec-lbl">🎨 Artes prontas</div>
           <div class="prat-grid" id="prat-galeria-grid"></div>
+        </div>
 
-          <!-- Fundos inline -->
-          <div class="prat-sec-lbl">🖼️ Fundos & Gradientes</div>
+        <!-- ABA FUNDOS (separada) -->
+        <div id="prat-fundos-area" class="hidden">
+          <div class="fundos-upload-bar">
+            <span class="galeria-sec-title">🖼️ Fundos</span>
+            <input type="file" id="fundos-upload-input" accept="image/*" class="fundos-upload-input" onchange="uploadImagemFundos(this)"/>
+            <button class="fundos-upload-btn" onclick="document.getElementById('fundos-upload-input').click()">➕ Adicionar fundo</button>
+          </div>
+
+          <!-- Fundos salvos no GitHub -->
+          <div id="prat-gh-fundos-section">
+            <div class="prat-sec-lbl">📁 Fundos salvos no GitHub</div>
+            <div class="prat-grid" id="prat-gh-fundos-grid"></div>
+          </div>
+
+          <!-- Fundos SVG locais + Gradientes -->
+          <div class="prat-sec-lbl">🎨 Fundos & Gradientes</div>
           <div class="prat-grid" id="prat-fundos-grid"></div>
+
+          <button class="prat-reset" onclick="pratReset()">↩ Remover fundo personalizado</button>
         </div>
 
         <!-- ABA OUTRAS (pets/racao/acessorios) -->
@@ -407,16 +420,8 @@
             <div class="prat-sec-lbl">📁 Salvas no GitHub</div>
             <div class="prat-grid" id="prat-gh-grid"></div>
           </div>
-          <!-- Fotos padrão -->
-          <div id="prat-padrao-section">
-            <div class="prat-sec-lbl" id="prat-padrao-lbl" style="display:flex;align-items:center;justify-content:space-between;">
-              <span>🖼️ Fotos padrão</span>
-              <button id="btn-importar-gh" class="upload-act-btn" style="width:auto;padding:3px 8px;font-size:.65rem;background:var(--verde-esc);color:#fff;border-radius:8px;white-space:nowrap;" onclick="migrarImgsParaGitHub(pratAbaAtual)" title="Baixar todas para o GitHub">⬇️ Salvar no GitHub</button>
-            </div>
-            <div id="prat-import-progress" style="display:none;font-size:.7rem;color:var(--verde-esc);padding:4px 8px;font-weight:800;"></div>
-          </div>
           <div class="prat-grid" id="prat-outras-grid"></div>
-          <button class="prat-reset" id="prat-reset-btn" onclick="pratReset()">↩ Foto padrão da arte</button>
+          <button class="prat-reset" id="prat-reset-btn" style="display:none;" onclick="pratReset()">↩ Foto padrão da arte</button>
         </div>
 
         <!-- Camadas ativas -->
@@ -454,18 +459,7 @@
 
 </div>
 <script>
-const CATS=[
-  {id:'todos',lbl:'Todos'},{id:'cachorro-pequeno',lbl:'Cão Pequeno'},
-  {id:'cachorro-grande',lbl:'Cão Grande'},{id:'gato',lbl:'Gatos'},
-  {id:'banho-tosa',lbl:'Banho & Tosa'},
-  {id:'nutricao',lbl:'Nutrição'},
-  {id:'acessorios',lbl:'Acessórios'},{id:'vacinas',lbl:'Vacinas & Saúde'},
-  {id:'dicas',lbl:'Dicas & Info'},{id:'promocoes',lbl:'Promoções'},
-  {id:'praia',lbl:'Praia & Verão'},{id:'fazenda',lbl:'Fazenda & Campo'},
-  {id:'adestramento',lbl:'Adestramento'}
-];
-
-// Somente IDs — imagens vêm EXCLUSIVAMENTE do GitHub
+// ── FOTO IDS — imagens EXCLUSIVAMENTE do GitHub ────────
 const FOTO_IDS={
   'cachorro-pequeno':[406014,1591939,1254140,1458916,1805164,2106765],
   'cachorro-grande':[1108099,220742,1851164,2607544,1496372,1884779],
@@ -481,7 +475,6 @@ const FOTO_IDS={
   'adestramento':[1108099,220742,1851164,2607544,1496372,1585669],
 };
 
-// Mapa de IDs para URLs no GitHub (populado via localStorage + FOTO_GH_STATIC)
 let fotoGhMap={};
 
 // URLs estáticas no GitHub — ÚNICA fonte de imagens para os modelos
@@ -511,7 +504,7 @@ const FOTO_GH_STATIC={
   45201:'https://raw.githubusercontent.com/lssgoiano-anagi/amigao-petshop-imagens/main/imagens/galeria/pexels-45201.jpg',
 };
 
-// Retorna URL da foto — SOMENTE GitHub, nunca externo
+// Retorna URL da foto — SOMENTE GitHub
 const FOTO=(tag,idx)=>{
   const ids=FOTO_IDS[tag]||FOTO_IDS['cachorro-grande'];
   const id=ids[idx%ids.length];
@@ -520,6 +513,7 @@ const FOTO=(tag,idx)=>{
 
 const MASCOTE_IMG=new Image();MASCOTE_IMG.src='marcote.png';
 
+// ── ARTES (modelos) ────────────────────────────────────
 const ARTES=[
   {id:'cp01',t:'BANHO & TOSA',s:'Para cães de porte pequeno',tag:'cachorro-pequeno',c:'#2ECC71'},
   {id:'cp02',t:'CONSULTA VETERINÁRIA',s:'Seu pequenino merece cuidado',tag:'cachorro-pequeno',c:'#3498DB'},
@@ -612,6 +606,29 @@ const GH_BRANCH='main';
 let ed={arte:null,titulo:'',sub:'',dest:'',cor:'#2ECC71',bgUrl:null,bgGrad:null,objects:[],selectedObjIdx:-1};
 let renderTmr=null;
 
+// ── PRATELEIRA DATA ────────────────────────────────────
+const PRAT={
+  fundos:[
+    {url:'imagens/fundos/verde-natural.svg',lbl:'Verde Natural'},
+    {url:'imagens/fundos/azul-fresco.svg',lbl:'Azul Fresco'},
+    {url:'imagens/fundos/laranja-vibrante.svg',lbl:'Laranja Vibrante'},
+    {url:'imagens/fundos/roxo-elegante.svg',lbl:'Roxo Elegante'},
+    {url:'imagens/fundos/escuro-premium.svg',lbl:'Escuro Premium'},
+    {url:'imagens/fundos/rosa-pet.svg',lbl:'Rosa Pet'},
+    {url:'imagens/fundos/terra-natural.svg',lbl:'Terra Natural'},
+    {url:'imagens/fundos/azul-noite.svg',lbl:'Azul Noite'},
+    {url:null,grad:'linear-gradient(135deg,#2ECC71,#F39C12)',lbl:'Verde Dourado'},
+    {url:null,grad:'linear-gradient(135deg,#E74C3C,#9B59B6)',lbl:'Vermelho Roxo'},
+    {url:null,grad:'linear-gradient(135deg,#3498DB,#2ECC71)',lbl:'Azul Verde'},
+    {url:null,grad:'linear-gradient(135deg,#F39C12,#E74C3C)',lbl:'Fogo'},
+  ],
+  pets:[],
+  racao:[],
+  acessorios:[],
+};
+
+let pratAbaAtual='galeria';
+
 // ── BOOT ───────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded',()=>{
   const saved=localStorage.getItem('petcfg');
@@ -623,10 +640,8 @@ document.addEventListener('DOMContentLoaded',()=>{
   }
   carregarMigracoes();
   atualizarHdr();preencherEditor();renderCores();
-  renderPratCats();renderPratGaleria();renderPratFundos();
-  atualizarBotaoImportarGaleria();
-  // Carrega imagens da galeria do GitHub ao iniciar
-  if(cfg.ghToken)carregarImgsGitHubGaleria();
+  renderPratGaleria();renderPratFundos();
+  if(cfg.ghToken){carregarImgsGitHubGaleria();carregarImgsGitHubFundos();}
   initCanvasInteraction();
 });
 
@@ -649,7 +664,7 @@ function salvarCfg(){
   localStorage.setItem('petcfg',JSON.stringify(cfg));
   document.getElementById('modal-cfg').classList.add('hidden');
   atualizarHdr();preencherEditor();schedRender();
-  if(cfg.ghToken)carregarImgsGitHubGaleria();
+  if(cfg.ghToken){carregarImgsGitHubGaleria();carregarImgsGitHubFundos();}
 }
 function atualizarHdr(){
   document.getElementById('hdr-nome').textContent=cfg.nome;
@@ -662,7 +677,6 @@ function renderThumb(a,canvas){
   canvas.width=W;canvas.height=H;
   const fotoUrl=FOTO(a.tag,ARTES.indexOf(a));
   if(!fotoUrl){
-    // Sem imagem: mostra placeholder com cor
     ctx.fillStyle=a.c;ctx.fillRect(0,0,W,H);
     ctx.font='60px serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('🐾',W/2,H/2-20);
     ctx.font='bold 20px Nunito,sans-serif';ctx.fillStyle='rgba(255,255,255,.8)';ctx.fillText(a.t,W/2,H/2+40);
@@ -717,52 +731,34 @@ function renderCores(){
 function selCor(c){ed.cor=c;updateSwatchSel(c);schedRender();}
 function updateSwatchSel(c){document.querySelectorAll('.cswatch').forEach(s=>s.classList.toggle('sel',s.dataset.c===c));}
 
-// ── PRATELEIRA ─────────────────────────────────────────
-const PRAT={
-  fundos:[
-    {url:'imagens/fundos/verde-natural.svg',lbl:'Verde Natural'},
-    {url:'imagens/fundos/azul-fresco.svg',lbl:'Azul Fresco'},
-    {url:'imagens/fundos/laranja-vibrante.svg',lbl:'Laranja Vibrante'},
-    {url:'imagens/fundos/roxo-elegante.svg',lbl:'Roxo Elegante'},
-    {url:'imagens/fundos/escuro-premium.svg',lbl:'Escuro Premium'},
-    {url:'imagens/fundos/rosa-pet.svg',lbl:'Rosa Pet'},
-    {url:'imagens/fundos/terra-natural.svg',lbl:'Terra Natural'},
-    {url:'imagens/fundos/azul-noite.svg',lbl:'Azul Noite'},
-    {url:null,grad:'linear-gradient(135deg,#2ECC71,#F39C12)',lbl:'Verde Dourado'},
-    {url:null,grad:'linear-gradient(135deg,#E74C3C,#9B59B6)',lbl:'Vermelho Roxo'},
-    {url:null,grad:'linear-gradient(135deg,#3498DB,#2ECC71)',lbl:'Azul Verde'},
-    {url:null,grad:'linear-gradient(135deg,#F39C12,#E74C3C)',lbl:'Fogo'},
-  ],
-  pets:[],
-  racao:[],
-  acessorios:[],
-};
-
-let pratAbaAtual='galeria';
-let pratCatAtual='todos';
-let pratSrch='';
-
+// ── PRATELEIRA ABAS ────────────────────────────────────
 function pratAba(aba,btn){
   pratAbaAtual=aba;
   document.querySelectorAll('.prat-tab').forEach(t=>t.classList.remove('active'));
   btn.classList.add('active');
   const galArea=document.getElementById('prat-galeria-area');
+  const fundosArea=document.getElementById('prat-fundos-area');
   const outArea=document.getElementById('prat-outras-area');
+  galArea.classList.add('hidden');
+  fundosArea.classList.add('hidden');
+  outArea.classList.add('hidden');
   if(aba==='galeria'){
-    galArea.classList.remove('hidden');outArea.classList.add('hidden');
-    renderPratGaleria();renderPratFundos();atualizarBotaoImportarGaleria();
+    galArea.classList.remove('hidden');
+    renderPratGaleria();
     if(cfg.ghToken)carregarImgsGitHubGaleria();
+  } else if(aba==='fundos'){
+    fundosArea.classList.remove('hidden');
+    renderPratFundos();
+    if(cfg.ghToken)carregarImgsGitHubFundos();
   } else {
-    galArea.classList.add('hidden');outArea.classList.remove('hidden');
+    outArea.classList.remove('hidden');
     document.getElementById('prat-reset-btn').style.display='none';
     renderPratOutras();
-    atualizarBotaoImportar(aba);
     carregarImgsGitHub(aba);
   }
 }
 
-function pratBuscar(v){pratSrch=v.toLowerCase();renderPratGaleria();}
-
+// ── RENDER FUNDOS (aba separada) ───────────────────────
 function renderPratFundos(){
   const grid=document.getElementById('prat-fundos-grid');
   if(!grid)return;
@@ -783,23 +779,11 @@ function renderPratFundos(){
   });
 }
 
-function pratFiltrarCat(cat,btn){
-  pratCatAtual=cat;
-  document.querySelectorAll('.pcat-btn').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');renderPratGaleria();atualizarBotaoImportarGaleria();
-}
-
-function renderPratCats(){
-  document.getElementById('prat-cats').innerHTML=
-    CATS.map(c=>`<button class="pcat-btn${c.id===pratCatAtual?' active':''}" onclick="pratFiltrarCat('${c.id}',this)">${c.lbl}</button>`).join('');
-}
-
+// ── RENDER GALERIA (modelos — sem busca, sem filtros) ──
 function renderPratGaleria(){
   const lista=ARTES.filter(a=>{
-    const mc=pratCatAtual==='todos'||a.tag===pratCatAtual;
-    const ms=!pratSrch||a.t.toLowerCase().includes(pratSrch)||a.s.toLowerCase().includes(pratSrch);
     const temImagem=!!FOTO(a.tag,ARTES.indexOf(a));
-    return mc&&ms&&temImagem;
+    return temImagem;
   });
   const grid=document.getElementById('prat-galeria-grid');
   grid.innerHTML='';
@@ -850,13 +834,17 @@ function renderPratOutras(){
 }
 
 function pratSelUrl(url){
-  ed.bgUrl=url;ed.bgGrad=null;renderPratOutras();schedRender();
+  ed.bgUrl=url;ed.bgGrad=null;schedRender();
+  if(pratAbaAtual==='fundos')renderPratFundos();
 }
 function pratSelGrad(grad){
-  ed.bgGrad=grad;ed.bgUrl=null;renderPratOutras();schedRender();
+  ed.bgGrad=grad;ed.bgUrl=null;schedRender();
+  if(pratAbaAtual==='fundos')renderPratFundos();
 }
 function pratReset(){
-  ed.bgUrl=null;ed.bgGrad=null;renderPratOutras();schedRender();
+  ed.bgUrl=null;ed.bgGrad=null;schedRender();
+  if(pratAbaAtual==='fundos')renderPratFundos();
+  else renderPratOutras();
 }
 
 const OBJ_BASE_H=380;
@@ -916,23 +904,25 @@ function mostrarToast(msg,dur=3000){
   clearTimeout(toastTmr);toastTmr=setTimeout(()=>t.classList.remove('show'),dur);
 }
 
-// ── UPLOAD DE IMAGENS (abas Pets/Ração/Acess.) ─────────
+// ── UPLOAD DE IMAGENS ──────────────────────────────────
 let uploads=[];
 function uploadImagem(input){
   const file=input.files[0];if(!file)return;
   input.value='';
   abrirTratamento(file,'outras');
 }
-
-// ── UPLOAD DE IMAGEM PARA GALERIA (Aba Modelos) ────────
 function uploadImagemGaleria(input){
   const file=input.files[0];if(!file)return;
   input.value='';
   abrirTratamento(file,'galeria');
 }
+function uploadImagemFundos(input){
+  const file=input.files[0];if(!file)return;
+  input.value='';
+  abrirTratamento(file,'fundos');
+}
 
 // ── TRATAMENTO DE IMAGEM ────────────────────────────────
-// contextoUpload: 'outras' | 'galeria'
 let tratCtx={file:null,originalBlob:null,processedBlob:null,tratamentos:{bg:false,qual:false},pasta:null,contexto:'outras'};
 
 const PASTAS_GH=[
@@ -948,6 +938,7 @@ const PASTAS_GH_GALERIA=[
 
 function _pastaDefault(contexto){
   if(contexto==='galeria')return'galeria';
+  if(contexto==='fundos')return'fundos';
   const abas=['pets','racao','acessorios','fundos'];
   return abas.includes(pratAbaAtual)?pratAbaAtual:'pets';
 }
@@ -962,11 +953,9 @@ function abrirTratamento(file,contexto='outras'){
   document.getElementById('tratar-status').textContent='';
   document.getElementById('tratar-prog').style.display='none';
   document.getElementById('btn-tratar-salvar').disabled=false;
-  // Pasta buttons (galeria mostra opção galeria + outras; outros só mostram as pastas normais)
-  const listaPastas=contexto==='galeria'?PASTAS_GH_GALERIA:PASTAS_GH;
+  const listaPastas=(contexto==='galeria'||contexto==='fundos')?PASTAS_GH_GALERIA:PASTAS_GH;
   const row=document.getElementById('tratar-pasta-row');
   row.innerHTML=listaPastas.map(p=>`<button class="tratar-pasta-btn${p.id===pasta?' on':''}" onclick="selecionarPastaTratar('${p.id}',this)">${p.lbl}</button>`).join('');
-  // Preview
   const canvas=document.getElementById('tratar-canvas');
   const ctx=canvas.getContext('2d');
   const img=new Image();
@@ -1047,12 +1036,10 @@ async function aplicarTratamentosPreview(){
   btnSalvar.disabled=false;
 }
 
-// ── REMOVER FUNDO — com fallback entre CDNs ────────────
 async function removerFundoImagem(blob){
   const status=document.getElementById('tratar-status');
   if(!window._bgRemovalMod){
     status.textContent='⬇️ Baixando modelo de IA (apenas 1ª vez ~5MB)…';
-    // Tenta unpkg primeiro; cai para jsdelivr como fallback
     const cdns=[
       'https://unpkg.com/@imgly/background-removal@1.4.5/dist/background-removal.js',
       'https://cdn.jsdelivr.net/npm/@imgly/background-removal@1.4.5/dist/background-removal.js',
@@ -1071,8 +1058,7 @@ async function removerFundoImagem(blob){
   }
   const cfg_={
     publicPath: window._bgRemovalPublicPath||'https://unpkg.com/@imgly/background-removal@1.4.5/dist/',
-    debug:false,
-    model:'small',
+    debug:false,model:'small',
   };
   return await window._bgRemovalMod.removeBackground(blob,cfg_);
 }
@@ -1140,9 +1126,10 @@ async function salvarImagemTratada(){
       mostrarToast('✅ Salvo no GitHub!');
       const rawUrl=`https://raw.githubusercontent.com/${GH_REPO}/${GH_BRANCH}/${path}`;
       if(tratCtx.pasta==='galeria'){
-        // Recarrega galeria
         await carregarImgsGitHubGaleria();
-        // Usa como fundo
+        ed.bgUrl=rawUrl;ed.bgGrad=null;schedRender();
+      } else if(tratCtx.pasta==='fundos'){
+        await carregarImgsGitHubFundos();
         ed.bgUrl=rawUrl;ed.bgGrad=null;schedRender();
       } else {
         await carregarImgsGitHub(tratCtx.pasta);
@@ -1173,7 +1160,7 @@ function usarLocalSemSalvar(){
   const entrada={url,lbl,local:true};
   uploads.unshift(entrada);
   document.getElementById('modal-tratar').classList.add('hidden');
-  if(tratCtx.contexto==='galeria'){
+  if(tratCtx.contexto==='galeria'||tratCtx.contexto==='fundos'){
     ed.bgUrl=url;ed.bgGrad=null;schedRender();
   } else {
     renderUploadThumbs();
@@ -1219,8 +1206,7 @@ function renderUploadThumbs(){
 }
 
 async function excluirUpload(idx){
-  const u=uploads[idx];
-  if(!u)return;
+  const u=uploads[idx];if(!u)return;
   if(!confirm(`Excluir "${u.lbl}"?`))return;
   if(u.ghPath&&cfg.ghToken){
     mostrarToast('⏳ Excluindo do GitHub…',8000);
@@ -1245,6 +1231,7 @@ async function excluirUpload(idx){
   if(!u.ghPath)mostrarToast('🗑️ Imagem removida!');
 }
 
+// ── MOVER IMAGEM ───────────────────────────────────────
 let moverTarget=null;
 function abrirModalMover(idx){
   const u=uploads[idx];if(!u||!u.ghPath)return;
@@ -1268,10 +1255,16 @@ function abrirModalMoverGaleria(ghPath,url){
     schedRender();
   });
 }
+function abrirModalMoverFundos(ghPath,url){
+  _abrirMoverDialog(ghPath,url,(novaUrl)=>{
+    carregarImgsGitHubFundos();
+    if(ed.bgUrl===url)ed.bgUrl=novaUrl;
+    schedRender();
+  });
+}
 function _abrirMoverDialog(ghPath,url,onSuccess){
   const pastaAtual=ghPath.split('/')[1]||'';
   moverTarget={ghPath,url,onSuccess};
-  // Destinos incluem galeria
   const todasPastas=[{id:'galeria',lbl:'🎨 Galeria (modelos)'},...PASTAS_GH];
   const opcoes=document.getElementById('modal-mover-opcoes');
   opcoes.innerHTML=todasPastas.filter(p=>p.id!==pastaAtual).map(p=>
@@ -1336,7 +1329,6 @@ async function carregarImgsGitHubGaleria(){
       const lblEl=document.createElement('div');lblEl.className='prat-label';lblEl.textContent='📁 '+lbl;
       el.appendChild(img);el.appendChild(lblEl);
       el.onclick=()=>{ed.bgUrl=rawUrl;ed.bgGrad=null;schedRender();carregarImgsGitHubGaleria();};
-      // Botões ação (excluir + mover)
       const actions=document.createElement('div');actions.className='upload-item-actions';
       const btnDel=document.createElement('button');
       btnDel.className='upload-act-btn upload-act-del';btnDel.title='Excluir';btnDel.textContent='🗑';
@@ -1355,8 +1347,7 @@ async function carregarImgsGitHubGaleria(){
             });
             if(del.ok){
               if(ed.bgUrl===rawUrl){ed.bgUrl='';schedRender();}
-              mostrarToast('🗑️ Excluído!');
-              carregarImgsGitHubGaleria();
+              mostrarToast('🗑️ Excluído!');carregarImgsGitHubGaleria();
             }else{mostrarToast('❌ Erro ao excluir');}
           }
         }catch(ex){mostrarToast('⚠️ Erro de conexão');}
@@ -1364,6 +1355,64 @@ async function carregarImgsGitHubGaleria(){
       const btnMv=document.createElement('button');
       btnMv.className='upload-act-btn upload-act-mv';btnMv.title='Mover pasta';btnMv.textContent='📂';
       btnMv.onclick=(e)=>{e.stopPropagation();abrirModalMoverGaleria(ghPath,rawUrl);};
+      actions.appendChild(btnDel);actions.appendChild(btnMv);
+      el.appendChild(actions);
+      grid.appendChild(el);
+    });
+  }catch(ex){grid.innerHTML='<div style="font-size:.72rem;color:#f00;padding:4px 8px;">Erro ao carregar.</div>';}
+}
+
+// ── IMAGENS DO GITHUB — aba fundos ────────────────────
+async function carregarImgsGitHubFundos(){
+  if(!cfg.ghToken)return;
+  const grid=document.getElementById('prat-gh-fundos-grid');
+  if(!grid)return;
+  grid.innerHTML='<div style="font-size:.72rem;color:#aaa;padding:6px 8px;">Carregando…</div>';
+  try{
+    const r=await fetch(`https://api.github.com/repos/${GH_REPO}/contents/imagens/fundos`,{
+      headers:{'Authorization':`Bearer ${cfg.ghToken}`}
+    });
+    if(!r.ok){grid.innerHTML='<div style="font-size:.72rem;color:#aaa;padding:4px 8px;">Pasta fundos não encontrada.</div>';return;}
+    const files=await r.json();
+    const imgs=files.filter(f=>f.type==='file'&&/\.(jpg|jpeg|png|gif|webp|svg)$/i.test(f.name));
+    if(!imgs.length){grid.innerHTML='<div style="font-size:.72rem;color:#aaa;padding:4px 8px;">Nenhum fundo salvo.</div>';return;}
+    grid.innerHTML='';
+    imgs.forEach(f=>{
+      const rawUrl=`https://raw.githubusercontent.com/${GH_REPO}/${GH_BRANCH}/imagens/fundos/${f.name}`;
+      const ghPath=`imagens/fundos/${f.name}`;
+      const lbl=f.name.replace(/\.[^.]+$/,'').substring(0,22);
+      const el=document.createElement('div');
+      el.className='prat-item'+(ed.bgUrl===rawUrl?' sel':'');
+      const img=document.createElement('img');img.src=rawUrl;img.alt=lbl;img.loading='lazy';
+      const lblEl=document.createElement('div');lblEl.className='prat-label';lblEl.textContent='📁 '+lbl;
+      el.appendChild(img);el.appendChild(lblEl);
+      el.onclick=()=>{ed.bgUrl=rawUrl;ed.bgGrad=null;schedRender();carregarImgsGitHubFundos();};
+      const actions=document.createElement('div');actions.className='upload-item-actions';
+      const btnDel=document.createElement('button');
+      btnDel.className='upload-act-btn upload-act-del';btnDel.title='Excluir';btnDel.textContent='🗑';
+      btnDel.onclick=async(e)=>{
+        e.stopPropagation();
+        if(!confirm(`Excluir "${lbl}"?`))return;
+        mostrarToast('⏳ Excluindo…',8000);
+        try{
+          const chk=await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${ghPath}`,{headers:{'Authorization':`Bearer ${cfg.ghToken}`}});
+          if(chk.ok){
+            const d=await chk.json();
+            const del=await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${ghPath}`,{
+              method:'DELETE',
+              headers:{'Authorization':`Bearer ${cfg.ghToken}`,'Content-Type':'application/json'},
+              body:JSON.stringify({message:`Excluído: ${f.name}`,sha:d.sha,branch:GH_BRANCH})
+            });
+            if(del.ok){
+              if(ed.bgUrl===rawUrl){ed.bgUrl='';schedRender();}
+              mostrarToast('🗑️ Excluído!');carregarImgsGitHubFundos();
+            }else{mostrarToast('❌ Erro ao excluir');}
+          }
+        }catch(ex){mostrarToast('⚠️ Erro de conexão');}
+      };
+      const btnMv=document.createElement('button');
+      btnMv.className='upload-act-btn upload-act-mv';btnMv.title='Mover pasta';btnMv.textContent='📂';
+      btnMv.onclick=(e)=>{e.stopPropagation();abrirModalMoverFundos(ghPath,rawUrl);};
       actions.appendChild(btnDel);actions.appendChild(btnMv);
       el.appendChild(actions);
       grid.appendChild(el);
@@ -1437,7 +1486,7 @@ async function carregarImgsGitHub(pasta){
   }catch(ex){sec.classList.add('hidden');}
 }
 
-// ── MIGRAR FOTOS PADRÃO PARA GITHUB ────────────────────
+// ── MIGRAÇÕES (localStorage) ───────────────────────────
 const PRAT_MIGRADO_KEY='pratMigrado_v1';
 const FOTO_GH_KEY='fotoGhMap_v1';
 function carregarMigracoes(){
@@ -1454,98 +1503,6 @@ function carregarMigracoes(){
   try{
     fotoGhMap=JSON.parse(localStorage.getItem(FOTO_GH_KEY)||'{}');
   }catch(e){}
-}
-function salvarMigracao(pasta){
-  try{
-    const saved=JSON.parse(localStorage.getItem(PRAT_MIGRADO_KEY)||'{}');
-    saved[pasta]=PRAT[pasta].filter(i=>i.url&&i.url.includes('raw.githubusercontent.com')).map(i=>({lbl:i.lbl,url:i.url}));
-    localStorage.setItem(PRAT_MIGRADO_KEY,JSON.stringify(saved));
-  }catch(e){}
-}
-function atualizarBotaoImportar(pasta){
-  const btn=document.getElementById('btn-importar-gh');
-  if(!btn)return;
-  const itens=PRAT[pasta]||[];
-  const pendentes=itens.filter(it=>it.url&&!it.url.startsWith('imagens/')&&!it.url.includes('raw.githubusercontent.com'));
-  if(!cfg.ghToken||pendentes.length===0){btn.style.display='none';}
-  else{btn.style.display='';btn.textContent=`⬇️ Salvar ${pendentes.length} no GitHub`;}
-}
-async function migrarImgsParaGitHub(pasta){
-  if(!cfg.ghToken){mostrarToast('⚠️ Configure o Token GitHub primeiro');return;}
-  const itens=PRAT[pasta]||[];
-  const pendentes=itens.filter(it=>it.url&&!it.url.startsWith('imagens/')&&!it.url.includes('raw.githubusercontent.com'));
-  if(!pendentes.length){mostrarToast('✅ Todas as fotos já estão no GitHub!');return;}
-  const prog=document.getElementById('prat-import-progress');
-  const btn=document.getElementById('btn-importar-gh');
-  if(btn)btn.disabled=true;
-  let ok=0,erros=0;const msgs=[];
-  for(const item of pendentes){
-    if(prog)prog.style.display='',prog.textContent=`⏳ ${ok+erros+1}/${pendentes.length}: ${item.lbl}…`;
-    try{
-      const urlObj=new URL(item.url);
-      const nomeArq=urlObj.pathname.split('/').pop().replace(/\?.*$/,'')||`foto-${Date.now()}.jpg`;
-      const path=`imagens/${pasta}/${nomeArq}`;
-      const chk=await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${path}`,{headers:{'Authorization':`Bearer ${cfg.ghToken}`}});
-      if(chk.ok){item.url=`https://raw.githubusercontent.com/${GH_REPO}/${GH_BRANCH}/${path}`;ok++;continue;}
-      const imgResp=await fetch(item.url);
-      if(!imgResp.ok){msgs.push(`${item.lbl}: HTTP ${imgResp.status}`);erros++;PRAT[pasta]=PRAT[pasta].filter(x=>x!==item);continue;}
-      const blob=await imgResp.blob();
-      const base64=await new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result.split(',')[1]);r.onerror=rej;r.readAsDataURL(blob);});
-      const put=await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${path}`,{
-        method:'PUT',
-        headers:{'Authorization':`Bearer ${cfg.ghToken}`,'Content-Type':'application/json'},
-        body:JSON.stringify({message:`Importado: ${item.lbl}`,content:base64,branch:GH_BRANCH})
-      });
-      if(put.ok){item.url=`https://raw.githubusercontent.com/${GH_REPO}/${GH_BRANCH}/${path}`;ok++;}
-      else{const d=await put.json().catch(()=>({}));msgs.push(`${item.lbl}: GitHub ${put.status}`);erros++;PRAT[pasta]=PRAT[pasta].filter(x=>x!==item);}
-    }catch(e){msgs.push(`${item.lbl}: ${e.message||e}`);erros++;PRAT[pasta]=PRAT[pasta].filter(x=>x!==item);}
-  }
-  if(prog)prog.style.display='none';
-  if(btn)btn.disabled=false;
-  salvarMigracao(pasta);renderPratOutras();atualizarBotaoImportar(pasta);carregarImgsGitHub(pasta);
-  if(erros){const detalhe=msgs.slice(0,3).join(' | ')+(msgs.length>3?` (+${msgs.length-3} mais)`:'');mostrarToast(`❌ ${erros} removido(s) por falha: ${detalhe}`,10000);}
-  else{mostrarToast(`✅ ${ok} fotos salvas no GitHub!`);}
-}
-
-// ── MIGRAR FUNDOS DOS MODELOS PARA GITHUB ──────────────
-function getIdsParaTag(tag){
-  if(tag==='todos'){const all=new Set();Object.values(FOTO_IDS).forEach(arr=>arr.forEach(id=>all.add(id)));return[...all];}
-  return FOTO_IDS[tag]||[];
-}
-function atualizarBotaoImportarGaleria(){
-  const bar=document.getElementById('prat-galeria-import-bar');
-  const lbl=document.getElementById('prat-galeria-import-lbl');
-  if(!bar||!cfg.ghToken)return bar&&(bar.classList.add('hidden'),undefined);
-  const ids=getIdsParaTag(pratCatAtual);
-  const pendentes=ids.filter(id=>!fotoGhMap[id]&&!FOTO_GH_STATIC[id]);
-  if(!pendentes.length){bar.classList.add('hidden');return;}
-  bar.classList.remove('hidden');bar.style.display='flex';
-  lbl.textContent=`${pendentes.length} fundos externos`;
-}
-async function migrarFotosGaleria(){
-  if(!cfg.ghToken){mostrarToast('⚠️ Configure o Token GitHub primeiro');return;}
-  const ids=getIdsParaTag(pratCatAtual);
-  const pendentes=ids.filter(id=>!fotoGhMap[id]&&!FOTO_GH_STATIC[id]);
-  if(!pendentes.length){mostrarToast('✅ Todos os fundos já estão no GitHub!');return;}
-  const bar=document.getElementById('prat-galeria-import-bar');
-  const prog=document.getElementById('prat-galeria-import-prog');
-  if(bar)bar.classList.add('hidden');
-  if(prog)prog.style.display='';
-  let ok=0,erros=0;const msgs=[];
-  for(const id of pendentes){
-    if(prog)prog.textContent=`⏳ ${ok+erros+1}/${pendentes.length}: pexels-${id}…`;
-    const path=`imagens/galeria/pexels-${id}.jpg`;
-    try{
-      const chk=await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${path}`,{headers:{'Authorization':`Bearer ${cfg.ghToken}`}});
-      if(chk.ok){fotoGhMap[id]=`https://raw.githubusercontent.com/${GH_REPO}/${GH_BRANCH}/${path}`;ok++;}
-      else{msgs.push(`pexels-${id}: não encontrado`);erros++;delete fotoGhMap[id];Object.keys(FOTO_IDS).forEach(tag=>{FOTO_IDS[tag]=FOTO_IDS[tag].filter(x=>x!==id);});}
-    }catch(e){msgs.push(`pexels-${id}: ${e.message||e}`);erros++;delete fotoGhMap[id];Object.keys(FOTO_IDS).forEach(tag=>{FOTO_IDS[tag]=FOTO_IDS[tag].filter(x=>x!==id);});}
-  }
-  if(prog)prog.style.display='none';
-  localStorage.setItem(FOTO_GH_KEY,JSON.stringify(fotoGhMap));
-  renderPratGaleria();atualizarBotaoImportarGaleria();
-  if(erros){mostrarToast(`❌ ${erros} removido(s) por falha`,8000);}
-  else{mostrarToast(`✅ ${ok} fundos OK no GitHub!`);}
 }
 
 // ── CANVAS RENDER ──────────────────────────────────────
@@ -1815,3 +1772,16 @@ const objImgCache={};
 </script>
 </body>
 </html>
+```
+
+## Resumo das alterações feitas:
+
+| Mudança | Detalhes |
+|---------|---------|
+| **🔍 Busca removida** | Removido o campo `<input>` de busca e a função `pratBuscar()` + variável `pratSrch` |
+| **🏷️ Filtros de categoria removidos** | Removidos os botões (Todos, Cão Pequeno, Cão Grande, etc.), o array `CATS`, `renderPratCats()`, `pratFiltrarCat()`, `pratCatAtual` |
+| **🖼️ Fundos separados em aba própria** | Nova aba "🖼️ Fundos" na prateleira com seu próprio conteúdo (`prat-fundos-area`), incluindo: fundos do GitHub, SVGs locais, gradientes e upload dedicado |
+| **📁 Só imagens do GitHub** | Removidas as funções de migração externas (`migrarFotosGaleria`, `migrarImgsParaGitHub`, `atualizarBotaoImportar`, `atualizarBotaoImportarGaleria`), barras de importação e botões "Salvar no GitHub" de fotos externas |
+| **📋 Modelos simplificado** | Aba Modelos agora mostra direto: upload galeria + fotos GitHub + artes prontas (sem busca nem filtros) |
+| **➕ Upload Fundos** | Nova função `uploadImagemFundos()` e `carregarImgsGitHubFundos()` para a aba separada |
+| **Arquivo completo** | ~1800+ linhas com toda a funcionalidade mantida |
