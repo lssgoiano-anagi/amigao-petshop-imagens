@@ -1084,15 +1084,23 @@ async function salvarImagemTratada(){
       }
     } else {
       const err=await resp.json().catch(()=>({}));
-      const msg='❌ '+(err.message||`HTTP ${resp.status}`);
+      const msg='❌ '+(err.message||`HTTP ${resp.status}`)+' — imagem removida da página.';
       status.textContent=msg;
       mostrarToast(msg,6000);
+      // Upload falhou: remove da lista local e fecha o modal
+      uploads=uploads.filter(u=>u.url!==URL.createObjectURL(blob));
+      document.getElementById('modal-tratar').classList.add('hidden');
+      renderUploadThumbs();
       btnSalvar.disabled=false;
     }
   }catch(e){
-    const msg='⚠️ '+(e.message||'Erro de conexão');
+    const msg='⚠️ '+(e.message||'Erro de conexão')+' — imagem removida da página.';
     status.textContent=msg;
     mostrarToast(msg,6000);
+    // Erro de rede: remove da lista local e fecha o modal
+    uploads=uploads.filter(u=>u.local!==true||u._pendente===true);
+    document.getElementById('modal-tratar').classList.add('hidden');
+    renderUploadThumbs();
     btnSalvar.disabled=false;
   }
 }
@@ -1360,7 +1368,12 @@ async function migrarImgsParaGitHub(pasta){
       const chk=await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${path}`,{headers:{'Authorization':`Bearer ${cfg.ghToken}`}});
       if(chk.ok){item.url=`https://raw.githubusercontent.com/${GH_REPO}/${GH_BRANCH}/${path}`;ok++;continue;}
       const imgResp=await fetch(item.url);
-      if(!imgResp.ok){msgs.push(`${item.lbl}: imagem retornou HTTP ${imgResp.status}`);erros++;continue;}
+      if(!imgResp.ok){
+        msgs.push(`${item.lbl}: imagem retornou HTTP ${imgResp.status}`);
+        erros++;
+        PRAT[pasta]=PRAT[pasta].filter(x=>x!==item);
+        continue;
+      }
       const blob=await imgResp.blob();
       const base64=await new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result.split(',')[1]);r.onerror=rej;r.readAsDataURL(blob);});
       const put=await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${path}`,{
@@ -1369,15 +1382,26 @@ async function migrarImgsParaGitHub(pasta){
         body:JSON.stringify({message:`Importado: ${item.lbl}`,content:base64,branch:GH_BRANCH})
       });
       if(put.ok){item.url=`https://raw.githubusercontent.com/${GH_REPO}/${GH_BRANCH}/${path}`;ok++;}
-      else{const d=await put.json().catch(()=>({}));msgs.push(`${item.lbl}: GitHub ${put.status} – ${d.message||'sem detalhe'}`);erros++;}
-    }catch(e){msgs.push(`${item.lbl}: ${e.message||e}`);erros++;}
+      else{
+        const d=await put.json().catch(()=>({}));
+        msgs.push(`${item.lbl}: GitHub ${put.status} – ${d.message||'sem detalhe'}`);
+        erros++;
+        // Falhou: remove da lista para não aparecer na página
+        PRAT[pasta]=PRAT[pasta].filter(x=>x!==item);
+      }
+    }catch(e){
+      msgs.push(`${item.lbl}: ${e.message||e}`);
+      erros++;
+      // Erro de rede: remove da lista para não aparecer na página
+      PRAT[pasta]=PRAT[pasta].filter(x=>x!==item);
+    }
   }
   if(prog)prog.style.display='none';
   if(btn)btn.disabled=false;
   salvarMigracao(pasta);renderPratOutras();atualizarBotaoImportar(pasta);carregarImgsGitHub(pasta);
   if(erros){
     const detalhe=msgs.slice(0,3).join(' | ')+(msgs.length>3?` (+${msgs.length-3} mais)`:'');
-    mostrarToast(`❌ ${erros} erro(s): ${detalhe}`,10000);
+    mostrarToast(`❌ ${erros} item(ns) removido(s) por falha no upload: ${detalhe}`,10000);
   } else {mostrarToast(`✅ ${ok} fotos salvas no GitHub!`);}
 }
 
@@ -1428,15 +1452,32 @@ async function migrarFotosGaleria(){
         body:JSON.stringify({message:`Fundo galeria: pexels-${id}`,content:base64,branch:GH_BRANCH})
       });
       if(put.ok){fotoGhMap[id]=`https://raw.githubusercontent.com/${GH_REPO}/${GH_BRANCH}/${path}`;ok++;}
-      else{const d=await put.json().catch(()=>({}));msgs.push(`pexels-${id}: GitHub ${put.status} – ${d.message||'sem detalhe'}`);erros++;}
-    }catch(e){msgs.push(`pexels-${id}: ${e.message||e}`);erros++;}
+      else{
+        const d=await put.json().catch(()=>({}));
+        msgs.push(`pexels-${id}: GitHub ${put.status} – ${d.message||'sem detalhe'}`);
+        erros++;
+        // Falhou: remove do mapa para não aparecer na galeria
+        delete fotoGhMap[id];
+        // Remove o ID dos FOTO_IDS para sumir da prateleira
+        Object.keys(FOTO_IDS).forEach(tag=>{
+          FOTO_IDS[tag]=FOTO_IDS[tag].filter(x=>x!==id);
+        });
+      }
+    }catch(e){
+      msgs.push(`pexels-${id}: ${e.message||e}`);
+      erros++;
+      delete fotoGhMap[id];
+      Object.keys(FOTO_IDS).forEach(tag=>{
+        FOTO_IDS[tag]=FOTO_IDS[tag].filter(x=>x!==id);
+      });
+    }
   }
   if(prog)prog.style.display='none';
   localStorage.setItem(FOTO_GH_KEY,JSON.stringify(fotoGhMap));
   renderPratGaleria();atualizarBotaoImportarGaleria();
   if(erros){
     const detalhe=msgs.slice(0,3).join(' | ')+(msgs.length>3?` (+${msgs.length-3} mais)`:'');
-    mostrarToast(`❌ ${erros} erro(s): ${detalhe}`,10000);
+    mostrarToast(`❌ ${erros} item(ns) removido(s) por falha: ${detalhe}`,10000);
   } else {mostrarToast(`✅ ${ok} fundos salvos no GitHub!`);}
 }
 
