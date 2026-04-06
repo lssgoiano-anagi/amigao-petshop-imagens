@@ -461,7 +461,7 @@ let fotoGhMap={};
 const FOTO=(tag,idx)=>{
   const ids=FOTO_IDS[tag]||FOTO_IDS['cachorro-grande'];
   const id=ids[idx%ids.length];
-  return fotoGhMap[id]||`https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&w=800&h=800&fit=crop`;
+  return fotoGhMap[id]||null;
 };
 // Pre-load mascot SVG for canvas use
 const MASCOTE_IMG=new Image();MASCOTE_IMG.src='marcote.png';
@@ -663,42 +663,9 @@ const PRAT={
     {url:null,grad:'linear-gradient(135deg,#3498DB,#2ECC71)',lbl:'Azul Verde'},
     {url:null,grad:'linear-gradient(135deg,#F39C12,#E74C3C)',lbl:'Fogo'},
   ],
-  pets:[
-    {url:'https://images.pexels.com/photos/2607544/pexels-photo-2607544.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Golden Retriever'},
-    {url:'https://images.pexels.com/photos/1805164/pexels-photo-1805164.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Shih Tzu'},
-    {url:'https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Pastor Alemão'},
-    {url:'https://images.pexels.com/photos/1254140/pexels-photo-1254140.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Filhote'},
-    {url:'https://images.pexels.com/photos/2887458/pexels-photo-2887458.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Husky'},
-    {url:'https://images.pexels.com/photos/1591939/pexels-photo-1591939.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Cachorrinho'},
-    {url:'https://images.pexels.com/photos/45201/pexels-photo-45201.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Gato Laranja'},
-    {url:'https://images.pexels.com/photos/617278/pexels-photo-617278.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Gato Cinza'},
-    {url:'https://images.pexels.com/photos/1404819/pexels-photo-1404819.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Gato Tabby'},
-    {url:'https://images.pexels.com/photos/1543793/pexels-photo-1543793.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Gatinho'},
-    {url:'https://images.pexels.com/photos/349758/pexels-photo-349758.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Papagaio'},
-    {url:'https://images.pexels.com/photos/730896/pexels-photo-730896.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Hamster'},
-  ],
-  racao:[
-    {url:'https://images.pexels.com/photos/5732456/pexels-photo-5732456.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Ração Premium'},
-    {url:'https://images.pexels.com/photos/6568501/pexels-photo-6568501.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Tigela de Ração'},
-    {url:'https://images.pexels.com/photos/1741205/pexels-photo-1741205.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Pet & Ração'},
-    {url:'https://images.pexels.com/photos/4498150/pexels-photo-4498150.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Petiscos'},
-    {url:'https://images.pexels.com/photos/7210748/pexels-photo-7210748.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Gato Comendo'},
-    {url:'https://images.pexels.com/photos/6957641/pexels-photo-6957641.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Ração Gato'},
-    {url:'https://images.pexels.com/photos/8434791/pexels-photo-8434791.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Bowl Pet'},
-    {url:'https://images.pexels.com/photos/6816866/pexels-photo-6816866.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Pet Alimentando'},
-    {url:'https://images.pexels.com/photos/5255197/pexels-photo-5255197.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Snack Pet'},
-    {url:'https://images.pexels.com/photos/7210604/pexels-photo-7210604.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Filhote Comendo'},
-  ],
-  acessorios:[
-    {url:'https://images.pexels.com/photos/3651579/pexels-photo-3651579.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Coleira & Tags'},
-    {url:'https://images.pexels.com/photos/4587987/pexels-photo-4587987.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Guia & Peitoral'},
-    {url:'https://images.pexels.com/photos/5731871/pexels-photo-5731871.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Caminha'},
-    {url:'https://images.pexels.com/photos/6816861/pexels-photo-6816861.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Brinquedo'},
-    {url:'https://images.pexels.com/photos/4587992/pexels-photo-4587992.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Roupa Pet'},
-    {url:'https://images.pexels.com/photos/6957640/pexels-photo-6957640.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Higiene Pet'},
-    {url:'https://images.pexels.com/photos/5255213/pexels-photo-5255213.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Escova & Tosa'},
-    {url:'https://images.pexels.com/photos/5731873/pexels-photo-5731873.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Bolsa Transporte'},
-  ],
+  pets:[],
+  racao:[],
+  acessorios:[],
 };
 let pratAbaAtual='galeria';
 let pratCatAtual='todos';
@@ -754,7 +721,8 @@ function renderPratGaleria(){
   const lista=ARTES.filter(a=>{
     const mc=pratCatAtual==='todos'||a.tag===pratCatAtual;
     const ms=!pratSrch||a.t.toLowerCase().includes(pratSrch)||a.s.toLowerCase().includes(pratSrch);
-    return mc&&ms;
+    const temImagem=!!FOTO(a.tag,ARTES.indexOf(a)); // só exibe se tiver imagem no GitHub
+    return mc&&ms&&temImagem;
   });
   const grid=document.getElementById('prat-galeria-grid');
   grid.innerHTML='';
@@ -1440,25 +1408,14 @@ async function migrarFotosGaleria(){
     const path=`imagens/galeria/pexels-${id}.jpg`;
     try{
       const chk=await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${path}`,{headers:{'Authorization':`Bearer ${cfg.ghToken}`}});
-      if(chk.ok){fotoGhMap[id]=`https://raw.githubusercontent.com/${GH_REPO}/${GH_BRANCH}/${path}`;ok++;continue;}
-      const pexelsUrl=`https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&w=800&h=800&fit=crop`;
-      const imgResp=await fetch(pexelsUrl);
-      if(!imgResp.ok){msgs.push(`pexels-${id}: download HTTP ${imgResp.status}`);erros++;continue;}
-      const blob=await imgResp.blob();
-      const base64=await new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result.split(',')[1]);r.onerror=rej;r.readAsDataURL(blob);});
-      const put=await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${path}`,{
-        method:'PUT',
-        headers:{'Authorization':`Bearer ${cfg.ghToken}`,'Content-Type':'application/json'},
-        body:JSON.stringify({message:`Fundo galeria: pexels-${id}`,content:base64,branch:GH_BRANCH})
-      });
-      if(put.ok){fotoGhMap[id]=`https://raw.githubusercontent.com/${GH_REPO}/${GH_BRANCH}/${path}`;ok++;}
-      else{
-        const d=await put.json().catch(()=>({}));
-        msgs.push(`pexels-${id}: GitHub ${put.status} – ${d.message||'sem detalhe'}`);
+      if(chk.ok){
+        fotoGhMap[id]=`https://raw.githubusercontent.com/${GH_REPO}/${GH_BRANCH}/${path}`;
+        ok++;
+      } else {
+        // Não existe no GitHub — remove da galeria
+        msgs.push(`pexels-${id}: não encontrado no GitHub`);
         erros++;
-        // Falhou: remove do mapa para não aparecer na galeria
         delete fotoGhMap[id];
-        // Remove o ID dos FOTO_IDS para sumir da prateleira
         Object.keys(FOTO_IDS).forEach(tag=>{
           FOTO_IDS[tag]=FOTO_IDS[tag].filter(x=>x!==id);
         });
