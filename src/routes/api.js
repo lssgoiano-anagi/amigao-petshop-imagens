@@ -1,7 +1,11 @@
 const express = require('express');
+const fs = require('fs');
+const path = require('path');
 const queries = require('../db/queries');
 const { sendText } = require('../whatsapp/sender');
 const config = require('../config');
+
+const KNOWLEDGE_FILE = path.join(process.cwd(), 'knowledge.txt');
 
 const router = express.Router();
 
@@ -71,6 +75,26 @@ router.post('/appointments', auth, (req, res) => {
   if (!customerId || !service) return res.status(400).json({ error: 'Dados inválidos' });
   const id = queries.createAppointment(customerId, petName, service, scheduledAt, notes);
   res.json({ id });
+});
+
+// ── Catálogo / Conhecimento ────────────────────────────────────────────────
+
+router.get('/knowledge', auth, (req, res) => {
+  try {
+    const content = fs.existsSync(KNOWLEDGE_FILE) ? fs.readFileSync(KNOWLEDGE_FILE, 'utf8') : '';
+    res.json({ content });
+  } catch {
+    res.json({ content: '' });
+  }
+});
+
+router.post('/knowledge', auth, (req, res) => {
+  try {
+    fs.writeFileSync(KNOWLEDGE_FILE, req.body.content || '', 'utf8');
+    res.json({ ok: true });
+  } catch (e) {
+    res.status(500).json({ error: 'Erro ao salvar.' });
+  }
 });
 
 // ── Estatísticas ───────────────────────────────────────────────────────────

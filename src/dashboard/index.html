@@ -320,6 +320,44 @@
     /* ── Scrollbar ───────────────────────────────── */
     * { scrollbar-width: thin; scrollbar-color: var(--border) transparent; }
 
+    /* ── Modal Catálogo ──────────────────────────── */
+    .modal-overlay {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,.7);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 500;
+    }
+    .modal-overlay.hidden { display: none; }
+    .modal-box {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px;
+      width: 680px;
+      max-width: 95vw;
+      max-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .modal-box h2 { font-size: 1.1rem; }
+    .modal-box p  { color: var(--muted); font-size: .82rem; line-height: 1.5; }
+    .modal-box textarea {
+      flex: 1;
+      min-height: 320px;
+      padding: 12px 14px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: var(--text);
+      font-size: .85rem;
+      font-family: 'Consolas', monospace;
+      resize: vertical;
+      line-height: 1.5;
+    }
+    .modal-box textarea:focus { outline: none; border-color: var(--blue); }
+    .modal-actions { display: flex; gap: 10px; justify-content: flex-end; }
+
     /* ── Toast ───────────────────────────────────── */
     #toast {
       position: fixed; bottom: 24px; right: 24px;
@@ -354,6 +392,7 @@
     <h1>Amigão Pet Shop</h1>
     <span>Central de Atendimento WhatsApp</span>
   </div>
+  <button class="action-btn btn-blue" style="margin-left:auto; margin-right:8px;" onclick="openCatalog()">📦 Catálogo</button>
   <div class="stats">
     <div class="stat bot">
       <div class="stat-n" id="stat-bot">—</div>
@@ -418,6 +457,37 @@
       </div>
     </div>
   </section>
+</div>
+
+<!-- Modal Catálogo -->
+<div id="catalog-modal" class="modal-overlay hidden">
+  <div class="modal-box">
+    <h2>📦 Catálogo & Conhecimento da Loja</h2>
+    <p>
+      Tudo que você escrever aqui o bot vai saber responder: rações, preços, produtos, promoções, serviços específicos, etc.<br>
+      Use texto simples, uma informação por linha. Ex: <code>Ração Royal Canin Filhote 15kg — R$ 189,90</code>
+    </p>
+    <textarea id="catalog-text" placeholder="Ex:
+RAÇÕES DISPONÍVEIS:
+- Royal Canin Adulto 15kg: R$ 189,90
+- Pedigree Frango 10kg: R$ 89,90
+- Golden Fórmula Cão Adulto 15kg: R$ 119,00
+
+MEDICAMENTOS:
+- Antipulgas Frontline Spray: R$ 65,00
+- Vermífugo Drontal Cães: R$ 38,00
+
+ACESSÓRIOS:
+- Coleira ajustável pequena: R$ 25,00
+- Cama pet tamanho M: R$ 79,90
+
+PROMOÇÕES:
+- Banho + Tosa porte médio: R$ 90,00 (15% off)"></textarea>
+    <div class="modal-actions">
+      <button class="action-btn btn-gray" onclick="closeCatalog()">Cancelar</button>
+      <button class="action-btn btn-green" onclick="saveCatalog()">💾 Salvar</button>
+    </div>
+  </div>
 </div>
 
 <div id="toast"></div>
@@ -700,6 +770,44 @@
     if (h < 24) return `${h}h`;
     return `${Math.floor(h / 24)}d`;
   }
+
+  // ── Catálogo ─────────────────────────────────────
+  async function openCatalog() {
+    document.getElementById('catalog-modal').classList.remove('hidden');
+    try {
+      const r = await apiFetch('/knowledge');
+      const d = await r.json();
+      document.getElementById('catalog-text').value = d.content || '';
+    } catch {
+      toast('Erro ao carregar catálogo.', true);
+    }
+  }
+
+  function closeCatalog() {
+    document.getElementById('catalog-modal').classList.add('hidden');
+  }
+
+  async function saveCatalog() {
+    const content = document.getElementById('catalog-text').value;
+    try {
+      const r = await apiFetch('/knowledge', {
+        method: 'POST',
+        body: JSON.stringify({ content }),
+      });
+      if (r.ok) {
+        toast('Catálogo salvo! O bot já sabe das novidades. 🐾');
+        closeCatalog();
+      } else {
+        toast('Erro ao salvar.', true);
+      }
+    } catch {
+      toast('Erro de conexão.', true);
+    }
+  }
+
+  document.getElementById('catalog-modal').addEventListener('click', function(e) {
+    if (e.target === this) closeCatalog();
+  });
 
   function toast(msg, error = false) {
     const el = document.getElementById('toast');

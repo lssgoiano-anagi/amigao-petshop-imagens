@@ -1,7 +1,21 @@
 const Anthropic = require('@anthropic-ai/sdk');
+const fs = require('fs');
+const path = require('path');
 const config = require('../config');
 
 const client = new Anthropic({ apiKey: config.anthropic.apiKey });
+
+const KNOWLEDGE_FILE = path.join(process.cwd(), 'knowledge.txt');
+
+function loadKnowledge() {
+  try {
+    if (fs.existsSync(KNOWLEDGE_FILE)) {
+      const content = fs.readFileSync(KNOWLEDGE_FILE, 'utf8').trim();
+      if (content) return '\n\nCATÁLOGO E CONHECIMENTO ESPECÍFICO DA LOJA:\n' + content;
+    }
+  } catch {}
+  return '';
+}
 
 function buildSystemPrompt() {
   const { nome, endereco, horario, instagram, whatsapp } = config.petshop;
@@ -63,7 +77,7 @@ QUANDO AGENDAR, sempre confirme:
 2. Raça e porte (pequeno / médio / grande)
 3. Serviço desejado
 4. Data e horário preferido
-5. Observações especiais (pet nervoso, alergia, etc.)`;
+5. Observações especiais (pet nervoso, alergia, etc.)${loadKnowledge()}`;
 }
 
 async function chat(conversationHistory) {
