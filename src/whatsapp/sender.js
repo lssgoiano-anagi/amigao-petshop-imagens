@@ -26,8 +26,29 @@ async function sendTyping(phone, seconds = 2) {
       delay: seconds * 1000,
     });
   } catch {
-    // não crítico — ignorar falha de presence
+    // não crítico
   }
 }
 
-module.exports = { sendText, sendTyping };
+async function sendButtons(phone, title, body, buttons) {
+  try {
+    await api.post(`/message/sendButtons/${config.evolution.instance}`, {
+      number: phone,
+      title,
+      description: body,
+      footer: 'Amigão Pet Shop',
+      buttons: buttons.slice(0, 3).map((b, i) => ({
+        type: 'reply',
+        displayText: b,
+        id: String(i + 1),
+      })),
+    });
+  } catch {
+    const txt =
+      title + '\n\n' + body + '\n\n' +
+      buttons.map((b, i) => `${i + 1}. ${b}`).join('\n');
+    await sendText(phone, txt);
+  }
+}
+
+module.exports = { sendText, sendTyping, sendButtons };

@@ -9,8 +9,8 @@ module.exports = {
     instance: process.env.EVOLUTION_INSTANCE || 'amigao',
   },
 
-  anthropic: {
-    apiKey: process.env.ANTHROPIC_API_KEY || '',
+  groq: {
+    apiKey: process.env.GROQ_API_KEY || '',
   },
 
   petshop: {

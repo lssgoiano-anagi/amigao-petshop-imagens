@@ -497,9 +497,25 @@ PROMOÇÕES:
   let PASSWORD = '';
   let currentFilter = null;
   let currentConvId = null;
-  let agentName = '';
+  let agentName = localStorage.getItem('amigao_agent') || 'Atendente';
   let pollInterval = null;
   let msgPollInterval = null;
+
+  // ── Auto-login via localStorage ─────────────────
+  (function () {
+    const saved = localStorage.getItem('amigao_pass');
+    if (saved) {
+      fetch('/api/stats?password=' + encodeURIComponent(saved))
+        .then(r => {
+          if (r.ok) {
+            PASSWORD = saved;
+            document.getElementById('login-screen').style.display = 'none';
+            startPolling();
+          }
+        })
+        .catch(() => {});
+    }
+  })();
 
   // ── Login ───────────────────────────────────────
   document.getElementById('pass-input').addEventListener('keydown', e => {
@@ -517,7 +533,12 @@ PROMOÇÕES:
         return;
       }
       PASSWORD = pass;
-      agentName = prompt('Qual é o seu nome de atendente?', 'Atendente') || 'Atendente';
+      localStorage.setItem('amigao_pass', pass);
+      if (!localStorage.getItem('amigao_agent')) {
+        const name = prompt('Qual é o seu nome de atendente?', 'Atendente') || 'Atendente';
+        agentName = name;
+        localStorage.setItem('amigao_agent', name);
+      }
       document.getElementById('login-screen').style.display = 'none';
       startPolling();
     } catch {
